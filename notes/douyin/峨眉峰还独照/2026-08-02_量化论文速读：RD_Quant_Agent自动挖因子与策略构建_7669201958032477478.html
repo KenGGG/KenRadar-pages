@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【量化论文速读】大A自动挖因子，牛校和公司论文 #因子 #量化交易 #交易策略 #AI #大模型｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-08-02_量化论文速读：RD_Quant_Agent自动挖因子与策略构建_7669201958032477478.md · 发布于 2026-08-03 12:02:29</div><nav class="page-links"><a href="https://www.douyin.com/video/7669201958032477478" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>量化论文速读：RD Quant Agent自动挖因子与策略构建</h1>
+<p>抖音 | 峨眉峰还独照 | 原文链接（<a href="https://www.douyin.com/video/7669201958032477478">https://www.douyin.com/video/7669201958032477478</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+介绍微软研究院等机构开源的RD Quant Agent项目，利用大语言模型自动完成因子挖掘、代码实现、回测验证和策略组合的全流程。在沪深300、中证500和纳斯达克等市场的回测中，该Agent结合因子挖掘与组合优化的效果最佳，显著优于传统机器学习和深度学习模型。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>研究背景与核心思路</strong>
+量化研究团队长期面临如何高效产出高质量、低相关性因子的难题。该论文提出利用大语言模型自动化完成因子挖掘全流程：基于历史实验和论文生成研究点子，自动转换为因子代码，回测验证，最终组合成交易策略。项目名为RD Quant Agent，由微软研究院与多家研究机构合作开发，已在GitHub开源。</p>
+</li>
+<li>
+<p><strong>五步自动化流程</strong>
+第一步：配置文件定义数据集、输出格式和工作流；第二步：综合单元利用大模型预训练知识和人工输入生成研究idea；第三步：实现单元通过schedule agent生成DAG任务调度，按依赖关系排序后由implementation agent编写Python代码，并记录错误信息作为知识库；第四步：自动测试因子，记录成功、失败和一般结果；第五步：多角度分析验证，确定因子组合策略，并可循环回第二步产生新idea。</p>
+</li>
+<li>
+<p><strong>回测结果对比</strong>
+在沪深300回测中，传统机器学习模型（如线性回归加简单因子）效果最差，深度学习模型稍好，RD Quant Agent效果最佳，在最大回撤和ICIR等指标上均表现最优。在中证500和纳斯达克的测试中，LSTM表现尚可，QuantLab内置因子库效果也不错，而RD Agent结合因子挖掘与模型组合的效果最佳，尤其是结合o4-mini模型后在中证500和纳斯达克均表现突出。</p>
+</li>
+<li>
+<p><strong>结论与启示</strong>
+使用推理模型效果很好；让Agent同时挖因子和组合因子是关键；传统模型（线性、LightGBM）表现一般，可作为baseline但跑不赢Transformer和RNN等模型。当前系统仅覆盖因子挖掘和组合两个环节，风控、实盘、交易监督等模块尚未涉及。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 研究背景与核心思路</h3>
+<p>大家好，很长时间以来，我都困惑于如何高效地管理一个研究团队。相信有过管理经验的同志们都会有这个困惑：如何持续高效地让研究团队产出高质量的因子，且相关性比较低？如何自动化那些没有意义的杂活，让团队成员聚焦于更有价值的、机器代替不了的精细工作？如何给予不同水平的研究员以不同的指导，让他们分别探索不同的方向？这些问题其实很难解决。今天这个论文似乎提出了一种自动利用大语言模型的解决方案。基本思路是让它自动用历史上做过的所有实验和研究论文，产生一些研究点子，然后自动把点子转换成因子和Python代码，再自动回测产生结果。这是微软和若干研究机构合作的，在Qlib基础上做的一个叫RD Quant Agent的开源项目。论文有四十多页，我们重点只看两三个表格就能抓住大体意思。</p>
+<h3>2. 回测结果展示</h3>
+<p>第一个表格看回测结果，用沪深300作为回测标的。横行是一组一组基于不同机器学习方向的结果，竖着是一些具体指标，比如ICIR、最大回撤、CR等。可以看到效果最差的是传统机器学习模型，比如线性回归加一些简单因子；稍微好一点的是深度学习模型；最好的是这篇论文提出的RD Agent，自己挖因子、自己把因子组合起来，得到最好的效果。无论是最大回撤还是ICIR都是最好的。如果大家感兴趣可以去下载论文，或者到Qlib的GitHub上搜，排在最上面的论文就是这个，而且都开源了。非常有意思的是，微软研究院为什么会搞这么一个量化交易项目，而且坚持了好几年。我也用过他们的Qlib作为一个探索性的东西，觉得还蛮有意思的。</p>
+<h3>3. 五步自动化流程详解</h3>
+<p>Figure 3是他们最重要的讲解原理的表格，一二三四五共四步（实际五步），产生自动的因子和策略。第一步是一个配置文件，定义你有什么数据集、想干什么、输出格式以及具体工作流程。第二步很有意思，叫综合单元，是产生研究idea最关键的部分。基本原理是利用大模型预训练里得到的知识，以及人工后来输入的一些知识，可以是几句话，可以是一篇论文，自己产生一些idea，不管是幻觉还是合理的推理，反正能产生研究idea。具体idea是利用行为金融学、量价关系等产生因子。第三步是如何实现，写成代码。写代码时不是一个个写的，而是有一个调度器，分清主次关系和互相依赖关系，然后发包任务一个个写出来。写完再往下走，自动测试这些因子，比如用定义好的指标ICIR、分离度、最大回撤等。测完以后，成功的、不成功的、一般的那些因子，以及在实现过程中的错误、bug、错误信息都会记录下来，作为知识库，在下一轮迭代中借用这些知识库提高质量。第五步是最后的分析，用不同角度测试，比如看不同市场区域、测试不同的鲁棒性、做不同的退火实验等，重点聚焦于验证和一致性。最后确定要什么样的因子，怎样把这些因子组合起来做一个交易策略。它甚至会自动再产生一些新idea，从第二步开始循环。有点可惜的是，这里边没有见到风控模块，或者说现金管理。说白了，RD Quant Agent实际解决的只是量化pipeline当中的前两部，就是挖因子和组合因子。至于后面的风控、实盘、交易监督，包括执行前执行后的那些风控，它都没有涉及到。希望他们继续把这些模块也做出来。当然那些模块可能不太容易发论文，都是很无聊的东西，甚至业界一些提供商都有卖。所以我估计他们也没什么动力，挖因子和组合策略这两个是比较容易发论文的，可以理解。</p>
+<h3>4. 实现单元细节</h3>
+<p>第三步实现单元很有意思，我们详细讲一下。主要是有两个agent，一个是调度agent，一个是实现agent。调度agent产生一个DAG，本来有ABCD四个因子要实现。它经过分析后发现互相有依存关系，比如B和A依赖于C，B和A也依赖于D，因此必须先做C因子，E乘以C再做出D因子来，有了D因子以后顺理成章B和A就能出来了。经过排序后实现顺序应该是C、D、B、A。然后发包任务给下一个实现agent。这个agent再翻看前面的错误记录和历史先验知识，把它写成Python代码。写完以后把知识存下来，再反馈给调度agent进行下一步循环。</p>
+<h3>5. 美股与A股回测结果</h3>
+<p>讲了这一堆过程以后，回测效果怎么样？当然这个就是之前看过的只在沪深300上的效果。如果在美股上或者更大规模的A股效果如何？这个图表在中证500和纳斯达克分别测了一下，每一列就是一个指标，ICIR、最大回撤等。很可惜没有提供夏普比率，但提供了信息比率，也在一定程度上告诉我们总体的一个综合分数。最差的一组就是传统机器学习，比如线性回归。稍微好一点的加入深度学习。很有意思的是你发现LSTM在好多金融学论文里都很喜欢用的一个模型，虽然有点老，但总体效果都还不错，尤其在美股A股表现都还可以。再往下看QuantLab，就是说用Qlib自己内置的一百五十八因子、三百六十因子加上默认的LightGBM，他们的回测结果就都不差。顺便说一下，传统的LightGBM这些东西用的是选了二十个最有代表性的因子配合上LightGBM做测试，则只有二十个因子这一坨。好，最后最好的一组就是这坨RD Factor Agent。它怎么看呢？分成三小组，就是因子系列、模型系列和Agent系列。因子系列只是说用论文里面提供的方法自动挖因子，自动挖出来因子结合默认的LightGBM跑分，跑出来已经不错了。RD Agent系列是说用事先定义好的因子，比如Alpha158、Alpha360，具体哪个大家可以翻一下。我把这因子拿来以后，让RD Agent自己只考虑怎么组合因子，跑效果也不错。最好的就是RD Agent把因子和模型结合起来，让它自己挖因子、自己组合。你发现效果是最棒的，尤其是结合了o4-mini以后，不论在中证500还是纳斯达克都很棒。那为什么呢？为什么o4比GPT-4o要好？因为o4是一个recent model，但是现在用的人少了，大家都用GPT-4o-mini，它也有不错的reasoning或者是long reasoning。GPT-4o我不知道为什么他们用这个东西，这个东西更多是出于一个holistic model来处理各种多媒体的东西。</p>
+<h3>6. 结论与启示</h3>
+<p>不管怎么样，我们学到这么几个点：第一，用推理模型效果很好；第二，一定要让RD Agent自己挖因子，同时自己组合；第三，这些传统的模型啊，什么线性、LightGBM确实表现挺一般的，可以作为baseline，但是确实跑不太过后边这些东西，比如说什么Transformer，甚至跑不赢一些比较简单的一些RNN，比如LSTM。好，谢谢大家，这个论文就讲到这儿。我们讲讲三个表格，但实际它后面有大量的附录提供更多的信息。如果大家感兴趣可以看看，他们这些图表非常有意思。好，谢谢大家。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">峨眉峰还独照</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">因子</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">交易策略</span></li>
+<li><span class="wikilink">AI</span></li>
+<li><span class="wikilink">大模型</span></li>
+<li><span class="wikilink">自动化</span></li>
+<li><span class="wikilink">开源项目</span></li>
+<li><span class="wikilink">因子挖掘</span></li>
+<li><span class="wikilink">大语言模型</span></li>
+<li><span class="wikilink">RDQuantAgent</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>大家好，很长时间以来，我都困惑于如何高效的管理。一个研究团队，相信有过管理经验的同志们都会有这个困惑，就是持续高效的让研究团队产出高质量的因子，且相关性比较低。如何自动化？那些呃没有意义的杂活，让团队成员聚焦于更有价值的那些精细的机器代替不了的活上面。如何给予不同水平的研究员以不同的指导，让他们分别探索不同的方向，让这些问题其实很难解决。今天这个论文似乎提出了一种自动的利用大语言模型的解决方案。它的基本思路是说让它自动的用历史上做过的所有的实验和研究论文，产生一些研究的点子，然后自动的去把这个点子转换成因子，它的python代码，然后自动回测，然后产生结果。这是微软和很多呃若干研究机构合作的，在q的基础上做的一个叫RD quant agent这么一个开源项目。我想呃这个论文它有四十多页啊，我们重点只看两三个表格就能抓住大体意思。那第一个就是先看他的回测结果，这是用沪深三百作为回测的一个结果，横行这么一组一组的都是用不同的。呃，怎么说呢？应该是基于机器学习的方向，他们的表现竖着的就是一些具体的matrix.比如说ICIR,比如说next draw down,然后CR之类东西，你可以看到效果最差的是用传统的机器学习模型。比如说lineer reression加上一些简单的因子，那稍微好一点的就是用deep learning model最好的。就是他这篇论文提出了叫RD agent这么一个东西，自己挖因子，自己去把因子组合起来，得到最好的这个效果。无论是max draw down,还是ICL down,都是最好的。这个论文。如果大家感兴趣，可以去下载一下，就是这个题目，或者直接到q lap,他们的github上面搜他们排最上面论文也是这个，而且都开远了，呃，非常感兴做什么了。非常有意思的是，为什么微软研究院他会搞这么一个量化交易的项目，而且坚持了好几年了，像他们能坚持下去，我也用过他们的q lap作为一个探索性的这么一个东西吧，觉得还蛮有意思的。这个figure three就是他们最重要的讲解原理的这么一个表。一二三四五这么四步，呃，产生如何产生自动的因子和策略。第一步就是一个confideration file,它定义了你有什么数据集，你想干什么输出的格式以及具体的工作流，就是一二三四五这么来一趟，这没什么好说的。第二个就很有意思的。第二个，这个叫呃synthesis unit,是产生research idea最关键的这么一个单元。它的基本原理就是利用大元模型pre training里边得到的知识，以及人工后来输入的一些知识，可以是几句话，可以是一篇论文，自己产生一些idea,也不管它是hellustination也好，还是合理的inference也好，反正能产生一些研究的idea.具体idea就是利用行为金融学、利用量价关系等等产生一些因子。产生因子以后呢，第三步就是如何去实现把它写成代码。他们在呃写代码的时候啊，我们后面会详细讲一下，他不是一个一个写的，而是有一个叫schedule.他分清主次，关系分清互相的依赖关系，然后发包任务一一个写出来，写完之后再往下走，就是自动测试这些因子。比如说用定义好的metrics ICLR、 separation one MDD之类的。测测完以后啊，他还会把那些成功的不成功的，还有一般的那些因子，还有在实现过程中的一些错误，一些bug、一些错误信息都会记录下来。作为他的知识库，在下一轮迭代了以后，他就会借用这些知识库，提高自己的质量。第五步就是最后的分析分析啊，它就会用不同的角度，比如说看不同mark region测试不同的呃robutness测试不同的这种叫叫什么退火实验之类的东西，重点聚焦于validation、 consistency之类东西。最后确定我要什么样的音子，怎样把这音质组合起来做一个交易策略。然后它甚至会自动的再产生一些新的idea,然后从第二步开始循环，第五步，再跳回第二步。有点可惜的是，这里边他并没有见到一个风控模块，嗯，或者说现金管理，或者呃说白了就是他整个的呃RD quant agent,他实际解决得只是我们整个量化pipeline当中的前两部，就是八因子和组合因子。至于后面的风控呃，实盘，然后交易监监督，包括执行前执行后的那些风控，它都没有涉及到。呃，希望他们继续后面把这些模块也做出来。当然那些模号可能不太容易发论文，都很无聊的一些东西，甚至业界的一些提供商都有卖。所以我估计他也没什么动力啊，就八因子和组合策略，这两个是比较容易发论文的。可以理解。前面说了他的比较有意思的这两个点啊，就是在第第三步，implementation unit,我们详细讲一下很有意思，我们放大一下。第三步，你看它主要是有两个agent,一个是scheduled agent,一个是implementation agent schedule那个说它产生一个DAG,就是本来有ABCD四百电，要实现四个因子。他经过分析以后，发现互相有依存关系，咱们必须是先做c因子，因为BAD移存于c并且BA移存于d因此啊先做c因子，e乘以c再做出d引子来有了d因此以后顺理成章的b和a就能出来了。因此，它经过排序以后，实现顺序应该是CDBA.然后发包任务给下一个implementation agent这个agent再翻看前面的错误记录和历史先验知识，把它写成python代码。写完以后啊，他把这个知知识存下来，哎，然后再反馈给schedule的agent进行下一步循环。讲了这一堆过程以后，回测效果怎么样呢？当然这个就是之前我们看过的只在沪深三百上的效果。如果在美股上或者更大的规模的a股效果如何？就是这个图表，这图表在中证五百和纳斯达克分别测了一下，每一列就是一个metrics ICLR my strodown之类的。很可惜，没有提供sharp ertial.但是提供了这个information ratio,也在一定程度上告诉我们总体一个综合的分儿吧。那么最差的一组就是传统机器学习，比如说五拐linution稍微好一点的加入deep learning这儿。很有意思的是你发现LSTM在好多金融学论文里面都很喜欢用的一个模型啊，虽然有点老，但是总体效果都还不错，尤其在美股a股表现都还可以。再往下看such a library,就是说用q lab自己内置的一百五十八factor,三百六十个factor加上默认的来GBM,他们的回测结果就都不差。顺便说一下啊，传统的mtion lanling这些东西用的都是选了二十个最有代表性的因子，配合上YGBMSG boots进行测试，则只有二十个音子这一坨好，最后最好的一组就是这坨RD. Factor agent他怎么看呢？分成三小组，就是factor系列、model系列和agent系列。 Factors只是说用论文里面提供的方法自动挖因子，自动挖出来因子，结合，默认的light GBM跑分跑出来已经不错了。 Rd猫老师说，我用事先定义好的因子，比如说阿尔法一五八、阿尔法三六零，具体哪个大家可以翻一下。我把这因子来拿来以后，让RD agent自己只考虑怎么组合因子，跑车效果也不错。最好的就是的RD agent把factor和model结合起来，让他自己挖因子，自己组合。你发现效果是最棒的，尤其是结合了o four mini以后，他不论在中证五百还是纳萨克都很棒。那为什么呢？这儿你看啊呃为什么o四比这个for o要好？因为o four它是一个recently model,但是现在用的人少了，大家都用GPT五点二mini,他也也有不错的reasoning,或者是来geninereasoning.那GPT for o我不知道为什么他是用这个东西，这个东西更多是出于一个就是holist model来处理各种多媒体的东西。那不管怎么样，就是我们这学到是这么几个点。第一呃用reasoning model效果很好。第二，一定要让RND自己挖因子，同时自己组合。呃，第三就是这些呃传统的模型啊，什么这个lineer IGBM就就确实表现挺一般的，可以作为baseline.但是确实跑不太过后边这些东西。比如说什么transformer啊，呃甚至跑不赢一些比较呃比较简单的一些RNN,比如说ISTM啊。好，谢谢大家。这个论论就讲讲这里啊，什我们讲讲三个表格，但实际它有后面有大量的附录提供更多的信息。如果大家感兴趣，可以看看他们这些图表非常有意思。好，谢谢大家。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
