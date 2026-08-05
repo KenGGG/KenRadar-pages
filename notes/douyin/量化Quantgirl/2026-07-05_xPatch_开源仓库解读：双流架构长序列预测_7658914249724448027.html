@@ -33,25 +33,44 @@
   </style>
 </head>
 <body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-07-05_【开源解读】xPatch双流横扫长序列_这个开源仓库_stitsyuk_xPat_7658914249724448027.md · 发布于 2026-08-05 12:11:45</div><nav class="page-links"><a href="https://www.douyin.com/video/7658914249724448027" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>【开源解读】xPatch双流横扫长序列 这个开源仓库 stitsyuk/xPat</h1>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-07-05_xPatch_开源仓库解读：双流架构长序列预测_7658914249724448027.md · 发布于 2026-08-05 16:44:27</div><nav class="page-links"><a href="https://www.douyin.com/video/7658914249724448027" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>xPatch 开源仓库解读：双流架构长序列预测</h1>
 <p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7658914249724448027">https://www.douyin.com/video/7658914249724448027</a>）</p>
 <h2>一、内容简述</h2>
 <h3>（一）一句话结论</h3>
 <blockquote>
 <p><strong>一句话结论</strong>
-AI 整理结果解析失败，需人工查看视频原稿。</p>
+解读 AAAI 2025 论文《xPatch: Dual-Stream Time Series Forecasting with Exponential Seasonal-Trend Decomposition》的官方开源实现。该仓库利用指数移动平均进行时序季节-趋势分解，构建线性（MLP）与非线性（CNN）双流网络，在多个长序列预测基准上取得领先 MSE。</p>
 </blockquote>
 <h3>（二）核心内容</h3>
 <ol>
-<li><strong>原稿待人工核对</strong>
-本条视频已完成 Whisper 转录，但 AI 结构化摘要解析失败，请以视频原稿为准。</li>
+<li>
+<p><strong>项目定位与核心方法</strong>
+xPatch 是 AAAI 2025 论文的官方实现，针对长序列预测难以同时捕获趋势与季节分量的难题，利用指数移动平均将时序拆分为趋势分量和季节分量，构建线性流与非线性流的双流网络架构。</p>
+</li>
+<li>
+<p><strong>模型架构与实验效果</strong>
+项目说明页面直观展示序列经指数分解后分别进入线性与非线性网络的过程。实验结果显示，在统一配置下，多数基准数据集上均取得领先的均方误差（MSE）。</p>
+</li>
+<li>
+<p><strong>快速上手与仓库结构</strong>
+三步快速启动：用 conda 环境配置文件搭建开发环境，将预处理数据放入数据集目录，运行超参搜索脚本。仓库文件结构清晰，核心模型与数据加载模块在主目录，实验与消融脚本集中管理，消融目录补充指数分解与损失函数等研究细节。</p>
+</li>
+<li>
+<p><strong>适用场景与注意事项</strong>
+该开源方案非常适合天气、交通、电力等长序列预测任务，可作为强基线供研究者使用。训练需要 RTX 4090 级 GPU，超长序列对显存有要求，新手需要一定调参经验，但复现路径完整清晰。</p>
+</li>
 </ol>
 <h2>二、分段原文</h2>
 <blockquote>
-<p>[!warning]
-本次 AI 未生成可核验的纠错分段原文。为避免把未经纠错的文字误标为修正版，请查看下方“视频原始转录”，或从详情页重新生成 AI 整理。</p>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
+<h3>1. 项目介绍与方法解读</h3>
+<p>在本期带你看 xPatch 开源仓库配套论文的方法解读。我们另开一期。这里先讲项目定位、双流架构与复现路径。这个仓库提供完整模型代码，针对长序列预测难以同时捕获趋势与季节的难题，利用指数移动平均将时序拆分为趋势分量和季节分量，随后构建双流网络，线性流处理趋势。项目说明页面展示了模型架构与双流设计，直观地描绘出序列经指数分解后分别进入线性与非线性网络的过程。</p>
+<h3>2. 实验效果与快速上手</h3>
+<p>实验结果显示，在统一配置下，多数基准数据集上均取得领先的均方误差。代码快速上手只需三步：先用 conda 的环境配置文件一行命令搭建 xPatch 开发环境，再把预处理数据放进数据集目录，最后运行超参搜索脚本即可启动。</p>
+<h3>3. 仓库结构与适用场景</h3>
+<p>项目公平对比实验，仓库文件结构清晰可见，核心模型与数据加载模块放在主目录，实验与消融脚本集中管理。消融目录还补充了指数分解与损失函数等研究细节。这个开源方案非常适合天气、交通、电力等长序列预测任务，作为强基线供研究者使用。训练需要 RTX 4090 级 GPU，超长序列对显存有要求，新手需要一定调参经验，但复现路径完整清晰。</p>
 <h2>三、知识关联</h2>
 <h3>来源与类型</h3>
 <ul>
@@ -62,8 +81,16 @@ AI 整理结果解析失败，需人工查看视频原稿。</p>
 </ul>
 <h3>相关主题</h3>
 <ul>
-<li><span class="wikilink">AI产业</span></li>
-<li><span class="wikilink">投资策略</span></li>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">时间序列预测</span></li>
+<li><span class="wikilink">开源项目</span></li>
+<li><span class="wikilink">深度学习</span></li>
+<li><span class="wikilink">机器学习</span></li>
+<li><span class="wikilink">xPatch</span></li>
+<li><span class="wikilink">长序列预测</span></li>
+<li><span class="wikilink">双流架构</span></li>
+<li><span class="wikilink">指数移动平均</span></li>
+<li><span class="wikilink">季节-趋势分解</span></li>
 </ul>
 <h3>人物</h3>
 <ul>
@@ -80,7 +107,6 @@ AI 整理结果解析失败，需人工查看视频原稿。</p>
 <h3>资产/产品/地点</h3>
 <ul>
 <li><span class="wikilink">AAAI</span></li>
-<li><span class="wikilink">xPat AI</span></li>
 </ul>
 <details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
