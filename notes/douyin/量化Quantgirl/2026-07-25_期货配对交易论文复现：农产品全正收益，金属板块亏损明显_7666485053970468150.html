@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文复现】期货配对 农产品全正 原论文《Signature Decomposition Method Applying to Pair Trading》提出SE-SIG-DIFF双过滤信号。我们复现了该框架，在期货1分钟数据上回测近两年18对跨品种配对。
+✅ 怎么交易
+残差Z值突破±2开仓，回到0平仓，搭配签名面积收敛+同向过滤，预热期最大回撤止损。成本按官方手续费逐笔扣除（开仓约0.3～1.1bps），未含滑点。
+📊 核心发现
+农产品板块6对全部盈利，中位净年化约16.6%、夏普约1.32；金属板块（金、银等）仅1对正收益，中位净年化约-5.9%；油品链居中。整体中位净年化约4.0%、夏普约0.14。高胜率（均超65%）背后是大量小额盈利与少数深度回撤，金属在单边行情下大亏。
+💡 用法边界
+优先集中在农产品子池；金属和跨板块混配容易稀释利润。滑点是关键变量，实盘必须按成交回报压测。换月跳空也需用主力拼接处理。
+⚠️ 风险提示
+历史回测不代表未来表现，不构成投资建议。策略可能失效，务必独立判断。
+#量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant #量化策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-07-25_期货配对交易论文复现：农产品全正收益，金属板块亏损明显_7666485053970468150.md · 发布于 2026-08-05 11:14:43</div><nav class="page-links"><a href="https://www.douyin.com/video/7666485053970468150" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>期货配对交易论文复现：农产品全正收益，金属板块亏损明显</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7666485053970468150">https://www.douyin.com/video/7666485053970468150</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+复现《Signature Decomposition Method Applying to Pair Trading》论文提出的SE-SIG-DIFF双过滤信号框架，在期货1分钟数据上回测近两年18对跨品种配对。农产品板块6对全部盈利（中位净年化约16.6%、夏普约1.32），金属板块仅1对正收益（中位净年化约-5.9%），整体中位净年化约4.0%、夏普约0。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>策略框架与交易方法</strong>
+原论文提出SE-SIG-DIFF双过滤信号，复现在期货1分钟数据上回测近两年18对跨品种配对。残差Z值突破±2开仓，回到0平仓，搭配签名面积收敛+同向过滤，预热期最大回撤止损。成本按官方手续费逐笔扣除（开仓约0.3～1.1bps），未含滑点。</p>
+</li>
+<li>
+<p><strong>核心回测发现</strong>
+农产品板块6对全部盈利，中位净年化约16.6%、夏普约1.32；金属板块（金、银等）仅1对正收益，中位净年化约-5.9%；油品链居中。整体中位净年化约4.0%、夏普约0.14。高胜率（均超65%）背后是大量小额盈利与少数深度回撤，金属在单边行情下大亏。</p>
+</li>
+<li>
+<p><strong>盈亏结构与风险特征</strong>
+策略整体胜率较高，多数信号小额盈利离场，但高胜率背后是极为不对称的盈亏分布：因触发频繁且幅度小，而止损通常要等到较大反向波动才会发生，导致小盈堆积、偶发大亏，几次不利行情就足以把盈利全部吞没。大回撤几乎都对应少数金属品种的急速反转行情。</p>
+</li>
+<li>
+<p><strong>实盘应用建议与边界</strong>
+优先集中在农产品子池；金属和跨板块混配容易稀释利润。滑点是关键变量，实盘必须按成交回报压测。换月跳空也需用主力拼接处理。出场机制带来的高胜率小盈利与低频大亏损深刻影响组合收益形态，需识别可能引发大亏的行情段落。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 论文背景与复现目标</h3>
+<p>今天我们来解读这篇论文《期货配对交易》。本期复现的是一类商品期货上跑动量效应的趋势跟踪策略。原论文在比较宽泛的品种池上检验了价格趋势的延续性，发现多空组合可以带来显著溢价。本回测把研究落到可交易的口径，结合行情和实盘成本重新审视，两个品种样本内观察净收益能否站住。</p>
+<h3>2. 板块分化与数据设置</h3>
+<p>可整体看策略在不同板块的分化非常明显，农产品合约几乎都对付现有利，而金属品种在入费用后多难难守，商品策略这后续品种筛选、出场设设变得很关键。本复现用的数据覆盖了十几个活跃商品，期货全部采用主力连续合约，并在发生跨月时做了前复权处理，避免空档干扰信号。</p>
+<h3>3. 交易成本与滑点压测</h3>
+<p>交易成本设定上，手续费直接使用官方保证金，按交易所比例计算，买卖各扣一次。滑点方面，本回测在每个开仓信号上使用固定比例损耗，同时额外做了一道模拟的滑点压测，因为考察策略在成交摩擦放大后的韧性。样本期为连续两年，涵盖了趋势顺畅与频繁反转的行情，段能比较好的反映策略在真实摩擦下的表现。</p>
+<h3>4. 收益曲线与回撤分析</h3>
+<p>开仓与回撤曲线看策略，在多数时段能够缓步积累利润，整体运行方向稳定。但偶尔会遭遇幅度较大且持续时间较长的回撤。复现中发现，这些大回撤几乎都对应着少数金属品种的急速反转行情，一次亏损就能吞掉前面多次小盈利的积累。农产品合约的盈利则更加细密，回撤幅度浅，恢复也快。这种结构导致整体收益的高点与低谷，几乎完全跟着金属板块的强弱在走。如果不加干预，组合的稳定性会被少数品种绑架。</p>
+<h3>5. 绩效汇总与板块对比</h3>
+<p>看绩效汇总表里，十八个交易对中有十个在考虑手续费后年化回报为正值，中位数刚好落在百分之四点零左右。表现靠前的几乎全是农产品，部分品种的年化收益可以超过百分之十五。与之对照，多数金属与部分化工品种的年化净收益为负，尤其铜、锌等合约扣费后损失明显。表内的夏普比率和卡玛比率同样呈现这种分裂，农产品一侧的数值稳健且可接受，金属一侧则大多在零轴以下徘徊。全样本的最大回撤主要来自少数几次大亏，这一结构在表内各项风险指标中体现的十分充分。</p>
+<h3>6. 胜率结构与盈亏分布</h3>
+<p>可胜率上，用法上策略整体胜率较高，多数信号小额盈利离场，给人一种交易很稳的直观感觉。但复现中能清楚看到，高胜率的背后是极为不对称的盈亏分布：因触发频繁且幅度小，而止损通常要等到较大反向波动才会发生，导致盈亏持续是小盈堆积，偶发大亏，几次不利行情就足以把盈利全部吞没。</p>
+<h3>7. 实盘改进方向</h3>
+<p>要想在实盘中改善这一结构，方向不是去提高胜率，而是用出场机制识别出可能引发大亏的行情段落，并结合换月处理，尽量减少在转仓日的异常摩擦。</p>
+<h3>8. 复现结论与建议</h3>
+<p>总结复现结论，在两年样本与官方手续费口径下，十个年化回报为正的品种给出了可运作的基础，中位回报水平大约在百分之四左右。农产品一侧全员守住了正收益，提供了一个天然的稳健支持，而金属品种几乎全线高负，显然不适合原样纳入组合。出场机制带来的高胜率小盈利与低频大亏损深刻影响了组合的收益形态。基于这些事实的一条相对可落地的路径是收缩到农产品，此时同步进行滑点压测和换月逻辑优化，让信号在成交摩擦与展期损耗的共同作用下，依然能保留足够的正期望。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化研究</span></li>
+<li><span class="wikilink">配对交易</span></li>
+<li><span class="wikilink">商品期货</span></li>
+<li><span class="wikilink">回测复现</span></li>
+<li><span class="wikilink">统计套利</span></li>
+<li><span class="wikilink">风险管理</span></li>
+<li><span class="wikilink">期货配对交易</span></li>
+<li><span class="wikilink">SE-SIG-DIFF</span></li>
+<li><span class="wikilink">农产品</span></li>
+<li><span class="wikilink">金属板块</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>今天我们来解读读这篇文论文期货配交易。本期付现的是一类类商商期货上跑动量效应的趋势跟踪策略。原论文在比较宽泛的品种，池上检验了价格趋势的延续性，发现多空组合可以带来显著溢价本回策，把研究落到可交易的口径。而金开行情和实盘成本重新审审，两两品样本内观察净收益能否占住。可整体看策略在不同板块的分化非常明显，农产品品合约乎乎都对付现有利。而金属品种在入入费用后多难难守，商品期略这这后后续品品筛选选出场设设变得很关键。普付现用的数据覆盖了十几个活跃商品，期货全部采用主力连续合约，并在发生跨月时做了前付权处合，避避免空干扰扰信。而呃，交易成本设定上呃，手续费直接使用方标标保证金，按交易所比例计算，买卖各扣一次。不划点方面，本回测在每个开仓信号上使用固定比例损耗，同时额外做了一道卖衣架的滑电压测。因为考察策略在成交摩擦放大后的韧性样本期为连续两年涵盖了趋势顺畅与频繁反转的行情。段落能比较好的反映策略，在真实摩擦下的表现，开搓与与回撤曲线，看策略，在多数时段能够缓步积累利润，禁止运行方向稳定。但偶尔会遭遇幅度较大且持续时间较长的回撤。复现中发现，这些大回撤几乎都对应着少数金属品种的急速反转行情，一次亏损就能吞掉前面多次小盈利的积累，呸。农产币合约的盈利则更加细密，回撤幅度浅，恢复也快。这种结构导致整体收益的高点与低谷，几乎完全跟着金属板块的强弱在走。如果不加干预，组合的稳定性会被少数品种绑架。看绩效汇总表里，十八个交易队中有十个在考虑手续费，后年化回报为正值中位数，刚好落在百分之四点零左右，表现靠前的几乎全是农产品，部分品种的年化收益可以超过百分之十五。与之对照，多数金属与部分化工品种的年化净收益为负，尤其同心等合约扣费后损失明显。表内的夏普比率和卡玛比律同样呈现这种分裂农产品一侧的数值稳健且可接受，金属一侧则大多在零轴以下徘徊。全样本的最大回撤主要来自少数几次大亏，这一结构在表内各项风险指标中体现的十分充分，可胜率习题、用法上策略整体胜率较高，多数信号小额盈利离场，给人一种交易很稳的直观感觉。但复线中能清楚看到，高胜率的背后是极为不对称的盈亏分布，只因触发频繁且幅度小，而止损通常要等到较大反向波动才会发生，导致盈亏持续是小盈堆积，偶发大，亏，几次不利行情就足以把盈利全部吞没。要想在实盘中改善这一结构方向，不是去提高胜率，而是用出场结构识别出可能引发大亏的行情段落，并结合换月处理，尽量减少在转仓日的异常摩擦。总结复现结论，在两年样本与官方手续费口径下，十个今年化为正的品种给出了可运作的基础，中位回报水平大约在百分之四左右，农产品一侧全员守住了正收益，提供了一个天然的稳健支持，而金属品种几乎全线高富，显然不适合原样纳入组合出厂机制带来的高胜率小盈利与低频大亏损深刻影响了组合的收益形态。基于这些事实的一条相对可落地的路径是收缩到农产品此时同步进行、滑点、压测和换月逻辑优化，让信号在成交摩擦与展期损耗的共同作用下，依然能保留足够的正期望。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

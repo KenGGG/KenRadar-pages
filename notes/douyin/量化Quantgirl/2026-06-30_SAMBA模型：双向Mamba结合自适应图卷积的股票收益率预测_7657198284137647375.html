@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文分享】状态空间图网络预测股票收益 这篇论文《Mamba Meets Financial Markets: A Graph-Mamba Approach for Stock Price Prediction》提出SAMBA模型，以双向Mamba捕捉长程时序依赖，自适应图卷积学习每日特征交互，预测次日收益率。 
+✅ 方法亮点：双向选择性扫描从前向与反向捕捉全局依赖；可学习特征图端到端构建金融特征邻接矩阵，无需手工定义；低秩分解控制参数量防过拟合。 
+📊 结果：在NASDAQ、NYSE、DJIA三个市场2010-2023数据上，SAMBA的RMSE降至0.0128（提升11.72%），IC达0.5046（提升85%），方向性判断大幅增强；计算量MACs仅0.11M，远低于Transformer的13.77M。 
+⚠️ 历史回测不代表未来收益，本文仅供学习参考，不构成投资建议。 
+#量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant #量化策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-06-30_SAMBA模型：双向Mamba结合自适应图卷积的股票收益率预测_7657198284137647375.md · 发布于 2026-08-05 11:39:29</div><nav class="page-links"><a href="https://www.douyin.com/video/7657198284137647375" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>SAMBA模型：双向Mamba结合自适应图卷积的股票收益率预测</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7657198284137647375">https://www.douyin.com/video/7657198284137647375</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+论文《Mamba Meets Financial Markets: A Graph-Mamba Approach for Stock Price Prediction》提出SAMBA模型，用于预测次日股票收益率。模型采用双向Mamba块捕捉长程时序依赖，通过端到端可学习的自适应图卷积建模每日股票特征间的交互关系，并结合低秩分解控制参数量。在NASDAQ、NY。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>研究背景与问题定义</strong>
+股票预测的难点在于噪声大、非线性强。核心问题是如何同时捕捉长期时间依赖和每日特征间的复杂依赖。MLP忽略时间结构，CNN可能遗漏长期依赖，LSTM难以并行化，Transformer虽能全局交互但计算复杂度随序列长度平方级增长，实时交易中不实用。此问题被明确定义为回归问题：给定过去20天的八十二维日平特征矩阵，目标是预测次日收益率（次日收盘价减当日收盘价除以当日收盘价）。</p>
+</li>
+<li>
+<p><strong>SAMBA模型架构与方法</strong>
+SAMBA基于状态空间模型（SSM），用隐状态递归压缩历史信息，通过一阶微分方程描述系统演化，并借助Hylvester矩阵增强长期依赖建模。Mamba的核心是输入依赖的选择机制，每个时间步的状态参数不同，能动态聚焦重要信息、过滤无关信号，并利用硬件感知算法实现高效训练。作者设计双向Mamba块，同时送入原始和反转序列，将正反向输出与输入残差连接后，经层归一化和前馈网络捕捉双向时间依赖。输入特征矩阵先进入双向Mamba提取时间依赖，再通过自适应图卷积建模特征交互，图卷积跨特征过滤信息后线性投影输出。</p>
+</li>
+<li>
+<p><strong>自适应图卷积与参数优化</strong>
+区别于手工构图，论文采用端到端方式学习特征图，用两组可训练节点嵌入的转置相乘生成邻接矩阵，让模型在训练中自动发现对预测任务有用的特征关系。图卷积部分使用切比雪夫多项式作图滤波，以学习到的图拉普拉斯矩阵为基，通过k阶多项式在特征节点间传播信息并聚合到标量预测值，k控制传播范围。为防过拟合，作者对图卷积参数做低秩分解，利用节点权重矩阵及其转置重构滤波参数，大幅减少可训练参数，使同一嵌入同时支撑图构件和自适应滤波。</p>
+</li>
+<li>
+<p><strong>实验结果与效率分析</strong>
+实验覆盖NASDAQ、NYSE、DJIA三大指数，数据从2010年1月至2023年11月，每个市场每日使用八十二个金融特征，回看窗口长度为20天。基线包括LSTM、Transformer、FiTTS、Stock Mixer和AGCRN，评估指标为RMSE、IC和质信息系数。SAMBA在三个市场的RMSE和IC上全面领先，尤其在IC上的提升非常显著，表明其在预测股价变动方向上格外精准。计算效率方面，SAMBA的MACs远低于Transformer和AGCRN，虽非最小模型，但在预测性能与计算代价的。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 论文介绍与研究动机</h3>
+<p>今天我们来解读这篇论文《Graph Mamba：SAMBA股票预测》。SAMBA股票预测难就难在噪声大、非线性强。这篇论文要解决的核心问题是如何同时捕捉长期时间依赖和每日特征间的复杂依赖。作者指出，MLP忽略时间结构，CNN可能遗漏长期依赖，LSTM难以并行化，而Transformer能全局交互，但计算复杂度随序列长度平方级增长，实时交易中很不实用。为此，论文提出SAMBA，它用双向Mamba块捕捉历史价格的长期依赖，配合自适应图卷积来建模每日股票特征之间的关系，兼顾表达力与计算效率。此问题被明确定义为回归问题：给定过去20天的八十二维日平特征矩阵，目标是预测次日的收益率，用次日收盘价减去当日收盘价再除以当日收盘价来计算。</p>
+<h3>2. 状态空间模型与Mamba机制</h3>
+<p>SAMBA的根基是状态空间模型，用隐状态递归压缩历史信息，通过一阶微分方程描述系统演化，并借助Hylvester矩阵增强长期依赖建模能力。与传统SSM不同，Mamba的核心是输入依赖的选择机制，每个时间步的状态参数都不同，能动态聚焦重要信息、过滤无关信号，并利用硬件感知算法实现高效训练。论文特别强调，单向Mamba的选择机制可能无法充分利用全局上下文，金融序列的模式有时需要结合回看窗口早期和晚期的位置信息才能合理解释。为此作者设计了双向Mamba块，同时送入原始和反转序列，将正反向输出与输入残差连接后，经层归一化和前馈网络捕捉双向时间依赖。该模块重复多层扫描。</p>
+<h3>3. 模型架构与自适应图卷积</h3>
+<p>SAMBA的整体架构图清晰展示：输入特征矩阵先进入双向Mamba提取时间依赖，再通过自适应图卷积建模特征交互，图卷积跨特征过滤信息后线性投影输出收益率预测。区别于手工构图，论文采用端到端方式学习特征图，用两组可训练节点嵌入的转置相乘来生成邻接矩阵，直接让模型在训练中自己发现对预测任务有用的特征关系。图卷积部分使用切比雪夫多项式作图滤波，以学习到的图拉普拉斯矩阵为基，通过k阶多项式在特征节点间传播信息，最终聚合到标量预测值，k控制传播范围。为防过拟合，作者对图卷积参数做了分解，利用节点权重矩阵及其转置来重构滤波参数，这大幅减少了可训练参数，使同一嵌入同时支撑图构件和自适应滤波。</p>
+<h3>4. 实验设置与结果分析</h3>
+<p>实验覆盖NASDAQ、NYSE和DJIA三大指数数据，从2010年1月到2023年11月，每个市场每日用到八十二个金融特征。回看窗口长度依据基线设为20天。对比基线包括LSTM、Transformer、FiTTS、Stock Mixer和AGCRN。评估指标选用均方根误差、信息系数和质信息系数，后者重点衡量模型的方向预测与排序质量。回测结果显示，SAMBA在三个市场的RMSE和IC上全面领先所有基线，尤其在IC上的提升非常显著，表明其在预测股价变动方向上格外精准。计算效率方面，SAMBA的MACs远低于Transformer和AGCRN。作者强调，它虽然不是最小的模型，但在预测性能与计算代价的权衡上做到了最优。总结来看，该论文用双向选择性扫描处理时间维度，用可训练的节点嵌入学习自适应特征图，两者配合让SAMBA实现了高效且准确的次日股票收益率预测。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">配对交易</span></li>
+<li><span class="wikilink">统计套利</span></li>
+<li><span class="wikilink">量化</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">Quant</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">深度学习</span></li>
+<li><span class="wikilink">金融AI</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>今天，我们来解读这篇论文，graph monmber股价预测samba股票预测难就难在噪声大、非线性强。这篇论文要解决的核心问题是如何同时捕捉长期时间依赖和每日特征间的复杂依赖。作者指出，MLP忽略时间结构，CNN可能遗漏，长期依赖LSTM难以并行化，而transform间能全局交互，但计算复杂度随序列长度平方及增长，实时交易中很不实用。为此，论文提出samba,它用双向曼吧快捕捉历史价格的长期依题，配合自适应图、卷积来建模每日股票特征之间的关系，兼顾表达力与计算效率。锐此被明确定义为回归问题。给定过去l天的八十二维日平特征矩阵目标是预测次日的收益率，用次日收盘价减去当日收盘价，再除以当日收盘价来计算。三霸的根基是状态空间模型。他用一个隐状态递归的压缩历史信息，通过一阶微分方程描述系统演化，并借助hyp与下矩阵来增强长期依赖建模能力。与传统SSM不同，曼by的核心是输入依赖的选择机制。每个时间部的状态参数都不同，能动态聚焦重要信息，过滤无关信号，并利用硬件感知算法，实现高效训练。论文。特别强调，单向盲吧的选择机制，可能无法充分利用全局上下文金融序列的模式。有时需要结合回看窗口早期和晚期的位置信息，才能合理解释。为此，作者设计了双向慢吧快。他同时送入原始和反转序列，将正反向输出与输入残差连接后，精层归一化和前馈网络捕捉双向时间依赖该模块重复多层散漫的整体架构图，清晰展示输入特征矩阵先进、双向蒙吧提取时间依赖，再通过自适应图、建模特征、交互图卷机跨退征过滤信息后，线性投影输出收益率预测区别于手工构图，论文采用端到端方式学习特征图，用两组可训练节点嵌入的转置相乘来生成零阶矩阵，直接让模型在训练中自己发现。对预测任务有用的特征、关系。图诀集部分使用切比雪夫多项式作图滤波，以学习到的图的拉普拉斯矩阵为基，通过k阶多项式在特征节点间传播信息，最终聚合到标量预测值k控制传播范围为防过拟合，作者对图卷积参数做了分解，利用节点欠物矩阵及其转置来重构滤波参数，这大幅减少了可训练参数，使同一嵌入同时支撑。图，构件和自适应滤波实验覆盖纳斯达克纽交所和道琼斯三大指数数据。从二零一零年一月到二零二三年十一月，每个市场每日用到八十二个金融特征。回看窗口长度，依据基线设为二十天，对比基线，包括LST、 transformer、 fitits、 stock mixer和AGCRN.评估指标选用均方根误差、信息系数和质信息系数，后者重点衡量模型的方向预测与排序质量。回测结果显示，香巴在三个市场的RMSE九十九REC上全面领先所有基线，尤其在九十九和REC上的提升非常显著，表明他在预测股价变动方向上格外精准。计算效率方面，在三八的乘法加累积数远低于transformer和AGCRN.作者强调，它虽然不是最小的模型，但在预测性能与计算代价的权衡上做到了最优。总结来看，俄论文用双向选择性扫描处理时间维度，用可训练的节点嵌入学习自适应特征图，两者配合，让sambar实现了高效且准确的次日股票收益率预测。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

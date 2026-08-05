@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【量化研究】行业 ETF 投资组合风控研究 #量化  #量化交易  #量化分析  #Quant  #量化策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-05-28_行业ETF投资组合账户级双轨风控研究_7644936755182865718.md · 发布于 2026-08-05 11:55:24</div><nav class="page-links"><a href="https://www.douyin.com/video/7644936755182865718" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>行业ETF投资组合账户级双轨风控研究</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7644936755182865718">https://www.douyin.com/video/7644936755182865718</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本研究针对复合动量行业轮动策略，提出独立的账户级双轨风控机制。以满仓理论净值为基准轨道，当账户净值从历史高点回撤超过阈值时按比例减仓，待基准创新高后接回。回测四年数据显示，10%回撤阈值触发过晚导致风控失效，夏普最优区域集中在6%-7%阈值，回撤超7%时减仓至50%可使夏普比升至0.720、最大回撤降至27.1%。研究结论是否定10%阈值的普适性，验证账户级。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>研究背景与策略基准</strong>
+投资者真正关心账户实际回撤而非理论净值。传统风控易与策略逻辑冲突，因此提出独立的账户级风控作为第二道闸门。策略底层为复合动量行业轮动，数据标的为2017-2021年行业ETF，回测四年。以始终满仓执行的理论净值作为基准轨道，基准年化收益21.7%，最大回撤32.3%。</p>
+</li>
+<li>
+<p><strong>双轨风控机制与参数扫描</strong>
+核心为双轨风控：一条轨道始终记录满仓信号，当账户净值从历史高点回撤超过阈值时按比例缩放减仓，待理论轨道净值创新高后接回基准策略。参数扫描显示夏普比最优区域集中在6%-7%回撤阈值。阈值过紧如4%容易踏空，10%常见阈值触发过晚导致风控在下跌中实质失效，最大回撤33.6%反而略差于基准。晚触发配合深减仓组合表现最差。</p>
+</li>
+<li>
+<p><strong>回撤热力图与风险收益权衡</strong>
+参数回撤热力图表明阈值是控制回撤的一阶因素，仅阈值加低仓位保护最强。同一阈值下提高仓位会加深回撤但也可能提升夏普，体现风险与收益的权衡。三角关系图显示需在收益、风险和策略暴露度之间做出权衡，没有单一最优参数，需根据自身偏好选择方案。</p>
+</li>
+<li>
+<p><strong>研究局限与结论</strong>
+研究局限：回撤用收益缩放模拟封仓，未考虑实盘冲击成本，属于软减仓不能将回撤硬性封顶，未来需在更长期样本中检验稳健性。结论：账户级双轨风控有效改善了ETF轮动策略的风险调整后表现，否定了10%阈值的普适性，作为独立风控层不与策略阿尔法耦合。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 研究背景与策略设定</h3>
+<p>账户级风控如何改善你的投资体验？请看这张净值对比图。投资者真正关心的是自己账户的实际回撤，而非理论净值。传统风控易与策略、逻辑冲突。因此，我们提出独立的账户级风控作为第二道闸门。本研究回测了四年，数据标的为2017至2021年行业ETF，底层策略是基于复合动量的行业轮动。我们以始终满仓执行该策略的理论净值作为基准轨道。</p>
+<h3>2. 双轨风控机制与基准表现</h3>
+<p>我们的核心是双轨风控：一条轨道始终记录满仓信号。当账户净值从历史高点回撤超过阈值，我们便按比例缩放，其日收益模拟减仓，待理论轨道净值创新高后再接回基准策略。基准年化收益百分之二十一点七，但最大回撤达百分之三十二点三。</p>
+<h3>3. 参数扫描与最优方案</h3>
+<p>我们找到了夏普最优方案：当回撤超百分之七时减仓至百分之五十，其夏普比升至零点七二零，最大回撤改善至百分之二十七点一。从净值曲线看，橙色夏普最优方案走势更平滑。绿色回撤最优方案在熊市防守出色，而红色收益最优方案几乎满仓，运行紧贴基准。我们发现百分之十这个常见阈值在本策略中表现不佳，它触发过晚，导致风控在下跌中实质失效，最终最大回撤百分之三十三点六，反而略差于基准。参数扫描显示，夏普比最优区域集中在百分之六到百分之七的回撤阈值。阈值过紧如百分之四，容易踏空。而晚触发配合深减仓的组合表现最差。</p>
+<h3>4. 回撤热力图与风险权衡</h3>
+<p>参数回撤热力图表明，阈值是控制回撤的一阶因素，左上角仅阈值加低仓位保护最强。同一阈值下，提高仓位会加深回撤，但也可能提升夏普，这是风险与收益的权衡。没有单一最优参数。这个三角关系图表明，你需要在收益、风险和策略暴露度之间做出权衡，根据自身偏好选择方案。</p>
+<h3>5. 研究局限与结论</h3>
+<p>本研究存在局限：回撤用收益缩放模拟封仓，未考虑实盘冲击成本。这是软减仓，不能将回撤硬性封顶。未来需在更长期样本中检验稳健性。结论是，账户级双轨风控有效改善了ETF轮动策略的风险调整后表现。它否定了百分之十阈值的普适性，且作为独立风控层，不与策略阿尔法耦合。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化投资</span></li>
+<li><span class="wikilink">ETF策略</span></li>
+<li><span class="wikilink">风控模型</span></li>
+<li><span class="wikilink">回测研究</span></li>
+<li><span class="wikilink">参数优化</span></li>
+<li><span class="wikilink">动量策略</span></li>
+<li><span class="wikilink">投资组合管理</span></li>
+<li><span class="wikilink">账户级风控</span></li>
+<li><span class="wikilink">双轨风控</span></li>
+<li><span class="wikilink">行业ETF</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>账户级风控如何改善你的投资体验？请看这张净值对比图。投资者真正关心的是自己账户的实际回撤，而非理论净值。传统风控易与策略、逻辑冲突。因此，我们提出独立的账户级风控作为第二道闸门，本研究回撤了四年，数据标的为七十一至行业ETF底层策略是基于复合动量的行业轮动。我们以始终满仓执行该策略的理论净值作为基准轨道。我们的核心是双轨风控一条轨道，终时记录满仓信号。当账户净值从历史高点、回撤超过阈值，我们便按比例缩放，其日收益模拟减仓，待理论轨道净值创新高后再接回基准策略，年化收益百分之二十一点七，但最大回撤达百分之三十二点三。我们找到了夏普最优方案，当回撤超百分之七一十，减仓至百分之五十，其夏普比升至零点七二零，最大回撤改善至百分之二十七点。一从净值曲线看，橙色夏普最优方案走势更平滑。绿色回撤最优方案在熊市防守出色，而红色收益最优方案几乎满仓，运行紧贴基准，我们发现还百分之十。这个常见阈值在本策略中表现不佳，他触发过晚，导致风控在下跌中实质失效，最终最大回撤百分之三十三点六，反而略差于基准。开放。扫描显示，夏普比最优区域集中在百分之六到百分之七的回撤阈值，带阈值过紧如百分之四，容易踏空。而晚触发配合深减舱的组合表现最差。四大回撤热力图表明，阈值是控制回撤的一阶因素，左上角仅阈值加低仓位保护最强。同一阈值下，提高仓位会加深回撤，但也可能提升夏普，这是风险与收益的权衡。没有单一最优参数。这个三角关系图表明，你需要在收益风险和策略暴露度之间做出权衡。根据自身偏好选择方案，本研究存在局限回撤，用收益缩放模拟封仓，未考虑实盘冲击成本。这是软减仓，不能将回撤硬性封顶，未来需在更长期样本中检验稳健性。结论是，账户级双轨风控有效改善了ETF轮动策略的风险。调整后表现。它否定了百分之十阈值的普适性，且作为独立风控层，不与策略阿尔法耦合。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

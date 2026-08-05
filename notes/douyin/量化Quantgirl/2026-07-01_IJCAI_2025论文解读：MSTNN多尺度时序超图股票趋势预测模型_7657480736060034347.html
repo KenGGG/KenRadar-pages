@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文分享】多尺度股票趋势预测 这篇论文《Multi-Scale Temporal Neural Network for Stock Trend Prediction Enhanced by Temporal Hyperedge Learnings》发表在IJCAI 2025，作者提出MSTNN模型，把个股多尺度周期性和行业板块时序动态结合到一起。核心是用3D卷积把价格数据重整为年-月-日张量，捕捉周、月、年规律；同时用时序超图注意力网络，将行业超边演化成随时间变化的特征序列，再回流到个股预测。 
+在美股NASDAQ和NYSE数据集上，F1较此前最佳提升超6个百分点，模拟交易累计收益达37.12%（历史回测）。消融实验证实多尺度周期特征贡献最大。 
+需要提醒，模型依赖较长历史数据，对新股可能不适用；所有结果均为论文中的回测检验，不代表未来实际收益。 
+#量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant  #量化策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-07-01_IJCAI_2025论文解读：MSTNN多尺度时序超图股票趋势预测模型_7657480736060034347.md · 发布于 2026-08-05 11:38:30</div><nav class="page-links"><a href="https://www.douyin.com/video/7657480736060034347" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>IJCAI 2025论文解读：MSTNN多尺度时序超图股票趋势预测模型</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7657480736060034347">https://www.douyin.com/video/7657480736060034347</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本文解读IJCAI 2025发表的MSTNN论文，该模型将个股多尺度周期性（年-月-日）与行业板块时序动态结合，通过3D卷积捕捉周/月/年规律，用时序超图注意力网络建模行业超边演化。在NASDAQ和NYSE数据集上F1较此前最佳提升超6个百分点，模拟交易累计收益37.12%。消融实验证实多尺度周期特征贡献最大。模型依赖较长历史数据，对新股可能不适用。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>研究动机与问题定义</strong>
+股票中存在周、月、年至年度的周期节律，行业板块本身也随时间变化。现有方法两大局限：一是只看固定回看窗口，丢失周期性模式；二是超图方法未显式学习超边的周期动态。论文将股票趋势预测定义为分类问题，判断下一日是否非下跌。</p>
+</li>
+<li>
+<p><strong>MSTNN模型架构</strong>
+双路并行设计：一路用多尺度3D卷积（Ndmcnn）将收盘价组织为3年×12月×30日的张量，用不同尺寸3D卷积核捕捉跨度不同的周期规律；另一路用时序超图注意力网络，通过节点聚合、周期位置编码（PPE）、超边回聚三步将行业动态注入个股表征。</p>
+</li>
+<li>
+<p><strong>实验结果与验证</strong>
+使用美股NASDAQ和NYSE从2013年初到2017年底的两年多数据。MSTNN在两个市场所有指标上全面超过之前最优方法，F1提升明显。模拟交易在测试期每天按预测买入前k只股票次日卖出，累计收益率明显跑赢对比方法。消融实验显示去掉3D CNN后F1掉最多，PPE优于不用位置编码或绝对位置编码。</p>
+</li>
+<li>
+<p><strong>局限性与风险提示</strong>
+模型依赖较长历史数据，对新股可能不适用。所有结果均为论文中的回测检验，不代表未来实际收益。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 论文介绍与研究动机</h3>
+<p>今天我们来解读这篇论文《多尺度时序超图趋势预测MSTNN》。为什么只看最近几十天，却要预测下周涨跌？这篇论文指出，股票里藏着周、月、年至年度的周期节律，而行业板块本身也在随时间变化。你看计算机制造业这个板块从2014到2015年的动态走势，本身就是一条会变化的曲线。作者认为，如果把整个行业看作一条超边，那这条边的时序行为就很值得建模。这篇论文指出了现有两大局限：第一，只看固定回看窗口，丢掉了周、月、年这类周期性模式。第二，现有超图方法虽然用上了行业关系，却没有显式地去学超边自己的周期动态。</p>
+<h3>2. MSTNN框架设计</h3>
+<p>作者提出MSTNN框架，核心是两路并行的设计。一边用多尺度三维卷积去抓个股的年、月、日节律，另一边用时序超图注意力来建模行业超边随时间的变化，最后把两路特征融合起来做预测。论文把股票趋势预测定义成一个分类问题，输入是N只股票T个交易日的多维特征，再加上一张以行业板块为超边的超图，目标是判断下一日是否非下跌。和普通图不同，这里的超图里每条超边可以直接连接同一个行业的全部股票节点。是股票超边对应行业板块权重矩阵，简单设为单位阵，重点放在学习节点和超边之间的注意力关系。</p>
+<h3>3. 3D CNN模块与超图注意力</h3>
+<p>Ndmcnn这个模块很有意思，它把一条长长的时间序列重新折叠成年、月、日的三维张量，然后用不同尺寸的三维卷积核在三个轴上去划，这样就能同时捕捉到跨度不同的周期规律。股票的收盘价被组织成Y等于3年、M等于12月、D等于30天的张量，用两个不同尺度的三维卷积核扫完再做拼接，最后得到所有股票的多尺度周期特征，维度是N乘T乘2D。按模块分成三步来更新表征：先是从个股聚合出超边特征，再沿着时间维度对超边序列做自注意力，最后把学好的时序超边信息重新聚合回每只股票上，这样行业动态就被注入到个股里了。第一步节点聚合，论文用多头注意力来算每只股票对超边的贡献系数，把属于同一条超边的节点特征加权求和得到初始超边表示，这一步做完就得到一组沿着交易日的超边特征序列。第二步是这篇论文的关键创新之一，作者把每条超边在窗口长度W内的特征序列抽出来，用类似Transformer的自注意力去建模超边的时间演化。还为了让模块更清楚节奏，本文设计了周期位置编码PPE，它不是从头到尾递增，而是在每个窗口内按照周期函数重复，这样更贴合股价以周或月为单位的重复节律，实验也表明这样更好。第三步超边回聚股票时，同样用了注意力机制，算出每条行业超边对某只股票的重要程度，然后加权聚合，对不同注意力头取平均得到最终的股票超图感知特征。两边特征都拿到之后，MSTNN把它们拼起来，过一层LayerNorm，得到最终股票表征。预测时用Sigmoid给出非下跌概率，训练就用简单的二元交叉熵，整个流程端到端优化。</p>
+<h3>4. 实验设置与结果</h3>
+<p>实验用了美股NASDAQ和NYSE的两年多数据，从2013年初到2017年底。特征包括开盘收盘价和多条移动均线，超图按行业构建。训练期747天，验证期249天，测试期249天。从结果看，MSTNN在两个市场所有指标上全面超过之前的最优方法，尤其F1提升明显，因为召回率大幅提高。这说明同时抓个股周期和行业时序动态，对找对上涨机会很有帮助。论文还做了盈利模拟，在NASDAQ测试期每天按预测买入前K只股票次日卖出。从累计收益率曲线看，MSTNN明显跑赢其他对比方法，说明多出来的预测能力能直接转化成收益。左图进一步验证了各组件的价值，去掉3D CNN后F1掉得最多，说明个股周期特征非常关键。去掉N或时序超边特征学习都会变差，PPE也明显优于不用位置编码或绝对位置编码。</p>
+<h3>5. 总结与局限</h3>
+<p>这篇论文的贡献在于把股票预测里的两个重要维度统一了起来：个股自己的多尺度周期，以及行业层面超边的高阶关联。实验、盈利测试和消融分析都支持了这个思路。需要提醒的是，模型依赖较长历史数据，对新股可能不适用；所有结果均为论文中的回测检验，不代表未来实际收益。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">Quant</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">统计套利</span></li>
+<li><span class="wikilink">配对交易</span></li>
+<li><span class="wikilink">MSTNN</span></li>
+<li><span class="wikilink">多尺度时序</span></li>
+<li><span class="wikilink">超图神经网络</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">IJCAI</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>今天，我们来解读这篇论文多尺度时序。超图趋势预测MSTNN为什么只看最近几十天，却要预测下周涨跌？这篇论文指出，股票里藏着周月现至年度的周期节律，而行业板块本身也在随时间变化。你看计算机制造业这个板块从二零一四到二零一五年的动态走势，本身就是一条会变化的曲线。作者认为，如果把整个行业看作一条超边，那这条边的时序行为就很值得建模。这论文指出了现有两大局限。第一，只看固定回看窗口，丢掉了周月年这类周期性模式。第二，现有超图方法虽然用上了行业关系，却没有显示的去学超编自己的周期动态。于是，作者提出，MSTNN框架，核心是两路并行的设计，一边用多尺度三维卷积去抓个股的年月日节律。另一边，用时续抄图注意力来建模行业超编随时间的变化，最后把两路特征融合起来，做预测篇论文，把股票趋势预测定义成一个分类问题，输入是n只股票t个交易日的多维特征，再加上一张以行业板块为超编的超图，目标是判断下一日是否非下跌，也就是涨货平普通成对图不同。这里的超图里每条超边可以直接连接同一个行业的全部。股票节点是股票超边对应行业板块权重矩阵，简单设为单位阵，重点放在学习节点和超编之间的注意力关系。 Ndmcnn这个模块很有意思，它把一条长长的时间序列重新折叠成年月日的三维张量，然后用不同尺寸的三维卷积核在三个轴上去划，这样就能同时捕捉到跨度不同的周期规律。股票。它的收盘价被组织成y等于三年m等于十二月d等于三十天的张量。用两个不同尺度的三维卷积核扫完再做拼接，最后得到所有股票的多尺度。周期特征维度是n乘t乘二d按模块分成三步来更新表征。先是从个股聚合出超边特征，再沿着时间维度对超编序列、坐姿、注意力，最后把学好的时序、超编信息、重新聚合回每只股票上，这样行业动态就被注入到个股里了。第一步节点聚合理论文，用多头注意力来算每只股票对超变的贡献系数，把属于同一条超边的节点特征加权求和得到初始。超编表示，这一步做完就得到一组沿着交易日的超边特征序列。第二步是这篇论文的关键创新之一。作者把每条超编在窗口长度w内的特征序列抽出来，用类似transformer的自注意力去建模超编的时间演化，还为了让模块更清楚节奏，本文设计了周期位置编码PPE,它不是从头到尾递增，而是在每个窗口内按照周期函数重复，这样更贴合股价以周或月为单位的重复节律，实验也表明这样更好。第三步，抄编剧和回股票时，同样用了注意力机制，算出每条行业超编对某只股票的重要程度，然后加全聚合，在对不同注意力投取平均得到最终的股票。超图感知特征，两边特征都拿到之后，MSTNN把它们拼起来，过一层layer, norm,得到最终股票表征。预测时用sigmoid给出非下跌概率训练，就用简单的二元交叉熵，整个流程端到端优化。此实验用了美股nins stack和NYC的两年多数据，从二零一三年初到我一七年底特征包括规划收盘价和多条移动均线超图按行业构建训练期七百四十七天，验证期二百四十九天，测试期二百四十九天。从结果看，MSTAN在两个市场所有指标上全面超过之前的最优方法，尤其f一提升明显。因为召回率大幅提高，这说明同时，抓个股周期和行业持续动态，对找对上涨机会很有帮助。字文还做了盈利模拟，在instack测试期每天按预测买入前k只股票次日卖出。从累计收益率曲线看，MSTNN明显跑赢其他对比方法，说明多出来的预测能力能直接转化成收益。左走一进一步验证了各组件的价值，去掉三DCNN后FE掉的最多说明个股周期特征非常关键。去掉n或时序，超边特征，学习都会变差，PPE也明显优于不用位置编码或绝对位置编码。总结一下，这篇论文的贡献在于把股票预测里的两个重要维度统一了起来。个股自己的多尺度周期以及行业层面实变的高阶关联实验、盈利测试和消融分析都支持了这个思路。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

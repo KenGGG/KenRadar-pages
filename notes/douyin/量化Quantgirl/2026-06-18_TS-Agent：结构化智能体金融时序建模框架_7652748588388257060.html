@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文分享】智能体反思式金融时序建模 这篇论文《Structured Agentic Workflows for Financial Time-Series Modelling with LLMs and Reflective Feedback》提出TS-Agent，把金融时序建模变成模型选择→代码改进→超参微调的迭代过程，并融入案例库、代码库和改进知识库，通过反思反馈实现自适应优化，每步决策可审计。 
+在加密货币、外汇和美股预测与生成任务上，TS-Agent全面优于AutoML和通用LLM智能体。比如在加密货币预测中，MAPE低至1.53%，风险指标（Sharpe/VaR差异）也最优；生成任务的尾部风险保真度更高，成功率稳定100%。核心亮点是模块化编辑和反思循环，避免了代码幻觉，做到高性能可追溯。 
+⚠️历史回测不代表未来，仅方法分享，不构成投资建议。 
+#量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant  #量化策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-06-18_TS-Agent：结构化智能体金融时序建模框架_7652748588388257060.md · 发布于 2026-08-05 11:49:12</div><nav class="page-links"><a href="https://www.douyin.com/video/7652748588388257060" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>TS-Agent：结构化智能体金融时序建模框架</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7652748588388257060">https://www.douyin.com/video/7652748588388257060</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+论文提出TS-Agent框架，将金融时序建模转化为模型选择、代码精炼、超参微调的迭代过程，融入案例库、代码库和改进知识库，通过反思反馈实现自适应优化。在加密货币、外汇和美股预测与生成任务上全面优于AutoML和通用LLM智能体。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>TS-Agent核心架构</strong>
+将金融时序建模拆分为可追溯的决策链条，工作流分为模型选择、代码精炼和超参微调三大块，每步由规划器调度，通过外部知识库和内部反思反馈环实现自适应优化。</p>
+</li>
+<li>
+<p><strong>三大外挂知识库</strong>
+案例库存放过往成功方案，代码库提供可直接运行的主流时序模型实现（Autoformer、PatchTST、DLinear等），精炼库作为实战经验手册指导模型调整。</p>
+</li>
+<li>
+<p><strong>决策闭环与两阶段流程</strong>
+规划器根据知识库给出编辑方案，执行后获得反馈日志，有意的修改被采纳、无用的被拒绝、出错的触发调试。模型预筛阶段从案例库检索相似任务选出候选模型，预热与主优化阶段保留最佳种子不断微调精炼。</p>
+</li>
+<li>
+<p><strong>回测结果与表现</strong>
+在加密货币、外汇和美股三大类数据上，TS-Agent在预测任务中RMSE、MAPE及夏普比率等指标全面领先；生成任务中统计特征逼近真实市场，尾部风险保真度更高。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 论文背景与核心思路</h3>
+<p>今天我们来解读这篇论文：金融时序建模、智能体框架TS-Agent。金融时间序列预测最头疼的不是模型跑不动，而是非平稳、厚尾和审计这三座大山。这篇论文不搞万能黑箱，而是提出一种结构化的智能体框架，把建模拆成可追溯的决策链条。以往的传统工具像个静态搜索器，很少直接对齐夏普比率或AUC。通用大模型智能体游态自由，容易写出幻觉代码。这篇论文的TS-Agent采取折中方案，让大模型编辑现有的模块化脚本，而不是从零生成整个流水线。</p>
+<h3>2. TS-Agent整体架构</h3>
+<p>这是TS-Agent的整体架构。它把工作流分成模型选择、代码精炼和微调三大块，每一步都受规划器调度。关键是左侧的外部知识库和内部的反思反馈环，让系统在试错中积累经验。这篇论文将金融时间序列任务清晰定义成两类：一是预测，比如用过去数据推断未来价格；二是生成，训练一个生成器来模仿真实市场的统计特征。评估只看测试集，训练阶段完全不碰。</p>
+<h3>3. 三大知识库详解</h3>
+<p>为了支撑决策，作者给智能体配了三个外挂知识库。案例库存放过往成功方案，代码库提供可直接跑通的模型实现，精炼库则是一本实战经验手册，告诉模型哪些该调整预处理、哪些该调学习率。代码库是保持严谨性的基石，包含了Autoformer、PatchTST、DLinear等主流时序模型以及一系列标准评测指标，确保每次实验都有统一、可复现的基准，而不是让智能体凭空写代码。</p>
+<h3>4. 决策闭环机制</h3>
+<p>在规划时，智能体每步都会产生新的代码状态和执行日志，动态记忆不断累积。作者把规划器的动作限制为结构化的编辑序列，只动模型选择、指标和精炼策略，这就避免了推倒重来的代码漂移。这个图展示了TS-Agent的决策闭环：规划器根据知识库给出编辑方案，执行后获得反馈日志，有意的修改被采纳、无用的被拒绝、出错的则触发调试。如此往复，系统实现自适应学习。</p>
+<h3>5. 两阶段流程与实际操作</h3>
+<p>作者设计了一套两阶段流程：模型预筛阶段从案例库里检索相似任务选出几个候选模型；随后的预热与主优化阶段保留表现最好的种子，不断进行微调与精炼，并且每个编辑都有接受或拒绝的判别规则。这张图演示了TS-Agent接收一个预测任务后的实际操作：它先从知识库里捞出一个基于Autoformer的参考方案，然后经历序列化的编辑、报错和修正，最终输出一个明显更专业的训练脚本。</p>
+<h3>6. 回测实验设计</h3>
+<p>本文的回测覆盖六个组合，横跨加密货币、外汇和美股三大类数据。任务有预测和生成两大块。加密货币用二十个币种的小时线，外汇用八种主要货币对二十年日线，美股则选十只大盘股近几年的行情。预测阶段，论文调用了Autoformer等五个模型。除了看RMSE、MAPE这些传统误差，还专门设计了金融视角的评估，看预测隐含的交易策略在夏普比率和尾部风险上是否真的优于基准。</p>
+<h3>7. 回测结果分析</h3>
+<p>回测给出的结果相当直接。在加密货币上，TS-Agent的RMSE约零点二零六，明显低于AutoGluon的零点二二三，夏普差异也达到零点三七八。在外汇和股票上，它在误差和交易指标上同样全面领先。这篇雷达图把综合排名展示得一目了然：TS-Agent在不同数据集和不同大模型基座的组合下，形成了一条最大外圈，说明它不只是个别指标冒尖，而是在误差和金融效用上具备全面的稳定优势。</p>
+<h3>8. 生成任务结果与总结</h3>
+<p>生成任务上，论文评测了TimeGPT、TimeV等五种模型，考察边际分布相关系数和自相关函数的匹配度。在加密货币层面，还额外加入Barone-Adesi差值，以检验生成数据对极端尾部风险的还原能力。在生成任务的综合排名里，TS-Agent同样占据了主导地位，绝大部分指标都接近理论最优，意味着生成的合成序列在统计特征上更逼近真实市场。不过协方差得分显示这一块仍有挑战。总结来看，这篇论文的贡献在于把金融时序建模提炼为一个多智能体决策过程，通过约束编辑、领域知识注入和可审计的反馈日志，让大模型既能自主进化，又不至于失控。未来还会向欺诈检测等方向扩展。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化研究</span></li>
+<li><span class="wikilink">AI金融</span></li>
+<li><span class="wikilink">大模型</span></li>
+<li><span class="wikilink">时间序列</span></li>
+<li><span class="wikilink">智能体</span></li>
+<li><span class="wikilink">论文解读</span></li>
+<li><span class="wikilink">TS-Agent</span></li>
+<li><span class="wikilink">金融时序建模</span></li>
+<li><span class="wikilink">智能体框架</span></li>
+<li><span class="wikilink">结构化工作流</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>今天我们来解读这篇论文，金融时序建模、智能体框架TS agent金容时间序列预测，最头疼的不是模型跑不动，而是非平稳后尾和审计这三座架构。这篇论文不搞万能黑箱，而是提出一种结构化的智能体框架，把建模拆成可追溯的决策链条。以往的特曼工具像个静态搜索器，很少直接对齐夏普比率或auv r通用大模型智能体优态自由，容易写出幻觉代码。这篇论文的TS agent采取折中让大模型编辑现有的模块化脚本，而不是从零生成整个流水线。这是TS agent的整体架构。它把工作流分成模型，选择代码精炼和微调三大块，每一步都受规划器调度，关键是左侧的外部知识库和内部的反思反馈环，让系统在试错中积累经验。这篇论文打金融时间序列中任务清晰的定义成两类，一是预测，比如用过去数据推断未来价格还二是生成在训练一个生成器来模仿真实市场的统计特征评估，只看测试集训练阶段完全不碰。为了支撑决策，作者给智能体配了三个外挂知识库，案例库，存放过往成功方案代码库，提供可直接跑通的模型。实现精炼库则是一本实战经验手册，告诉模型核实，该调整预处理核实，该调学习率代码库是保持严谨性的基石，包含了auto、 former patch、 dist等主流时序模型以及一系列标准评测指标。他确保每次实验都有统一、可复现的基准，而不是让智能体凭空写代码。在规划时，智能体每步都会产生新的代码状态和执行日志，动态记忆不断累积。作者把规划器的动作限制为结构化的编辑序列，只动模型选择指标和精炼策略，这就避免了推倒重来的代码漂移。这个图展示了TS agent的决策闭环。规划器根据知识库给出编辑方案，执行后获得反馈日志，有意的修改被采纳、无用的被拒绝出错的，则触发调试。如此往复系统实现自适应学习。作者设计了一套两阶段流程模型预筛阶段，从案例库里检索相似任务选出几个候选模型。随后的预热与主优化阶段，保留表现最好的种子，不断进行微调与精炼。并且每个编辑都有接受或拒绝的判别规则。这张图演示了TS agent接收一个预测任务后的实际操作。他先从知识库里捞出一个基于auto former的参考方案，然后经历序列化的编辑报错和修正，最终输出一个明显更专业的训练脚本。木文的回测覆盖六个组合，横跨crital、外汇和美股三大类数据任务有预测和生成两大块，quit tall,拿二十个币种的小时线外汇用八种主要货币，对二十年日线美股则选十只大盘股。近几年的行情预测阶段，楞伦调用了autoformer等五个模型。除了看RMSEMAPE这些传统误差，还专门设计了金融视角的评估，看预测隐含的交易策略在夏普比率和尾部风险上是否真的优于基准。回测给出的结果相当直接。在cypto上，TS agent RMSE压倒零点二零六左右，明显低于auto go round的零点二二三，shop差异也达到零点三七八。在外汇和股票上，它在误差和交易指标上同样全面领先。这篇雷达图，把综合排名展示的一目了然。 T s agent在不同数据集和不同大模型基座的组合下，形成了一条最大外圈，说明它不只是个别指标冒尖，而是在误差和金融效用上具备全面的稳定优势。生成任务上，论文评测了time、 gein、 time v等五种模型，考察编际分布相关系数和自相关函数的匹配度。在crepu层面，还额外加入巴尔亥一s差值，以检验生成数据对极端尾部风险的还原能力。在生成任务的综合排名里，TSA阵同样占据了主导地位，绝大部分指标他都接近理论最优，意味着生成的合成序列，在统计特征上更逼近真实市场。不过协方差得分显示这一块仍有挑战。总结来看，这篇论文的贡献在于把金融时序建模提炼为一个多度点。智能体决策过程，通过约束编辑领域知识注入和可审计底反馈日志，让大模型既能自主进化，又不至于失控。未来，他还会向欺诈检测等方向扩展。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

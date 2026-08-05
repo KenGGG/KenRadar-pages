@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文复现】转债四因子周频轮动 复现 Sheng (2025) ACM 论文 A Convertible Bond Four-Factor Investment Strategy Driven by Optimization Algorithms: Evidence from the Chinese Market。原论文用价格、转股溢价、余额与到期收益打分，周四信号周五调仓，选综合分最高的十只，并比较等权、滚动优化与全样本最优权重。 
+本回测沿用同一节奏与选券框架，公开数据重建，主看无前视可交易路径：
+· 等权：毛年化约 7.63%，夏普 0.63，回撤约 -14.7%，周换手约 10.9%，可作基线
+· 滚动 PSO/DE：毛夏普更高，但回撤约 -21%，换手约 26%，不宜默认开
+· Static：全样本最优，不可交易 
+数据上相对原文改用公开行情与字段代理，未接转债指数，比较主要在策略之间。历史回测不构成投资建议。 
+#论文复现  #可转债 #量化交易  #量化策略  #因子投资  #量化学习｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-07-24_可转债四因子周频轮动策略论文复现_7665968684615191871.md · 发布于 2026-08-05 11:16:30</div><nav class="page-links"><a href="https://www.douyin.com/video/7665968684615191871" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>可转债四因子周频轮动策略论文复现</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7665968684615191871">https://www.douyin.com/video/7665968684615191871</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+复现Sheng(2025)ACM论文可转债四因子周频轮动策略，使用价格、转股溢价、余额与到期收益四个因子打分，周四信号周五调仓，选综合分最高十只。等权方案毛年化约7.63%、夏普0.63、回撤-14.7%、周换手10.9%，可作为基线；滚动PSO/DE方案夏普更高但回撤约-21%、换手约26%，不宜默认开启；Static全样本最优权重不可交易。数据范围201。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>策略框架与交易规则</strong>
+原论文使用价格、转股溢价、余额与到期收益四个因子对可转债打分，按周四信号周五调仓，选取综合分最高的十只。持仓价格区间70-160，剔除次新、停牌与低活跃标的。等权方案各因子权重各占四分之一，作为可交易基线。</p>
+</li>
+<li>
+<p><strong>权重优化方案对比</strong>
+三种权重方案：等权（各因子25%）、滚动PSO/DE优化（每四周更新，无前世历史窗口最大化夏普）、Static全样本最优（不可交易上界）。滚动方案使用八组候选与十五轮迭代，原文用三十组候选与二百轮。</p>
+</li>
+<li>
+<p><strong>回测结果与绩效</strong>
+等权方案毛年化约7.63%，夏普0.63，最大回撤约-14.7%，周换手约10.9%。滚动PSO/DE年化与夏普更高，但回撤约-21%，周换手约26%。Static为全样本最优曲线，不可作为实盘基准。</p>
+</li>
+<li>
+<p><strong>数据与结论</strong>
+数据范围2018-2026共435周，过滤后约626只可转债。未接入转债指数，比较主要在策略之间。结论：等权提供清楚基线，滚动优化需额外检验，Static不宜直接用作实盘权重。在补齐指数与真实交易成本前，稳妥做法是保留等权而非默认开启动态优化。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 策略概述</h3>
+<p>在本期复现一篇中国可转债四因子周频轮动研究。原论文用价格、转股溢价、余额与到期收益打分，按周四信号与周五调仓，选取得分最高的十支，并比较等权、滚动优化与全样本最优权重。本回测沿用同一交易节奏与选券框架，在公开数据下重建组合。主结论落在无前视可交易路径上：等权毛年化大约百分之七点六，回撤大约负百分之十四点七。滚动方案毛收益与夏普更高，但回撤更深，换手也更高。</p>
+<h3>2. 选券逻辑与规则</h3>
+<p>该论文的选券对象是可转债，它同时带有债底与转股权债的一面，提供到期还本付息的缓冲；转股的一面让组合能够分享正股上涨。因此价格、转股溢价、余额与到期收益会一起进入选券，而不是只看涨跌强弱。按照周进行，周四形成排名，周五收盘调仓持有一周。券池保留价格七十到一百六十的价格区间，并去掉次新、停牌与低活跃标的，再按低价、低溢价、大余额与高到期收益打分，取综合分最高的十只，仓内各占百分之十成交，按周五收盘计算，没有单独处理。涨跌停拒单在线设计，尽量贴近原文规则，但数据来源并不相同。原文较多使用卖方与终端行情字段，本回测改用公开行情价格、东财溢价，并以发行规模、核价期限、票面取近似余额与到期收益。过滤后大约六百二十六只，主净值大约从二零一八到二零二六共四百三十五周。由于尚未接入转债指数，比较主要在策略之间展开。</p>
+<h3>3. 因子合成与权重方案</h3>
+<p>四个因子先做截面标准化，再按非负且和为一的权重合成综合分。等权时各占四分之一，每周选取综合分最高的十只。后面几组方案仍然共用这套选券与持有规则，变化只发生在权重如何确定。之前把四个因子固定为各四分之一作为可交易基线。滚动粒子群与差分进化则在无前世历史窗口里最大化夏普，大约每四周更新一次，可以交易，但换手通常更高。Static用全样本一次求得最优权重，只作为不可交易的上界。这些算法并不直接预测单只可转债的涨跌，而是搜索一组因子权重，使历史周收益的均值相对于波动尽可能高。为了保持可交易性，调仓日只用已经实现的周收益来估计权重，新权重也只用于之后的选券。原文大约使用三十组候选与二百轮迭代，本回测主结果采用八组候选与十五轮。若窗口里混入未来信息，绩效容易被抬高，因此那种结果只做敏感性，不进入主结论。</p>
+<h3>4. 回测结果与结论</h3>
+<p>在无前视路径上，等权最大回撤大约负百分之十四点七，滚动方案大约负百分之二十一。滚动净值抬升得更快，波动与回撤也更明显。图中最高的一条是Static，它使用了全样本信息，不能当做实盘基准。毛绩下看，等权年化约百分之七点六三，夏普零点六三，周换手约百分之十一。滚动粒子群年化与夏普更高，周换手大约百分之二十六。若按换手线性扣减十个基点，滚动相对等权的净优势会缩小，这里仍未计入真实价差与冲击成本。综合来看，四因子周频轮动提供了一条清楚的等权基线，而滚动优化更像需要额外检验的增强项。Static不宜直接用作实盘权重，在补齐转债指数与更接近真实的交易成本之前，更稳妥的做法仍是先保留等权，而不是默认开启动态优化。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">论文复现</span></li>
+<li><span class="wikilink">可转债</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">因子投资</span></li>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">四因子轮动</span></li>
+<li><span class="wikilink">周频策略</span></li>
+<li><span class="wikilink">等权基线</span></li>
+<li><span class="wikilink">滚动优化</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>在本期复现一篇中国可转债四因子周频轮动研究原论文用价格转股溢价余额与到期收益打分，按周四信号与周五调仓，选取得分最高的十支并比较等权滚动优化与权样本最优权重。本回撤沿用同一交易节奏与选券框架。在公开数据下，重建组合主结论落在无钱市，可交易路径上等权，毛年化大约百分之七点六，回撤大约负百分之十四点七。滚动方案毛收益与下普更高，但回撤更深，换手也更高。该论文的选券对象是可转债，它同时带有债底与转股权债的一面，提供到期还本付息的缓冲，转股的一面，让组合能够分享正股上涨。因此，价格转股溢价余额与到期收益会一起进入选券，而不是只看涨跌强弱。按照按周进行，周四形成排名，周五收盘调仓持有一周券，持先保留由七十到一百六十的价格区间，并去掉刺新停牌与低活跃标的，再按低价低溢价大余额与高到期收益打分。取综合分最高的是只仓内各百分之十成交。按周五收盘计算，没有单独处理。涨跌停拒单在线设计，尽量贴近原文规则，但数据来源并不相同，原文较多，使用卖方与终端行情字段。本回策改用公开行情价格东财溢价，并以发行规模核价期限票面取近似余额与到期收益过滤后大约六百二十六只，主净值大约从二零一八到二零二六共四百三十五周。由于尚未接入，转债指数比较，主要在策略之间展开。四个因子先做洁面标准化，再按非负且和为一的权重合成，综合分等全时各占四分之一，每周选取综合分最高的十之后面几组方案仍然共用。这套选券与持有规则变化只发生在权重，如何确定之前，把四个因子固定为各四分之一作为可交易。基线滚动粒子群与差分进化则在无前世历史窗口里最大化。夏普大约每四周更新一次，可以交易，但换手通常更高。 Static用全样本一次求得最优权重，只作为不可交易的上界些算法，并不直接预测单指可转债的涨跌，而是搜索一组因子权重，使历史周收益的均值相对于波动尽可能高。为了保持可交易调仓日，只用已经实现的周收益来估计权重新权重，也只用于之后的选券。原文大约使用三十组候选与二百轮迭代。本回测主结果采用八组候选与十五轮，若窗口里混入未来信息绩效容易被抬高，因此那种结果只做敏感性，不进入主结论。在无前视路径上等全，最大回撤大约负百分之十四点七，滚动方案大约负百分之二十一滚动，净值抬升的更快波动与回撤也更明显。图中最高的一条是static,它使用了全样本信息，不能当做实盘基准、毛绩下看等，全年化约百分之七点六三。夏普零点六三周，换手约百分之十一，滚动粒子群，年化与夏普更高周，换手大约百分之二十六。若按换手、线性扣减、十个基点，滚动相对等权的净优势会缩小，这里仍未计入真实价差与冲击成本。综合来看，四因子周频轮动提供了一条清楚的等全基线而滚动优化，更像需要额外检验的增强项。 Static不宜直接用作实盘权重，在补齐转债指数与更接近真实的交易成本之前，更稳妥的做法仍是先保留等权，而不是默认打开、动态优化。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

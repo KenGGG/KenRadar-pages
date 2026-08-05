@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文分享】世界模型让组合优化更有远见 📌 这篇论文《Adaptive World Model with Latent Generation Algorithm for Deep Reinforcement Learning in Portfolio Optimization》提出AWMLG框架，用Transformer编码历史行情，构建概率世界模型，让智能体在“想象”的未来轨迹上训练，实现长期风险规划。 
+🧪 在道琼斯30只成分股的2024年回测中，AWMLG累计收益38.36%，夏普1.84，卡玛3.70，高出全部基线至少27个百分点。消融实验显示，移除世界模型后收益降至15%，说明前瞻想象是关键。 
+💡 自适应机制：模型实时计算惊奇度，市场突变时自动调高学习率快速适应，避免策略失效。 
+⚠️ 历史回测不代表未来表现，市场有风险，内容仅供学习交流，不构成投资建议。 
+#量化学习  #配对交易  #统计套利 #量化  #量化交易  #量化分析  #Quant #量化策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-06-09_AWMLG世界模型框架：用Transformer构建概率世界模型实现投资组合远期_7649420671281368335.md · 发布于 2026-08-05 11:47:39</div><nav class="page-links"><a href="https://www.douyin.com/video/7649420671281368335" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>AWMLG世界模型框架：用Transformer构建概率世界模型实现投资组合远期</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7649420671281368335">https://www.douyin.com/video/7649420671281368335</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+论文提出AWMLG框架，通过Transformer编码器提取长期依赖，构建潜在空间概率世界模型，让强化学习智能体在想象轨迹上训练，实现风险感知的远期规划。道琼斯30只成分股2024年回测显示累计收益38.36%，夏普比率1.84，显著优于所有基线。自适应机制通过惊奇度监测市场突变，动态调整学习率。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>研究背景与问题</strong>
+金融市场具有非平稳性，现有深度强化学习方法面临三个瓶颈：部分可观测性导致决策依赖长期历史，RNN难以捕捉远距离依赖；非平稳市场使模型快速失效，数据效率低；试错式训练倾向短视策略，缺乏战略远见。</p>
+</li>
+<li>
+<p><strong>核心方法：AWMLG框架</strong>
+采用Transformer编码器通过自注意力机制提取长期依赖；提出在紧凑潜在空间学习的概率世界模型，适应市场分布变迁；策略训练完全在世界模型生成的未来轨迹上进行，实现风险感知的远期规划。</p>
+</li>
+<li>
+<p><strong>模型架构与训练</strong>
+两阶段架构：第一阶段世界模型从真实数据学习，Transformer编码器将观测历史压缩为潜变量，转移模型和奖励模型在潜空间预测下一状态与收益；第二阶段策略训练脱离真实环境，仅在想象轨迹上学习。资产配置形式化为MDP，奖励定义为组合净值变化扣除交易成本。</p>
+</li>
+<li>
+<p><strong>实验结果</strong>
+道琼斯30只成分股2024年回测，AWMLG累计收益38.36%，夏普比率1.84，卡玛比率3.70，比第二名高出27.18%。消融实验显示移除世界模型后收益降至15%，Transformer编码器和自适应机制均为性能关键支撑。</p>
+</li>
+<li>
+<p><strong>自适应机制</strong>
+模型实时计算惊奇度监测市场机制转化，市场突变时自动调高学习率快速适应，避免策略失效。内置交易成本模拟真实市场摩擦。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 研究背景与问题提出</h3>
+<p>金融市场的非平稳性，怎么让深度强化学习看得更远？这篇论文提出了AWMLG算法，用Transformer编码器与潜在世界模型实现远期规划。2024年回测，道指30只股票累积收益比所有基线至少高出27.18%。作者指出，现有深度强化学习方法在金融场景中面临三个关键瓶颈。第一，部分可观测性导致决策依赖长期历史，RNN难以捕捉远距离依赖。第二，非平稳市场让模型快速失效，数据效率很低。第三，试错式训练往往倾向短视策略，缺乏真正的战略远见。</p>
+<h3>2. 主要贡献</h3>
+<p>论文做了三项主要贡献：一是设计基于Transformer的编码器，通过自注意力机制有效提取长期持续依赖。二是提出一个在紧凑潜空间中学习的概率世界模型，能适应市场的分布变迁。三是把策略训练完全放在世界模型生成的未来轨迹上，实现风险感知的远期规划。</p>
+<h3>3. 整体架构</h3>
+<p>整体架构分为两个互通阶段。第一阶段，让世界模型从真实数据中学习市场动态，编码器将观测历史压缩成潜变量，转移模型和奖励模型在潜空间里预测下一状态与收益。第二阶段策略训练则完全脱离真实环境，只在世界模型想象出的轨迹上进行。作者将资产配置问题形式化为马尔可夫决策过程，状态包含前一时刻的现金、个股持仓量和当前价格，动作是一个连续向量归一化到[0,1]来调节仓位，奖励则直接定义为组合净值的变化并扣除比例交易成本，让代理切实关注净收益。</p>
+<h3>4. 潜在世界模型</h3>
+<p>潜变量世界模型是核心，Transformer编码器输出后沿高斯分布采样得到z_t，转移模型和奖励模型都是在潜空间里的条件高斯分布，通过最大化对数似然来训练。训练后模型能生成多条潜在未来轨迹，代理就在这些想象轨迹上学习，从而培养更稳健的规划能力。</p>
+<h3>5. 实验设计与结果</h3>
+<p>实验选取道琼斯工业平均指数30只成分股在2024年进行回测，对比对象涵盖了传统资产配置策略以及PPO等多种先进的深度强化学习基线。论文还内置了交易成本模拟真实市场的摩擦，并利用惊奇因子来监测市场机制转化。在2024年的回测中，AWMLG表现出明显的优势，累计收益至少高出第二名27.18%。不论与基于模型还是无模型的深度强化学习方法相比，还是与传统基准相比，AWMLG都取得了显著领先，验证了生成式世界模型在应对极端市场波动时的鲁棒性。消融实验表明，Transformer编码器和自适应机制都是性能的关键支撑，移除后收益出现明显下滑。</p>
+<h3>6. 结论与展望</h3>
+<p>论文总结AWMLG通过在潜空间里进行概率生成与远期规划，有效解决了非平稳性和短视问题，未来可拓展到更多资产类别与更长周期。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化投资</span></li>
+<li><span class="wikilink">AI金融</span></li>
+<li><span class="wikilink">强化学习</span></li>
+<li><span class="wikilink">资产配置</span></li>
+<li><span class="wikilink">论文解读</span></li>
+<li><span class="wikilink">世界模型</span></li>
+<li><span class="wikilink">深度学习</span></li>
+<li><span class="wikilink">深度强化学习</span></li>
+<li><span class="wikilink">投资组合优化</span></li>
+<li><span class="wikilink">Transformer</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>金融市场的非平稳性，怎么让DRA看得更远？这篇论文提出了AWMLG算法，用transformer编码器与潜在世界模型实现远期规划。二零二四年回测，倒指三十只，股票累积收益比所有基线至少高出百分之二十七点一八。作者指出，现有深度强化学习方法，在金融场景中面临三个关键瓶颈。第一，部分可观测性导致决策依赖，长期历史RNN难以捕捉远距离依赖。第二，非平稳市场，让模型快速失效，数据效率很低。第三，试错式训练往往倾向短视策略，一乏真正的战略远见一文，做了三项主要贡献，一是设计基于transformer的编码器，通过自注意力机制有效提取长城持续依赖。二是提出一个在紧凑前空间中学习的概率事件模型能适应市场的分布变迁。三是把策略训练完全放在世界模型生成的未来轨迹上。实现风险感知的远期规划。整体架构分为两个互通阶段，第一阶段，让世界模型从真实数据中学习市场动态编码器，将观测历时压缩成浅变量转移模型和奖励模型在前空间里预测下一状态与收益。第二阶段策略训练则完全脱离真实环境，只在世界模型想象出的轨迹上进行。作者将资产配置问题形式化为马尔可夫决策过程状态，包含前一时刻的现金个股。持仓量和当前价格动作是一个连续向量归一划到杜伊豆伊来调节仓位，奖励则直接定义为组合净值的变化，并扣除比例交易成本，让代理切实关注净收益前变量世界模型是核心transformer编码器输出后燕高斯分布采样得到z下划线t转移模型和奖励模型都是在前空间里的条件。高斯分布通过最大化对数似然来训练，训练后，模型能生成出多条潜在未来轨迹。代理就在这些想象轨迹上学习，从而培养更稳健的规划能力。实验选取道琼斯工业平均指数三十只成分股在二零二四年进行回测，对比对象涵盖了传统资产配置策略以及PPO等多种先进的深度强化学习。基线论文还内置了交易成本，模拟真实市场的摩擦，并利用惊喜因子来监测市场机制转化。在二零二四年的回测中，AWMLG表现出明显的优势，累计收益至少高出第二名，百分之二十七点一八。不论与基于模型还是无模型的深度强化学习方法相比，还是与传统基准相比，AWMLG都取得了显著领先，验证了生成式事件模型在应对极端市场波动时的鲁棒性。消融实验表明，transformer编码器和自适应机制都是性能的关键支撑。移除后，收益出现明显下滑。论文总结AWMLG通过在前空间里进行概率生成与远期规划，有效解决了非平稳性和短视问题，未来可拓展到更多资产类别与更长周期。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

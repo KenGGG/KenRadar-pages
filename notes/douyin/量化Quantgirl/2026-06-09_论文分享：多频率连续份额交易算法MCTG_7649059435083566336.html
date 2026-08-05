@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文分享】多频率连续份额交易算法 这篇论文《A Multi-Frequency Continuous-Share Trading Algorithm with GARCH and Deep Reinforcement Learning》提出了MCTG框架。针对传统深度强化学习交易模型只依赖单一频率数据、输出离散买卖信号的问题，作者设计了一个多频率并行网络，分别抽取5分钟高频、日均线中频和周均线低频特征。 
+同时，显式集成GARCH(1,1)预测的波动率作为风险特征，让智能体具备“风险感知”。动作空间不再是买入卖出持有，而是一个连续值[-1,1]，代表买卖的仓位比例，用PPO训练优化超额收益。 
+论文在2011-2020年中国A股多行业股票及几只主流ETF上做了回测。结果显示，MCTG平均收益率达到292.56%，夏普比率2.147，最大回撤仅13.34%，全面优于买入持有和传统离散模型。尤其在震荡市中，仍能捕捉超额。 
+⚠️ 提醒：以上均为该论文在特定历史区间的回测结果，所有量化策略都可能面临失效风险，不构成投资建议。 
+#量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant #量化策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-06-09_论文分享：多频率连续份额交易算法MCTG_7649059435083566336.md · 发布于 2026-08-05 11:53:35</div><nav class="page-links"><a href="https://www.douyin.com/video/7649059435083566336" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>论文分享：多频率连续份额交易算法MCTG</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7649059435083566336">https://www.douyin.com/video/7649059435083566336</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+分享了一篇由电子科技大学、港大、清华联合发表的论文，提出MCTG框架，通过多频率并行网络融合5分钟/日/周数据，并显式集成GARCH波动率预测作为风险特征，使用PPO训练输出连续仓位指令[-1,1]，在2011-2020年A股回测中平均收益率292.56%，夏普比率2.147，最大回撤13.34%，显著优于买入持有及传统离散模型。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>传统DRL交易模型的局限性</strong>
+以往深度强化学习交易模型常只依赖单一频率数据，动作空间仅为买、卖、持三个离散信号，忽略多时间尺度信息，无法同时捕捉短线震荡和长线趋势，且未考虑实际交易成本，风险调整后收益难以令人满意。</p>
+</li>
+<li>
+<p><strong>MCTG框架核心设计</strong>
+设计并行深度网络，分别接入5分钟高频、日均线中频、周均线低频数据，各走一路神经网络后加权融合为统一状态；显式引入GARCH(1,1)预测的波动率作为风险特征，让智能体具备风险感知能力。</p>
+</li>
+<li>
+<p><strong>连续动作空间与PPO优化</strong>
+动作空间由离散三选一改为连续值[-1,1]，代表买卖仓位比例，实现精细化资金配置；使用PPO算法保证训练稳定，将超额收益与回撤控制一起优化。</p>
+</li>
+<li>
+<p><strong>回测结果与论文贡献</strong>
+回测覆盖500只股票，2011-2020年A股多行业股票及主流ETF，MCTG平均收益率292.56%，夏普比率2.147，最大回撤13.34%，全面优于买入持有及传统离散模型。论文贡献在于搭建多频率与波动预测融合的并行网络，将风险预算写入状态空间，用连续动作实现精细化调仓。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 论文背景与问题提出</h3>
+<p>交易、AI，连波动都算进去了？这篇由电子科技大学、港大、清华作者联合发表的论文提出多频率连续份额交易算法MCTG。以往的深度强化学习交易模型，常只依赖单一频率数据，动作也缩成买、卖、持三个信号，几乎不纳入市场波动信息，也顾不上实际交易成本，风险调整后收益很难让人满意。核心缺口有两个：一是忽略多时间尺度信息，没法同时读懂短线震荡和长线趋势；二是离散动作根本不知道该买多少，资金配置低效，在市场剧烈波动时尤其被动。</p>
+<h3>2. MCTG框架设计</h3>
+<p>因此设计了MCTG框架，同时接入5分钟、日线、周线数据，并引入GARCH模型预测波动，训练出的智能体能输出连续的仓位指令，精细控制买卖比例。具体做法是设计并行深度网络，每一条频率的数据流各走一路神经网络，在加权融合成统一状态。GARCH给出的波动预测直接送进状态，让智能体在学习时就带着风险预感。</p>
+<h3>3. 模型训练与优化</h3>
+<p>策略优化使用PPO算法保证训练稳定，波动预测采用GARCH(1,1)模型，根据上一期的残差平方和过去方差更新当期方差，相当于把市场的不安程度提前告诉智能体。智能体据此在PPO框架下不断调整连续动作，把超额收益与回撤控制一起优化。</p>
+<h3>4. 回测结果</h3>
+<p>回测数据覆盖500只股票，按5分钟、日、周切分。结果显示MCTG平均盈亏比达到292.56%，夏普比率2.147，最大回撤仅13.34%，各项指标都显著优于基础DNN、DNN-GARCH和买入持有策略。回测图展示得很清楚：高频、中频、低频三条数据通路分别经过全连接和CNN，汇合后进入PPO智能体，智能体输出一个[-1,1]的标量，直接决定下一日买入或卖出的资金比例，实现端到端的连续交易。</p>
+<h3>5. 论文贡献总结</h3>
+<p>这篇论文的贡献有三点：搭建了能融合多频率与波动预测的并行网络；把风险预算写进状态空间，再用连续动作做精细化调仓；最终验证MCTG不仅收益更高，回撤也更可控，为量化交易提供了强风险意识的落地路径。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">Quant</span></li>
+<li><span class="wikilink">深度强化学习</span></li>
+<li><span class="wikilink">风险管理</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">GARCH模型</span></li>
+<li><span class="wikilink">PPO算法</span></li>
+<li><span class="wikilink">多频率交易</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li><span class="wikilink">分享了一篇由电子科技</span></li>
+<li><span class="wikilink">这篇由电子科技</span></li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>交易、AI,连波动都算进去了?这篇由电子科技大学、港大、清华作者联合发表的论文提出多频率连续股份交易算法MCTG 以往的深度强化学习交易模型,常只依赖单一频率数据。动作也缩成买、卖、持三个信号。 几乎是市场波动信息,也顾不上实际交易成本。风险调整后,收益很难让人满意。 核心缺口有两个 一是忽略多时间尺度信息 没法同事读懂短线震荡和长线趋势 二是离散动作根本不知道该买多少 资金配置低效 在市场剧烈波动时尤其被动 Froger因此设计了MCTG框架 他同时接入5分钟日线和周线数据 并引入GARCH模型预测波动 训练出的代理能输出连续的仓位指令 精细控制买卖比例 具体做法是设计并行深度网络 每一条频率的数据流各走一路神经网络 在加权融合成统一状态 GARCH-EE 给出的波动预测直接送进状态 让委托在学习时就带着风险预感 策略优化使用PPO算法保证训练稳定 波动预测采用GARCH-EE模型 根据上一期的残差平方和过去方差更新当期方差 相当于把市场的不安程度提前告诉代理 代理据此在PPO框架下不断调整连续动作 把超额收益与回撤控制一起优化 微撤数据及覆盖500只股票 按5分钟日周切分 结果显示MCTG平均盈亏比达到292.56% 下谱比率2.147 最大回撤仅13.34% 各项指标都显著优于基础DNN、DNNG、ARCH和买入持有策略 断购图展示的很清楚 高频、中频、低频三条数据通路 分别经过全连接和chopop 汇合后进入PPO代理 代理输出一个洛依91的标量 直接决定下一日买入或卖出的资金比例 实现端到端的连续交易 这篇论文的贡献有三点 搭建了能融合多频率 与波动预测的并行网络 把风险预算写进状态空间 再用连续动作做精细化调仓 最终验证 MCTG不仅收益更高 回撤也更可控 为量化交易提供了 强风险意识的落地路径</p>
+</blockquote>
+</details></main>
+</body>
+</html>

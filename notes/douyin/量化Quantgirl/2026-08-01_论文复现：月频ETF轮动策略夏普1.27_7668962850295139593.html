@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文复现】月频ETF轮动夏普1.27 原论文《基于动量与风险优化双重视角的ETF行业轮动策略研究》（Research on ETF Industry Rotation Strategy Based on Dual Perspectives of Momentum and Risk Optimization）提出用动量筛选与收缩协方差权重做行业ETF月频轮动。
+我们复现时，使用本地xtdata日频前复权数据，样本期2021-06-01至2025-12-31，与原文表1十三只ETF对齐。
+动量信号采用对数价格OLS计算趋势得分，而非原文可能使用的对数收益率回归（本地失效）。权重用收缩协方差优化。
+回测结果：主策略累计+328%，年化37%，夏普1.27，最大回撤-25%，同期沪深300ETF约-6%。但数字明显高于原文表3，只能当作本口径下的可用规则，不能当原文格点。
+回撤仍深，更适合当作卫星仓。历史回测不代表未来表现，不构成投资建议。 
+#量化学习  #配对交易  #统计套利 #量化  #量化交易  #量化分析  #Quant #量化策略 #好视频扶持计划｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-08-01_论文复现：月频ETF轮动策略夏普1.27_7668962850295139593.md · 发布于 2026-08-05 11:07:05</div><nav class="page-links"><a href="https://www.douyin.com/video/7668962850295139593" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>论文复现：月频ETF轮动策略夏普1.27</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7668962850295139593">https://www.douyin.com/video/7668962850295139593</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+复现《基于动量与风险优化双重视角的ETF行业轮动策略研究》，使用本地xtdata日频前复权数据，样本期2021-06-01至2025-12-31，采用对数价格OLS计算趋势得分，收缩协方差优化权重，月频轮动。主策略累计+328%，年化37%，夏普1.27，最大回撤-25%，同期沪深300ETF约-6%。结果高于原文表3，仅适用于本口径，回撤较深更适合卫星仓。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>研究背景与复现设置</strong>
+原论文《基于动量与风险优化双重视角的ETF行业轮动策略研究》提出用动量筛选与收缩协方差权重做行业ETF月频轮动。复现对齐原文十三只ETF池子，使用本地xtdata日频前复权数据，样本期2021-06-01至2025-12-31。动量信号采用对数价格OLS计算趋势得分，而非原文可能使用的对数收益率回归（本地失效）。权重用收缩协方差优化。</p>
+</li>
+<li>
+<p><strong>回测结果与对比</strong>
+主策略累计+328%，年化37%，夏普1.27，最大回撤-25%，同期沪深300ETF约-6%。数字明显高于原文表3，只能当作本口径下的可用规则，不能当原文格点。回撤仍深，更适合当作卫星仓。</p>
+</li>
+<li>
+<p><strong>策略规则与参数</strong>
+每月第一个交易日用正月至前一日的二十五日窗口算信号，对数价格回归得到斜率和拟合角度再折成年化趋势，并乘上判定系数形成得分，正分才进持仓，负分空仓。用收缩相关矩阵做均值方差风险厌恶优化取权重后恢复且加总为一。单标的偏离到百分之一才真正调仓，主净值已按单边万二计入，半边换手大约每月0.7。</p>
+</li>
+<li>
+<p><strong>口径差异与注意事项</strong>
+数据口径需与原文分开看：原文写对数收益回归，复现改用对数价格，因为对数收益回归本地几乎选不出标的。成交与成本不同，原文月首开盘并叠加印花，复现用收盘代理且只扣万二。结论只对本代理口径负责，不对原文表3格点负责。如果再按原文印花近似，加压收益会下修，但不会改变规则。</p>
+</li>
+<li>
+<p><strong>结论与建议</strong>
+策略多数时段压过沪深300ETF，但不是一路平滑，最大回撤约四分之一本金，更适合卫星仓而非满仓。不要将本地328%当成实盘预期，不要满仓长期扛回撤，不要盲目扩成全市场行业ETF。规则可执行，本地超额明显但回撤深，代理差异会抬高收益尺度，不要直接对标原文。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 研究背景与复现设置</h3>
+<p>本期复现一篇用动量筛选加收缩协方差做行业ETF月频轮动的研究。原论文在固定十三只ETF上算二十五日趋势得分再优化权重，本复现对齐同一池子，但改用本地前复权，并用对数价格回归与收盘成交代理验证。本地主结果扣完万二后，二零二一年六月到二零二五年十二月，累计约加百分之三百二十八，夏普约一点二七，最大回撤约负百分之二十五。</p>
+<h3>2. 策略规则详解</h3>
+<p>规则本身很短，每月第一个交易日用正月至前一日的二十五日窗口算信号，对数价格回归，得到斜率和拟合角度再折成年化趋势，并乘上判定系数形成得分，用正分才进持仓，负分就空仓。持仓后用收缩相关矩阵做均值方差风险厌恶优化取权重后恢复且加总为一。百分之五上期仓位，单标的偏离到百分之一才真正调仓，主净值已按单边万二计入，半边换手大约每月零点七。</p>
+<h3>3. 口径差异说明</h3>
+<p>这数据口径要先和原文分开看。原文表一只列是十三只ETF，本工程用本目录本地日频前复权。原文写对数收益回归，本工程主结果改用对数价格，因为对数收益回归本地几乎选不出标的。成交与成本也不同，原文月首开盘并叠加印花，本工程用收盘代理且只标扣万二。同为二零二一年六月到二零二五年十二月，结论只对本代理口径负责，不对原文表三格点负责。</p>
+<h3>4. 回测结果与对比分析</h3>
+<p>净值处理策略多数时段压过沪深300ETF，但也不是一路平滑，之后最大回撤大约四分之一本金，更适合卫星仓而不是满仓。主策略净值已经含万二，如果再按原文印花近似，加压收益会下修一节，但并不会改变规则。能不能跑、回撤深不深，这两点判断。头剁到数字一，主策略累计约加百分之三百二十八，年化约百分之三十七，夏普约一点二七，回撤约负百分之二十五，同期监护沪深三百ETF累计约负百分之六，夏普接近零。跟表三保累计约加百分之七十五、夏普零点五十七，只能当对照，不能当成这次本地已经实现的业绩。我们差距主要来自成交代理、回归对象和成本口径，不是同一厨房的同一道菜。</p>
+<h3>5. 策略逻辑与结论</h3>
+<p>我们的是可以机制上可以拆成两步分，同时要方向和稳定性。信号强但路径乱会被判定系数压低。收缩相关矩阵向单位阵收缩一半再重建协方差，用来压短窗噪声。特优化目标是预期收益减风险惩罚风险厌恶的固定为二，全负分就空仓。参数何福仙所住在做小范围稳健性，而不是天天改窗，边界也比较清楚可做的事。十三支池的月频卫星仓为正分才持有，泰勇用收缩协方差定权。本地百分之三百二十八不能当成实盘预期，或者满仓长期扛回撤，或者盲目扩成全市场行业ETF。别做的事包括字面收益回归却不检查得分是否几乎全面，用前世写方差讲故事，以及宣称已经复现原文表三格点，再走三点就够。规则可执行，本地超额明显，但回撤深更宜卫星仓，代理差异会抬高收益尺度，所以不要直接对标原文。数字工程入口是本目录下的回测脚本，本地模式即可复跑主表。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">配对交易</span></li>
+<li><span class="wikilink">统计套利</span></li>
+<li><span class="wikilink">量化</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">Quant</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">ETF轮动</span></li>
+<li><span class="wikilink">动量策略</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>本期复线一篇用动量筛选加收缩斜方差，做行业ETF月平轮动的研究。故原论文在固定十三只ETF上算二十五日趋势得分再优化权重本复现对齐同一池子，但改用本地潜复权，并用对数价格回归与收盘成交代理验本地主结果扣完万二后二零二一年六月到二零二五年十二月，累计约加百分之三百二十八。夏普约一起的最大回撤约付百分之二十五。规则本身很短，每月第一个交易日用正至前一日的二十五日窗口算信号，对数价格回归，得到斜率和拟合角度再折成年化趋势，并乘上判定系数形成得分，用正分才进持全负，就空仓可进持后，用收缩相关矩阵做均值方差风险厌误取。二、权重后恢复且加总为一，百分之上期仓位呃，单标的偏离到百分之一才真正调仓，主净值已按单边万二计入半边换手，大约每月零七。三、这数据口径要先和原文分开看的。游泳表一只列是三只日评本工程用本目录本地日评前复权狂废这边原文写对数收益回归，本工程主结果改用对数价格，因为字面收益回归，本地几乎选不出标底。B成交与成本也不同。原文月首开盘并叠加印花本工程用收盘代理，且注标只扣万二本。同为二零二一年六月到二零二五年十二月，结论只对本代理口径负责，不对原文表、三格点负责的净值处理策略。多数时段压过铜器，沪深三百ETF,但也不是一路平滑之后最大回撤，大约四分之一本金更适合卫星仓，而不是满仓。主策略净值已经含万二。如果再按原文印花近似，加压收益会下修一节，但并不会改变规则。能不能跑回撤深不深？这两点判断头剁到数字一，主策略累计约加百分之三百，二十八年化约百分之三十七。夏普约的二十七回撤约负百分之二十五，同区监护深三百ETF,累计约付百分之六。相普接近零跟表三保累计约加百分之七十五，夏普零口五十七只能当对照，不能当成这次本地已经实现people,我们差距主要来自成交代理。回归对象和成本口径，不是同一厨房的同一道菜阿姨，我们的是可以机制上可以拆成两步分，同时要方向和稳定性。知识强，但路径乱会被判定系数压低洗脚。相关举证向单位证收缩一半再重建斜方差用来压短窗噪声特优化目标是预期收益减风险、惩罚风险。厌恶的固定为二，全负分就空仓参数。何富仙所住在做小范围稳健性，而不是天天改窗，边界也比较清楚可做的事。十三支池的月平卫星舱为正分，才持有泰勇用收缩斜方差定权。对，要胜做的是吧？本地百分之三百二十八当成实盘预期，或者满仓长期抗身回撤，或者盲目扩成全市场行业ETF别做的事，包括字面收益回归，却不检查得分是否几乎全面用前世写方差、讲故事，以及宣称已经复现原文表、三格点，再走三点就够规则可执行。本地超额明显，但回撤深更一卫星仓代理差异会抬高收益尺度，所以不要直接对标原文。数字工程入口是本目录下的回测脚本，本地模式即可复跑主表。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

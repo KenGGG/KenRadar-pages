@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文复现】转债ML+双低混合 原论文《Machine learning models in Chinese convertible bond market》在2018-2023年转债上，用27个因子滚动训练机器学习模型，按预测分位多空，XGB月均约1.52%。我们复现时，数据源换成QMT与东财估值，因子精选近高、双低等核心特征，并加入30%双低分位混合。在2018.10-2023.12论文窗内，LogR多空年化13.5%，Sharpe 1.65；XGB年化12.7%，Sharpe 1.51。延长至2026年6月后，年化降至约8%，近期分化明显。手续费万分之0.6下净收益几乎无影响，但未计入冲击与流动性。只做多T3组合也可作为转债增强参考。⚠️历史回测不代表未来，不构成投资建议。 
+#量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant #量化策略  #好视频扶持计划｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-08-02_可转债ML+双低混合策略复现：从论文窗口到2026年实盘表现_7669412128721227017.md · 发布于 2026-08-05 11:06:28</div><nav class="page-links"><a href="https://www.douyin.com/video/7669412128721227017" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>可转债ML+双低混合策略复现：从论文窗口到2026年实盘表现</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7669412128721227017">https://www.douyin.com/video/7669412128721227017</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+复现《Machine learning models in Chinese convertible bond market》论文策略，在2018-2023论文窗口内LogR多空年化13.5%、XGB年化12.7%，夏普均超1.5；延长至2026年6月后年化降至约8%，2025年5月后分化明显（XGB约4.4%，LogR转负）。核心结论：因子精选与双低混合比堆。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>策略框架与数据源</strong>
+原论文使用万得全量27因子与协议期权定价，复现版本改用迅投日线与东财估值代理，加入订单流、财务等替代因子，缺失分析师一致预期、历史到期收益率与剩余规模序列。期权、信用、赎回与下修因素被忽略。保留净价高、双低等核心特征，加入30%双低分位混合（7:3权重）。</p>
+</li>
+<li>
+<p><strong>论文窗口回测表现</strong>
+2018年10月至2023年12月论文窗口内，LogR多空年化13.5%，夏普1.65；XGB月均约1.52%，年化12.7%，夏普1.51。最大回撤约-6.3%至-9.3%。双低混合使XGB月均从0.82%提升至1.52%，年化从9.9%提升至12.7%。若堆砌换手残差、极端高价、大单等特征，月均反降至0.67%，说明精选比堆量更重要。</p>
+</li>
+<li>
+<p><strong>延长样本与近期表现</strong>
+样本拉长至2026年6月后，二者年化均降至约8%。最近14个月分化明显：XGB年化约4.4%，LogR约-4.3%。2025年5月后短样本中LogR已转负，说明近期市场结构发生变化，多空收益主要来自最强组相对最弱组的排序优势。</p>
+</li>
+<li>
+<p><strong>交易成本与实盘建议</strong>
+手续费万分之0.6下，多空每月约耗0.4个基点，净年化比毛年化低约0.05个百分点，费率几乎不是约束。真正需防范的是冲击成本与小余额流动性。不做空时仅做多最强组，论文窗口内年化约15%，但回撤达14%-18%，非市场中性。建议双低混合模块（权重30%）嵌入其他截面策略，短样本衰减时需跟随切换模型。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 研究背景与回测方法概述</h3>
+<p>本期复现一篇关于机器学习在中国可转债市场选债的研究，原论文用二零一八至二零二三年全量因子做截面多空，并报告梯度提升月均约一点五。本回策改用迅投日线与东财估值代理并加入双低分位，按七比三混合控制。论文窗内逻辑回归多空，年化十三点五，夏普一点六五。把样本拉到二零二六年左右，仍大约保持百分之八年化，手续费万分之零点六。下近年化几乎不动，与节奏固定。在月末最后一个交易日，截面持有到下月末再调仓训练，用过去六个月滚动窗口里，前五个月拟合最近一个月验证，按难证均方误差选餐后重估。当月预测综合分按机器学习预测分位七成与双低升序、分位反向升续混合，再三分位等券做多最强组，做空最弱组，宇宙覆盖沪深可转债，含历史退市券，且未做ST强熟过余额硬过滤红述像。</p>
+<h3>2. 原文与本工程数据差异说明</h3>
+<p>要把原文和本工程分开看，原文依赖万得全量二十七因子与协议期权定价。本工程为用迅投日线、东财历史估值和订单流、财务、代理等，缺了分析师一致预期。而历史到期收益率与剩余规模序列期权册也忽略信用赎回和下修。对，因此上，我们只保留净高于双低等核心，增补样本外，从二零一八年十月起可延到二零二六年六月。我结论只对本代理口径负责，不对原文表格格点负责。</p>
+<h3>3. 回测结果与模型表现分析</h3>
+<p>论文窗内逻辑回归与梯度提升多空都比较稳，呃，最大回撤大约在负六点三到负九点三。数虚线之后，把样本拉到二零二六年，啊斜率变缓，回撤加深。而二零二五年五月之后的短样本里，梯度提升仍弱，当逻辑回归已转负，说明近期市场结构在变，多空主要来自最强组相对最弱组的排序优势好，落到数字，论文窗卡罗基回归均一点零九，年化十三点五，其夏普一点六五。梯度提升月均一点三，靠三，三，夏普一点五一。拉长到二零二六年六月后，二者年化大约掉到八点四分体与八点零。最近十四个月，梯度提升年化约四点四，逻辑回归约负四点三。按单边万分之零点六，月换首月三分之一估算，多空每月大约只耗零点四个基点，净年化比毛年化低约零点零五个百分点。费率几乎不是约束，冲击与小余额流动性才是。v混合权重零点三来自固定消融，而不是滚动巡游。加上之后，论文创梯度提升月均从零点八二升到一点三，年化从九点九到十二点七。若把换手残差、极端高价和大单何等一并堆进去，月均反而曾掉到约零点六七，说明精选比堆名更重要。短样本理逻辑回归也明显弱于梯度提升，不能盲性单一模型，不能做空时只做多最强组。乐文窗年化约十五，但回撤到百分之十四至十八，并不是市场中性补发。</p>
+<h3>4. 策略使用建议与结论</h3>
+<p>要用法，能量化做空就用多空，否则只做多最强组，并加上余额与强属过滤。双低混合可以当做固定模块，嵌进别的洁面策略，权重零点三，当起点即可。但转债空头摩擦不对称，借券与流动性要单独顾，短样本衰减时也要跟着换模型，切记对文献。因此，明确不验增量，更不能拿未机冲击的毛收益。当实盘预期腿收术和月末滚动等预测，加双低七比三，再做三分位多空。在二零一八至二零二三年论文窗给出约十三点五与十二点七，年化夏普大约一点五到一点六五，拉长到二零二六年，后年化仍大约百分之八。但近期逻辑回归转负，要盯模型分化。万分之零点六手续费几乎不伤收益，真正药防的是冲击与流动性，核心仍是因子精选与双低混合，而不是把模型堆的更花。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">可转债</span></li>
+<li><span class="wikilink">机器学习</span></li>
+<li><span class="wikilink">策略复现</span></li>
+<li><span class="wikilink">双低</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">回测</span></li>
+<li><span class="wikilink">双低策略</span></li>
+<li><span class="wikilink">量化复现</span></li>
+<li><span class="wikilink">XGBoost</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>本期复现一篇关于机器学习在中国可转债市场选债的研究，原论文用二零一八至二零二三年全量因子做截面多空，并报告梯度提升，月均约一点百分之五十。二本回策改用讯，投日线与东财估值代理并加入双低分位，按七比三混合空制，论文窗内逻辑回归多空，年化十三点百分之五，夏普一点六十五。把样本拉到二零二六年左右，仍大约保持百分之八年化手续费万分至零点六。下近年化几乎不动，与节奏固定。在月末最后一个交易日，截面持有到下月末再调仓训练，用过去六个月滚动窗口里，前五个月拟合最近一个月验证按难证均方误差选餐后重估。当月预测综合分按机器学习预测分位七成与双低升序、分位反向升续混合再三分位等券做多最强组，做空最弱组，宇宙覆盖沪深可转债，含历史退市券，且未做ST强熟过余额硬过滤红述像。要把原文和本工程分开看，原文依赖万德全量二十七因子与协议期权定价。本工程为用迅头日线、东财历史估值和订单流、财务、代理等缺了分析师一致预期。而历史到期收益率与剩余规模序列期权册也忽略信用赎回和下修。对，因此上，我们只保留净高于双低等核心增补样本外，从二零一八年十月起可延到二零二六年。六月，我结论只对本代理口径负责，不对原文表格格点负责别禁止路径上，论文窗内逻辑回归，与梯度提升多空都比较稳。呃，最大回撤大约在负六点百分之三到负九点百分之三数虚线之后，把样本拉到二零二六年啊斜率变缓，回撤加深。而二零二五年五月之后的短样本里，梯度提升仍弱，当逻辑回归已转负，说明近期市场结构在变，多空主要来自最强组。相对最弱组的排序优势好，落到数字论文窗，卡罗基回归均一点零九年化十三点百分之五。他夏普一点六十五，梯度提升，月均一点百分之三，靠百分之三，百分之三。百分之夏普一点五十一拉长到二零二六年，六月后，二者年化大约掉到八点四分体与八点零最近十四个月，梯度提升年化约四点百分之四，逻辑回归约付四点百分之三，按单边万分之零点六月换首月三分之一估算多空每月大约只耗零点四个基点。净年化比毛年化低约零点零五个百分点。费率几乎不是约束冲击与小余额流动性才是v混合权重。零点三来自固定消融，而不是滚动巡游。加上之后，论文创梯度提升，月均从零点百分之八十二升到一点百分之三，年化从九点百分之九到十二点百分之七。若把换手残差、极端高价和大单何等一并堆进去，月均反而曾掉到约零点百分之六十七，说明精选比堆名更重要。短样本理逻辑回归也明显弱于梯度提升，不能盲性单一模型不能做空时，只做多最强组。乐文窗年化约十五，但回撤到百分之十四至十八，并不是市场中性补发，要用法，能量化做空就用多空，否则只做多最强组，并加上余额与强属过滤双低混合，可以当做固定模块，嵌进别的洁面策略权重零点三，当起点即可。但转债空头摩擦不对称，借券与流动性要单独顾短样本衰减时，也要跟着换模型，切记对文献。因此，明确不验增量，更不能拿未机冲击的毛收益。当实盘预期腿收术和月末滚动等预测加双低七比三，再做三分位多空。在二零一八至二零二三年论文窗给出约十三点百分之五与十二点百分之七。年化夏普大约一点五到一点六十五，拉长到二零二六年，后年化仍大约百分之八。但近期逻辑回归，转负要盯模型分化万分之零点六手续费，几乎不伤收益。真正药防的是冲击与流动性，核心仍是因子精选与双d混合，而不是把模型堆的更花。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

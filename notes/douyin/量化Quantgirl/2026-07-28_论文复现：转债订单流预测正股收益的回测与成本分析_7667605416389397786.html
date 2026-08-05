@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文复现】转债订单流，正股怎么走？ 原论文为 Chen et al. (2023) “Can convertible bond trading predict stock returns? Evidence from China”，发现可转债T+0、免印花税，订单不平衡可能提前反映信息。 
+我们复现用QMT分钟数据代理tick，计算转债BOI，次日做多最高组、做空最低组正股，等权或市值加权。 
+回测结果：多空等权毛边日均约9.6bps，市值加权约15.1bps，但扣费后VW多空净收益基本打平，EW微亏；只做多绝对收益高，但相对样本等权超额近似为零。日频满仓难成主策略。 
+📌 启示：想用此信号，需降低换手率、集中资金并考虑融券对冲。历史回测不代表未来，不构成投资建议。 
+#量化学习 #配对交易 #统计套利 #量化 #量化交易 #量化分析 #Quant #量化策略 #好视频扶持计划｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-07-28_论文复现：转债订单流预测正股收益的回测与成本分析_7667605416389397786.md · 发布于 2026-08-05 11:07:32</div><nav class="page-links"><a href="https://www.douyin.com/video/7667605416389397786" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>论文复现：转债订单流预测正股收益的回测与成本分析</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7667605416389397786">https://www.douyin.com/video/7667605416389397786</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+复现Chen et al. (2023)论文，用可转债订单不平衡(BOI)预测次日正股收益。毛边等权约9.6bps、市值加权约15.1bps，但扣费后净收益接近零，日频满仓难成主策略，建议降频加缓冲或作为增强项。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>论文背景与复现方法</strong>
+原论文为Chen et al. (2023) 'Can convertible bond trading predict stock returns? Evidence from China'，靠高频逐笔判向并对正股做日平多空。复现改用公开分分钟线代理tick，计算转债BOI，次日做多最高组、做空最低组正股，等权或市值加权。</p>
+</li>
+<li>
+<p><strong>回测结果与扣费分析</strong>
+多空等权毛边日均约9.6bps，市值加权约15.1bps。但扣费后VW多空净收益基本打平，EW微亏；只做多绝对收益高，但相对样本等权超额近似为零。日频满仓难成主策略。</p>
+</li>
+<li>
+<p><strong>成本结构与敏感性</strong>
+佣金常被五元地板抬到约万分之三一边，智能持仓日均成本约万分之七点七。换手率约66%，资金按一百万计多空各五十万。毛边能否保住取决于成本建模是否完整。</p>
+</li>
+<li>
+<p><strong>策略启示与改进方向</strong>
+想试用此信号需降低换手率、集中资金并考虑融券对冲。可将单票规模做到约四万以上以躲开五元佣金地板，或用股指期货替代融券对冲。信号更像增强项而非主仓。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 论文背景与复现方法</h3>
+<p>本期复现一篇用可转债订单流预测次日正股收益的论文，原论文靠高频逐笔判向，并对正股做日平多空，但复现改用公开分分钟线代理tick，在晚进样本上沿用同一套五分位轮动。费前等权多空大约九点六个基点，市值加权大约十五点一个基点。毛边还在，仓位做在正股上，信号只看转债盘前用昨日全日订单不平衡，做截面五分位大约三十支高分组做多、三十支低分组做空，权重用等权或昨日市值加权。股票单边是完好，换手率大约百分之六十六，资金按一百万计多空各五十万，正股佣金有五元地板，另加万分之五印花税，资金与融券费率未建模，毛边能不能保住先看数据和费率。</p>
+<h3>2. 数据与成本结构</h3>
+<p>用高频逐笔判买卖方向，本付现只有公开一分钟线，有盘口就相对中间价攀向，否则用坝内推断，转股价也按公开调整日志做时点近似。样本大约二零二四年十月到二零二六年六月，有效调仓日两百六十五，日均有效约一百四十七只一百万，拆到两腿各约三十只时单票大约一万七千元，佣金常被五元地板抬到约万分之三一边。智能持仓下多空日均成本大约万分之七点七，只做多大约万分之五点二，已经吃掉大半毛边。</p>
+<h3>3. 回测结果与扣费后表现</h3>
+<p>扣完这些费用后净值就难看了。市值加权多空期末大约九十九万几乎打平等，全多空落道约九十二万略亏，只做多高分组剩到一百四十八万，但减去样本等权后超额净值几乎水平。期末净值一百万说明涨幅主要来自市场本身。回撤上等权多空大约百分之十三点七，市值加权大约百分之十点五，只做多绝对路径大约百分之十八。费用前有区分力，费用后却把多空超额基本抹平。表上的数字把同一条线说死，加权与等权的毛收益都为正，扣费后接近打平或转负。只做多绝对收益高，主要是市场收益多，空镜与超额镜都接近零。成本敏感的资金很难把这一版日频规则当成独立阿尔法，直接上那什么保不住，还和持有期叠在一起。</p>
+<h3>4. 持有期衰减与敏感性</h3>
+<p>等权多空日均毛收益第一天大约九点六个基点，第二天仍约九点五个基点，第三天掉到约三点五个基点，第五天转复信号立即在前一两天过。我再直接扣掉万分之十的往返成本等券，多空见收益就会翻覆。而智能持仓的日均成本已经接近或超过等权锚边的一半。低流动性组毛边更厚一些，但未建模冲击可能把优势突回去。所以日频满仓等权尤其脆弱。将换手二处等期看态，提高单票规模，或改看尾盘信号，才更向保健收益的方向。</p>
+<h3>5. 策略启示与执行建议</h3>
+<p>这样子若要用更像增强项而不是主仓，可做的是降频加缓冲，或把单票做到大约四万二以上已躲开五元佣金地板。也可以用股指期货一类工具替代融券对冲。充当者的是把日频满仓多空当主仓以及只盯只做多的绝对净值。别做的是看见一百四十八万就大规模裸多，以及成本还没想清楚就按毛表示盘。就是可合起来看规则清楚可执行，分钟代理下仍能留下次日正股价差毛边，等权大约九点六个基点，市值加权大约十五点一个基点。但在五元佣金地板、百分之五印花和约百分之六十六日换手下净收益被压到接近零。市值加权多空几乎打平等全微亏，只做多绝对收益高而净超额约等于零。想试就先降换手抬单票规模，别把日频满仓当主策略。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">配对交易</span></li>
+<li><span class="wikilink">统计套利</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">转债研究</span></li>
+<li><span class="wikilink">可转债</span></li>
+<li><span class="wikilink">订单流</span></li>
+<li><span class="wikilink">BOI</span></li>
+<li><span class="wikilink">正股收益</span></li>
+<li><span class="wikilink">量化复现</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>本期复现一篇用可转债订单流预测次日正股收益的论文，原论文靠高频逐笔判向，并对正股做日平多空，但复现改用公开分中线代理，在晚进样本上沿用同一套五分位轮动费前等权多空大约九点六个基点，较一天市值加权大约十五点一个基点。毛边还在仓位做在正股上，信号只看转债盘前用昨日全日订单不平衡，做截面五分位大约三十支高。分组做多三十支低分组做空权、重用等权，或昨日市值加权股票单边是完好，换手人，大约百分之六十六资金按一百万计多空各五十万，正股，佣金由五元低板卖出，另加万分之五印花税资金与融券费率未建模，毛边能不能保住。先看数据和费率毛边，用高频逐笔判买卖方向，本付现，只有公开一分钟线，有盘口就相对中间价攀向，否则用坝内推断，转股价也按公开调整日志做时点近似样本。大约二零二四年十月到二零二六年六月有效调仓日两百六十五，日均有效约一百四十七只一百万。拆到两腿各约三十只时，单票大约一万七千元，佣金常被五元地板抬到。约万分之三一边智能持仓下多空，日均成本大约万分之七点七只做多大约万分之五点二已经吃掉大半毛边科沃基准是样本内正股等权没有接到沪深三百。扣完这些费用后，精职就难看了。市值加权多空期末大约九十九万，几乎打平等，全多空落道约九十二万，略亏只做多高，分组剩到一百四十八万，但减去样本等权后，超额净值几乎水平。期末人员一百万说明涨幅主要来自市场本身，它回撤上等权多空大约百分之十三点七，市值加权大约百分之十点五只，做多绝对路径大约百分之十八。费钱有区分力费用，却把多空超额基本抹平。表上的数字，把同一条线说死是指加权与等权的毛收益都为正。扣费后接近打平或转付只做多，绝对收益高，主要是市场收益多，空镜与超额镜都接近零成本敏感的资金，很难把这一版日评规则当成独立阿尔法，直接上那什么保不住，还和持有期叠在一起。等全多空日均毛收益第一天大约九点六个基点，第二天仍约九点五个基点，第三天掉到约三点五个基点。第五天，转复信号，立即在前一两天过，我再直接扣掉万分之十的往返成本等券，多空见收益就会翻覆。而智能持仓的日均成本已经接近或超过等全锚边的一半。低流动性组毛边更厚一些，但未建模冲击，可能把优势突回去。所以日品满仓等全尤其脆弱。将换手二处等期看态，提高单票规模，或改看尾盘信号，才更向保健收益的方向。这样子若要用更像增强项，而不是主仓，可做的是降频加缓冲，或把单票做到大约四万二以上，已躲开五元佣金。地板也可以用股指期货一类工具替代融券对冲。充当者的是呃把日评满仓多、空当主仓以及只盯只做多的绝对净值。别做的是看见一百四十八万就大规模裸多以及成本还没想清楚，就按毛表示盘就是可合起来看规则清楚，可执行分钟，代理下仍能留下次日正骨价叉、毛边等权。大约九点六个基点，市值加权大约十五点一个基点，但在五元佣金地板百分之五。印花和约百分之六十六日换手下净收益被压到接近零。市值加权多空，几乎打平等全微亏。只做多绝对收益高而净超额约等于零。想试就先降，换手抬单票规模，别把日品满仓当主策略。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

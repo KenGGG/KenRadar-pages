@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文分享】检索增强MoE预测异质行情 这篇论文《MERA: Mixture of Experts with Retrieval-Augmented Representation for Modeling Diversified Stock Patterns》(WWW Companion 2025) 探讨了股票市场中不同股票行为的异质模式问题。 
+📌 问题：传统模型对所有股票共用一套参数，难以兼顾高价/低价、强势/弱势股的不同收益规律。作者提出可插拔的 MERA 模块，让模型把不同行情路由给不同专家。 
+💡 方法三步走：
+1️⃣ 自监督预训练：用掩码自编码器在分钟级数据上训练 Transformer，获得稳健表征。
+2️⃣ 检索增强：根据表征检索历史最相似的邻居，聚合它们的特征与未来收益标签，作为判别信号。
+3️⃣ 稀疏混合专家：GateNet 利用邻居标签信号，仅激活 Top-K 专家做精细化预测，大大降低计算开销。 
+📊 论文在沪深300/中证500/中证1000分钟数据上验证，Transformer+MERA 排序能力(IC)和多空收益均提升。例如沪深300的 IC 从 0.102 升至 0.107，多空年化收益从 0.886 升至 0.915，其他指数也稳定增强。 
+🔍 消融实验显示，去掉检索标签信号收益显著下滑；专家激活矩阵高度稀疏，不同收益模式被准确路由到不同专家，并非随机分配。 
+⚠️ 风险提示：文中所有结果均为历史回测，不代表未来表现，仅作为学术方法分享，不构成任何投资建议。 
+#量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant  #量化策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-07-06_论文解读：MERA检索增强混合专家预测异质行情_7659381184589253930.md · 发布于 2026-08-05 11:36:24</div><nav class="page-links"><a href="https://www.douyin.com/video/7659381184589253930" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>论文解读：MERA检索增强混合专家预测异质行情</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7659381184589253930">https://www.douyin.com/video/7659381184589253930</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+解读WWW Companion 2025论文《MERA》，提出用检索增强的混合专家模块建模多样化股票行情模式。通过自监督预训练获取稳健表征、检索相似历史邻居聚合特征与标签、稀疏混合专家门控分配，在沪深300/中证500/中证1000分钟数据上验证了IC和多空收益的提升。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>问题背景：传统模型难以适应异质行情</strong>
+传统深度学习模型使用单一参数集拟合所有样本，难以适应真实市场的异质行情。股票市场往往并存多种迥异的行情状态，如疫情初期电商与医疗科技板块强劲，而能源和航空股持续低迷。</p>
+</li>
+<li>
+<p><strong>方法框架：MERA三步走</strong>
+MERA模块核心思路包含三步：首先通过自监督学习从嘈杂分钟数据中提取稳健嵌入；然后检索相似历史样本聚合特征与标签；最后由稀疏混合专家根据检索信号进行差异化建模。GateNet门控网络动态为每个样本选取最合适的稀疏专家子集。</p>
+</li>
+<li>
+<p><strong>实验结果：多指数验证性能提升</strong>
+论文使用中国A股分钟级数据覆盖沪深300、中证500和中证1000三个指数。Transformer+MERA在三个指数上均取得最优表现，沪深300的IC从0.102升至0.107，多空年化收益从0.886升至0.915。</p>
+</li>
+<li>
+<p><strong>消融分析：各组件贡献验证</strong>
+消融实验显示，去掉检索标签信号收益显著下滑；专家激活矩阵高度稀疏，不同收益模式被准确路由到不同专家；去掉稀疏混合专家削弱差异化建模能力，移除去噪标签显著拉低门控路由判别力。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 论文介绍与问题背景</h3>
+<p>第一，我们解读一篇WWW 2025关于量化选股的新框架。作者提出用检索增强的混合专家模块来建模多样化的股票行情模式。论文指出，传统深度学习模型常用单一参数集拟合，所有样本难以适应真实市场的异质行情。这篇论文观察到，股票市场往往并存多种迥异的行情状态。作者举例说明，在新冠疫情初期，电商与医疗科技板块表现强劲，而能源和航空股则因宏观冲击持续低迷。为此，作者设计了名为MERA的模块来解决这一难题。</p>
+<h3>2. 方法设计：自监督预训练</h3>
+<p>它的核心思路包含三个步骤。首先通过自监督学习，从嘈杂分钟数据中提取稳健嵌入。论文先训练了一个掩码自编码器来获取高层表征。具体做法是随机遮蔽时间序列上的部分位置，让模型根据可见上下文重建被掩码的内容，从而学到紧凑且鲁棒的嵌入。由于原始行情数据噪声较大，直接做最近邻检索并不可靠。</p>
+<h3>3. 方法设计：检索增强与标签离散化</h3>
+<p>在检索相似历史样本以聚合特征与标签。在检索子构建时，作者同时存储了预训练的高层嵌入与标签信息。论文把连续的收益率标签离散化为十个类别，因为这里需要的并不是精确数值，而是一个能区分股票模式、指导后续专家分配的判别信号。拿到检索结果后，论文设计了一个目标感知的注意力聚合操作，这个机制会依据检索样本与目标的相关性赋予不同缩放系数，然后用相同的注意力权重分别聚合邻居的特征嵌入和标签嵌入，使信息与当前查询紧密关联。</p>
+<h3>4. 方法设计：稀疏混合专家与架构</h3>
+<p>在预测环节，聚合到的标签嵌入会被送入GateNet执行Top-K稀疏门控。论文默认设置是总共四个专家，每次只激活一个。随后目标股票嵌入与聚合到的邻居特征一起送入被激活的GRU专家中进行更细粒度的局部分析。模型最终将门控混合专家的输出通过残差连接与主干信息融合，并用MSE损失进行训练。作者强调，MERA是一个即插即用的模块，可以非常方便地附加到任意深度学习主干网络上，辅助捕捉多样的市场行情。</p>
+<h3>5. 实验设置与核心结果</h3>
+<p>在实验设置方面，论文使用了真实的中国A股分钟级数据，覆盖沪深300、中证500和中证1000三个指数，分别代表大盘、中盘以及更广泛的小盘股票池，带来全面评估模型。作者采用了因子与组合双重视角。因子指标包括衡量线性相关性的IC、基于排名的Rank IC以及它们的稳定性比值。在核心对比结果中，基于Transformer加DHN MERA的方法在三个指数上都取得了最优表现。与普通Transformer相比，MERA在IC与投资组合回撤的结果同样佐证了MERA的优势。在沪深300、中证500和中证1000三个市场中，该方法的多空收益均显著超越基准模型。</p>
+<h3>6. 可视化分析与消融实验</h3>
+<p>通过可视化分析了专家的分配情况，激活图呈现出高度稀疏的特点，并且不同离散标签类别明显倾向于选择不同的专家。例如，中等偏高的标签类别主要由三号专家处理，而较高的类别则几乎都路由至零号专家。消融实验进一步验证了各组件的贡献：去掉稀疏混合专家会削弱差异化建模能力，去掉检索增强会让模型丢失有价值的邻居上下文，而移除去噪标签则显著拉低了门控路由的判别力。这说明三个模块缺一不可。</p>
+<h3>7. 总结</h3>
+<p>总结来说，这篇论文提出的MERA方法使用稀疏混合专家来建模多样化的股票模式。它通过自监督预训练获得稳健表征，再检索相似邻居聚合特征与标签，最后由门控网络实现自适应专家分配。在三个真实指数上，均取得了领先性能。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">深度学习</span></li>
+<li><span class="wikilink">论文分享</span></li>
+<li><span class="wikilink">股票市场</span></li>
+<li><span class="wikilink">分钟级数据</span></li>
+<li><span class="wikilink">混合专家模型</span></li>
+<li><span class="wikilink">MERA</span></li>
+<li><span class="wikilink">检索增强</span></li>
+<li><span class="wikilink">混合专家</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li><span class="wikilink">如疫情初期电商与医疗科技</span></li>
+<li><span class="wikilink">电商与医疗科技</span></li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>第一，我们解读一篇WW二零二五关于量化选股的新框架。作者提出，用检索增强的混合专家模块来建模多样化的股票行情模式。论文指出，传统深度学习模型常用单一参数集拟合，所有样本难以适应真实市场的抑制行情。这篇论文观察到，这实股票市场往往并存多种迥异的行情状态。作者举例说明，在新冠疫情初期，电商与医疗科技板块表现强劲。而能源和航空股则因宏观冲击持续低迷。为此，作者设计了名为marra的模块来解决这一难题。它的核心思路包含三个低骤，首先通过自监督学习，从嘈杂分钟数据中提取，稳健嵌入。在检索相似历史，模本以聚合特征与标签，最后由稀疏混合专家根据检索信号进行差异化建模。我论文把思路从单分支网络推进到了多分支专家网络。每个专家可以专注学习某一类特定的股票模式，而gatenet门控网络会动态为每个样本选取最合适的稀疏专家子集。在问题形式化阶段，作者的目标是构建一个能预测个股未来收益的模型输入是分钟级的价量等特征。标签则基于下一天收益率计算论文，对原始收益率做了z分数归一化，将预测任务转化为截面排名的学习问题。由于原始行情数据噪声较大，直接做最近临检索并不可靠。这篇论文先训练了一个掩码，自编码器来获取高层表征。具体做法是随机遮蔽时间序列上的部分位置，让模型根据可见上下文重建被掩码的内容，从而学到紧凑切鲁棒的嵌入模块的整体架构，可以概括为，查询、检索和预测三步收到预测请求后先用主干网络提取目标样本的嵌入作为查询，然后从池中检索出前n个最相似的历史样本。在检索之构建时，作者同时存储了预训练的高层嵌入与标签信息，论文把连续的收益率标签离散化为十个类别。因为这里需要的并不是精确数值，而是一个能区分股票模式，指导后续专家分配的判别信号。拿到检索结果后，论文设计了一个目标感知的注意力，聚合操作。这个机制会依据检索样本与目标的相关性赋予不同缩放系数。然后用相同的注意力权重分别聚和邻居的特征嵌入和标签嵌入，使信息与当前查询紧密关联，在预测环节聚合到的标签嵌入会被送入gate. Net执行talk k稀疏门控论文默认设置是总共四个专家，每次只激活一个随后目标股票嵌入与聚合道的邻居特征一起送入被激活的GRU专家中进行更细粒度的局部分析模型，最终叫门控混合专家的输出，通过残差连接与主干信息融合，并用MSE损失进行训练。作者强调，marra是一个即插即用的模块，可以非常方便的附加到任意深度学习主干网络上，辅助捕捉多样的市场行情。在实验设置方面，论文使用了真实的中国。 A股分中级数据覆盖沪深三百、中证五百和中证一千三个指数，分别代表大盘中盘，以及更广泛的小盘股票池带了全面评估模型。作者采用了因子与组合双重视角因子指标，包括衡量线性相关性的IC,基于排名的ran cake以及它们的稳定性比值。在核心对比结果中，基于transformer加dhn mara的方法，在三个指数上都取得了最优表现。与普通transformer相比，mara在IC书投资组合回撤的结果同样佐证了mary的优势。在沪深三百、中证五百和中证一千三个市场中，该方法的多空收益均显著超越基准模型，或者还通过可视化分析了专家的分配情况，激活图，呈现出高度稀疏的特点，并且不同离散标签类别明显倾向于选择不同的专家。例如，中等偏高的标签类别主要由三号专家处理，而较高的类别则几乎都陆有至零号专家交融实验，进一步验证了各组件的贡献，去掉稀疏混合专家会削弱差异化建模能力，去掉检索增强会让模型丢失有价值的邻居上下文。而移除去噪标签，则显著拉低了门控路由的判别力。这说明三个模块缺一不可。总结来说，这篇论文提出的measure方法，使用稀疏混合专家来建模多样化的股票模式。他通过自监督预训练获得稳健表征，再检索相似邻居聚合特征与标签，最后由门控网络实现自适应专家分配，在三个真实指数上，均取得了领先性能。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

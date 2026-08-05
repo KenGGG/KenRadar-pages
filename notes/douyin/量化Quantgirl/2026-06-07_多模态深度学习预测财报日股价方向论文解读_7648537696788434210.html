@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文分享】多模态预测财报日股价方向 这篇论文《Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning》(2026) 来自苏黎世联邦理工。作者在财报日前30天窗口内，融合公司基本面、市场技术指标和新闻情感，构建21维特征向量，尝试预测财报日股价的涨跌方向。 
+模型对比了逻辑回归、LSTM和Transformer，并进行了有无新闻情感的消融实验。结果很有意思：Transformer 对波动事件更敏感，宏平均F1最高（0.39）；LSTM 策略极其保守，大量预测中性，反而把方向性误判代价降到最低（0.651）。新闻情感对所有模型都有稳定增益，尤其在LSTM中，移除情感后上涨类的精确率直接归零，宏平均F1从0.325掉到0.292。 
+这篇研究提醒，追求捕捉行情（Transformer）和追求低风险（LSTM）存在本质权衡，没有单一最优解。不过所有结果均来自历史回测，市场环境会变，方法只能说提供一种视角，不构成投资建议。 
+#量化学习  #配对交易  #统计套利 #量化  #量化交易  #量化分析｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-06-07_多模态深度学习预测财报日股价方向论文解读_7648537696788434210.md · 发布于 2026-08-05 11:52:54</div><nav class="page-links"><a href="https://www.douyin.com/video/7648537696788434210" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>多模态深度学习预测财报日股价方向论文解读</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7648537696788434210">https://www.douyin.com/video/7648537696788434210</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+苏黎世联邦理工2026年论文，融合基本面、技术指标和FinBERT新闻情感构建21维特征向量，对比逻辑回归、LSTM和Transformer三类模型预测财报日股价涨跌方向。Transformer对波动更敏感但方向性误判代价高，LSTM策略保守且代价最低，FinBERT情感特征为所有模型带来稳定增益。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>研究背景与动机</strong>
+论文聚焦财报发布日这一事件驱动的高波动场景，弥补多数研究仅关注日常交易的不足。作者在财报前三十天窗口内，联合基本面、市场动态和FinBERT新闻情感进行多模态时序建模。</p>
+</li>
+<li>
+<p><strong>特征工程与数据预处理</strong>
+构建21维异构特征向量：15项基本面指标（净利润率、ROE、资产负债率等）、3项市场动态（调整后收盘价、三日和六日简单移动平均）、3维FinBERT情感概率（正负中性）。预处理采用三阶段流水线：前项填充补齐周末节假日稀疏数据、横截面均值填补、Z分数标准化。</p>
+</li>
+<li>
+<p><strong>模型设计与训练</strong>
+对比三类序列模型：逻辑回归（展平30天窗口丢失时序结构）、二层LSTM（隐藏维度64，捕捉短期时序依赖）、二层Transformer编码器（多头自注意力建模长期交互）。采用加权交叉熵缓解类别不平衡（中性类约占67%），自定义代价指标度量方向性误判的金融损害。</p>
+</li>
+<li>
+<p><strong>实验结果与核心发现</strong>
+Transformer宏平均F1最高（0.39）但对波动更敏感，方向性误判代价最大（0.651）；LSTM策略保守大量预测中性，方向性误判代价最低。FinBERT情感消融实验显示：移除情感后LSTM上涨类精确率归零，宏平均F1从0.325降至0.292，情感特征为所有模型带来稳定增益。</p>
+</li>
+<li>
+<p><strong>结论与投资启示</strong>
+追求捕捉行情可选Transformer，风险规避优先选LSTM，两者存在本质权衡无单一最优解。未来可探索混合架构并引入外汇、宏观变量等外部数据源。所有结果来自历史回测，不构成投资建议。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 研究概述</h3>
+<p>财报发布日的股价方向能靠多模态持续信号提前预判吗？本期我们看一篇论文，它在财报前三十天窗口内，联合基本面、市场动态和FinBERT新闻情感进行建模对比，涵盖逻辑回归、LSTM与Transformer三类序列模型。这篇论文的核心结论是融合基本面、技术指标和情感的21维特征，带来多数提升。财报发布日方向预测，作者发现Transformer对波动更敏感，LSTM更保守，且方向性误判代价最低。情感特征在消融实验中为所有模型带来稳定增益。也有文献如Tang等（2007）表明新闻情感能补充价格之外的增量信息，但多数研究聚焦日常交易，对财报发布日这种事件驱动的高波动场景关注不足。这篇论文的动机正是在财报前三十天窗口内，把基本面、市场动态和新闻情感三元信息联合起来，做多模态时序建模方法。</p>
+<h3>2. 特征构建与预处理</h3>
+<p>作者为每只股票构建了财报前三十天的日级序列，每天包含15项基本面、3项收盘价与均线，以及FinBERT输出的3维情感概率。三个模型分别接收这些多模态输入，展平后接逻辑回归的基线、二层LSTM和二层Transformer编码器，输出上涨、下跌、中性三分类，并用加权交叉熵缓解类别不平衡。特征层整体是21维异构向量：公司基本面取净利润率、ROE、资产负债率等15项；市场动态包括调整后收盘价、三日和六日简单移动平均；新闻情感直接取FinBERT输出的正负中性概率。数值与文本特征联合输入，显著增强了模型在财报发布日捕捉方向的能力。数据预处理采用三阶段流水线：先用前项填充补齐周末和节假日对稀疏的基本面指标，用横截面均值填补，最后对所有特征做Z分数标准化，避免量纲差异大的特征主导梯度更新，保证序列模型训练的稳定性。</p>
+<h3>3. 模型设计与评估指标</h3>
+<p>作者依据财报发布日的收益率R和预设阈值定义三分类目标：大于等于阈值为上涨，小于等于阈值为下跌，其余为中性。实际数据里中性类约占67%，形成明显的类别不平衡，训练时靠加权交叉熵应对。同时引入自定义代价指标来直接度量方向性误判的金融损害。三种模型的设计差异明显：逻辑回归基线将整个三十天窗口展平，丢失时序结构；二层LSTM隐藏维度64，主要捕捉短期时序依赖；二层Transformer编码器通过多头自注意力建模更长期的交互，对突发异动更敏感，但也更容易产生方向性误判。实验用PyTorch在ETH学生集群上完成，Adam优化训练，15个A100大小8评价。不只靠准确率，更侧重金融决策：报告精确率、宏平均F1、上涨下跌中性三类等全平均，避免多数类主导，还引入自定义代价直观体现方向性误判成本。</p>
+<h3>4. 实验结果分析</h3>
+<p>从三类混淆矩阵的总体对比可以观察到，引入情感特征后上涨和下跌的召回整体上升，但不同模型的风险偏好差异明显。逻辑回归的混淆矩阵显示，作为非持续基线，它几乎将所有样本判给多数的中性类，对真实上涨和下跌的召回极低。这意味着仅靠展平历史基本面很难捕捉财报日前后突然爆发的方向性波动。Transformer的混淆矩阵出现明显变化，它对上涨下跌类的召回大幅提升，但与此同时把大量中性日误判为上涨或下跌，方向性错误显著增多。这种高敏感、高误判的模式正是其风险属性的直观体现。综合性能对比图表明，Transformer的宏平均F1最高，但自定义方向性误判代价也最大；LSTM的代价最低，在风险控制上更优。情感消融结果进一步确认，无论用哪个模型加入FinBERT情感，都能稳定提升预测的稳健性。</p>
+<h3>5. 结论与展望</h3>
+<p>本文结论强调多模态融合确实提升了财报发布日方向预测的风险感知能力。若追求捕捉波动，可选Transformer；若风险规避优先，LSTM的自定义代价最低更保守。未来可探索混合架构，并引入外汇、宏观变量等更多外部数据源。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">配对交易</span></li>
+<li><span class="wikilink">统计套利</span></li>
+<li><span class="wikilink">量化</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">论文分享</span></li>
+<li><span class="wikilink">多模态</span></li>
+<li><span class="wikilink">多模态深度学习</span></li>
+<li><span class="wikilink">财报日股价预测</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>财报发布日的股价方向能靠多模态持续信号提前预判吗？本期我们看一篇论文，它在财报前三十天窗口内，联合基本面市场动态和fmbers新闻情感进行建模对比，逻辑回归LSTM与transformer三类序列模型。这篇论文的核心结论是融合基本面、技术指标和情感的二十一维特征，但多数提升。财报发布日方向预测，作者发现，transformer对波动更敏感，LSTM更保守。且方向性误判代价最低情感特征在消融实验中为所有模型带来稳定增益。也有文献，如t atl OG二零零七表明新闻情感能补充价格之外的增量信息，但多数研究聚焦日常交易。对财报发布日这种事件驱动的高波动场景关注不足。这篇论文的动机正是在财报前三十天窗口内，把基本面、市场动态和新闻情感三元信息联合起来，做多模态时序建模方法。单览上，作者为每只股票构建了财报前三十天的日级序列，每天包含十五项、基本面、三项、收盘价与均线，以及fyberred输出的三维情感概率。三个模型分别接收这些多模态输入、展平后接逻辑回归的基线、二层LSTM和二层transformer编码器输出上涨下跌中性三分类并用加权交叉熵缓解类别不平衡。特征层整体是二十一维异构向量公司基本面取净利润率、ROE、资产负债率等十五项市场动态，包括调整后收盘价三日和六日简单移动平均新闻情感直接取fmber的输出的正负中性概率。数值与文本特征联合输入，显著增强了模型在财报发布日捕捉方向的能力。这据处理采用三阶段流水线，先用前项填充，补齐周末和节假日对稀疏的基本面指标，用横截面均值填补，最后对所有特征做z分数标准化，避免量缸差异大的特征主导梯度更新，保证序列模型训练的稳定性。作者依据财报发布日的收益率r和预值套定义三分类目标而大于等于套围上涨，而小于等于套为下跌，其余为中性。实际数据里中性类约占百分之六十七，形成明显的类别不平衡，训练时靠加权交叉熵应对。同时，引入自定义代价指标来直接度量、方向性、误判的金融损害三种模型的设计差异明显，逻辑回归基线，将整个三十天窗口展平丢失。时序结构，二层LSTM隐藏维度六十四，主要捕捉短期时续依赖二层transformer编码器，通过多头自注意力建模更长城的交互，对突发异动更敏感，但也更容易产生方向性、误判实验用PT orch在ETH学生集群上完成adam优化训练。十五个艾克p大小八评价不只靠准确率，更侧重金融决策报告精确率红平均、f一队上涨、下跌、中性三类等全平均，避免多数类主导，还引入自定义代价，直观体现方向性误判成本。从三类混淆矩阵的总体对比，可以观察到，引入情感特征后上涨和下跌的召回整体上升。但不同模型的风险偏好差异明显。接下来，我们逐一看逻辑回归transformer和LS tm的典型混淆矩阵体会敏感性与稳健性的权衡。逻辑回归的混淆矩阵显示，作为非持续基线，他几乎将所有样本判给多数的中性类，对真实上涨和下跌的召回极低。这意味着仅靠展平历史基本面很难捕捉财报日前后突然爆发的方向性波动，transformer的混淆矩阵出现明显变化。他对上涨下跌类的召回大幅提升，但与此同时，把大量中性日误判为上涨或下跌，方向性错误显著增多。这种高敏感、高误判的模式，正是其风险属性的直观体现。综合性能。对比图表明，transformer的红平均f一最高，但自定义方向性误判代价也最大，LSTM的代价最低。在风险控制上，更优情感消融结果进一步确认。无论用哪个模型加入funbert情感，都能稳定提升预测的稳健性。不文结论强调多模态融合，确实提升了财报发布日方向预测的风险感知能力。若追求捕捉波动，可选transformer,若风险规避优先，LSTM的自定义代价最低更保守。未来可探索混合架构，并引入外汇、宏观变量等更多外部数据源。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

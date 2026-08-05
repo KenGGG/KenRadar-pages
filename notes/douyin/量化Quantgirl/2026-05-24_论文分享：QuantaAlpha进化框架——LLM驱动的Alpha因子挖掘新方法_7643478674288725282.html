@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文分享】QuantaAlpha进化框架 这篇论文《QuantaAlpha: An Evolutionary Framework for LLM-Driven Alpha Mining (2026)》提出了一种用大模型挖掘量化因子的新方法。 
+1️⃣ 解决了啥问题？
+传统AI挖因子容易“跑偏”、不可控、探索范围窄。这篇论文想更稳、更可信地自动化挖因子。 
+2️⃣ 核心方法：轨迹进化
+把一次完整的因子生成与回测过程看作一条“轨迹”。
+✅ 突变：定位轨迹中失败的关键步骤，只重写这里，精准修正。
+✅ 交叉：把不同成功轨迹里的优秀片段（如有效假设）组合起来，创造新因子。
+像生物进化一样，结合了微调和优势重组。
+⚠️ 风险提示：所有内容仅为方法研究与分享，不构成任何投资建议。
+#量化学习  #配对交易  #统计套利  #量化  #量化交易｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-05-24_论文分享：QuantaAlpha进化框架——LLM驱动的Alpha因子挖掘新方法_7643478674288725282.md · 发布于 2026-08-05 11:59:29</div><nav class="page-links"><a href="https://www.douyin.com/video/7643478674288725282" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>论文分享：QuantaAlpha进化框架——LLM驱动的Alpha因子挖掘新方法</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7643478674288725282">https://www.douyin.com/video/7643478674288725282</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+论文《QuantaAlpha: An Evolutionary Framework for LLM-Driven Alpha Mining (2026)》提出一种基于大模型的量化因子挖掘框架，核心创新为轨迹级突变与交叉操作，在沪深300数据上取得IC 0.0472、年化收益4.68%、最大回撤11.8%，显著优于基线模型。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>研究背景与痛点</strong>
+传统AI挖因子存在可控性差、脆弱性高、因子可信度低、探索不足导致冗余等三大痛点。金融市场高维特征空间给Alpha挖掘带来巨大挑战。</p>
+</li>
+<li>
+<p><strong>核心方法：轨迹进化</strong>
+将一次完整的因子生成与评估过程视为一条可进化、可追溯的轨迹。核心操作包括突变（针对失败步骤局部修订）和交叉（融合不同高奖励轨迹中的成功片段），结合生物进化中的微调与优势重组思想。</p>
+</li>
+<li>
+<p><strong>多智能体协作流程</strong>
+采用多智能体协作工作流，从生成市场假设、构建因子代码到回测评估，每个步骤由专门智能体负责。关键设计为中间符号表示，将因子表达为符号式再转为代码，确保假设、表达式和最终代码三者语义一致。</p>
+</li>
+<li>
+<p><strong>实验结果与验证</strong>
+在沪深300数据上按时间划分训练集和测试集，评估指标包括IC、年化收益率ARR和最大回撤MDD。QuantaAlpha取得IC 0.0472、年化收益4.68%、最大回撤11.8%，相比AdAgent IC提升0.0186，收益提升1.10个百分点。消融实验验证各组件重要性：移除突变导致IC降低0.0079，交叉带来持续增益，规划模块对生成多样化稳定假设至关重要。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 研究背景与问题定义</h3>
+<p>如何让大模型稳定地挖掘Alpha因子？这篇论文提出了一个进化框架。它通过规划并净化完整的生成轨迹来对抗回测噪声和语义漂移，最终在沪深300上取得了显著优于基线模型的表现。该文介绍的框架名为QuantaAlpha，旨在解决传统Alpha挖掘中的回测噪声、机制转换和知识复用难题。其核心创新在于轨迹级的突变与交叉操作，以此提升生成因子的质量。金融市场高维特征空间给Alpha挖掘带来巨大挑战。作者指出，尽管现有方法利用了大语言模型，但仍存在三大痛点：可控性差、脆弱、因子可信度低，以及探索不足导致的冗余。</p>
+<h3>2. 方法框架与多智能体协作</h3>
+<p>我们来看论文的方法框架图，它整体上是一个进化系统，核心思想是将一次完整的因子生成与评估过程视为一条可进化、可追溯的轨迹。具体的挖掘流程是怎样的呢？作者设计了一个多智能体协作的工作流，从生成市场假设开始，到构建因子代码，最后进行回测评估，每个步骤由专门的智能体负责。在因子构建环节，论文采用了一个关键设计——中间符号表示，即将因子表达为符号式再转为代码，这确保了最初的假设、中间的表达式和最终代码三者语义一致。进化机制是框架的核心，主要包括突变和交叉：突变针对轨迹中的失败步骤进行局部修订，交叉则融合不同高奖励轨迹中的成功片段，以此继承已验证的有效模式。</p>
+<h3>3. 实验结果与消融验证</h3>
+<p>实验在沪深300数据上进行，按时间划分了训练集和测试集，评估指标主要看信息系数IC、年化收益率ARR和最大回撤MDD。基线包括了传统机器学习、深度学习和之前的LLM智能体。来看实证结果的对比图，这张图直观展示了QuantaAlpha框架与多个基线模型在关键指标上的性能对比。目文回测显示，QuantaAlpha取得了IC 0.0472、年化收益4.68%、最大回撤11.8%，相比AdAgent其IC提升了0.0186，收益提升了1.10个百分点。消融研究验证了各组件的重要性，其中移除突变操作导致性能下降最严重，IC降低了0.0079；交叉能带来持续增益；而规划模块对于生成多样化、稳定的假设至关重要。</p>
+<h3>4. 总结与未来展望</h3>
+<p>总结来说，该文将Alpha挖掘建模为一个进化过程，通过轨迹级的操作提升了探索效率和因子质量，大量实验验证了其有效性。未来作者计划进一步精炼进化机制，并探索更多市场场景。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">配对交易</span></li>
+<li><span class="wikilink">统计套利</span></li>
+<li><span class="wikilink">量化</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">LLM应用</span></li>
+<li><span class="wikilink">因子挖掘</span></li>
+<li><span class="wikilink">QuantaAlpha</span></li>
+<li><span class="wikilink">量化因子</span></li>
+<li><span class="wikilink">大语言模型</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li><span class="wikilink">结合生物</span></li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>如何让大模型稳定地挖掘α因子?这篇论文提出了一个净化框架。它通过规划并净化完整的生成轨迹来对抗回测噪声和语意飘移,最终在护身300上取得了显著优于基线模型的表现。该文介绍的框架名为Quanta Alpha。它旨在解决传统α挖掘中的回测噪声、机制转换和知识附用难题。 其核心创新在于轨迹级的突变与交叉操作 以此提升生成因子的质量 金融市场高维起飞平稳 这给阿尔法挖掘带来巨大挑战 作者指出 尽管现有方法利用了大语言模型 但仍存在三大痛点 可控性 脆弱 因子可信度低 以及探索不足导致的冗余 我们来看论文的方法框架图 它整体上是一个净化系统 核心思想是将一次完整的因子生成与评估过程视为一条可进化、可追溯的轨迹。 具体的挖掘流程是怎样的呢? 作者设计了一个多智能体协作的工作流,从生成市场假设开始,到构建因子代码,最后进行回测评估,每个步骤由专门的智能体负责。 在因子构建环节 论文采用了一个关键设计 中间符号表示 即将因子表达为符号式 再转为代码 这确保了最初的假设 中间的表达式和最终代码三折语意一致 净化机只是框架的核心 主要包括突变和交叉 突变针对轨迹中的失败步骤进行局部修订 交叉则融合不同高奖励轨迹中的成功片段 以此继承已验证的有效模式 实验在护身300数据上进行 按时间划分了训练级和测试级 评估指标主要看信息系数IC 年化收益率ARR和最大回撤MDD 基线包括了传统机器学习 深度学习和之前的LLM智能体 来看实证结果的对比图 这张图直观展示了Quanta Alpha框架 与多个机械模型在关键指标上的性能对比 目文回测显示 Quanta Alpha取得了IC0.0472 年化收益4.68% 最大回撤11.8% 相比AdAgent其IC提升了0.0186 收益提升了1.10个白电型 骁容研究验证了各组件的重要性 其中,移除突变操作导致性能下降最严重,IC降低了0.0079,交叉能带来持续增益,而规划模块对于生成多样化,稳定的假设至关重要。 总结来说,该文将α挖掘建模为一个进化过程,通过轨迹级的操作提升了探索效率和因子质量,大量实验验证了其有效性。 未来作者计划进一步精炼进化机制 并探索更多市场场景</p>
+</blockquote>
+</details></main>
+</body>
+</html>

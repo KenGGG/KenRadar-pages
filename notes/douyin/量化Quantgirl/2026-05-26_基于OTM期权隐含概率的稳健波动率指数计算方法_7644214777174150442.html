@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文分享】基于OTM期权隐含概率的稳健波动率指数计算 基于OTM期权隐含概率的稳健波动率指数计算 
+该文针对传统波动率指数（如VIX）的计算局限性。传统方法基于离散期权合约和买卖价差中点，导致估计偏差并在市场压力期计算失败。作者提出基于虚值（OTM）期权买卖价差的算法，构建严格无套利的连续定价函数以计算波动率积分。 
+#量化研究  #波动率指数  #期权定价  #稳健算法  #风险管理｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-05-26_基于OTM期权隐含概率的稳健波动率指数计算方法_7644214777174150442.md · 发布于 2026-08-05 11:54:21</div><nav class="page-links"><a href="https://www.douyin.com/video/7644214777174150442" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>基于OTM期权隐含概率的稳健波动率指数计算方法</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7644214777174150442">https://www.douyin.com/video/7644214777174150442</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+论文针对传统VIX等波动率指数基于离散期权合约和买卖价差中点导致的估计偏差问题，提出基于虚值期权买卖价差的无套利连续定价函数算法。实证显示在高波动时期预测准确性较VIX提升14%，且在极端市场条件下仍能保持稳定运行。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>研究背景与问题</strong>
+传统波动率指数（如VIX）基于离散期权合约和买卖价差中点计算，导致估计偏差并在市场压力期可能计算失败。期权行权价的离散性造成波动率估计存在缺口，传统模型假设期权连续交易会因实际数据离散而低估风险。</p>
+</li>
+<li>
+<p><strong>方法核心思路</strong>
+作者提出用虚值期权构建连续且无套利的定价函数，参数更少，在流动性不足时更稳健。核心是创建平滑连续函数连接离散期权报价点，基于风险中性定价原理结合零息债券和远期价格，定义满足静态投资组合约束条件的无套利价格模型。</p>
+</li>
+<li>
+<p><strong>定价函数构建</strong>
+采用分段线性函数连接离散行权价，函数需满足凸性连续性并严格尊重每个行权价处的市场买卖价差。该模型无关定价框架通过关键方程确保投资组合初始成本与到期中值之间满足无套利基本假设。</p>
+</li>
+<li>
+<p><strong>实证结果</strong>
+使用标普500期权真实市场数据回测，与CBOE VIX比较。高波动时期预测准确性较VIX提升高达14%，市场冲击期估计更一致，即便数据有限也能有效重建定价曲面。新方法构建的波动率指数曲线更平滑。</p>
+</li>
+<li>
+<p><strong>稳健性与未来方向</strong>
+即使在连续出现零买价导致传统方法失效的极端情况下，基于无套利框架的所提方法仍能保持稳定运行。未来可扩展至其他资产类型，融入机器学习增强函数适应性，并开发过滤异常数据方法以提升稳健性。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 研究背景与核心问题</h3>
+<p>如何从离散期权中精准捕捉市场波动？请看第一页的示意图，它直观展示了论文要解决的核心问题。这篇论文旨在解决一个关键问题：由于期权行权价是离散的，导致波动率估计存在缺口。作者提出用虚值期权构建连续且无套利的定价函数，参数更少，在流动性不足时也更稳健。准确衡量波动风险对金融实践至关重要，但传统模型假设期权连续交易，会因实际数据离散而低估风险。先前的一些差值方法还可能违反套利约束，这正是本研究的出发点。</p>
+<h3>2. 定价函数构建方法</h3>
+<p>那么具体如何构建这个定价函数呢？作者的方法概述如图所示，其核心是创建一个平滑连续的函数来连接市场上离散的期权报价点。在理论层面，作者建立了一个包含买卖价差的无套利价格模型，基于风险中性定价原理，结合零息债券和远期价格，定义了必须满足的静态投资组合约束条件。这个模型无关的定价框架可以用一个关键方程来概括，它确保了投资组合的初始成本与到期中值之间满足无套利的基本假设。具体构建期权定价函数时，作者采用了分段线性函数来连接离散的行权价，这个函数必须满足凸性连续性，并且严格尊重每个行权价处的市场买卖价差。</p>
+<h3>3. 实证结果与对比分析</h3>
+<p>为了验证方法，论文使用标普500期权的真实市场数据进行回测，并与CBOE的VIX等现有基准进行比较，测试特别关注了不同市场状态，尤其是极端条件下的表现。实证结果如何呢？在高波动时期，该方法的预测准确性比VIX提升了高达14%，在市场冲击期，它的估计更一致，即便数据有限，也能有效重建定价曲面。这是所提方法与CBOE VIX的详细对比图，可以直观看到新方法构建的波动率指数曲线更为平滑，且在关键时点的估计存在差异。</p>
+<h3>4. 稳健性分析与未来方向</h3>
+<p>论文还进行了稳健性分析，测试表明即使在连续出现零买价导致传统方法失效的极端情况下，基于无套利框架的所提方法依然能够保持稳定运行。关于未来方向，作者指出可将此框架扩展到其他资产类型，他们还设想融入机器学习来增强函数适应性，并开发过滤异常数据的方法以提升稳健性。总之，这篇论文证明构建可靠的波动率指数需要能处理离散数据的新方法，作者提出的无套利框架提供了更优的估计，为未来开发适应动荡市场的模型奠定了基础。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化研究</span></li>
+<li><span class="wikilink">波动率指数</span></li>
+<li><span class="wikilink">期权定价</span></li>
+<li><span class="wikilink">稳健算法</span></li>
+<li><span class="wikilink">风险管理</span></li>
+<li><span class="wikilink">OTM期权</span></li>
+<li><span class="wikilink">无套利定价</span></li>
+<li><span class="wikilink">VIX</span></li>
+<li><span class="wikilink">离散期权</span></li>
+<li><span class="wikilink">买卖价差</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>如何从离散期权中精准捕捉市场波动?请看第一页的示意图。它直观展示了论文要解决的核心问题。这篇论文旨在解决一个关键问题。由于期权行权价是离散的,导致波动率估计存在缺口。作者提出,用虚值期权构建连续且无套利的定价函数,参数更少,在流动性不足时也更稳健。 准确衡量波动风险对金融实践至关重要 但传统模型假设期权连续交易 会因实际数据离散而低估风险 先前的一些差值方法还可能违反套利约束 这正是本研究的出发点 那么具体如何构建这个定价函数呢 作者的方法概述如图所示 其核心是创建一个平滑连续的函数 来连接市场上离散的期权报价点 在理论层面 作者建立了一个包含买卖价差的无套利价格模型 他们基于风险中性定价原理 结合零息债券和远期价格 定义了必须满足的静态投资组合约束条件 这个模型无关的定价框架 可以用一个关键方程来概括 它确保了投资组合的初始成本与到期中值之间 满足无套利的基本假设 具体构建期权定价函数时 作者采用了分段线性函数来连接离散的行权价 这个函数必须满足突性连续性 并且严格尊重每个行权价处的市场买卖价差 为了应证方法 论文使用标普500期权的真实市场数据进行回测 并与CBO的VIX等现有基准进行比较 测试特别关注了不同市场状态 尤其是极端条件下的表现 执政结果如何呢? 在高波动时期,该方法的预测准确性比VIX提升了高达14% 在市场冲击期,它的估计更一致 即便数据有限,也能有效重建定价曲面 这是所提方法与CBOVIX的详细对比图 可以直观看到新方法构建的波动率指数曲线更为平滑 且在关键时点的估计存在差异 论文还进行了稳健性分析 测试表明 即使在连续出现零买价 导致传统方法失效的极端情况下 基于无套利框架的索提方法 依然能够保持稳定运行 关于未来方向 作者指出可将此框架扩展到其他资产类型 他们还设想融入机器学习 来增强函数适应性 并开发过滤异常数据的方法 以提升稳健性 总之 这篇论文证明 构建可靠的波动率指数需要能处理离散数据的新方法 作者提出的无套利框架提供了更优的估计 为未来开发适应动荡市场的模型奠定了基础</p>
+</blockquote>
+</details></main>
+</body>
+</html>

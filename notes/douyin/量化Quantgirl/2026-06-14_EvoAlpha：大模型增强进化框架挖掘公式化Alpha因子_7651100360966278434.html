@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文分享】大模型挖掘因子 这篇论文《EvoAlpha: An LLM-Enhanced Evolutionary Framework for Formulaic Alpha Mining》解读：作者把大模型放进进化算法，挖掘可解释公式化因子，而不是直接生成交易指令。 
+1 问题：传统公式搜索空间大，常出现语法有效但金融含义弱的表达式。
+2 做法：大模型先分析父代因子，再交叉、变异；代码评估器执行并算IC；mutIC超0.9的新因子会被丢弃，降低冗余。
+3 结论：论文在A股宽基成分股15年日频数据验证。多个20日/30日任务中，该框架IC领先；示例里，沪深三百类样本20日IC为0.0618，30日IC为0.0821。生成500个因子，平均相关性0.1399，低于传统遗传编程的0.5777；回测累计收益至少提升12%。 
+💡启发：大模型适合做语义筛选、结构重组、代码生成和纠错，外层仍需可评估闭环。 
+❗风险提示：论文结果来自历史样本和回测，不代表未来，也不构成投资建议。 
+#量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant #量化策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-06-14_EvoAlpha：大模型增强进化框架挖掘公式化Alpha因子_7651100360966278434.md · 发布于 2026-08-05 11:49:40</div><nav class="page-links"><a href="https://www.douyin.com/video/7651100360966278434" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>EvoAlpha：大模型增强进化框架挖掘公式化Alpha因子</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7651100360966278434">https://www.douyin.com/video/7651100360966278434</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本文解读论文《EvoAlpha: An LLM-Enhanced Evolutionary Framework for Formulaic Alpha Mining》，介绍将大语言模型接入进化搜索框架，用于挖掘可解释的公式化Alpha因子。方法通过LLM理解因子语义、进行交叉变异，结合代码评估器和多样性检查器，在A股CSI300和CSI500数据上验证，取得。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>问题背景</strong>
+传统公式化Alpha挖掘多采用遗传编程或强化学习，在算子和操作数之间搜索表达式。问题在于搜索空间过大、效率低，且生成的公式常缺少金融语义，还需依赖外部解析器才能执行。</p>
+</li>
+<li>
+<p><strong>方法设计</strong>
+EvoAlpha将大语言模型接入进化搜索。流程包括：从已有种群中选择父代，由LLM分析父代因子的结构和金融含义后进行交叉和变异，代码评估器将生成结果转为可执行代码并计算IC，多样性检查器过滤冗余（mutIC超0.9的新因子被丢弃），最后更新种群。</p>
+</li>
+<li>
+<p><strong>实验验证</strong>
+论文使用中国A股市场数据，覆盖CSI300和CSI500，采用2015年日频数据。特征包括开高低收、成交量和VWAP，预测目标为20日和30日收益。结果显示EvoAlpha在所有指数和持有期组合上取得最高IC和ICIR。生成500个因子平均相关性0.1399，低于传统遗传编程的0.5777。回测累计收益至少提升12%。</p>
+</li>
+<li>
+<p><strong>结论与启发</strong>
+EvoAlpha的价值在于LLM的语义理解与进化搜索相结合，LLM减少无意义搜索，净化过程持续改进种群，代码生成让Alpha更易执行评估和扩展。LLM适合做语义筛选、结构重组、代码生成和纠错，但外层仍需可评估闭环。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 问题背景与方法概述</h3>
+<p>阿尔法到底怎么挖？这篇论文先从公式化阿尔法说起。他把开高低收等行情数据变成股票得分，分数越高通常代表预期收益越高，优势是可解释，但人工设计很依赖金融经验。作者指出，传统方法多用遗传编程或强化学习，在算子和操作数之间搜索表达式，问题是空间太大、效率低，而且公式常缺少金融语义，还要依赖外部解析器才能执行。这篇论文提出EvoAlpha，把大语言模型接入进化搜索。作者让LLM先理解附带阿尔法，在做有金融意义的交叉和变异操作时，把生成结果转成可执行代码，减少无效探索。EvoAlpha的整体流程：从已有种群中选择父代，作者用evolutionary court生成新阿尔法，再由代码评估器计算效果，并用多样性检查器过滤冗余，最后更新种群。</p>
+<h3>2. 公式化阿尔法定义与评估指标</h3>
+<p>论文把公式化阿尔法定义为一个函数，输入某天某只股票的市场特征，输出一个实数得分。对同一天所有股票，这些得分组成一个向量，用来和未来收益做相关性评估。作者用IC衡量阿尔法与未来收益的相关性，并把它作为净化适应度。另一个指标mutIC用来衡量阿尔法之间的相似度，如果新阿尔法与已有结果相似度超过0.9，就会被丢弃。</p>
+<h3>3. 进化流程与代码评估器</h3>
+<p>变化过程从初始种群开始，论文中主要用Alpha101初始化，并按IC选出前n个alpha。随后作者采用轮盘赌选择，适应度越高的阿尔法被选为父代的概率越大。EvoAlpha的关键设计是作者让LLM先解释两个父代的结构和金融含义，再重组有价值的部分，最后通过变异引入新变化，使后代更可能继承有效信号。代码评估器负责把自然语言或公式形式的阿尔法变成可执行代码。作者用训练样本和任务说明提示LLM生成代码，再在国票数据上运行。若报错，就把错误反馈给LLM修复。</p>
+<h3>4. 实验设置与主要结果</h3>
+<p>实验部分使用中国A股市场数据，覆盖CSI300和CSI500。论文采用2015年日频数据，特征包括开盘价、最高价、最低价、收盘价、成交量和VWAP。预测目标是20日与30日收益。主要结果显示，EvoAlpha在所有指数和持有期组合上都取得最高IC，ICIR结果也说明这些alpha不只是相关性更高，预测稳定性同样较强。作者进一步比较了生成alpha的质量和多样性。论文强调，EvoAlpha生成数量远少于GP，但IC更高。这说明LLM引导和多样性过滤让搜索更偏向高质量候选。</p>
+<h3>5. 模型替换与回测协议</h3>
+<p>这一页关注不同大语言模型的替换效果。论文表明，GPT-4o-mini和DeepSeek-V2.5都是有竞争力的低成本选择，也说明EvoAlpha流水线并不绑定单一LLM。回测协议中，作者对多阿尔法方法先训练回归模型组合，按IC排名前十的阿尔法，之后按预测得分排序，股票选前K等于5只，并用N等于5限制每日买入和卖出数量。</p>
+<h3>6. 消融实验与冷启动实验</h3>
+<p>消融研究说明，EvoAlpha的各组件都有贡献。论文显示，去掉分析、交叉或变异都会削弱表现，其中交叉对组合父代有效结构尤其关键，分析和变异则帮助理解与探索。冷启动实验回答一个实际问题：EvoAlpha是否必须依赖高质量人工种子？作者让LLM直接生成十个初始alpha，再运行同样进化流程，并跟踪各代平均IC的变化。</p>
+<h3>7. 结论与启发</h3>
+<p>总结贡献时，这篇论文提出了LLM增强的公式化阿尔法挖掘框架EvoAlpha。作者设计evolutionary court、代码评估器和多样性检查器，并在CSI300和CSI500上取得最先进的IC和ICIR。整体来看，EvoAlpha的价值在于LLM的语义理解和进化搜索结合起来。LLM减少无意义搜索，净化过程持续改进种群，代码生成则让Alpha更容易执行评估和扩展。大模型适合做语义筛选、结构重组、代码生成和纠错，外层仍需可评估闭环。论文结果来自历史样本和回测，不代表未来，也不构成投资建议。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">因子挖掘</span></li>
+<li><span class="wikilink">大模型</span></li>
+<li><span class="wikilink">进化计算</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">Quant</span></li>
+<li><span class="wikilink">EvoAlpha</span></li>
+<li><span class="wikilink">大语言模型</span></li>
+<li><span class="wikilink">进化算法</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>阿尔法到底怎么挖？这篇论文先从公式化阿尔法说起，他把开高低收等行情数据变成股票得分，分数越高，通常代表预期收益越高，优势是可解释，但人工设计很依赖金融经验。作者指出，传统方法多用遗传编程或强化学习，在算子和操作数之间搜索表达式问题是空间太大，效率低，而且公式常缺少金融语义，还要依赖外部解析器才能执行这篇论文提出evil alpha,把大语言模型接入进化搜索。作者让LLM先理解附带阿尔法在做有金融意义的交叉和达译作时，把生成结果转成可执行代码，减少无效探索。这也使evil阿尔法的整体流程，作者从已有种群中选择附代作者evolutionary court生成新阿尔法，再由代码评估器计算效果，并用多样性检查器过滤冗余，最后更新种群论文，把公式化阿尔法定义为一个函数，输入某天某只股票的市场特征输出一个实数得分。对同一天所有股票这些得分组成一个向量，用来和未来收益做相关性评估。作者用IC衡量阿尔法与未来收益的相关性，并把它作为净化适应度。另一个指标，music用来衡量阿尔法之间的相似度。如果新阿尔法与已有结果相似度超过零点九，就会被丢弃。变化过程。从初始种群开始，论文中主要用阿尔尔一百零一初始化，并按IC选出前n个offer.随后，作者采用轮盘读，选择适应度越高的阿法尔，被选为附带的概率越大。 Evoillution records是这篇论文的关键设计。作者让LLM先解释两个附带的结构和金融含义，在重组有价值的部分，最后通过变异引入新变化，使后代更可能继承有效信号代码。评估器负责把自然语言或公式形式的阿尔法变成可执行代码。作者用训练样本和任务说明提示LLM生成代码，再在国票数据上运行。若报错，就把错误反馈给LLM修复实验部分使用。中国a股市场数据覆盖csi三百和csi五百论文采用一五年日评数据特征包括开盘价、最高价、最低价、收盘价、成交量和VWAP.预测目标是二十日与三十日收益，主要结果显示，evo alpha在所有指数和持有期组合上都取得最高IC ICIR结果也说明这些alpha不只是相关性更高，预测稳定性同样较强。作者进一步比较了生成offer的质量和多样性。论文强调，evl offer生成数量远少于barn,但IC更高。这说明，LLM引导和多样性过滤，让搜索更偏向高质量候选这一页，关注不同大语言模型的替换效果。论文表明，GPT杠四o杠mini和deep seek杠v二点五都是有竞争力的低成本选择，也说明evo alpha流水线并不绑定单一LLM回撤。协议中，作者对多阿尔法方法先训练，回归模型组合，按ic排名前十的阿尔法之后按预测得分排序，股票选前k等于五只，并用n等于五限制，每日买入和卖出数量。小荣研究说明，evolutionary cut的各组件都有贡献，论文显示，去掉分析，交叉或变异都会削弱表现。其中交叉对组合附带有效结构尤其关键。分析和变异则帮助理解与探索。冷启动实验回答一个实际问题，evo alpha是否必须依赖高质量人工种子？作者让LLM直接生成十个初始offer,再运行同样进化流程，并跟踪各代平均ic的变化。总结贡献时，这篇论文提出了LLM增强的公式化。阿尔法挖掘框架evil,阿尔法作者设计evolutionary court代码评估器和多样性检查器，并在CS i三百CSI五百上取得最先进的IC和ICIR.整体来看，evo alpha的价值在于八八网m的语义理解和进化搜索结合起来。八m减少无意义，攻势净化过程持续改进，种群代码生成则让阿va更容易执行评估和扩展。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

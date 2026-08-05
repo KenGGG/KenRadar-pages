@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文分享】智能预测再优化投资组合 这篇论文提出智能预测-再优化框架，用于投资组合优化。💡
+Smart Predict--then--Optimize Paradigm for Portfolio Optimization in Real Markets（2026）
+传统方法先预测收益再优化，但预测误差可能损害决策。作者使用SPO+损失函数，直接根据投资表现训练模型。📌
+回测使用美国ETF数据（2016-2024），每月调仓，交易成本0.5%。结果：
+✅ SPO+年化收益14.05%，夏普比率0.785，优于传统基准。
+✅ 市场动荡期（如2020年），鲁棒SPO最大回撤仅-9.58%，展现强稳健性。
+✅ 结论：决策导向学习能提升风险调整后收益，尤其控制下行风险。#量化学习 #配对交易  #统计套利  #量化  #量化交易 
+注：基于历史回测，不保证未来表现，不构成投资建议。｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-05-23_智能预测-再优化（SPO）框架用于投资组合优化_7643086294603664691.md · 发布于 2026-08-05 11:57:09</div><nav class="page-links"><a href="https://www.douyin.com/video/7643086294603664691" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>智能预测-再优化（SPO）框架用于投资组合优化</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7643086294603664691">https://www.douyin.com/video/7643086294603664691</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本文介绍SPO（Smart Predict-then-Optimize）框架，通过将优化直接集成到模型训练中，使学习目标与投资决策质量对齐而非仅追求预测准确性。在美国ETF数据（2015-2025）回测中，SPO+方法实现年化收益14.05%、夏普比率0.785，在市场动荡期（如COVID-19危机）最大回撤低于10%，显著优于传统方法。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>传统方法与SPO框架对比</strong>
+传统投资组合优化方法先预测收益再优化，但预测误差可能损害决策质量，存在目标不匹配问题。SPO范式将优化直接集成到模型训练中，强调学习目标应与最终投资决策质量对齐，而非仅追求预测准确。</p>
+</li>
+<li>
+<p><strong>SPO方法原理与实现</strong>
+SPO方法根据特征预测资产收益，计算能最大化预测收益的投资组合权重，整个学习过程最小化由真实收益导出的决策遗憾损失函数。为增强鲁棒性，对预测收益施加扰动并定义不确定集限制扰动范围，在最坏扰动情景下最小化潜在投资损失，同时纳入交易费用等现实约束。</p>
+</li>
+<li>
+<p><strong>实验设计与回测结果</strong>
+实验使用2015-2025年美国ETF每日数据，特征包括收益率、移动平均线、RSI等技术指标。采用滚动窗口法，每月调整组合，用过去12个月数据训练模型并通过时间序列验证选择超参数。SPO+方法实现年化收益14.05%、夏普比率0.785，风险调整后收益持续优于传统基线。</p>
+</li>
+<li>
+<p><strong>市场表现与结论展望</strong>
+在COVID-19危机期间，SPO+方法回撤低于10%，远优于传统方法超过30%的回撤。2024年牛市中因内置保守约束，收益略低于传统方法，凸显风险与收益权衡。未来可集成分布鲁棒优化等下行风险管理技术，探索树模型等预测器。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 引言与传统方法问题</h3>
+<p>投资组合优化，如何让AI协同决策？今天介绍智能预测-再优化框架，它让模型学习直接为更好的投资结果服务。本文核心是SPO框架，它强调学习目标应与最终的投资决策质量对齐，而不仅仅是追求预测准确。投资组合优化要在收益和风险间取得平衡，但市场复杂多变。传统先预测后优化的方法存在目标不匹配问题。</p>
+<h3>2. SPO方法原理</h3>
+<p>SPO范式将优化直接集成到模型训练中。两种学习方法对比鲜明：传统方法先估计收益再优化，可能得到次优决策；而SPO方法只直接优化投资组合表现，根据决策结果的好坏来训练模型。我们的方法采用先行预测，将优化方程嵌入学习循环，并纳入交易费用等现实约束，从而综合优化多个金融目标。模型根据特征预测资产收益，并计算能最大化该预测收益的投资组合权重。整个学习过程只在最小化一个由真实收益导出的衡量决策遗憾的损失函数。</p>
+<h3>3. 鲁棒性增强设计</h3>
+<p>为了更鲁棒，我们对预测收益施加扰动，并定义一个不确定集来限制扰动范围。训练目标是在最坏的扰动情景下最小化潜在的投资损失。</p>
+<h3>4. 实验设置</h3>
+<p>实验使用2015年至2025年美国ETF的每日数据，特征包括收益率、移动平均线、RSI等技术指标，直接将预测与投资决策挂钩。回测采用滚动窗口法，每月调整一次组合，每次都用过去十二个月的数据训练模型，并通过时间序列验证来选择超参数，严格遵循时间顺序。</p>
+<h3>5. 回测结果</h3>
+<p>结果显示，SPO+方法实现了最高的年化收益，达百分之十四点零五，夏普比率为零点七八五。这种面向决策的学习，在风险调整后收益上持续优于传统基线方法。在市场动荡的COVID-19危机期间，面向决策的模型展现出韧性，SPO+等方法的回撤低于百分之十，远优于传统方法超过百分之三十的回撤。</p>
+<h3>6. 牛市表现与权衡</h3>
+<p>在2024年的牛市里，由于内置了保守约束，面向决策的模型收益略低于传统方法，这凸显了风险与收益间的权衡。传统方法在牛市中更占优。</p>
+<h3>7. 未来展望与结论</h3>
+<p>未来工作可集成更先进的下行风险管理技术，例如分布鲁棒优化，也可探索使用树模型等预测器，并深入研究风险分散与收益最大化的平衡。总之，SPO范式提升了真实环境中的投资决策质量，凸显了激进与稳健间的权衡，尤其在市场动荡时价值显著，为投资实践提供了更稳健的新思路。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">统计套利</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">机器学习</span></li>
+<li><span class="wikilink">投资组合管理</span></li>
+<li><span class="wikilink">SPO</span></li>
+<li><span class="wikilink">智能预测-再优化</span></li>
+<li><span class="wikilink">投资组合优化</span></li>
+<li><span class="wikilink">决策导向学习</span></li>
+<li><span class="wikilink">鲁棒优化</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>投资组合优化，如何让AI各同决策？今天介绍智能预测再优化框架，它让模型学习直接为更好的投资结果服务。本文核心是SPO框架，它强调学习目标应与最终的投资决策质量对齐，而不仅仅是追求预测准确。在美国ETF数据上，它展现出卓越表现，投资组合优化，要在收益和风险间取得平衡，但市场复杂多变。传统先预测后优化的方法存在目标不匹配问题，SPO范式则将优化直接集成到模型训练中。两种学习方法对比鲜明，传统方法先估计收益再优化，可能得到次优决策。而SPO方法只在直接优化投资组合表现，根据决策结果的好坏来训练模型。我们的方法采用先行预测中根据目标与匹准确优化方程被嵌入学学习循环，并纳入了交易费用等现实约束，从而综合优化多个金融目标模型，根据特征预测资产收益，并计算能最大化该预测收益的投资组合权重。整个学习过程只在最小化一个由真实收益导出的衡量决策遗憾的损失函数。为了更垄棒，我们对预测收益施加扰动，并定义一个不确定级来限制扰动范围。训练目标是在最坏的扰动情景下最小化潜在的投资损失实验使用。二零一五年至二零二五年，美国ETF的每日数据特征包括收益率、移动平均线、RSI等技术指标，直接将预测与投资决策挂钩。回测采用滚动窗口法，每月调整一次组合，每次都用过去十二个月的数据训练模型，并通过时间序列验证来选择超参数。严格遵循时间顺序。结果显示，SPU加方法实现了最高的年化，收益达百分之十四点零五，夏普比率为零点七八五。这种面向决策的学习，在风险调整后收益上持续优于传统基线方法。在市场动荡的COVID杠一九危机期间，面向决策的模型展现出韧性、SPO加等方法的回撤低于百分之十，远优于传统方法超过百分之三十的回撤。在二零二四年的牛市里，由于内置了保守约束面向决策的模型收益略低于传统方法，这凸显了风险与收益间的权衡。传统方法在牛市中更占优，未来工作可集成更先进的下行风险管理技术，例如分布鲁棒优化，也可探索使用树模型等预测器，并深入研究风险分散与收益最大化的平衡。总之，SPO范式提升了真实环境中的投资决策质量，他凸显了激进与稳健间的权衡，尤其在市场动荡时价值显著，为投资实践提供了更稳健的新思路。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文分享】两阶段学习实现自适应投资组合 这篇论文《AlphaGAT: A Two-Stage Learning Approach for Adaptive Portfolio Selection》出自IJCAI 2025，将投资组合选择分解为两步：先用有监督的CATimeMixer从行情中提炼出高质量Alpha因子，再基于强化学习与图注意力网络自适应分配因子权重，生成交易信号。
+CATimeMixer采用多尺度时序提取和跨资产注意力，损失函数同时优化预测能力与因子多样性。第二阶段智能体在因子空间用PPO训练，GAT策略网络动态学习因子间关系。
+四个真实市场（美股、港股、A股、加密货币）回测显示，AlphaGAT的累计财富、年化收益和夏普比率均大幅领先传统组合算法和主流RL方法。消融实验表明各模块均有正向贡献。
+⚠️以上为历史回测结果，不构成投资建议，市场有风险，策略需谨慎。 
+#量化学习  #配对交易 #统计套利   #量化  #量化交易  #量化分析  #Quant #量化策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-06-23_论文解读：AlphaGAT两阶段自适应投资组合选择_7654596639369334031.md · 发布于 2026-08-05 11:45:19</div><nav class="page-links"><a href="https://www.douyin.com/video/7654596639369334031" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>论文解读：AlphaGAT两阶段自适应投资组合选择</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7654596639369334031">https://www.douyin.com/video/7654596639369334031</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+解读IJCAI 2025论文AlphaGAT，提出两阶段框架：第一阶段用CATimeMixer从行情数据提炼高质量Alpha因子，第二阶段用强化学习(PPO)结合图注意力网络(GAT)动态分配因子权重，在美股、港股、A股、加密货币市场回测中表现优异。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>论文核心思路</strong>
+AlphaGAT将投资组合选择分解为两步：先用有监督的CATimeMixer从行情中提炼高质量Alpha因子，再基于强化学习与图注意力网络自适应分配因子权重，生成交易信号。</p>
+</li>
+<li>
+<p><strong>第一阶段：CATimeMixer因子提炼</strong>
+CATimeMixer采用多尺度时序提取和跨资产注意力，损失函数同时优化预测能力与因子多样性，将原始行情数据转化为纯净的Alpha因子集。</p>
+</li>
+<li>
+<p><strong>第二阶段：GAT+PPO动态权重分配</strong>
+智能体在因子空间用PPO训练，GAT策略网络动态学习因子间关系，根据市场环境自适应调整各因子权重。</p>
+</li>
+<li>
+<p><strong>回测结果与消融实验</strong>
+四个真实市场（美股、港股、A股、加密货币）回测显示，AlphaGAT的累计财富、年化收益和夏普比率均大幅领先传统组合算法和主流RL方法。消融实验表明各模块均有正向贡献。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 论文介绍与核心思路</h3>
+<p>今天我们来解读这篇论文：《AlphaGAT：A Two-Stage Learning Approach for Adaptive Portfolio Selection》，出自IJCAI 2025。金融原始数据就像一台满是噪音的收音机，很难听清真实信号。这篇论文的核心思路不是和噪声死磕，而是先把信号分离出来。论文提出一个两阶段框架：阶段一负责把行情变成更纯净的Alpha因子；阶段二再用图注意力网络动态分配不同因子的权重，让组合在市场变化中更适应。作者这样定义Alpha因子：它是一个函数，输入是过去一段时间的量价等原始特征，输出是一个能衡量资产潜在收益的信号值。一组多样化的因子共同构成投资组合的观察基础。传统强化学习直接把嘈杂的价格当成状态来学，风险很高。这篇论文的做法不同，而是先把原始特征提炼成Alpha因子集，再让智能体去决定在不同时刻该更听哪类因子的话。</p>
+<h3>2. 第一阶段：CATimeMixer详解</h3>
+<p>这张图展示了AlphaGAT的全貌。左边阶段一，用CATimeMixer从多尺度和跨资产两个维度提炼因子。右边阶段二把因子抽象成图，通过GAT网络输出动态的投资决策。阶段一的CATimeMixer输入是回看窗口内的行情数据，输出是多个Alpha因子。它既要处理单个资产自身的时序规律，又要捕捉资产之间的联动关系。最后还希望学出来的因子彼此不太一样，避免一堆长相雷同的因子白费算力。它将时序特征拆成季节性和趋势两部分，自下而上的方式让底层的细节信息一层层补充上去，自上而下的方式把宏观趋势从高尺度注入到低尺度，融合得很巧妙。在每个尺度上，系统先把各资产特征嵌入，然后用多头注意力去抓资产间的横截面依赖。CATimeMixer不是单一的时序模型，它让时序学习和关系学习交替进行，一层接一层深化理解。为了让因子质量更高，作者设计的损失函数包含两部分：鼓励预测能力要强，同时又要把不同因子间的协方差降下来，避免一堆长相雷同的因子白费算力。</p>
+<h3>3. 第二阶段与训练流程</h3>
+<p>获得Alpha因子后，阶段二不再看原始噪音。智能体观测到的状态是这套提炼过的信号集，它的动作是给每个因子一个信任票，然后基于打分排序选出股票，构建组合。这篇论文把不同Alpha因子看作图的节点，用一种图注意力机制来判断谁在当前更重要。多头注意力让模型同时考虑多种依赖关系，这样面对不同的市场环境策略能更稳健。训练分两步走：先拿历史行情预训练，CATimeMixer固定住生成因子的能力，然后再用PPO算法反复试错，在真实回报的反馈里打磨出能自适应调整权重的决策策略。</p>
+<h3>4. 实验设置与回测结果</h3>
+<p>实验覆盖A股和加密货币等市场，原始特征用到了开盘价、成交量、换手率等八个维度，回看窗口设为30天，交易成本按千分之2.5算，总共生成了64个Alpha因子。对比对象很全面，既有Oman这类传统方法，也有AOSTM等监督学习模型，还包括AAT等强化学习方法。评判指标侧重长期财富积累和年化收益，看谁把资金滚得更高。论文回测显示，AlphaGAT在DJIA和CSI等几个知名指数上，累计财富和年化收益都跑到前列，风险调整表现也明显压过了之前的最优方法。</p>
+<h3>5. 消融实验与总结</h3>
+<p>对阶段一因子质量的消融实验表明，CATimeMixer的Conv1D部分确实把多尺度特征提取得更到位，加上跨资产注意力后，在因子预测排名能力上得到系统提升，整体指标最强。消融实验很说明问题：把强化学习因子加权换成静态组合，收益马上掉一块；把GAT换成普通MLP也有差距。完整模型最终赢在预测准、因子多样，且权重的自适应平衡做得好。这张热力图直观展示了GAT的注意力分配。作者发现，强化学习智能体确实倾向于把高权重交给那些IC更强的因子，而且这种侧重会随市场环境变化而动态调整，不是呆板的固定选择。总结这个框架：阶段一用CATimeMixer把噪音压下去，提炼信息丰富的因子；阶段二通过图注意力动态驱动投资决策。论文在多个真实市场验证了盈利与稳健性，未来方向打算把新闻等另类数据也纳入体系。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">Quant</span></li>
+<li><span class="wikilink">论文解读</span></li>
+<li><span class="wikilink">IJCAI</span></li>
+<li><span class="wikilink">AlphaGAT</span></li>
+<li><span class="wikilink">投资组合选择</span></li>
+<li><span class="wikilink">强化学习</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">IJCAI</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>今天我们来解读这篇论文。两阶段，阿尔法加该替组合选择阿尔法改替金融原始数据，就像一台满是噪音的收音机，很难听清真实信号。这篇论文的核心思路不适合噪声死磕，而是先把信号分离出来。论文提出一个两阶段框架。阿尔a gate阶段，一、负责把行情变成更纯净的阿尔法因子阶段。二、再用图注意力网络动态分配不同因子的权重，让组合在市场变化中更适应。作者这样定义阿尔法因子，它是一个函数输入，是过去一段时间的量价等原始特征输出，是一个能衡量资产潜在收益的信号值，一组多样化的因子，共同构成投资组合的观察基础。传统强化学习，直接把嘈杂的价格当成状态来学，风险很高。这篇论文的做法不同，而是先把原始是特征提炼成阿尔法因子集，再让智能体去决定。在不同时刻该更听奶类因子的话，这个图展示了阿尔法gate的全貌。左边阶段，一，用c他mixer从多尺度和跨资产两个维度提炼因子。右边阶段二把因子抽象成图，通过get网络输出动态的投资决策。阶段一的CAT type mixer输入是回看窗口内的行情，数据，输出是多个阿尔法因子。他既要处理单个资产自己的持续规律，又要捕捉资产之间的联动关系。最后还希望学出来的因子彼此不太一样，都为把时序特征拆成季节性和趋势两部分，自下而上的方式，让底层的细节信息一层层补充上去。自上而下的方式，把宏观趋势从高尺度注入到低尺度，融合的很巧妙。在每个尺度上，系统先把各资产特征嵌入，然后用多头注意力去抓资产间的横截面依赖。 Ct time mixer不是单一的时序模型，他让持续学习和关系学习交替进行一层接一层深化理解。为了让银子质量更高，作者设计的损失函数包含两部分，鼓励预测能力要强。同时又要把不同银子间的斜方差降下来，避免一堆长相雷同的银子白费。算力获得阿尔法因子后阶段二不再看原始噪音。智能体观测到的状态是这套提炼过的信号集，他的动作是给每个因子一个信任票，然后基于打分排序，选出股票，构建组合这篇论文，把不同阿弗玛因子看作图的节点，用一种图注意力机制来判断谁在当前更重要。多头注意力，让模型同时考虑多种依赖关系。这样，面对不同的市场环境策略，能更稳健训练分两步走，先拿历史行情预训练，CG time mixed固定住生成因子的能力，然后再用PPO算法反复试错，在真实回报的反馈里，打磨出能自适应调整权重的决策策略。职业覆盖a股和加密货币等市场原始特征，用到了开盘价、成交量、换手率等八个维度。回看窗口设为三十天，交易成本按千分之二点五算，总共生成了六十四个。阿尔法因子对比对象很全面，既有欧曼这类传统方法，也有AOSTM等监督学习模型，还包括AAT等，强化学习。对手拼载指标侧重长期财富积累和年化收益，看谁把资金去线滚得更高。这张表给出了直观结果。论文回测显示，alphagate在DJIA和CSI等几个知名指数上，累计财富和年化收益都跑到前列，风险调整表现也明显压过了之前的最优方法。决前因子质量的九十九分析表明，CE猜mixer的convel一d部分，确实把多尺度特征提取的更到位，加上跨资产注意力后，在因此预测排名能力得到系统提升，整体指标最强。胶州实验很说明问题，把强化学习因子加权换成静态组合，收益马上掉一块，把GAT换成普通MLP也有差距完整模型营就赢在预测准因子多样且权重的自适应平衡做得好。这张热力图直观展示了JT的注意力。分配。作者发现，强化学习智能体确实倾向于把高权重交给那些九十九更强的因子。而且这种侧重会随市场环境变化，而动态调整不是呆板的固定选择。总结这个框架阶段，一、用c ta mixer把噪音压下去，提炼信息丰富的因子阶段。二、通过图注意力动态驱动投资决策，论文在多个真实市场验证了盈利与稳健性未来方向，打算把新闻等另类数据也纳入体系。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

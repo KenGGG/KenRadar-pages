@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【开源解读】4天自进化WQ因子 这个开源仓库是 QuantML-Research/wq-alpha-research，一套能自我进化的 WorldQuant BRAIN Alpha 研究技能包。它把字段查找、因子模板、IS 诊断、自相关检查、经验写回整合成闭环，专治 BRAIN 挖掘中的反复踩坑。 
+核心亮点：
+✅ 本地字段快照：内置 USA TOP3000 delay=1 的 4,367 个 BRAIN 数据字段，无需联网关键词检索。
+✅ 结构化剧本 SKILL.md：记录黄金模板（如 group_rank+ts_rank）、失败诊断、自相关管理规则。
+✅ 自进化引擎 evolve_skill.py：自动分析活跃 Alpha 日收益相关性，提炼经验并可写回 SKILL.md。
+✅ 轻量依赖：只需 requests 和 numpy。 
+上手流程：看 SKILL.md 选字段写表达式，在 BRAIN 模拟，拉取活跃 Alpha 检查自相关，运行 evolve_skill.py 积累改进。 
+⚠️ 注意：项目完全依赖有效 BRAIN 账号；字段快照需手动更新；不承诺固定 Sharpe 或通过率；仅供学习交流，不构成参赛或投资建议。许可 CC BY-NC 4.0，商用需授权。 
+#量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant #量化策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-07-02_开源WorldQuant_BRAIN_Alpha自我进化研究技能包_7657939246027640116.md · 发布于 2026-08-05 11:36:45</div><nav class="page-links"><a href="https://www.douyin.com/video/7657939246027640116" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>开源WorldQuant BRAIN Alpha自我进化研究技能包</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7657939246027640116">https://www.douyin.com/video/7657939246027640116</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+介绍QuantML-Research/wq-alpha-research开源项目，一套能自我进化的WorldQuant BRAIN Alpha研究技能包，整合字段查找、因子模板、IS诊断、自相关检查与经验写回功能，支持离线字段检索，仅需requests和numpy依赖。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>项目概述</strong>
+QuantML-Research/wq-alpha-research是一套能自我进化的WorldQuant BRAIN Alpha研究技能包，将挖掘流程封装为agent可读的playbook，围绕字段速查、黄金模板、IS诊断、自相关核对与经验回写构建流水线。</p>
+</li>
+<li>
+<p><strong>核心功能</strong>
+内置4367个USA TOP3000 delay=1字段快照，支持离线关键词检索；SKILL.md记录黄金模板（如group_rank+ts_rank）、失败诊断与自相关管理规则；evolve_skill.py自动分析活跃Alpha日收益相关性，提炼经验并写回SKILL.md。</p>
+</li>
+<li>
+<p><strong>上手流程</strong>
+阅读SKILL.md掌握字段选择与IS失败诊断，本地字段搜索无需联网；配置凭据后执行自进化脚本，仅需requests和numpy两个库即可提炼经验并自更新技能。</p>
+</li>
+<li>
+<p><strong>注意事项</strong>
+项目完全依赖有效BRAIN账号；字段快照为静态，需手动重新拉取更新；不承诺固定Sharpe或通过率；仅供学习交流，不构成参赛或投资建议；采用CC BY-NC 4.0非商业许可，商用需授权。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 项目介绍</h3>
+<p>Alpha挖掘能自我进化，这个开源仓库真是自我进化的WorldQuant Alpha研究技能包。它把挖掘流程封装成一套agent可读的playbook。看项目，围绕字段速查、黄金模板、IS诊断、自相关核对与经验回写，构建流水线。它内置四千三百六十七个USA TOP3000字段快照，支持离线搜索。看项目说明，开头就点名目标：把零散的Alpha操作转化为可进化的agent技能。这个开源项目只公开通用规则，绝不携带凭据或私有记录。它让每一轮研究都能沉淀为可复用的经验，快速上手。</p>
+<h3>2. 使用流程</h3>
+<p>从阅读技能说明开始，掌握字段选择与IS失败诊断。本地字段搜索无需联网，运行一段Python代码即可。关键词检索配置凭据后，执行自进化脚本，仅需requests和numpy两个库，就能提炼经验并自更新技能。结构一目了然：核心是SKILL.md剧本，脚本目录与数据目录，自净化脚本负责拉取账户Alpha并生成经验摘要。数据目录已则存放完善的字段元数据，可供参赛者或需要本地字段检索的研究者使用。</p>
+<h3>3. 限制说明</h3>
+<p>但必须持有有效凭据，且字段快照为静态，需要时需手动重新拉取。技能框架只提供高效的Alpha挖掘循环，不承诺固定Sharpe。采用非商业许可。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">Quant</span></li>
+<li><span class="wikilink">因子研究</span></li>
+<li><span class="wikilink">开源工具</span></li>
+<li><span class="wikilink">WorldQuant</span></li>
+<li><span class="wikilink">BRAIN</span></li>
+<li><span class="wikilink">Alpha挖掘</span></li>
+<li><span class="wikilink">量化研究</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">WorldQuant BRAI</span></li>
+<li><span class="wikilink">BRAI</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>阿尔法挖掘能自我进化，这个开源仓库真是自我进化的world count. Alpha研究技能包，它把挖掘流程封装成一套agent可读的playbook.看项目，围绕字段速查、黄金模板、IS诊断、自相关核对与经验回写，构建流水线，它置四千三百六十七个USA top三千字段快照，支持离线搜索。看项目说明开头就点名目标，把零散的alpha操作转化为可进化的agent技能。这个开源项目只公开通用规则，绝不携带凭据或私有记录。它让每一轮研究都能沉淀为可复用的经验，快速上手。从阅读技能说明开始，掌握字段选择与IS失败诊断本地字段搜索无需联网运行一段python代码即可。关键词检索配置凭据后，执行自金化脚本，仅需request和none pay两个库，就能能提炼经验，并自更新技能，不结构一目了然。核心是既能说明剧本脚本目录与数据目录自净化脚本，负责拉取账户尔法并生成经验。摘要，数据目录已则存放完善的字段元数据可bring参赛者或需要本地字段检索的研究者，但必须持有有效凭据。且字段快照为静态，需要时，需手动重新拉取技能框架，只提供高效的阿尔法挖掘循环，不承诺固定事儿，采用非商业许可。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

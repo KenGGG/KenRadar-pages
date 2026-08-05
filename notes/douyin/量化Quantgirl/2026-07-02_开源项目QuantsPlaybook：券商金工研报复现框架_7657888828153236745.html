@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【开源解读】券商金工复现框架 hugo2046/QuantsPlaybook 是一个专注复现券商金工研报的开源仓库，已获5400+ star。它把光大、华泰、招商、国信等机构的研报思路转化为可直接运行的 Jupyter Notebook，累计提供 100+ 策略，覆盖择时、因子构建、量化基本面与组合优化四大方向。
+⚠️ 注意：回测依赖第三方数据源，各策略回测框架未统一，跨策略对比需自行整合；README 未给出未来收益保证，历史表现不代表实盘结果，请独立验证后再做决策。 
+#量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant #量化策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-07-02_开源项目QuantsPlaybook：券商金工研报复现框架_7657888828153236745.md · 发布于 2026-08-05 11:38:55</div><nav class="page-links"><a href="https://www.douyin.com/video/7657888828153236745" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>开源项目QuantsPlaybook：券商金工研报复现框架</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7657888828153236745">https://www.douyin.com/video/7657888828153236745</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+开源项目QuantsPlaybook由作者hugo2046发布在GitHub，已获5400+ star，复现了光大、华泰、招商、国信等顶级券商金工研报，累计提供100+策略，覆盖择时、因子构建、量化基本面与组合优化四大方向。技术栈基于Python 3.8+，依赖pandas、numpy、akshare、ta-lib和backtrader，数据源可选聚宽JQD。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>项目概述与影响力</strong>
+开源项目QuantsPlaybook由作者hugo2046发布在GitHub，目前已获5400+ star。项目复现了光大、华泰、招商、国信等顶级券商的金工研报，累计提供100+策略。</p>
+</li>
+<li>
+<p><strong>策略分类与技术栈</strong>
+作者将策略分为择时、因子构建、量化基本面和组合优化四大板块。技术栈涵盖Python 3.8+，核心依赖包括pandas、numpy、akshare、ta-lib和backtrader。</p>
+</li>
+<li>
+<p><strong>上手运行与数据源</strong>
+项目首页README给出清晰的上手入口，包含项目特色、策略数量、统计及核心依赖说明。运行方式为先git clone拉取仓库，安装核心依赖。数据源可选聚宽JQData或Tushare Pro。</p>
+</li>
+<li>
+<p><strong>项目结构与核心价值</strong>
+仓库文件按策略类别组织，分为择时、因子、价值和组合等文件夹。每个策略目录包含复现代码及对应原始研报PDF供对照学习。项目最大价值在于验证研报思路和量化入门，附带的Notebook和可视化可帮助快速理解回测逻辑，因子模块可直接复用。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 项目介绍与影响力</h3>
+<p>跑通券商金工研报吗？这个开源项目复现了一百个量化策略，作者hugo2046，把它发布在GitHub，目前已超5400个star。项目复现了光大、华泰、招商等顶级券商的金工研报。</p>
+<h3>2. 策略分类与技术栈</h3>
+<p>作者将策略分为择时、因子构建、量化价值和组合优化四大板块。技术栈涵盖Python 3.8+。项目首页README顶部给出了清晰的快速入口，可以看到项目特色、策略数量、统计以及核心依赖的说明。</p>
+<h3>3. 上手运行与数据源</h3>
+<p>上手运行先用git clone拉取仓库，安装核心依赖，包括pandas、numpy、akshare、ta-lib和backtrader。数据源可选聚宽JQData或Tushare Pro。</p>
+<h3>4. 项目结构与价值</h3>
+<p>从仓库的文件数可以看到，项目结构基于策略类别来组织，分为择时、因子、价值和组合等文件夹。每个策略目录里不仅包含复现代码，还附带了对应的原始研报PDF供对照学习。仓库最大的价值在于验证研报思路和量化入门，策略附带的Notebook和可视化能帮你快速理解回测逻辑，也能直接复用其中的因子模块。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化投资</span></li>
+<li><span class="wikilink">开源项目</span></li>
+<li><span class="wikilink">因子研究</span></li>
+<li><span class="wikilink">策略复现</span></li>
+<li><span class="wikilink">Python</span></li>
+<li><span class="wikilink">回测</span></li>
+<li><span class="wikilink">QuantsPlaybook</span></li>
+<li><span class="wikilink">券商金工研报</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">GitHub开源</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>跑通券商精工研报吗？这个开源项目复现了一百家个量化策略，作者优go两千零四十六，把它发布在data hub,目目前已超超千合优字个标标篇。论文式的项目复现了光大、华泰招商等顶级券商的精工研报。作者将策略分为择时因子，构建量化价值和组合优化四大板块。技术栈涵盖python三点八开项目首页，red m me顶部就给出了清晰的、快速入口的可以看到项目特色、策略、数量、统计以及核心依赖的说明的上手运行。先用gate clone拉去仓库，核心依赖安装，包括pandas、 non、 AQ、 tolib和back trader.数据源可选巨宽JQ data或tooa pro.从仓库的文件数可以看到，项目结构基于策略类别来组织，分为择时因子、价值和组合等文件夹。嗯，每个策略目录里不仅包含复现代码，还附带了对应的原始研报PDF供对照学习仓库最大的价值在于验证研报思路和量化入门策略。附带的notebook和可视化，能帮你快速理解回测逻辑，也能直接复用其中的因子模块。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
