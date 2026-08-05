@@ -34,25 +34,54 @@
   </style>
 </head>
 <body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-06-25_【论文分享】双VQ-VAE破解因子难题_这篇论文《STORM_A_Spatio_7655281295794130214.md · 发布于 2026-08-05 11:39:59</div><nav class="page-links"><a href="https://www.douyin.com/video/7655281295794130214" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>【论文分享】双VQ-VAE破解因子难题 这篇论文《STORM: A Spatio</h1>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-06-25_论文解读：STORM双VQ-VAE时空因子模型_7655281295794130214.md · 发布于 2026-08-05 12:13:03</div><nav class="page-links"><a href="https://www.douyin.com/video/7655281295794130214" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>论文解读：STORM双VQ-VAE时空因子模型</h1>
 <p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7655281295794130214">https://www.douyin.com/video/7655281295794130214</a>）</p>
 <h2>一、内容简述</h2>
 <h3>（一）一句话结论</h3>
 <blockquote>
 <p><strong>一句话结论</strong>
-AI 整理结果解析失败，需人工查看视频原稿。</p>
+解读WSDM 2026录用论文STORM，提出双路VQ-VAE架构同时建模时序和横截面因子，通过向量量化降低噪声并保证因子多样性。在SP500和DJ30回测中，投资组合年化收益较基线最高提升超90%，个股算法交易平均盈利提升超43.64%，模型仅15.2M参数可在CPU运行。</p>
 </blockquote>
 <h3>（二）核心内容</h3>
 <ol>
-<li><strong>原稿待人工核对</strong>
-本条视频已完成 Whisper 转录，但 AI 结构化摘要解析失败，请以视频原稿为准。</li>
+<li>
+<p><strong>论文背景与痛点</strong>
+传统VAE因子模型存在三大痛点：标量表达弱、噪声多、因子难筛选。现有模型主要关注横截面市场结构，个股时序动态未被充分建模，生成的因子嘈杂且冗余，难以清晰区分。</p>
+</li>
+<li>
+<p><strong>STORM模型架构</strong>
+STORM采用双路VQ-VAE架构，一路处理时序视角，一路处理横截面视角，联合构建时间序列和横截面因子。通过向量量化降低噪声，确保因子多样性，支持收益预测、投资组合管理和算法交易。</p>
+</li>
+<li>
+<p><strong>VQ-VAE原理与因子正则化</strong>
+VQ-VAE通过编码器将输入映射为连续潜在向量，每个向量被最近的码本条目替换，解码器从量化后的向量重构输入，从而聚合相似潜在因子、抑制噪声。码本条目表现像因子，支持显式因子选择，降低冗余和嘈杂信息。编码器通过重构损失和正交正则化确保因子独立性和多样性。</p>
+</li>
+<li>
+<p><strong>因子模块与先验后验学习</strong>
+因子模块通过交叉注意力在时序和横截面流之间交换信息，多尺度编码捕捉时序与空间模式关联，强调互信息区域同时抑制噪声。先验后验学习机制解耦训练和推理过程，提高对未来收益的预测能力。</p>
+</li>
+<li>
+<p><strong>实验结果</strong>
+在SP500和DJ30市场（2008年4月1日至2024年3月31日）实验，使用OHLC价格和Alpha158指标。STORM在SP500上APY提升137.97%，个股算法交易全面超越基线，平均盈利提升43.64%。Rank IC和Rank IC IR更高，表明横截面排序能力更强。码本大小512时获得最佳经验权衡。消融实验证实双路缺一不可，完整STORM在Rank IC上平均比简化变体提高16.50。</p>
+</li>
 </ol>
 <h2>二、分段原文</h2>
 <blockquote>
-<p>[!warning]
-本次 AI 未生成可核验的纠错分段原文。为避免把未经纠错的文字误标为修正版，请查看下方“视频原始转录”，或从详情页重新生成 AI 整理。</p>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
+<h3>1. 论文背景与痛点</h3>
+<p>今天我们来解读这篇论文《STORM：一种基于双向量量化变分自编码器的时空因子模型》，通过一组风险因子解释超额收益。但现有的VAE模型主要关注横截面市场结构，个股的时序动态过程仍未被充分建模。这篇论文指出，标量因子难以捕捉市场复杂性，潜在因子可能嘈杂且冗余，现有模型生成因子但未能清晰区分。</p>
+<h3>2. STORM模型设计</h3>
+<p>作者提出用双VQ-VAE流分别处理时序和横截面视角，设计了双VQ-VAE因子模型，联合构建时间序列和横截面因子，通过向量量化降低噪声，确保因子多样性。模型支持收益预测、投资组合管理和算法交易。输入为股票数量N、回顾窗口W和OHLC价格加技术指标D，目标是预测未来收益R_t+1，通过Rank IC和Rank IC IR评估因子质量。</p>
+<h3>3. VQ-VAE原理</h3>
+<p>VQ-VAE通过编码器将输入映射为连续潜在向量，每个向量被其最近的码本条目替换，解码器从量化后的向量重构输入，从而聚合相似的潜在因子，抑制连续的潜在噪声。</p>
+<h3>4. 双路架构与因子正则化</h3>
+<p>通过两个VQ-VAE流提取时序和空间市场特征，将每个流离散化，并在因子模块中融合对齐特征，利用先验后验学习预测未来收益，将因子输入到投资组合和交易策略。双路VQ-VAE流分别处理时序和空间视角，确保模型能够捕捉市场的多维度动态。作者通过码本构建和因子正则化，使码本条目表现像因子，支持显式的因子选择量化，降低了冗余和嘈杂信息。编码器通过重构损失和正交正则化，确保量化后的特征能够有效重构输入数据，同时保持因子的独立性和多样性。</p>
+<h3>5. 因子模块与学习机制</h3>
+<p>因子模块通过交叉注意力在时序和横截面流之间交换信息，多尺度编码捕捉时序与空间模式之间的关联，强调互信息区域同时抑制噪声。作者设计了先验后验学习机制，解耦训练和推理过程，提高模型对未来收益的预测能力。</p>
+<h3>6. 实验结果</h3>
+<p>我们在投资组合管理和算法交易任务中表现出色，预测次日股票收益，应用带有换手控制的Top K Drop回撤、累积财富和风险。将潜在因子加入R²观测论文，在SP500和DJ30市场上进行了实验，从2008年4月1日至2024年3月31日，使用OHLC价格和Alpha158指标作为特征。STORM在SP500上的APY提升了137.97%。STORM在五只个股的算法交易任务中全面超越所有基线，平均盈利能力比最佳基线提升43.64%。更高的Rank IC和Rank IC IR表明STORM对未来收益的横截面排序能力更强。平衡的码本使用提升了因子多样性并减少了坍缩。码本大小为512时获得了最佳的经验权衡。移除时序因子降低了对股票及时序动态的敏感性，移除横截面因子削弱了跨股票市场结构的建模。完整的STORM在Rank IC上平均比简化变体提高16.50。</p>
 <h2>三、知识关联</h2>
 <h3>来源与类型</h3>
 <ul>
@@ -63,9 +92,16 @@ AI 整理结果解析失败，需人工查看视频原稿。</p>
 </ul>
 <h3>相关主题</h3>
 <ul>
-<li><span class="wikilink">AI产业</span></li>
-<li><span class="wikilink">股票市场</span></li>
-<li><span class="wikilink">投资策略</span></li>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">配对交易</span></li>
+<li><span class="wikilink">统计套利</span></li>
+<li><span class="wikilink">量化</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">Quant</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">STORM</span></li>
+<li><span class="wikilink">VQ-VAE</span></li>
 </ul>
 <h3>人物</h3>
 <ul>
@@ -81,7 +117,7 @@ AI 整理结果解析失败，需人工查看视频原稿。</p>
 </ul>
 <h3>资产/产品/地点</h3>
 <ul>
-<li><span class="wikilink">A Spatio AI</span></li>
+<li>暂无明确资产、产品或地点</li>
 </ul>
 <details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python金融数据分析｜P10-投资者必知的两个概念SML和CML
+#python #python编程 #金融 #数据分析 #量化交易｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2023-03-25_Python金融数据分析：证券市场线SML与资本市场线CML详解_7214174723742141711.md · 发布于 2026-08-05 12:16:54</div><nav class="page-links"><a href="https://www.douyin.com/video/7214174723742141711" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Python金融数据分析：证券市场线SML与资本市场线CML详解</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7214174723742141711">https://www.douyin.com/video/7214174723742141711</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+视频讲解现代投资组合理论中的两个核心概念：证券市场线(SML)和资本市场线(CML)。SML基于CAPM模型，描述单个证券预期收益与β系数的关系；CML描述有效投资组合的风险收益权衡。视频通过具体数值示例演示了两个模型的计算方法。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>证券市场线(SML)概念与公式</strong>
+证券市场线是资本资产定价模型(CAPM)的线性表示，显示证券预期收益与其β系数之间的关系。β系数是衡量系统性风险的指标。公式为：ERI = RF + βI × (ERM - RF)，其中ERI为证券预期收益率，RF为无风险收益率，βI为证券β系数，ERM为市场组合预期收益率。</p>
+</li>
+<li>
+<p><strong>SML计算示例</strong>
+举例：某股票β系数为1.2，市场组合预期收益率8%，无风险收益率3%，代入公式计算得该股票预期收益率为9%。说明β系数越大，投资者预期收益率越高。</p>
+</li>
+<li>
+<p><strong>资本市场线(CML)概念与公式</strong>
+资本市场线表示有效边界内投资组合的风险收益权衡，连接无风险收益率与市场组合。市场组合代表风险资产的最优组合。公式为：ERP = RF + (σP/σM) × (ERM - RF)，其中ERP为投资组合预期收益率，σP为投资组合风险，σM为市场组合风险。</p>
+</li>
+<li>
+<p><strong>CML计算示例与总结</strong>
+举例：投资组合风险15%，市场组合风险10%，市场收益率8%，无风险收益率3%，计算得投资组合预期收益率为10.5%。当组合风险高于市场风险时，预期收益率相应高于市场收益率。SML用于评估单个证券，CML关注整个投资组合的风险收益权衡。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. SML概念介绍</h3>
+<p>大家好，今天我们要介绍两个重要的金融学概念，分别是证券市场线和资本市场线。首先我们来看一下什么是证券市场线。上节课我们讲到了资本资产定价模型，而证券市场线就是资本资产定价模型的线性表示。它显示了证券的预期收益与其β系数之间的关系，β系数就是衡量系统性风险的指标。简单地说，证券市场线可以帮助我们评估单个证券的表现，了解其收益和风险之间的关系。</p>
+<h3>2. SML公式与示例</h3>
+<p>这是证券市场线的方程：ERI = RF + βI × (ERM - RF)，其中ERI是证券I的预期收益率，RF是无风险收益率，βI是证券I的β系数，ERM是市场组合的预期收益率。这个公式其实就是我们前面学过的CAPM资本资产定价模型。我们来看一个实际的例子：假如我们有一只股票，β系数是1.2，市场组合的预期收益率是8%，无风险收益率是3%，我们可以通过证券市场线方程计算这只股票的预期收益率，ERI等于9%。这就意味着投资者预期这只股票的收益率为9%，同时也表明在这个线性模型下，我们关注的是预期收益率和β系数之间的关系。一般来说，股票的β系数越大，投资者对其预期的收益率就越高。</p>
+<h3>3. CML概念与公式</h3>
+<p>我们要介绍的第二个概念是资本市场线。资本市场线是表示有效边界内组合的风险收益权衡的一条线，它连接了无风险收益率和市场组合。市场组合表示了风险资产的最优组合。和证券市场线不同的是，资本市场线关注的是整个投资组合的风险收益权衡。这里我们给出了资本市场线的方程：ERP = RF + (σP/σM) × (ERM - RF)，其中ERP是投资组合的预期收益率，σP是投资组合的风险，σM是市场组合的风险。</p>
+<h3>4. CML示例与总结</h3>
+<p>用一个具体的实例来说明：假设我们有一个投资组合，其风险是15%，市场组合的风险是10%，市场组合的预期收益率是8%，无风险收益率是3%，我们就可以通过资本市场线的方程计算得到该投资组合的预期收益率，ERP等于10.5%。可以看出当投资组合的风险高于市场组合的风险时，投资者对投资组合的预期收益率相应的也会高于市场组合的预期收益率。最后总结一下今天的内容：证券市场线和资本市场线都是现代投资组合理论中的重要组成部分。证券市场线有助于评估单个证券的表现，而资本市场线关注整个投资组合的风险收益。通过应用这两个概念，投资者可以更好地了解证券或是投资组合风险和收益之间的关系，从而做出更明智的投资决策。好了今天的分享就到这里，拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">金融学</span></li>
+<li><span class="wikilink">量化投资</span></li>
+<li><span class="wikilink">投资组合理论</span></li>
+<li><span class="wikilink">Python数据分析</span></li>
+<li><span class="wikilink">CAPM模型</span></li>
+<li><span class="wikilink">证券市场线</span></li>
+<li><span class="wikilink">资本市场线</span></li>
+<li><span class="wikilink">CAPM</span></li>
+<li><span class="wikilink">β系数</span></li>
+<li><span class="wikilink">系统性风险</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li><span class="wikilink">证券市场线SML与资本</span></li>
+<li><span class="wikilink">描述单个证券</span></li>
+<li><span class="wikilink">证券市场线是资本</span></li>
+<li><span class="wikilink">显示证券</span></li>
+<li><span class="wikilink">其中ERI为证券</span></li>
+<li><span class="wikilink">I为证券</span></li>
+<li><span class="wikilink">SML用于评估单个证券</span></li>
+<li><span class="wikilink">分别是证券市场线和资本</span></li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>Hello 大家好,今天我们要介绍两个重要的金融学概念,分别是证券市场线和资本市场线。首先我们来看一下什么是证券市场线。上节课我们讲到了资本资产定价模型,而证券市场线就是资本资产定价模型的线性表示。它显示了证券的预期收益与其β系数之间的关系,β系数就是衡量系统性风险的指标。简单地说,证券市场线可以帮助我们评估单个证券的表现,了解其收益和风险之间的关系。 这是证券市场线的方程 其中ERI是证券I的预期收益率 RF是无风险收益率 βI是证券I的β系数 ERM是市场组合的预期收益率 这个公式其实就是我们前面学过的CAPM 资本资产定价模型 我们来看一个实际的例子 假如我们有一只股票 β系数是1.2 市场组合的预期收益率是8% 无风险收益率是3% 我们可以通过证券市场线方程 计算这只股票的预期收益率 ERI等于9% 这就意味着投资者预期 这只股票的收益率为9% 同时也表明 在这个线性模型下 我们关注的是预期收益率和beta系数之间的关系 一般来说股票的beta系数越大 投资者对其预期的收益率就越高 我们要介绍的第二个概念是资本市场线 资本市场线是表示有效边界内组合的风险收益权衡的一条线 它连接了无风险收益率和市场组合 市场组合表示了风险资产的最优组合 和证券市场线不同的是 资本市场线关注的是 整个投资组合的风险收益权衡 这里我们给出了资本市场线的方程 其中ERP是投资组合的预期收益率 SIGMA P是投资组合的风险 SIGMA M是市场组合的风险 用一个具体的实例来说明 假设我们有一个投资组合 其风险是15% 市场组合的风险是10% 市场组合的预期收益率是8%,无风险收益率是3%, 我们就可以通过资本市场线的方程, 计算得到该投资组合的预期收益率,ERP等于10.5%, 可以看出当投资组合的风险高于市场组合的风险时, 投资者对投资组合的预期收益率相应的也会高于市场组合的预期收益率。 最后总结一下今天的内容, 证券市场线和资本市场线都是现代投资组合理论中的重要组成部分, 证券市场线有助于评估单个证券的表现 而资本市场先关注整个投资组合的风险收益 通过应用这两个概念 投资者可以更好地了解证券或是投资组合 风险和收益之间的关系 从而做出更明智的投资决策 好了今天的分享就到这里了 拜拜</p>
+</blockquote>
+</details></main>
+</body>
+</html>

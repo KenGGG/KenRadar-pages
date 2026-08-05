@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python金融数据分析｜P2-绘制收盘价和交易量 
+#量化金融 #量化分析 #量化交易 #Python数据分析      ｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2022-10-22_Python金融数据分析：绘制收盘价与交易量图表_7157226164849790216.md · 发布于 2026-08-05 12:23:22</div><nav class="page-links"><a href="https://www.douyin.com/video/7157226164849790216" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Python金融数据分析：绘制收盘价与交易量图表</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7157226164849790216">https://www.douyin.com/video/7157226164849790216</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+视频讲解如何使用Python和matplotlib库，将股票数据中的收盘价和交易量可视化，分别绘制线形图和条形图，并支持中文显示。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>数据准备与观察</strong>
+股票数据已清洗预处理，主要关注收盘价和交易量两个属性，许多交易策略的技术指标基于这两个属性计算。先打印收盘价前五行和交易量最后五行，确认两者包含相同的date列，可绘制在同一画布上。</p>
+</li>
+<li>
+<p><strong>绘图环境配置</strong>
+导入matplotlib库，设置中文显示支持，使用subplot函数在网格中指定位置绘图，采用上下布局：上方绘制收盘价，下方绘制交易量。</p>
+</li>
+<li>
+<p><strong>收盘价线形图绘制</strong>
+使用4x4网格布局，绘图区域占据左上角，高度占四分之三，宽度占全部。横轴为日期索引，纵轴为收盘价，图例位于左上方，标题标注为近三年价格数据。</p>
+</li>
+<li>
+<p><strong>交易量条形图绘制</strong>
+底部使用bar函数绘制交易量条形图，与上方收盘价线图组合在同一画布中展示。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 数据准备与观察</h3>
+<p>我们来看一下股票数据绘图，数据已经经过清洗和预处理。这里我们主要关注两个属性，一个是收盘价，一个是交易量，许多交易策略的技术指标都是基于这两个属性计算的。我们现在把这两个属性的数值可视化出来看一下。看源码非常简单，定义两个变量，一个用来储存收盘价，一个用来储存交易量。我们先把收盘价的前五行打印出来看一下，再把交易量的最后五行打印出来看一下。可以看出这两个数据包含相同的列date，我们就可以考虑把这两个数据绘制在同一张画布上。</p>
+<h3>2. 绘图环境配置</h3>
+<p>接下来的代码是关于绘图的参数设置。第一行代码表示在当前编辑器内画图，第二行import matplotlib，第三行都是导入相应的依赖包。第四行和第五行是中文设置，让接下来的绘图中支持中文。绘图过程中，我们需要调用matplotlib中的subplot函数，这个函数可以在网格中指定的位置进行绘图。我们考虑在画布中进行上下布局，上方用来绘制收盘价，下方用来绘制交易量。</p>
+<h3>3. 收盘价线形图绘制</h3>
+<p>第一行代码代表绘制顶部图。这里的参数4,4表示将整图划分为四乘四的网格。0,0表示绘图锚定在左上角，rowspan等于3表示绘图将占据网格四个可用行中的三行，也就是高度的四分之三。colspan等于4表示占用网格可用列中的四个列，也就是全部宽度。第二行top.plot表示给横轴和纵轴赋值，这里横轴是price.index，也就是日期，纵轴参数prices就是收盘价，label就是标签，解释这里画的是什么，我们命名为label，表示这绘制的是近三年的价格数据。第三行plot.title用来声明图像的标题，第四行plot.legend用来声明图像的位置，loc等于2表示图例位于左上方。</p>
+<h3>4. 交易量条形图绘制与结果</h3>
+<p>下面这段代码表示的是绘制底部图，也就是交易量。注意第二行bottom.bar，这里调用的是bar，绘制的是条形图。我们来运行一下这部分的代码，最终输出的结果就是这样：顶部线图表示的是收盘价的线形图，底部图表示的是交易量的条形图。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化金融</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">Python数据分析</span></li>
+<li><span class="wikilink">数据可视化</span></li>
+<li><span class="wikilink">Python</span></li>
+<li><span class="wikilink">金融数据分析</span></li>
+<li><span class="wikilink">matplotlib</span></li>
+<li><span class="wikilink">收盘价</span></li>
+<li><span class="wikilink">交易量</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>我们来看一下股票数据存图，share调取的数据已经经过清洗和预处理。这里我们主要关注的两个属性，一个是收盘价，一个是交易量，许多交易策略的技术指标都是基于这两个属性计算的。我们现在把这两个属性的数值可视化出来看一下，看源码非常简单，定义两个变量，一个用来储存收盘价，一个用来储存交易量。我们先把收盘价的前五行打印出来看一下，再把交易量的最后五行打印出来看一下。可以看出这两个数据包含相同的列date,我们就可以考虑把这两个数据绘制在同一张画布上。接下来的代码就是关于绘图的参数设置。第一行代码表示，在当前编辑器内，画图、第二行、import、 met plot、 lib和第三行都是导入相应的依赖包。第四行和第五行是中文设置。那接下来的绘图中支持中文，绘图过程中，我们需要调用plot中的subplot to grade.这个函数可以在网格中指定的位置进行绘图，我们考虑在画布中进行上下布局，上方用来绘制收盘价，下方用来绘制交易量。第一行代码代表绘制顶部线。这里的参数四四表示，将整图划分为四乘四的网格。零零表示，绘图铆定在左上角rose、 pen等于三表示，绘图将占据网格四个可用行中的三个行，也就是高度的四分之三。 Cos pen等于四表示占用网格可用列中的四个列，也就是全部宽度。第二行代码top点plot表示给横轴和纵轴负值。这里横轴是price点index,也就是日期表，表示横参数prices就是收盘价，label就是标签解释这里画的是什么？我们命名为last表示这绘制的是近三年的价格数据。第三行代码plot点title用来声明图像的标题第四行p lot t legend用来声明图像的位置log等于two,表示图例位于左上方。下面这段代码表示的是绘制底部线，也就是交易量。注意第二行bottom点bar,这里调用的是bar,绘制的是条形图。我们来运行一下这部分的代码，最终输出的结果就是这样。顶部词图表示的是收盘价的线形图，部词图表示的是交易这样的条形图。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

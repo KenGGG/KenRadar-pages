@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>P1-编程快速上手 #教会闺蜜 #量化交易｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2025-10-02_量化交易入门：Python编程快速上手_7556467219169889536.md · 发布于 2026-08-05 12:14:23</div><nav class="page-links"><a href="https://www.douyin.com/video/7556467219169889536" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>量化交易入门：Python编程快速上手</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7556467219169889536">https://www.douyin.com/video/7556467219169889536</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本文介绍量化交易入门的Python编程基础，强调编程是量化交易中最简单但贯穿始终的技能。通过大模型辅助编程降低门槛，核心只需掌握函数概念。内容涵盖量化四步流程（获取数据、构建信号、策略执行、性能评估），并提供通用提示词模板及Tushare数据接口实战示例。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>Python编程在量化交易中的定位</strong>
+编程是量化交易入门最重要也是最简单的环节。最重要是因为所有研究都要基于编程实现，最简单是因为初期策略不涉及复杂模型和海量运算。建议不要一开始就掉进编程坑里，掌握基础知识即可快速通关，技能提升贯穿整个学习生涯。</p>
+</li>
+<li>
+<p><strong>大模型辅助编程降低入门门槛</strong>
+传统编程需要将想法写成代码交由计算机编译执行。随着AI技术发展，大模型允许用户用自然语言描述需求，由大模型代替编写和调试程序，大幅降低编程门槛。</p>
+</li>
+<li>
+<p><strong>函数概念与量化流程拆解</strong>
+函数是将可重复使用的步骤起名并规定输入输出。量化交易过程可拆解为四个步骤：获取数据、构建信号、策略执行、性能评估。将各步骤写成函数，即可像搭建积木一样拼装出完整策略。</p>
+</li>
+<li>
+<p><strong>通用提示词模板五要素</strong>
+提示词包含五个要素：角色定义（AI以何种身份产出）、目标（解决什么问题）、输入（函数输入变量）、输出（数据格式）、约束（指定工具库、异常处理、代码注解等）。</p>
+</li>
+<li>
+<p><strong>实战：使用Tushare获取历史数据</strong>
+以获取某标的收盘价为例，使用DeepSeek大模型生成Python函数，数据源指定Tushare（开源金融数据接口，支持股票、期货、外汇、基金等）。运行环境推荐使用VSCode+miniconda或在线工具如Google Colab、百度AI Studio。遇到第三方包未安装报错时，用pip安装即可。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 课程引入与编程定位</h3>
+<p>哈喽大家好，今天是教会文科生闺蜜量化交易第一课，高中学进来听课。今天我要教会你的是Python编程快速上手。这是量化交易入门最重要、也是最不重要的一个环节。最重要是因为我们所有的研究都要基于它去实现，最不重要是因为它是整个量化交易中最简单的部分。初期的时候，你的量化策略还没有涉及太复杂的模型，也没有海量的运算。所以我的建议是，学姐不要一开始就掉进编程的坑里。我们只需要掌握一些基础知识，然后就可以快速通关去到下一个环节。不用担心编程基础没有打牢了后面怎么办，这个技能的提升是要贯穿你整个学习生涯的。</p>
+<h3>2. 大模型辅助编程</h3>
+<p>那么我们言归正传，Python到底如何快速入门呢？你要先知道到底什么是编程。编程就是将你想要做的事情写成一段代码，交由计算机编译转成底层的指令，最终让计算机能够理解并执行你的想法。这是我们的传统编程方式。随着AI技术的发展，我们现在又多了一个辅助工具，就是大模型。大模型允许我们不再直接进行代码的撰写或是调试，只需要我们将自己的需求用自然语言描述出来，大模型就可以代替我们来编写程序。那么现在我们入门量化交易的编程门槛就只剩下一件事了，那就是函数。</p>
+<h3>3. 函数概念与量化四步流程</h3>
+<p>什么是函数呢？函数就是把一段可以重复使用的步骤给它起一个名字，然后规定好哪些是输入，按照固定的处理逻辑进行计算，得到最后一个输出。那按照这个思路，我们就只需要把量化交易的过程拆解成一个一个的函数，然后就能够像搭建积木一样快速拼装出一个完整的策略。当然这里我们指的是简单策略。那么一个标准的量化过程分为哪几个环节呢？我们大致可以分为以下四个步骤：第一步是获取数据，第二步是构建信号，第三步是策略执行，第四步是性能评估。</p>
+<h3>4. 提示词模板五要素</h3>
+<p>我们先来试一下写一个最简单的数据获取函数。我们利用大模型，现在我们来书写提示词。这里有一个通用的提示词模板，它包含五个要素：首先你要对AI进行角色定义，就是你希望AI以什么样的身份来产出；第二个是目标，就是你这段函数要解决一个什么样的问题，比如我们现在要获取指定标的的收盘价；第三个就是输入，我们需要规定这个函数的输入有哪些变量；第四个是输出，就是我们最终想要得到的数据是什么，以及它的格式是什么；第五个就是我们还可以对它进行施加约束，比如我们指定它使用什么工具、什么库、异常处理以及代码注解等等。</p>
+<h3>5. 实战示例与运行环境</h3>
+<p>现在我们把这一段提示词发给大模型，比如用DeepSeek，我们让它以资深量化工程师的身份来实现一个Python函数，目标是获取某标的在一段时间内的收盘价。我们的输入指定三个变量，分别是股票代码、开始日期和结束日期。输出我们要历史数据，格式限定为DataFrame。最后一个约束，我们限定数据源使用Tushare。Tushare是一个开源的金融数据接口，可以用Python直接来拉取股票、期货、外汇、基金等一些金融数据。类似的还有Tushare、BaoStock等等。我们现在等待代码完成。代码的运行环境我个人习惯使用VSCode的编辑器加miniconda，一个Python环境管理器。这些安装如果你觉得麻烦的话，也可以直接使用在线的编程工具，我这里给大家演示的是谷歌的Colab，你也可以使用百度的AI Studio。这些平台都提供一些免费的计算资源，而且它用的是notebook，你就不需要再去安装Python工具，可以直接在上面运行代码。等你熟悉一段时间Python之后，就可以尝试自己在本地安装软件和搭建环境，类似的教程非常多，大家可以在网上找一下。</p>
+<h3>6. 代码运行与报错处理</h3>
+<p>我们运行之后，这段AI的代码就会出现一个报错，这个报错的意思是我们没有安装Tushare。对Python来说，这些第三方包都是需要手动安装的，我们用pip这个包管理工具来进行安装。好，我们再次运行代码，这就是DataFrame格式的历史数据，指定股票以及它所对应的收盘价。OK，我们这节课就先讲这么多，下节课继续。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化入门</span></li>
+<li><span class="wikilink">编程教学</span></li>
+<li><span class="wikilink">AI辅助编程</span></li>
+<li><span class="wikilink">金融数据接口</span></li>
+<li><span class="wikilink">文科生友好</span></li>
+<li><span class="wikilink">Python编程</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">大模型</span></li>
+<li><span class="wikilink">函数</span></li>
+<li><span class="wikilink">提示词模板</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>哈喽大家好,今天是教会文科生闺蜜量化交易第一课。高组学进来听课,今天我要教会你的是Python编程快速上手。这是量化交易入门最重要,也是最不重要的一个环节。最重要是因为我们所有的研究都要基于它去实现,最不重要是因为它是整个量化交易中最简单的部分。初期的时候,你的量化策略还没有涉及太复杂的模型,也没有海量的运算。所以我的建议是,携手不要一开始就掉进编程的坑里。 我们只需要掌握一些基础知识 然后就可以快速通关去到下一个环节 不用担心编程基础没有打牢了 后面怎么办 这个技能的提升是要贯穿你整个学习生涯的 OK那么我们言归正传 Python到底如何快速入门呢 你要先知道到底什么是编程 编程就是将你想要做的事情 写成一段代码 交由计算机编译转成底层的指令 最终让计算机能够理解并执行你的想法 这是我们的传统编程方式 随着AI技术的发展 我们现在又多了一个辅助工具 就是大模型 大模型允许我们不再直接进行代码的砖写 或是调试 只需要我们将自己的需求用自然语言描述出来 大模型就可以代替我们来编写程序 那么现在我们入门量化交易的编程门槛 就只剩下一件事了 那就是函数 什么是函数呢 函数就是把一段可以重复使用的步骤 给它起一个名字 然后规定好哪些是输入 按照固定的处理逻辑进行计算 得到最后一个输出 那按照这个思路 我们就只需要把量化交易的过程 拆解成一个一个的函数 然后就能够像搭建积木一样 快速拼装出一个完整的策略 当然这里我们指的是简单策略 那么一个标准的量化过程 分为哪几个环节呢 我们大致可以分为以下四个步骤 第一步是获取数据 第二步是构建信号 第三步是策略执行 第四不是性能评估 我们先来试一下写一个最简单的数据获取函数 我们利用大模型 现在我们来书写提示词 这里有一个通用的提示词模板 它包含五个要素 首先你要对AI进行角色定义 就是你希望AI以什么样的身份来产出 第二个是目标 就是你这段函数要解决一个什么样的问题 比如我们现在要获取指定标的的收盘价 第三个就是输入 我们需要规定这个函数的输入有哪些变量 第四个是输出 就是我们最终想要得到的数据是什么 以及它的格式是什么 第五个就是我们还可以对它进行施加约束 比如我们指定它使用什么工具 什么库 异常处理 以及代码注解等等 现在我们把这一段提示词发给大模型 比如用DeepSeek 我们让它以资深量化工程师的身份 来实现一个Python函数 目标是获取某标的 在一段时间内的收盘价 我们的输入指定三个变量 分别是股票代码 开始日期和结束日期 输出我们要历史数据 格式限定为DataFrame 最后一个约束 我们限定数据员使用XShare XShare是一个开源的金融数据接口 可以用Python直接来拉取股票期货 外汇基金等一些金融数据 类似的还有ToShare,BallStoke等等 我们现在等待代码完成 代码的运行环境 我个人习惯使用VSCode的编辑器 一家miniconda 一个python环境管理器 这些安装如果你觉得麻烦的话 也可以直接使用在线的编程工具 我这里给大家演示的是谷歌的colab 你也可以使用百度的ai studio 这些平台都提供一些免费的计算资源 而且它用的是notebook 你就不需要再去安装python工具 可以直接在上面运行代码 等你熟悉一段时间python之后 就可以尝试自己在本地 安装软件和搭建环境 类似的教程非常多 大家可以在网上找一下 我们运行之后 这段AIS的代码就会出现一个报错 这个报错的意思是我们没有安装XL 对Python来说 这些第三方包都是需要手动安装的 我们用PIP这个包管理工具来进行安装 好我们再次运行代码 这就是DataFrame格式的历史数据 指定股票以及它所对应的收盘价 OK我们这节课就先讲这么多 下节课继续</p>
+</blockquote>
+</details></main>
+</body>
+</html>

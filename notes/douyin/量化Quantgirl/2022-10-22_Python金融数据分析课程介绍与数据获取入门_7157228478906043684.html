@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python金融数据分析｜P1-获取股票历史数据 
+#量化交易 #量化分析 #量化金融 
+#Python数据分析#Python    ｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2022-10-22_Python金融数据分析课程介绍与数据获取入门_7157228478906043684.md · 发布于 2026-08-05 12:22:41</div><nav class="page-links"><a href="https://www.douyin.com/video/7157228478906043684" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Python金融数据分析课程介绍与数据获取入门</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7157228478906043684">https://www.douyin.com/video/7157228478906043684</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本课程为quantigo制作的Python金融数据分析入门课程，参考《Python金融数据分析》原书第二版，将欧美证券市场数据替换为A股数据。课程分为三个模块：Python金融数据分析概述、时间序列统计分析、算法交易平台搭建与回测系统构建。本节讲解数据获取流程，使用tushare库调取工商银行（601398）历史数据，并演示数据排序、保存为CSV及用pand。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>课程概述与框架</strong>
+本课程由quantigo制作，参考教材为《Python金融数据分析》原书第二版（作者马伟明），电子版可在微信读书APP找到。课程将原书欧美证券市场数据替换为A股数据，分为三个模块：模块一介绍Python金融数据分析概述，熟悉pandas、numpy、matplotlib等常用库；模块二讲解时间序列数据的统计分析；模块三介绍算法交易平台搭建和回测系统构建。课程基本要求为具备Python使用经验，最低标准是能安装软件。由于金融数据分析领域主要调包，代码量较小，课后公开源码和课件。</p>
+</li>
+<li>
+<p><strong>数据获取流程与tushare使用</strong>
+Python金融数据分析按流程分为三步：第一步获取数据，第二步计算处理数据，第三步数据可视化。本节讲解第一步数据获取，使用tushare开源库调取股票历史数据。以工商银行为例，代码导入tushare库后，调用get_hist_data方法获取601398的历史数据，保存至data变量。打印data.head()发现日期顺序由近到远，需将数据逆转使时间序列从左到右由远到近。</p>
+</li>
+<li>
+<p><strong>数据保存与读取</strong>
+数据获取后保存到本地CSV文件，使用save方法，指定index=True以日期为索引。随后使用pandas库读取本地CSV文件，导入pandas并简写为pd，读取文件保存至data变量，打印前五行数据完成数据获取步骤。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 课程介绍</h3>
+<p>Hello，大家好，这里是由quantigo制作的第一门量化分析课程，叫做Python金融数据分析。本课程参考教材为《Python金融数据分析》原书第二版，作者马伟明，本书的电子版可在微信读书APP上找到。这本书主要的研究对象是欧美证券市场，我从中挑选了一些有借鉴价值的章节，制作成了本课程的课程框架，也将其中一些欧美证券交易所的数据换成了A股的数据。本课程一共分为三个模块：第一个模块介绍Python金融数据分析概述，会带大家熟悉一些被广泛用于金融数据分析领域的库，比如pandas、numpy、matplotlib；第二部分介绍如何对时间序列数据进行统计分析；第三部分介绍操作，带大家了解如何搭建算法交易平台和构建回测系统。本课程的基本要求是具备使用Python的经验，最低的标准是能把软件安装上。因为在金融数据分析领域中，大部分时候我们只需要调包，所以代码量其实很小。而且我会逐行为大家讲解，课后也会把源码和课件公开，大家可以在评论区找到下载地址。那么接下来我就默认大家已经安装好了工具，我们直接开始今天的第一节课。</p>
+<h3>2. 数据获取流程与tushare代码示例</h3>
+<p>Python金融数据分析，我们按流程将其分为了三个步骤：第一步获取数据，第二步计算处理数据，第三步对数据进行可视化。我们直接来看源码，首先第一个步骤获取金融数据。以工商银行为例，从tushare调取历史数据。tushare是一个开源的库，提供了一些接口，可以调取股票的历史数据，tushare的安装命令我也放在这里了。我们来看代码：第一行import tushare as ts，导入依赖包，是导入tushare这个库；第二行print语句是用来打印tushare的版本；第三行data = ts.get_hist_data('601398')，就是工商银行的代码，调用的意思是调用tushare中的get_hist_data方法来调取601398这只股票的历史数据，把它保存在data这个变量中。我们把data.head()打印一下，就是打印data这个数据的前五行。我们发现这个日期的顺序是由近到远的，那我们画图的时候，希望的是时间序列从左到右是依次由远到近的，所以我们需要把data这个数据集给逆转一下，就是顺序颠倒一下。我们重新改变它的顺序，将时间线由远到近，再重新打印一下data.head()，打印前五行会发现，这时候的时间顺序就变成了由远到近。</p>
+<h3>3. 数据保存与pandas读取</h3>
+<p>第二步，我们把调取到的历史数据保存到本地save，这是保存的目录地址。我们把data保存成一个CSV格式的文件，index就是它的索引，我们这里的索引等于True，就是date是以日期为索引。接下来我们看如何从本地读取数据：代码第一行import pandas as pd，就是把pandas这个库导入简写成pd；第二行命令就是打印pandas的版本；第三行命令就是读取本地的CSV文件，然后把它保存在data这个变量中；第四行代码data.head()就是打印data这个变量的前五行数据。到这里，我们的第一个步骤数据获取就完成了。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">量化金融</span></li>
+<li><span class="wikilink">Python数据分析</span></li>
+<li><span class="wikilink">Python</span></li>
+<li><span class="wikilink">教程</span></li>
+<li><span class="wikilink">数据获取</span></li>
+<li><span class="wikilink">金融数据分析</span></li>
+<li><span class="wikilink">tushare</span></li>
+<li><span class="wikilink">pandas</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li><span class="wikilink">将欧美证券</span></li>
+<li><span class="wikilink">使用tushare库调取工商银行</span></li>
+<li><span class="wikilink">课程将原书欧美证券</span></li>
+<li><span class="wikilink">以工商银行</span></li>
+<li><span class="wikilink">也将其中一些欧美证券</span></li>
+<li><span class="wikilink">就是工商银行</span></li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>Hello,大家好，这里是由quantigo制作的第一门量化分析课程，叫做python金融数据分析。本课程参考教材为python金融数据分析原素第二版作者马伟明本书的电子版可在某信读书APP上找到这本书，主要的研究对象是欧美证券市场。我从中挑选了一些有借鉴价值的章节，制作成了本课程的课程框架。我也将其中一些欧美证券交易所的数据换成了a股的数据。本课程一共分为三个模块。第一个模块介绍，python金融数据分析概述会带大家熟悉一些被广泛用于金融数据分析领域的库，比如pandas、 non派、mt plot lib的。第二部分介绍如何对时间、序列数据进行统计分析。第三部分介绍操作，带大家了解如何搭建算法交易平台和构建回测系统。本课程的基本要求是由使用python的经验，最低的标准是能把软件安装上。因为在在金融数据分析领域中，大部分时候我们只需要调包，所以代码量其实很小。而且我会逐行为，大家讲解课后，也会把源码和课件公开。大家可以在评论区找到下载地址。那么接下来我就默认大家已经安装好了工具，我们直接开始今天的第一节课。 Pyon金融数据分析，我们按流程将其分为了三个步骤，第一步获取数据，第二步，计算处理数据。第三步，对数据进行可视化，我们直接来看源码。首先第一个步骤获取金融数据。以工商银行为例，冲to share,调取历史数据to share是一个开源的库，提供了一些接口，可以调取股票的历史数据to share的安装命令。我也放在这里了，我们来看代码。第一行import to share STS导入依赖包是导入to share这个库。第二个，printer语句是用来打印图尔的版本，第三条data等于填s点，get haste data六零幺三九八就是工商银行的代码。代码的意思就是调用to share中的get his data方法来调取六零幺三九八这只股票的历史数据，把它保存在data这个变量中。我们把data head打印一下，就是打印data这个数据的前五行。我们发现这个日期的顺序时，由近到远的那我们画图的时候，希望的是时间序列，从左到右是依次由远到近的。所以我们需要把data这个数据集给逆转一下，就是顺序颠倒一下。我们重新改变他的顺序，将时间线由远到近再重新打印一下data head.打印前五行会发现，这时候的时间顺序就变成了由远到近。第二步，我们把调取到的历史数据保存到本地save pass,这是保存的目录地址。我们把data保存成一个CSV格式的文件，index,就是它的索引。我们这里的索引等于一，就是date,是以日期为索引。接下来我们看如何从本地读取数据代码第一行import pandas SPD,就是把pandas这个库导入简写成PD.第二行命令就是打印pandas的版本。第三行命令就是读取本地的CSV文件，然后把它保存在data这个变量中。第四行代码data点head就是打印data这个变量的前五行数据到这里，我们的第一个步骤数据获取就完成了。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

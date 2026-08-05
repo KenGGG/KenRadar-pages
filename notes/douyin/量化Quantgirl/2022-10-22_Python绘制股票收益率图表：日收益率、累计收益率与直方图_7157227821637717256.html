@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python金融数据分析｜P4-绘制股票收益率
+#量化金融 #量化分析 #量化交易 #Python数据分析 #Python   ｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2022-10-22_Python绘制股票收益率图表：日收益率、累计收益率与直方图_7157227821637717256.md · 发布于 2026-08-05 12:23:02</div><nav class="page-links"><a href="https://www.douyin.com/video/7157227821637717256" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Python绘制股票收益率图表：日收益率、累计收益率与直方图</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7157227821637717256">https://www.douyin.com/video/7157227821637717256</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本节讲解如何使用Python和pandas绘制股票收益率的三种统计图表：日收益率折线图、累计收益率（加法与乘法两种方法）以及日收益率直方图，并介绍describe函数计算统计量。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>日收益率的计算与绘制</strong>
+日收益率是每日收盘价格相较前一日收盘价格的涨跌百分比，计算公式为Ri=(Pi-Pi-1)/Pi-1。通过pandas的pct_change()函数应用于收盘价列即可计算，第一日收益率为NaN，图像从第二天开始绘制。</p>
+</li>
+<li>
+<p><strong>累计收益率的两种计算方法</strong>
+第一种为加法累计收益率，将每日收益率累加求和，模拟连续每日买入次日卖出的操作，使用cumsum()函数计算。第二种为乘法累计收益率，计算期末收益相较期初收益的涨跌比，更符合实际。两种方法结果非常接近，差异主要来自二次项及更高阶小项，实际使用中可任选其一。</p>
+</li>
+<li>
+<p><strong>日收益率直方图与统计量分析</strong>
+直方图用于展示数据分布情况，横坐标为每日收益率，纵坐标为对应频数。以工行为例，其日收益率分布接近正态分布，表明此类金融资产可能存在套利空间。describe函数可快速计算均值、标准差、极值、分位数等多种统计量。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 三种收益率统计形式概述</h3>
+<p>现在来绘制关于股票收益率的图，我们考虑收益率的三种统计形式。第一种，也就是简单的以日为计算周期的收益率的统计图像。第二种绘制一段时期内的累计收益率。第三种绘制日收益率的直方图。</p>
+<h3>2. 日收益率的计算与绘制</h3>
+<p>我们先来看一下以日为计算周期的收益率。统计每个交易日收盘价格相较前一个交易日收盘价格的涨跌百分比。收益率的计算公式如图，其中Pi表示第i天的收盘价格，Pi-1表示第i-1天的收盘价格，而Ri就表示第i天的收益率。下图表格中已经包含了日收益率的数据，这是因为我们从tushare获取到的数据已经经过了预处理。我们也可以根据股票价格自行计算。日收益率代码非常简单，直接调用pandas中的pct_change应用到收盘价这一列数据上，就得到一类新的数据，命名为daily changes，表示每日收益率。调用plot函数对daily changes绘制出来，就得到了每日收益率的图像。打印收益率的前五行看一下，这里注意，第一天的收益率是NaN，所以绘制收益率的图像是从历史数据的第二天开始绘制的。</p>
+<h3>3. 累计收益率的两种计算方法</h3>
+<p>接下来绘制累计收益率。这里提供了两种计算方法。原书中采用的是第一种，即将一段时间内的每日收益率累加求和，这实际上模拟的是连续每日买入、次日卖出、连续操作一段时间后的总收益率。看代码，直接调用pandas中的cumsum函数，然后将data.cumsum()绘制出来，就得到了第一种加法的累计收益率。第二种乘法计算的累计收益率我认为更符合实际一些，其计算的是一段时期内的期末收益相较期初收益的涨跌比，计算公式如图。我们来看一下代码实现，前两行计算得到的data price就是累计收益率。实际上这两种累计收益率的计算方法结果都非常接近。如果你把第二种乘法的累计收益率公式展开，就会发现它的一次项就是加法累计收益率，后面的二次项、三次项等等都是非常小的项，在实际中可以忽略不计。我们把这两种计算方法的差值打印出来看一下，可以看出相差很小，所以在现实中使用第一种或第二种方法都可以。</p>
+<h3>4. 日收益率直方图与统计量</h3>
+<p>第三个要绘制的图是收益率的直方图。直方图是一种对数据分布情况的图形表示，横纵坐标分别表示的是统计样本和该样本对应的某个属性的度量，用长条图来表示。我们这里横坐标表示的是每日收益率，纵坐标表示的是每日收益率对应的频数。这里绘制的是工行的每日收益率的直方图，可以看出工行的每日收益率分布还是比较接近正态分布的，这类的金融资产就存在一定的套利空间。最后来看一下describe这个函数，它可以快速计算出每日收益率的多种统计量，例如均值、标准差、极值、分位数等。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化金融</span></li>
+<li><span class="wikilink">Python数据分析</span></li>
+<li><span class="wikilink">收益率计算</span></li>
+<li><span class="wikilink">数据可视化</span></li>
+<li><span class="wikilink">股票收益率</span></li>
+<li><span class="wikilink">日收益率</span></li>
+<li><span class="wikilink">累计收益率</span></li>
+<li><span class="wikilink">直方图</span></li>
+<li><span class="wikilink">pandas</span></li>
+<li><span class="wikilink">pct_change</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>现在来绘制关于股票收益率的图，我们考虑收益率的三种统计形式。第一种，也就是简单的以日为计算周期的收益率的统计图像。第二种绘制一段时期内的累计收益率。第三种绘制日收益率的直方图。我们先来看一下以日为计算周期的收方率。第统计每个交易日收盘价格相较前一个交易日收盘价格的涨跌百分比收益率的计算公式如图，其中PI表示。第i天的收盘价格PI减一表示第i减一天的收盘价格，而i就表示第i天的收益率。下图表格中已经包含了日收益率的数据。这是因为我们从图尔获取到的数据已经经过了预处理。我们也可以根据股票价格自行计算，日收益率代码非常简单，直接调用sipandas中的PCT change应用到收盘价，这一列数据上就得到一类新的数据。命名为delay changes表示每日收益率调用plot函数。像delay changes绘制出来，就得到了每日收益率的图像打印收益率的前五行。看一下。这里注意，第一天的收益率是浪，所以绘制收益率的图像是从历史数据的第二天开始绘制的。接下来绘制累计收益率或累计收益率。这里提供了两种计算方法。原书中采用的是第一种即将一段时间内的每日收益率累加求和。这实际上模拟的是连续每日买入，次日卖出，连续操作一段时间后的总收益率看代码直接调用pandas中的consume函数，然后将data consume绘制出来，就得到了第一种加法的累计收益率。第二种，乘法计算的累计收益率我认为更符合实际一些，其计算的是一段时期内的期末收益。相较期初收益的涨跌比计算公式如图，我们来看一下代码实现前两行计算得到的data pride, some就是累计收益率。实际上这两种累计收益率的计算方法结果都非常接近。如果你把第二种乘法的累计收益率公式展开，就会发现它的一次项就是加法。累计收益率后面的二次项、三次项等等都是非常小的项。在实际中可以忽略不计。我们把这两种计算方法的差值打印出来看一下，可以看出相差很小。所以在现实中使用第一种或第二种方法都可以。第三个要绘制的图是收益率的直方图。这方图是一种对数据分布情况的图形，表示。横纵坐标分别表示的是统计样本和该样本对应的某个属性的度量。用长条图来表示。我们这里横坐标表示的是每日收益率，纵坐标表示的是每日收益率对应的频数。这里绘制的是工行的每日收益率的直方图，可以看出工行的每日收益率分布还是比较接近正态分布的这类的金融资产，就存在一定的套利空间。最后来看一下describe这个函数，它可以快速计算出每人收益率的多种统计量，例如均值标准差、极值、分位数等。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

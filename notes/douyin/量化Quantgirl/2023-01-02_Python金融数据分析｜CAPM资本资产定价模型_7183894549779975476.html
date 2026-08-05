@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python金融数据分析｜P9-资本资产定价模型
+#python #量化交易 #量化投资 #量化分析 #python数据分析｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2023-01-02_Python金融数据分析｜CAPM资本资产定价模型_7183894549779975476.md · 发布于 2026-08-05 12:18:58</div><nav class="page-links"><a href="https://www.douyin.com/video/7183894549779975476" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Python金融数据分析｜CAPM资本资产定价模型</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7183894549779975476">https://www.douyin.com/video/7183894549779975476</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+介绍线性模型在金融领域的两大优势（简单广泛、全局最优解），详细讲解CAPM资本资产定价模型的原理与公式，并通过Python代码实现线性回归计算股票的Beta系数。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>线性模型在金融领域的优势</strong>
+线性模型搭建简单但应用广泛，可解决资产证券定价、最优资产配置等实际问题；另一个优势是确保得到全局最优解，即找到最佳投资方案。</p>
+</li>
+<li>
+<p><strong>CAPM模型概述</strong>
+资本资产定价模型（CAPM）是现代金融市场价格理论的支柱，研究证券市场中资产预期收益率与风险资产之间的关系及均衡价格形成机制，广泛应用于投资决策和公司理财领域。</p>
+</li>
+<li>
+<p><strong>CAPM公式解析</strong>
+CAPM公式为线性模型，包含四项：RI（证券I的预期收益率）、RF（无风险利率）、βI（证券I的β系数，衡量无法被分散的系统性风险）、ERMKT（预期市场回报率）。单个证券期望收益率由无风险利率和风险溢价两部分组成，风险溢价取决于β系数，β值越高风险越高、补偿也越高。</p>
+</li>
+<li>
+<p><strong>Python代码实现</strong>
+使用Statsmodels库进行线性回归，Stocker Returns表示股票收益率（因变量RI），Market Returns表示预期市场收益率（自变量ERMKT），通过linear_model.OLS得到Alpha（截距）和Beta（斜率），Beta值代表该证券的系统性风险高低。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场与线性模型优势</h3>
+<p>哈喽大家好，从今天起我们就进入到本书第二章内容的学习，金融中的线性问题。今天的课程只有两个内容，首先我们来看一看在金融领域中应用线性模型有哪些优势。第一个，线性模型非常简单，搭建也很简单，但是它却有着非常广泛的应用，能解决非常多的实际问题，比如资产、证券定价。稍后我们将以CAPM模型为例为大家展示线性模型是如何工作的。除此之外，线性模型还被用于解决最优资产配置问题，简单一解是线性模型最突出的优点。线性模型的另一个优势是可以确保得到一个全局最优解，而在解决实际的金融问题时，找到全局最优解也就意味着找到了最佳的投资方案。以上就是我们要介绍的线性模型在金融领域中的两个主要优势。</p>
+<h3>2. CAPM模型介绍</h3>
+<p>接下来我们来看一看今天的主角，一个非常有名的线性模型，CAPM，C.A.P.M.，资本资产定价模型。CAPM主要研究证券市场中资产的预期收益率和风险资产之间的关系，以及均衡价格是如何形成的，是现代金融市场价格理论的支柱，广泛应用于投资决策和公司理财领域。</p>
+<h3>3. CAPM公式解析</h3>
+<p>CAPM从公式上来看就是一个非常简单的线性模型，只有四个项。等号左边的项RI表示证券I的预期收益率；等号右边的第一项RF表示无风险利率；等号右边的第二项是一个乘积的形式，其中βI表示证券I的β系数，β系数衡量的是证券I无法被分散的系统性风险，ERMKT表示的是预期的市场回报率。到这里我们对CAPM模型就可以这样解释：单个证券的期望收益率由两部分组成，无风险利率以及对所承担风险的补偿，即风险溢价。风险溢价的大小取决于该证券的β系数，β值越高表明单个证券的风险越高，所得到的补偿也越高。</p>
+<h3>4. Python代码实现</h3>
+<p>下面我们通过代码来简单实现一下。首先导入相应的依赖Statsmodels，第二行Stocker Returns表示股票的收益率，也就是因变量RI；第三行Market Returns表示预期的市场收益率，也就是自变量ERMKT。要用Statsmodels中的线性回归函数，就可以得到Alpha和Beta，分别表示线性函数的截距和斜率。在这个例子中，我们主要关注的是斜率Beta，其值大小就代表了该证券的系统性风险高低。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">金融建模</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">Python编程</span></li>
+<li><span class="wikilink">资产定价</span></li>
+<li><span class="wikilink">风险管理</span></li>
+<li><span class="wikilink">CAPM</span></li>
+<li><span class="wikilink">资本资产定价模型</span></li>
+<li><span class="wikilink">线性模型</span></li>
+<li><span class="wikilink">Beta系数</span></li>
+<li><span class="wikilink">系统性风险</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li><span class="wikilink">CAPM资本</span></li>
+<li><span class="wikilink">详细讲解CAPM资本</span></li>
+<li><span class="wikilink">可解决资产证券</span></li>
+<li><span class="wikilink">研究证券</span></li>
+<li><span class="wikilink">单个证券</span></li>
+<li><span class="wikilink">Beta值代表该证券</span></li>
+<li><span class="wikilink">CAPM主要研究证券</span></li>
+<li><span class="wikilink">值越高表明单个证券</span></li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>哈喽大家好,从今天起我们就进入到本书第二章内容的学习,金融中的线性问题。今天的课程只有两个内容,首先我们来看一看在金融领域中应用线性模型有哪些优势。 第一个,线性模型非常简单,搭建也很简单,但是它却有着非常广泛的应用,能解决非常多的实际问题,比如资产、证券定价。 稍后我们将以CAMP模型为例 为大家展示线性模型是如何工作的 除此之外线性模型还被用于解决最优资产配置问题 简单一解是线性模型最突出的优点 线性模型的另一个优势是可以确保得到一个全局最优解 而在解决实际的金融问题时 找到全局最优解也就意味着找到了最佳的投资方案 以上就是我们要介绍的线性模型在金融领域中的两个主要优势 接下来我们来看一看今天的主角 一个非常有名的线性模型 CAMP C.A.P.M.资本资产定价模型 CAMP主要研究证券市场中资产的预期收益率和风险资产之间的关系 以及均衡价格是如何形成的 是现代金融市场价格理论的支柱 广泛应用于投资决策和公司理财领域 CAMP从公式上来看就是一个非常简单的线性模型 只有四个项 等是左边的项RI表示证券I的预期收益率, 等是右边的第一项RF表示无风险利率, 等是右边的第二项是一个成绩的形式, 其中βI表示证券I的β系数, β系数衡量的是证券I无法被分散的系统性风险, ERMKT表示的是预期的市场回报率。 到这里我们对CAMP模型就可以这样解释, 单课证券的期望收益率由两部分组成, 无风险利率以及对所承担风险的补偿 即风险溢价 风险溢价的大小取决于该证券的β系数 β值越高表明单个证券的风险越高 所得到的补偿也越高 下面我们通过代码来简单实现一下 首先导入相应的依赖Ball status 第二行Stalker Returns表示股票的收益率 也就是因变量RI 第三行Market Returns表示预期的市场收益率 也就是字变量EMRKT 要用Status中的线性回归函数 就可以得到Alpha和Beta 分别表示线性函数的拮据和斜率 在这个例子中 我们主要关注的是斜率Beta 其值大小就代表了该证券的系统性风险高低</p>
+</blockquote>
+</details></main>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python金融数据分析｜P5-绘制股票波动率
+#量化金融 #量化分析 #量化交易 #Python数据分析 #Python   ｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2022-10-22_Python金融数据分析：股票波动率的计算与绘制_7157229349916249352.md · 发布于 2026-08-05 12:21:57</div><nav class="page-links"><a href="https://www.douyin.com/video/7157229349916249352" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Python金融数据分析：股票波动率的计算与绘制</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7157229349916249352">https://www.douyin.com/video/7157229349916249352</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本节课讲解使用Python计算和绘制股票波动率曲线。波动率是金融资产价格波动程度的度量，反映收益率不确定性，是期权定价和资产配置的关键因素。课程介绍了基于方差和标准差的简单计算方法，通过pandas对交易数据进行重采样填充缺失日期，计算30日收益率标准差并绘制波动率曲线，以工行为例分析其低风险特征。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>波动率的定义与性质</strong>
+波动率是金融资产价格的波动程度，是对资产收益率不确定性的度量，用于反映金融资产的风险水平。波动率越高，价格波动越剧烈，收益率不确定性越强；波动率越低，价格波动越平缓，收益率确定性越强。</p>
+</li>
+<li>
+<p><strong>波动率的研究意义</strong>
+波动率是期权定价和资产配置的关键因素。在资产配置时，对各股票分配资金设置权重，除参考历史收益率外，历史波动率也是重要参考指标。收益率和波动率一般成正相关，资产配置时需对两者进行平衡取舍。</p>
+</li>
+<li>
+<p><strong>波动率的计算方法</strong>
+采用简单的方差和标准差计算方法。由于波动率描述特定时间段内的变化，计算时只考虑一段固定时期内的收益率标准差。计算分两步：第一步计算日收益率，第二步计算日收益率在一段时期内的标准差，变量n表示天数。</p>
+</li>
+<li>
+<p><strong>Python代码实现与案例分析</strong>
+代码实现：将索引转换为日期格式，使用pandas的asfreq方法进行重采样填充缺失日期（用前一个交易日价格代替），根据重采样后的收盘价计算收益率，设置30天为时间窗口长度求收益率标准差，最后绘制波动率曲线。以工行为例，其股票价格波动率不大，最大值约2%，属于低风险金融资产。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 波动率概念与性质</h3>
+<p>本节课我们继续学习使用Python计算和绘制股票的波动率曲线。首先来看一下什么是波动率，波动率是金融资产价格的波动程度，是对资产收益率不确定性的度量，用于反映金融资产的风险水平。波动率的性质有两条：波动率的值越高，金融资产价格的波动就越剧烈，也就意味着金融资产收益率的不确定性就越强；相反，其值越低，就说明金融资产价格的波动越平缓，资产收益率的确定性就越强。</p>
+<h3>2. 波动率的意义</h3>
+<p>研究波动率有什么意义呢？波动率是期权定价和资产配置的关键因素。举个例子，在资产配置的时候，对各支股票如何分配资金设置权重的时候，除了参考历史收益率，历史波动率也是非常重要的参考。关于波动率计算的模型有很多，我们这里采用一种比较简单的计算方法，使用方差和标准差来计算。由于波动率描述了特定时间段内的变化，所以我们在计算波动率的时候，只考虑一段固定时期内的收益率标准差。标准差是一种衡量数据平均值离散程度的度量，其值越大，说明股票的历史波动率越大。通常来说，收益率和波动率一般成正相关的变量，那么在进行资产配置的时候，就要对两者之间进行一个平衡取舍。</p>
+<h3>3. 波动率计算公式</h3>
+<p>我们来看一下波动率的计算公式，分为两个步骤：第一步，先计算日收益率；第二步，计算日收益率在一段时期内的标准差。这里的变量n表示一段时期内的天数。</p>
+<h3>4. 代码实现与案例分析</h3>
+<p>现在来看一下源码代码。第一行表示将索引转换为日期格式；第二行表示对样本进行重采样，这里需要解释一下，因为股票的历史数据只有交易日的价格数据，节假日是不包含的，所以如果我们要计算最近一段时间比如30天内的收益率标准差，就必须要进行重采样，对缺失日期进行填充。这里用到了pandas中的asfreq方法；第三行代码我们在前面课程里已经见过了，根据重采样后的收盘价计算收益率。我们先不着急计算波动率，先来看一下采样前后的收盘价价格有什么变化：首先是日期变得连续了，其次缺失日期的价格就用了前一个交易日的价格来代替。第四行代码，我们设置30天作为时间窗口的长度，求收益率的标准差，最后将计算得到的收益率data.std绘制出来就得到了波动率曲线。可以看出工行的股票价格波动率其实不大，最大值大概2%，属于低风险的金融资产。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化金融</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">Python数据分析</span></li>
+<li><span class="wikilink">Python</span></li>
+<li><span class="wikilink">波动率计算</span></li>
+<li><span class="wikilink">金融教育</span></li>
+<li><span class="wikilink">波动率</span></li>
+<li><span class="wikilink">标准差</span></li>
+<li><span class="wikilink">资产配置</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>本节课我们继续学习使用python计算和绘制股票的波动率曲线。那么首先来看一下什么是波动率，波动率是金融资产价格的波动程度，是对资产收益率不确定性的度量，用于反映金融资产的风险水平。波动率的性质有两条，波动率的值越高，金融资产价格的波动就越剧烈，也就意味着金融资产收益率的不确定性就越强。相反，其值越低，就说明金融资产价格的波动越平缓，资产收益率的确定性就越强。研究波动率有什么意义呢？波动率是期权定价和资产分配的关键因素。举个例子，在资产配置的时候，对各支股票如何分配资金设置权重的时候，除了参考历史收益率，历史波动率也是非常重性的时候。关于波动率计算的模型有很多，我们这里采用一种比较简单的计算方法，使用方差和标准差来计算。由于波动率描述了特定时间段内的变化，所以我们在计算波动率的时候，只考虑一段固定时期内的收益率标准差。标准差是一种衡量数据平均值离散程度的度量，其值越大，说明股票的历史波动率越大。通常来说，收益率和波动率是一堆成正相关的变量，那么在进行资产配置的时候，就要对两者之间进行一个平衡取舍。我们来看一下波动率的计算公式分为两个步骤，第一步，先计算日收益率，第二步，计算日收益率在一段时期内的标准差。这里的变量n表示一段时期内的天数，现在来看一下源码代码。第一行表示，将索引转换为日期，格式代码，第二行表示对样本进行重新采样，这里需要解释一下，因为股票的历史数据只有交易日的价格，数据，节假日是不包含的。所以如果我们要计算最近一段时间，比如三十天内的收益率标准差，就必须要进行生采样，对缺失日期进行填充。这里用到了pandas中的as frank方法，第三行代码，我们在前面课程里已经见过了。根据重采样后的收盘价计算收益率，我们先不着急计算波动率。我们先来看一下采样前后的收盘价价格有什么变化。首先是日期变得连续了。其次，缺失日期的价格就用了前一个交易日的价格来代替。看第四行代码，我们设置三十天作为时间窗口的长度，求收益率的标准差，最后将计算得到的收益率。Data STD绘制出来就得到了波动力曲线。可以看出工行的股票价格波动率其实不大，最大值大概百分之二，属于低风险的金融资产。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

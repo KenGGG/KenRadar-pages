@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>#量化分析 #量化投资  #量化金融 #大数据推荐给有需要的人 #量化交易｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2022-11-02_使用Python绘制QQ图判断正态分布_7161358877458500899.md · 发布于 2026-08-05 12:21:22</div><nav class="page-links"><a href="https://www.douyin.com/video/7161358877458500899" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>使用Python绘制QQ图判断正态分布</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7161358877458500899">https://www.douyin.com/video/7161358877458500899</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本节课程讲解如何使用Python的SciPy库绘制QQ图，通过比较样本分位数与理论分位数来判断数据是否服从正态分布，并以股票价格数据为例进行演示。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>QQ图的基本原理</strong>
+QQ图是一种概率分布图，通过将两个概率分布相互做图来比较分布的图形化方法。本质是散点图，横坐标为某一样本的分位数，纵坐标为另一个样本的分位数。若散点落在直线Y=X附近，说明样本符合正态分布，直线斜率代表样本标准差，截距代表样本均值。</p>
+</li>
+<li>
+<p><strong>Python代码实现</strong>
+绘制QQ图需要调用SciPy中的stats模块，绘图函数为probplot。代码导入依赖包，将数据转为百分比，创建画布并添加子图，调用probplot函数绘制QQ图，对比分布设为标准正态分布(norm)。</p>
+</li>
+<li>
+<p><strong>结果解读与总结</strong>
+当所有点完全落在红线上，说明数据分布与正态分布完美对应；当多数数据在分位数值介于±2之间时，说明两个样本分布接近完美相关。QQ图通常比直方图更具诊断性，用于将数据集合理论模型进行比较。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 课程导入与QQ图原理</h3>
+<p>本节课学习使用Python绘制QQ图。大家还记得我们前面课程绘制过股票价格分布的直方图，当时说这支股票的价格分布是近似正态分布的，当时是用肉眼观察它的对称性得出的结论。那么有没有一种更精确的方法来判断它是否近似正态分布呢？QQ图就是实现这种对比的一种方法。QQ图是一种概率分布图，通过将两个概率分布相互做图，来比较两个概率分布的图形化方法。QQ图本质是一种散点图，横坐标为某一样本的分位数，纵坐标是另一个样本的分位数。回到之前的例子，如果我们要验证某只公司的股票价格分布是否近似正态分布，那么我们就可以设置横坐标为标准正态分布的分位数，纵坐标为公司价格的分位数。如果散点图落在直线Y等于X附近，也就是图中这条红线，就说明该标的样本符合正态分布，并且直线斜率代表样本标准差，截距代表样本均值。</p>
+<h3>2. Python代码实现</h3>
+<p>我们来看一下代码。绘制QQ图需要调用SciPy中的stats，用到的绘图函数是probplot。代码的前两行导入相应的依赖包，第三行表示将Data中的数据都转为百分比，第四行表示绘图的画布是一个八乘四的网格，第五行表示向画布中添加唯一的子图，代码111表示这是唯一的子图，第六行调用stats中的probplot函数绘制QQ图，这里作为对比的分布是标准正态分布，norm表示标准正态分布，最后一行将图像绘制出来。</p>
+<h3>3. 结果解读与总结</h3>
+<p>看一下运行结果，当所有点都完全落在红线上，说明数据分布与正态分布完美对应。当多数数据在分位数值介于正负2之间时，说明两个样本的分布接近于完美相关。由此可见我们所研究的公司股票价格数据，其分布是近似正态分布的。最后做个总结，QQ图通常比比较样本的直方图更具有诊断性，通常用于将数据集合理论模型进行比较。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">量化投资</span></li>
+<li><span class="wikilink">量化金融</span></li>
+<li><span class="wikilink">Python</span></li>
+<li><span class="wikilink">统计分析</span></li>
+<li><span class="wikilink">QQ图</span></li>
+<li><span class="wikilink">正态分布</span></li>
+<li><span class="wikilink">分位数</span></li>
+<li><span class="wikilink">SciPy</span></li>
+<li><span class="wikilink">probplot</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>本节课学习使用Pathol绘制QQ图。大家还记得我们前面课程绘制过股票价格分布的直方图。当时我们说这支股票的价格分布是近似正态分布的。当时我们是用肉眼观察它的对称性得出的结论。那么有没有一种更精确的方法来判断它是否近似正态分布呢?QQ图就是实现这种对比的一种方法。QQ图是一种概率分布图。通过将两个概率分布相互做图, 来比较两个概率分布的图形化方法 QQ图本质是一种散点图 横坐标为某一样本的分位数 纵坐标是另一个样本的分位数 回到之前的例子 如果我们要验证 公行的股票价格分布是否近似正台分布 那么我们就可以设置横坐标为 标准正台分布的分位数 纵坐标为公行价格的分位数 如果散点图落在直线Y等于X附近 也就是图中这条红线 就说明重作标的样本符合正态分布 并且直线写率代表样本标准差 结局代表样本均值 我们来看一下圆码 绘制QQ图需要调用SidePay中的Status 用到的绘图函数是ProperPlot 代码的前两行导入相应的依赖包 第三行表示将Data中的数据都转为百分比 第四行表示绘图的画布是一个八成四的网格 第五行表示向画布中添加唯一的字图 代码111表示这是唯一的字图 第六行调用Status中的ProbPlot函数绘制QQ图 这里作为对比的分布是标准正态分布 NUM表示标准正态分布 最后一行将图像绘制出来 看一下运行结果 当所有点都完全落在红线上 说明数据分布与正态分布完美对应 当多数数据在分位数值介于FAR的2之间时 说明两个样本的分布接近于完美相关 由此可见我们所研究的共航股票价格数据 其分布是近似正态分布的 最后做个总结 QQ图通常比比较样本的直方图更具有证断性 通常用于将数据集合理论模型进行比较</p>
+</blockquote>
+</details></main>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>量化Quantgirl｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">research_量化Quantgirl_20260805_1226.md · 发布于 2026-08-05 12:26:51</div><nav class="page-links"><a href="../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>研究报告 | 量化Quantgirl | 2026-08-05 12:26</h1>
+<h2>任务概况</h2>
+<ul>
+<li>任务 ID: 40</li>
+<li>研究博主: 量化Quantgirl</li>
+<li>抓取作品: 83</li>
+<li>处理成功: 37</li>
+<li>失败: 0</li>
+<li>跳过: 46</li>
+</ul>
+<h2>阶段分布</h2>
+<ul>
+<li>skipped: 46</li>
+<li>success: 37</li>
+</ul>
+<h2>成功条目索引</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>标题</th>
+<th>发布时间</th>
+<th>笔记</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>【论文分享】趋势策略如何过成本 这篇论文《The Science and Practice of Trend-Following Systems (2026)》把趋势跟踪拆成可归因问题：收益到底来自漂移，还是收益持续性？  1 方法 作者先将收益按滞后波动率标准化，再用连续EWMA信号建仓。理论上，预期收益由加权滞后自相关与漂移平方构成：即使没有正漂移，只要低频正自相关足够强，趋势也可能有正期望。回看期本质是频率选择器：越长越聚焦低频、换手通常越低。  2 回测发现 在84个流动性期货合约中，理论夏普与欧式趋势系统回测夏普的汇总相关性为0.99，回归斜率为0.96。短记忆的统计可预测性，可能被成本吞没；长记忆更可能支持长周期信号。  3 学习点 别先找“万能均线”：先看标准化收益的自相关、频谱和成本。正偏度也可能由滞后、自适应仓位内生形成，不等于能预测危机。  ❗风险提示：以上是论文样本内回测与理论解读，不构成投资建议。  #量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant #量化策略  #好视频扶持计划</td>
+<td>2026-07-31 20:32:10</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2026-07-31_%E3%80%90%E8%AE%BA%E6%96%87%E5%88%86%E4%BA%AB%E3%80%91%E8%B6%8B%E5%8A%BF%E7%AD%96%E7%95%A5%E5%A6%82%E4%BD%95%E8%BF%87%E6%88%90%E6%9C%AC_%E8%BF%99%E7%AF%87%E8%AE%BA%E6%96%87%E3%80%8AThe_Science_and_Pra_7668668933397875987.html">2026-07-31_【论文分享】趋势策略如何过成本_这篇论文《The_Science_and_Pra_7668668933397875987.md</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>【论文分享】机器学习破解可转债非线性收益 这篇论文《Convertible bond return predictability with machine learning》测试了机器学习能否预测可转债横截面收益。  1️⃣ 为什么研究可转债？兼具债股期权性质，收益非线性，传统定价常失灵。中国可转债市场万亿规模，个人投资者为主，套利限制多，为机器学习提供用武之地。  2️⃣ 方法论：作者构建56个转债与正股特征，测试13种模型（线性、树、神经网络）。采用滚动窗口，2017-2018训练，2019验证，2020-2022样本外测试。  3️⃣ 发现 ✅ NN1样本外R² 1.85%，显著优于OLS(0.83%)。 ✅ NN2多空周回报0.65%，年化夏普2.62，扣除成本稳健，纯多头也有效。 ✅ 高波动低流动性时更强。 ✅ 滞后收益与价格是核心变量。  4️⃣ 增强传统模型：机器学习信号与BS/TF模型定价误差结合，多空收益从0.36%跃至0.78%~0.80%，证明机器学习捕捉了传统模型外的非线性信息。  ⚠️ 请注意，以上均为基于历史数据的回测结果，不构成任何投资建议。市场有风险，实际交易需谨慎。  #量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant #量化策略</td>
+<td>2026-07-17 23:17:54</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2026-07-17_%E3%80%90%E8%AE%BA%E6%96%87%E5%88%86%E4%BA%AB%E3%80%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%A0%B4%E8%A7%A3%E5%8F%AF%E8%BD%AC%E5%80%BA%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%94%B6%E7%9B%8A_%E8%BF%99%E7%AF%87%E8%AE%BA%E6%96%87%E3%80%8AConvertible_bo_7663516400257994010.html">2026-07-17_【论文分享】机器学习破解可转债非线性收益_这篇论文《Convertible_bo_7663516400257994010.md</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>【论文分享】扩散模型一键生成风险组合 这篇论文《Diffusion Models for Risk-Aware Portfolio Optimization》（WSDM 2026）提出Diffolio框架，首次用扩散模型直接生成风险可控的投资组合，跳过了传统“先预测价格再优化”的繁琐流程。用户只需指定风险等级（0最保守，4最激进），模型就能端到端采样出多样化的资产权重。  在美股、A股、加密货币等六个市场回测中，Diffolio年化收益率最高提升12.1个百分点，夏普比率、最大回撤等指标全面领先。消融实验表明，内置的风险引导机制能保证实际风险与目标高度一致，避免错配。  ⚠️ 历史回测不代表未来表现，文中方法与结论仅供学习交流，不构成投资建议。请理性评估风险。  #量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant #量化策略</td>
+<td>2026-07-13 00:56:32</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2026-07-13_%E3%80%90%E8%AE%BA%E6%96%87%E5%88%86%E4%BA%AB%E3%80%91%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E4%B8%80%E9%94%AE%E7%94%9F%E6%88%90%E9%A3%8E%E9%99%A9%E7%BB%84%E5%90%88_%E8%BF%99%E7%AF%87%E8%AE%BA%E6%96%87%E3%80%8ADiffusion_Models_7661686376735182114.html">2026-07-13_【论文分享】扩散模型一键生成风险组合_这篇论文《Diffusion_Models_7661686376735182114.md</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>【开源解读】xPatch双流横扫长序列 这个开源仓库 stitsyuk/xPatch 是 AAAI 2025 论文《xPatch: Dual-Stream Time Series Forecasting with Exponential Seasonal-Trend Decomposition》的官方实现。它利用指数移动平均对时序进行季节-趋势分解，并构建线性（MLP）与非线性（CNN）双流网络，在多个长序列预测基准上取得最优 MSE。仓库提供了完整训练、超参搜索与公平实验脚本，支持多变量预测及 RevIN 标准化。快速启动：用 environment.yml 创建 conda 环境，数据集放入 ./dataset，执行 bash scripts/xPatch_search.sh 即可训练。模型擅长天气、交通、电力等长序列预测；需注意显存要求较高，超参搜索可能需调参经验。历史实验效果不代表所有场景，使用时建议谨慎验证。  #量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant #量化策略</td>
+<td>2026-07-05 13:39:00</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2026-07-05_%E3%80%90%E5%BC%80%E6%BA%90%E8%A7%A3%E8%AF%BB%E3%80%91xPatch%E5%8F%8C%E6%B5%81%E6%A8%AA%E6%89%AB%E9%95%BF%E5%BA%8F%E5%88%97_%E8%BF%99%E4%B8%AA%E5%BC%80%E6%BA%90%E4%BB%93%E5%BA%93_stitsyuk_xPat_7658914249724448027.html">2026-07-05_【开源解读】xPatch双流横扫长序列_这个开源仓库_stitsyuk_xPat_7658914249724448027.md</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>【职业规划】理工本科生量化职业路径 我们基于2024—2026公开行业数据与多家头部校招要求，整理了一份清醒版职业规划笔记📌 1️⃣ 行业底色 2026Q1量化私募规模保守破1.8万亿，百亿机构61家，赛道确实在扩容；但2025指数增强超额、百亿私募收益处在强势行情高位，2026年已有均值回归迹象——别把一年高光当常态❗ 2️⃣ 真实门槛 硕士起步是常态，核心策略岗博士偏好明显；开发/数据岗顶尖硕士仍有机会。AI、计算机（ML方向）、数据科学居专业第一梯队。 3️⃣ 大一大二先做啥 优先：数学编程课 + Python工具栈 + 跑通一个可复现小回测 其次：数学建模/Kaggle、英语与文献阅读 大二再：实验室、竞赛、暑期实习探索 4️⃣ 薪酬别上头 公开信息里应届硕士总包常见50—80万区间，但头部研究员录取率仅约0.5%，个案高薪幸存者偏差严重💡 我们强调的是T型能力：一两个环节做深，同时看懂从数据到实盘的全链条。公开资料整理，仅供学习交流，不构成求职或投资建议。 #量化交易  #职业规划  #量化  #量化求职  #理工本科生 #新兴专业主理人</td>
+<td>2026-07-04 12:33:34</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2026-07-04_%E7%90%86%E5%B7%A5%E6%9C%AC%E7%A7%91%E7%94%9F%E9%87%8F%E5%8C%96%E8%81%8C%E4%B8%9A%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92_7658526287111245056.html">2026-07-04_理工本科生量化职业路径规划_7658526287111245056.md</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>【论文分享】转型能源市场非线性预测 这篇论文《Nonlinear and Heavy-Tailed Predictability in Transition-Energy Financial Markets》(2026) 发现，传统高斯线性模型在面临市场极端波动时，往往低估尾部风险。作者提出一种“学生t-VAR+递归残差学习”的混合框架：先用量化模型捕捉重尾线性关联，再用 LSTM/GRU 来学习残差里残留的非线性模式。  在覆盖美股宽基、科技、化石能源、清洁能源和公用事业等六只代表性 ETF 的回测中，该混合模型在所有标的上的预测误差都最低，比纯线性模型降低约 33%。更有意思的是，这种提升在压力期最显著——疫情危机期间，清洁能源和化石能源标的的预测精度提升超 46%。这说明对转型资产做压力测试时，只靠线性假设可能系统性低估非线性放大风险。  ⚠️ 提醒：论文结论基于历史样本回测，所有统计结果均不代表未来表现，不构成投资建议。本文仅为学习分享，探讨方法本身。  #量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant #量化策略</td>
+<td>2026-06-29 21:12:35</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2026-06-29_%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB%EF%BC%9A%E8%BD%AC%E5%9E%8B%E8%83%BD%E6%BA%90%E5%B8%82%E5%9C%BA%E9%9D%9E%E7%BA%BF%E6%80%A7%E9%A2%84%E6%B5%8B%E4%B8%8E%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B%E6%A1%86%E6%9E%B6_7656804596391709987.html">2026-06-29_论文解读：转型能源市场非线性预测与混合模型框架_7656804596391709987.md</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>【论文分享】双VQ-VAE破解因子难题 这篇论文《STORM: A Spatio-Temporal Factor Model Based on Dual Vector Quantized Variational Autoencoders for Financial Trading》被数据挖掘顶会WSDM 2026录用。作者发现传统VAE因子模型存在标量表达弱、噪声多、因子难筛选三大痛点。STORM模型用双路VQ-VAE架构，同时抓股票的时序规律和截面对比关系，再把连续特征量化为离散码本嵌入，并通过多样性损失和正交约束让因子既均衡又独立。  在DJ30和SP500样本上回测，投资组合年化收益较基线最高提升超九成，个股算法交易平均盈利提高超四成，消融实验也证实双路缺一不可。模型参数量仅15.2M，标准CPU即可跑通。需要注意的是，论文结果均基于历史回测，不代表未来表现，不同市场环境下因子有效性可能衰减。  #量化学习  #配对交易  #统计套利  #量化  #量化交易  #量化分析 #Quant #量化策略</td>
+<td>2026-06-25 18:41:16</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2026-06-25_%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB%EF%BC%9ASTORM%E5%8F%8CVQ-VAE%E6%97%B6%E7%A9%BA%E5%9B%A0%E5%AD%90%E6%A8%A1%E5%9E%8B_7655281295794130214.html">2026-06-25_论文解读：STORM双VQ-VAE时空因子模型_7655281295794130214.md</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>【论文分享】多周期学习提升金融预测精度 这篇论文《Multi-period Learning for Financial Time Series Forecasting》发表于KDD 2025，作者发现金融时序（如基金销量）同时受短期热点与中长期趋势驱动，单一窗口难免顾此失彼。为此提出多周期学习框架MLF，包含三项关键设计：  📌多周期自适应切片（MAP）让不同周期分块数量相等，避免模型偏袒长周期。 📌跨周期冗余过滤（IRF）抑制相似片段注意力，聚焦互补信息。 📌可学习加权集成（LWI）自适应分配各周期预测权重。  在支付宝基金销售数据集上，MLF短期预测MSE较PatchTST下降7.7%，WMAPE从81.05降至75.84；训练速度比Scaleformer快3.6倍。论文还提到，该框架已部署于真实基金库存系统，预测未来5天销量，部署后WMAPE相对提升5.16%，GMV改善0.84%。  ⚠️历史回测效果不构成投资建议，实际市场受多因素影响，论文方法主要体现架构创新而非保证收益。  #量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析  #Quant  #量化策略</td>
+<td>2026-06-22 19:43:05</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2026-06-22_KDD_2025%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB%EF%BC%9A%E5%A4%9A%E5%91%A8%E6%9C%9F%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6MLF%E6%8F%90%E5%8D%87%E9%87%91%E8%9E%8D%E6%97%B6%E5%BA%8F%E9%A2%84%E6%B5%8B%E7%B2%BE%E5%BA%A6_7654183969264520474.html">2026-06-22_KDD_2025论文解读：多周期学习框架MLF提升金融时序预测精度_7654183969264520474.md</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>【量化论文】路径签名分解方法在配对交易中的应用 题目：Signature Decomposition Method Applying to Pair Trading（2025）  #量化学习  #配对交易  #统计套利  #量化  #量化交易</td>
+<td>2026-05-22 16:21:48</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2026-05-22_%E9%87%8F%E5%8C%96%E8%AE%BA%E6%96%87%EF%BC%9A%E8%B7%AF%E5%BE%84%E7%AD%BE%E5%90%8D%E5%88%86%E8%A7%A3%E6%96%B9%E6%B3%95%E5%9C%A8%E9%85%8D%E5%AF%B9%E4%BA%A4%E6%98%93%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8_7642628452222340392.html">2026-05-22_量化论文：路径签名分解方法在配对交易中的应用_7642628452222340392.md</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>P1-编程快速上手 #教会闺蜜 #量化交易</td>
+<td>2025-10-02 11:52:21</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2025-10-02_%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%85%A5%E9%97%A8%EF%BC%9APython%E7%BC%96%E7%A8%8B%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B_7556467219169889536.html">2025-10-02_量化交易入门：Python编程快速上手_7556467219169889536.md</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>教会闺蜜量化交易 P0-大纲预备#开学我又有招了 #开学基础开学的vlog就不基础</td>
+<td>2025-09-29 13:00:35</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2025-09-29_%E4%B8%AA%E4%BA%BA%E8%83%8C%E6%99%AF%E4%B8%8E%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91_7555371573612432667.html">2025-09-29_个人背景与研究方向_7555371573612432667.md</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>量化人的小助手｜官方正版的ios端ChatGPT来了 #chatgpt应用领域 #人工智能 #python #ChatGPT #量化交易</td>
+<td>2023-05-21 00:27:54</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2023-05-21_%E9%87%8F%E5%8C%96%E4%BA%BA%E7%9A%84%E5%B0%8F%E5%8A%A9%E6%89%8B%EF%BD%9C%E5%AE%98%E6%96%B9%E6%AD%A3%E7%89%88%E7%9A%84iOS%E7%AB%AFChatGPT%E6%9D%A5%E4%BA%86_7235302138052726031.html">2023-05-21_量化人的小助手｜官方正版的iOS端ChatGPT来了_7235302138052726031.md</a></td>
+</tr>
+<tr>
+<td>13</td>
+<td>Chatgpt｜电子书翻译  #chatgpt #人工智能 #双语翻译 #翻译 #电子书翻译</td>
+<td>2023-05-06 20:46:30</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2023-05-06_GitHub%E5%BC%80%E6%BA%90%E4%B9%A6%E7%B1%8D%E7%BF%BB%E8%AF%91%E5%B7%A5%E5%85%B7Bookmaker%E5%88%86%E4%BA%AB_7230049962321595683.html">2023-05-06_GitHub开源书籍翻译工具Bookmaker分享_7230049962321595683.md</a></td>
+</tr>
+<tr>
+<td>14</td>
+<td>Python金融数据分析｜P11-套利定价模型  #python #金融 #量化 #量化交易 #量化分析</td>
+<td>2023-04-22 11:08:40</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2023-04-22_Python%E9%87%91%E8%9E%8D%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BD%9C%E5%A5%97%E5%88%A9%E5%AE%9A%E4%BB%B7%E6%A8%A1%E5%9E%8B%EF%BC%88APT%EF%BC%89%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0_7224705838588513588.html">2023-04-22_Python金融数据分析｜套利定价模型（APT）原理与实现_7224705838588513588.md</a></td>
+</tr>
+<tr>
+<td>15</td>
+<td>Python金融数据分析｜P10-投资者必知的两个概念SML和CML #python #python编程 #金融 #数据分析 #量化交易</td>
+<td>2023-03-25 02:03:21</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2023-03-25_Python%E9%87%91%E8%9E%8D%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%9A%E8%AF%81%E5%88%B8%E5%B8%82%E5%9C%BA%E7%BA%BFSML%E4%B8%8E%E8%B5%84%E6%9C%AC%E5%B8%82%E5%9C%BA%E7%BA%BFCML%E8%AF%A6%E8%A7%A3_7214174723742141711.html">2023-03-25_Python金融数据分析：证券市场线SML与资本市场线CML详解_7214174723742141711.md</a></td>
+</tr>
+<tr>
+<td>16</td>
+<td>Chatgpt搭建的，懒人适用量化系统。  #chatgpt应用领域 #python #编程 #量化 #量化交易</td>
+<td>2023-03-13 23:52:24</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2023-03-13_ChatGPT%E6%90%AD%E5%BB%BA%E7%9A%84%E6%87%92%E4%BA%BA%E9%80%82%E7%94%A8%E9%87%8F%E5%8C%96%E5%9B%9E%E6%B5%8B%E7%B3%BB%E7%BB%9F_7210059221948288296.html">2023-03-13_ChatGPT搭建的懒人适用量化回测系统_7210059221948288296.md</a></td>
+</tr>
+<tr>
+<td>17</td>
+<td>你可能低估了这款英语APP#英语口语 #每天学习英语一点点 #口语天天练 #英语</td>
+<td>2023-02-28 23:25:53</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2023-02-28_%E8%8B%B1%E8%AF%AD%E5%8F%A3%E8%AF%AD%E7%BB%83%E4%B9%A0APP%E6%8E%A8%E8%8D%90%EF%BC%9ADaily_English_Listening_7205227886700137765.html">2023-02-28_英语口语练习APP推荐：Daily_English_Listening_7205227886700137765.md</a></td>
+</tr>
+<tr>
+<td>18</td>
+<td>量化博主的万粉之路。进度7946/10000。  #python编程 #python量化#量化投资 #量化交易 #量化金融</td>
+<td>2023-02-27 21:13:09</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2023-02-27_%E9%87%8F%E5%8C%96%E5%8D%9A%E4%B8%BB%E4%B8%87%E7%B2%89%E4%B9%8B%E8%B7%AF%EF%BC%9A%E5%8D%8A%E5%B9%B4%E5%88%9B%E4%BD%9C%E6%88%90%E6%9E%9C%E5%88%86%E4%BA%AB_7204823040092376335.html">2023-02-27_量化博主万粉之路：半年创作成果分享_7204823040092376335.md</a></td>
+</tr>
+<tr>
+<td>19</td>
+<td>ChatGPT使用教程来咯——人机交流  #ai聊天程序chatgpt爆红 #chatgpt应用领域 #chatgpt #chatgpt聊天 #chatgpt有多能聊</td>
+<td>2023-02-24 22:40:58</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2023-02-24_ChatGPT%E5%AF%B9%E8%AF%9D%E4%BA%A4%E6%B5%81%E5%8A%9F%E8%83%BD%E8%A7%A3%E6%9E%90%E4%B8%8E%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE_7203732379607911680.html">2023-02-24_ChatGPT对话交流功能解析与使用建议_7203732379607911680.md</a></td>
+</tr>
+<tr>
+<td>20</td>
+<td>分享｜20秒教会你用AI生成专属Logo  #AI #logo设计 #logo生成神器 #ai绘画为创作者提供灵感</td>
+<td>2023-01-29 18:17:48</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2023-01-29_20%E7%A7%92%E5%AD%A6%E4%BC%9A%E7%94%A8AI%E7%94%9F%E6%88%90%E4%B8%93%E5%B1%9ELogo_7194016365294964020.html">2023-01-29_20秒学会用AI生成专属Logo_7194016365294964020.md</a></td>
+</tr>
+<tr>
+<td>21</td>
+<td>Python金融数据分析｜P9-资本资产定价模型 #python #量化交易 #量化投资 #量化分析 #python数据分析</td>
+<td>2023-01-02 11:40:04</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2023-01-02_Python%E9%87%91%E8%9E%8D%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BD%9CCAPM%E8%B5%84%E6%9C%AC%E8%B5%84%E4%BA%A7%E5%AE%9A%E4%BB%B7%E6%A8%A1%E5%9E%8B_7183894549779975476.html">2023-01-02_Python金融数据分析｜CAPM资本资产定价模型_7183894549779975476.md</a></td>
+</tr>
+<tr>
+<td>22</td>
+<td>Python金融数据分析｜P8-量化技术指标:移动平均线 #量化分析 #量化交易 #python #量化金融 #技术指标</td>
+<td>2022-11-19 09:07:34</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-11-19_Python%E9%87%8F%E5%8C%96%E6%8A%80%E6%9C%AF%E6%8C%87%E6%A0%87%EF%BC%9A%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%9D%87%E7%BA%BF%EF%BC%88SMA%E4%B8%8EEMA%EF%BC%89_7167527510933015843.html">2022-11-19_Python量化技术指标：移动平均线（SMA与EMA）_7167527510933015843.md</a></td>
+</tr>
+<tr>
+<td>23</td>
+<td>Python金融数据分析｜P7-投资界的圣杯 #量化分析 #量化交易 #量化金融 #量化投资 #量化策略</td>
+<td>2022-11-12 00:25:57</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-11-12_Python%E9%87%91%E8%9E%8D%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%9A%E8%82%A1%E7%A5%A8%E7%9B%B8%E5%85%B3%E6%80%A7%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%BB%9A%E5%8A%A8%E7%9B%B8%E5%85%B3%E6%80%A7%E5%8F%AF%E8%A7%86%E5%8C%96_7164795497201372451.html">2022-11-12_Python金融数据分析：股票相关性计算与滚动相关性可视化_7164795497201372451.md</a></td>
+</tr>
+<tr>
+<td>24</td>
+<td>#量化分析 #量化投资  #量化金融 #大数据推荐给有需要的人 #量化交易</td>
+<td>2022-11-02 18:10:03</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-11-02_%E4%BD%BF%E7%94%A8Python%E7%BB%98%E5%88%B6QQ%E5%9B%BE%E5%88%A4%E6%96%AD%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83_7161358877458500899.html">2022-11-02_使用Python绘制QQ图判断正态分布_7161358877458500899.md</a></td>
+</tr>
+<tr>
+<td>25</td>
+<td>Python金融数据分析｜P5-绘制股票波动率 #量化金融 #量化分析 #量化交易 #Python数据分析 #Python</td>
+<td>2022-10-22 15:05:43</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-10-22_Python%E9%87%91%E8%9E%8D%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%9A%E8%82%A1%E7%A5%A8%E6%B3%A2%E5%8A%A8%E7%8E%87%E7%9A%84%E8%AE%A1%E7%AE%97%E4%B8%8E%E7%BB%98%E5%88%B6_7157229349916249352.html">2022-10-22_Python金融数据分析：股票波动率的计算与绘制_7157229349916249352.md</a></td>
+</tr>
+<tr>
+<td>26</td>
+<td>Python金融数据分析｜P1-获取股票历史数据  #量化交易 #量化分析 #量化金融  #Python数据分析#Python</td>
+<td>2022-10-22 15:02:10</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-10-22_Python%E9%87%91%E8%9E%8D%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%85%A5%E9%97%A8_7157228478906043684.html">2022-10-22_Python金融数据分析课程介绍与数据获取入门_7157228478906043684.md</a></td>
+</tr>
+<tr>
+<td>27</td>
+<td>Python金融数据分析｜P4-绘制股票收益率 #量化金融 #量化分析 #量化交易 #Python数据分析 #Python</td>
+<td>2022-10-22 14:59:39</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-10-22_Python%E7%BB%98%E5%88%B6%E8%82%A1%E7%A5%A8%E6%94%B6%E7%9B%8A%E7%8E%87%E5%9B%BE%E8%A1%A8%EF%BC%9A%E6%97%A5%E6%94%B6%E7%9B%8A%E7%8E%87%E3%80%81%E7%B4%AF%E8%AE%A1%E6%94%B6%E7%9B%8A%E7%8E%87%E4%B8%8E%E7%9B%B4%E6%96%B9%E5%9B%BE_7157227821637717256.html">2022-10-22_Python绘制股票收益率图表：日收益率、累计收益率与直方图_7157227821637717256.md</a></td>
+</tr>
+<tr>
+<td>28</td>
+<td>Python金融数据分析｜P2-绘制收盘价和交易量  #量化金融 #量化分析 #量化交易 #Python数据分析</td>
+<td>2022-10-22 14:53:17</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-10-22_Python%E9%87%91%E8%9E%8D%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%9A%E7%BB%98%E5%88%B6%E6%94%B6%E7%9B%98%E4%BB%B7%E4%B8%8E%E4%BA%A4%E6%98%93%E9%87%8F%E5%9B%BE%E8%A1%A8_7157226164849790216.html">2022-10-22_Python金融数据分析：绘制收盘价与交易量图表_7157226164849790216.md</a></td>
+</tr>
+<tr>
+<td>29</td>
+<td>Python金融数据分析｜P3-绘制K线图  #量化金融 #量化分析 #量化交易 #Python数据分析</td>
+<td>2022-10-22 14:46:38</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-10-22_Python%E7%BB%98%E5%88%B6K%E7%BA%BF%E5%9B%BE%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0_7157224457793277191.html">2022-10-22_Python绘制K线图教程：从原理到代码实现_7157224457793277191.md</a></td>
+</tr>
+<tr>
+<td>30</td>
+<td>量化交易入门｜P3-金融篇   #量化交易 #量化金融 #量化分析</td>
+<td>2022-10-22 14:16:23</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-10-22_%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%85%A5%E9%97%A8%EF%BD%9C%E9%87%91%E8%9E%8D%E7%AF%87_7157216635907034375.html">2022-10-22_量化交易入门｜金融篇_7157216635907034375.md</a></td>
+</tr>
+<tr>
+<td>31</td>
+<td>量化交易入门｜P2-编程篇  #量化交易 #量化分析 #量化金融</td>
+<td>2022-10-22 14:00:01</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-10-22_%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%85%A5%E9%97%A8%EF%BD%9C%E7%BC%96%E7%A8%8B%E7%AF%87_7157212438289534222.html">2022-10-22_量化交易入门｜编程篇_7157212438289534222.md</a></td>
+</tr>
+<tr>
+<td>32</td>
+<td>量化交易入门｜P1-数学篇  #量化交易#量化金融 #量化分析 #quant</td>
+<td>2022-10-22 13:56:58</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-10-22_%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93%E5%85%A5%E9%97%A8%EF%BD%9C%E6%95%B0%E5%AD%A6%E7%AF%87_7157211669045710088.html">2022-10-22_量化交易入门｜数学篇_7157211669045710088.md</a></td>
+</tr>
+<tr>
+<td>33</td>
+<td>MacBook Air 2022 M2 Starlight星光色开箱</td>
+<td>2022-07-28 17:57:33</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-07-28_MacBook_Air_2022_M2_%E6%98%9F%E5%85%89%E8%89%B2%E5%BC%80%E7%AE%B1%E4%BD%93%E9%AA%8C_7125360273052945702.html">2022-07-28_MacBook_Air_2022_M2_星光色开箱体验_7125360273052945702.md</a></td>
+</tr>
+<tr>
+<td>34</td>
+<td>摄影日常</td>
+<td>2022-06-29 23:44:48</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-06-29_%E6%91%84%E5%BD%B1%E6%97%A5%E5%B8%B8_7114688371561106699.html">2022-06-29_摄影日常_7114688371561106699.md</a></td>
+</tr>
+<tr>
+<td>35</td>
+<td>打卡~新加坡国博~#博物馆</td>
+<td>2022-05-27 17:57:08</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-05-27_%E6%96%B0%E5%8A%A0%E5%9D%A1%E5%9B%BD%E5%8D%9A%E6%89%93%E5%8D%A1%E8%A7%86%E9%A2%91_7102353018724666665.html">2022-05-27_新加坡国博打卡视频_7102353018724666665.md</a></td>
+</tr>
+<tr>
+<td>36</td>
+<td>泰拳五米绷带的专业缠法#泰拳 #泰拳绷带 #五米绷带缠法 #运动</td>
+<td>2022-04-29 13:59:26</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-04-29_%E6%B3%B0%E6%8B%B3%E4%BA%94%E7%B1%B3%E7%BB%B7%E5%B8%A6%E4%B8%93%E4%B8%9A%E7%BC%A0%E6%B3%95%E6%95%99%E5%AD%A6_7091901369786895651.html">2022-04-29_泰拳五米绷带专业缠法教学_7091901369786895651.md</a></td>
+</tr>
+<tr>
+<td>37</td>
+<td>未知</td>
+<td>2022-01-22 18:51:45</td>
+<td><a href="https://kenggg.github.io/KenRadar-pages/notes/douyin/%E9%87%8F%E5%8C%96Quantgirl/2022-01-22_%E5%AD%97%E5%B9%95%E5%BF%97%E6%84%BF%E8%80%85%E7%BD%B2%E5%90%8D_7055981437790555392.html">2022-01-22_字幕志愿者署名_7055981437790555392.md</a></td>
+</tr>
+</tbody>
+</table>
+<h2>失败条目</h2>
+<table>
+<thead>
+<tr>
+<th>aweme_id</th>
+<th>标题</th>
+<th>错误</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>暂无</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h2>系统说明</h2>
+<p>本报告由 KenRadar 研究博主功能自动生成，完整原稿请进入对应单条内容笔记查看。</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>量化交易入门｜P1-数学篇 
+#量化交易#量化金融 #量化分析 #quant   ｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2022-10-22_量化交易入门｜数学篇_7157211669045710088.md · 发布于 2026-08-05 12:25:34</div><nav class="page-links"><a href="https://www.douyin.com/video/7157211669045710088" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>量化交易入门｜数学篇</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7157211669045710088">https://www.douyin.com/video/7157211669045710088</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+介绍量化分析入门所需的数学基础，推荐以CFA数量方法课程作为学习框架，并对比FRM和CQF课程难度，最后提供补充书单。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>量化入门学习路径概述</strong>
+量化分析入门需要掌握三大基础：数学基础、编程基础和金融基础。学习者应根据自身学科背景设定学习路径。作者具有数学和计算机背景，因此第一步是提升金融基础知识。</p>
+</li>
+<li>
+<p><strong>三大金融证书课程对比</strong>
+作者参考CFA、FRM和CQF三个金融证书的数量分析课程。CFA一级数量方法介绍基础统计学，二级涉及复杂数学建模和机器学习/AI方法，适合新手入门，教材案例丰富。FRM知识面较窄，专业性高，侧重风险控制，建议学完CFA数量方法后再学习。CQF课程难度最大，涉及随机过程等高级内容，属于进阶课程。</p>
+</li>
+<li>
+<p><strong>补充书单推荐</strong>
+推荐三本Machine Learning必备教材：李航的《统计学习方法》、多数化的《机器学习》、协文锐的《机器学习公式详解》。非理工科背景者可先看本科教材《概率论与数理统计》。CFA中文教材也可作为参考。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场与学习路径概述</h3>
+<p>Hello大家好，本期视频来分享一下个人如何入门量化分析，需要掌握哪些基础知识。主要是三个部分：数学基础、编程基础和金融基础。因为每个人的学科背景都不一样，所以你其实是需要根据自己的专业背景来设定自己的学习路径的。以我个人为例，我有数学和计算机的专业背景，那么如果我要做量化分析的话，我的第一步就是先提升自己的金融基础知识，所以我的目光就转向了一些金融领域的专业证书。那如果你的提升目标是数学的话，你也可以参考这些金融证书中的课程框架设计来制定自己的学习路径。</p>
+<h3>2. 三大证书课程对比</h3>
+<p>我扒了三个金融界目前比较认可的证书课程，分别是CFA、FRM和CQF，我们逐一来看一下，这里只关注数量分析部分的课程。CFA一级里的数量方法主要是介绍一些基础的统计学知识，CFA二级里的数量方法就涉及到一些复杂的数学建模，用到一些机器学习和AI的方法。就我个人的感觉，CFA是比较适合新手入门的，官方教材中提供了大量的案例解析，这个课程难度比较低。如果你想要系统学习量化分析的数学知识的话，我个人是比较推荐你用CFA教材中的这个数量方法作为课程框架来制定你的学习路径图。至于另外两个证书，FRM的知识面相对比较窄，具有较高的专业性，主要是风险控制，如果有兴趣的话，你可以先学完CFA的数量方法，再继续学习FRM。然后CQF这个课程难度就大很多了，我只是看了一下模块1的介绍，虽然我本科学的都是数学专业，但是随机过程中的理论这个已经是我的知识盲区了，这个课程难度大得多，这个课程应该是进阶之后再进阶的课程了。</p>
+<h3>3. 补充书单与结尾</h3>
+<p>最后再提供一些书单，作为CFA数量方法课程的补充。一个是李航的《统计学习方法》，还有周志华的《机器学习》，薛薇的《机器学习公式详解》，这三本可以说是做Machine Learning人手必备的教材了。但是这些专业书里面都包含了大量的数学公式，如果你非理工科背景的话，可以看一些本科教材，《概率论与数理统计》。最后就是CFA的中文教材，完整的思维导图我放在评论区可供下载。如果大家有兴趣的话，下次可以聊一下量化分析入门需要哪些编程基础，拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化入门</span></li>
+<li><span class="wikilink">金融证书</span></li>
+<li><span class="wikilink">学习资源</span></li>
+<li><span class="wikilink">数学基础</span></li>
+<li><span class="wikilink">编程基础</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">CFA</span></li>
+<li><span class="wikilink">FRM</span></li>
+<li><span class="wikilink">CQF</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>Hello 大家好,本期视频来分享一下个人如何入门量化分析,需要掌握哪些基础知识。主要是三个部分,数学基础、编程基础和金融基础。因为每个人的学科背景都不一样,所以你其实是需要根据自己的专业背景来设定自己的学习路径的。以我个人为例,我有数学和计算机的专业背景。 那么如果我要做量化分析的话 我的第一步就是先提升自己的金融基础知识 所以我的目光就转向了一些金融领域的专业证书 那如果你的提升目标是数学的话 你也可以参考这些金融证书中的课程框架设计 来制定自己的学习路径 我扒了三个金融节目前比较认可的证书课程 分别是CFA、FRM和CQF 我们逐一来看一下 这里只关注数量分析部分的课程 CFA一级里的数量方法 主要是介绍一些基础的统计学知识 CFA二级里的数量方法 就涉及到一些复杂的数学建模 用到一些机器学习和AI的方法 就我个人的感觉 CFA是比较适合新手入门的 官方教材中提供了大量的案例解析 这个课程难度比较低 如果你想要系统学习量化分析的数学知识的话 我个人是比较推荐你用CFA教材中的这个数量方法 作为课程框架来制定你的学习路径图 至于另外两个征书 FRM的知识面相对比较窄 具有较高的专业性 主要是风险控制 如果有兴趣的话 你可以先学完CFA的数量方法 再继续学习FRM 然后CQF 这个课程难度就大很多了 我只是看了一下模块1的介绍 虽然我本说都是学的数学专业 但是随机过程中的央论 这个已经是我的知识盲区了 这个课程难度大得多 这个课程应该是进阶之后再进阶的课程了 最后再提供一些书单 作为CFA数量方法课程的补充 一个是立航的统计学习方法 还有多数化的机器学习 协文锐的机器学习公式详解 这三本可以说是做 Machine Learning人手必备的教材了 但是这些专业书里面 都包含了大量的数学公式 如果你费理工科背景的话 可以看一些本科教材 概略论和梳理统计 最后就是CFA的中文教材 完整的思维导图我放在评论区可供下载 如果大家有兴趣的话 下次可以聊一下 电话分析入门需要那些编程基础 拜拜</p>
+</blockquote>
+</details></main>
+</body>
+</html>

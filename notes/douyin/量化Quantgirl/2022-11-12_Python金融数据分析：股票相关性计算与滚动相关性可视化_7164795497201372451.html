@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python金融数据分析｜P7-投资界的圣杯
+#量化分析 #量化交易 #量化金融 #量化投资 #量化策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2022-11-12_Python金融数据分析：股票相关性计算与滚动相关性可视化_7164795497201372451.md · 发布于 2026-08-05 12:20:58</div><nav class="page-links"><a href="https://www.douyin.com/video/7164795497201372451" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Python金融数据分析：股票相关性计算与滚动相关性可视化</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7164795497201372451">https://www.douyin.com/video/7164795497201372451</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本文讲解多元化投资的核心概念，重点介绍股票相关性的定义、相关系数的计算方法，以及如何通过Python程序实现相关矩阵和滚动相关性的可视化分析。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>多元化投资的核心思想</strong>
+Harry Markowitz提出多元化是投资中唯一的免费午餐。多元化的关键在于使用多种相关性较低的资产，避免重仓股涨跌同步导致无法分散风险。</p>
+</li>
+<li>
+<p><strong>相关性与相关系数的定义</strong>
+相关性指两个投资标的在特定区间内涨跌的相似性。相关系数等于协方差除以两者方差的乘积，取值范围-1到1，越接近1表示相关性越强，越接近-1表示反向变动，为零表示相互独立。</p>
+</li>
+<li>
+<p><strong>相关矩阵的构建与程序实现</strong>
+通过计算多只股票两两之间的相关系数可构建相关矩阵。以茅台、工行、中国平安为例，获取历史收盘价数据后调用相关函数即可得到相关矩阵，对角线值为1表示自相关性。</p>
+</li>
+<li>
+<p><strong>滚动相关性的概念与应用</strong>
+滚动相关性指在滚动窗口上两个时间序列的相关性，反映相关性强弱随时间的变化。通过选择时间窗口（如整个区间的一半）可绘制滚动相关性图像，揭示相关性并非固定不变。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 多元化投资理念</h3>
+<p>今天来聊一下多元化投资。Harry Markowitz说，多元化是投资中唯一的免费午餐。原文未明确说明出处，艺书中将多元化作为投资界的圣杯。多元化的关键在于使用多种资产，有些资产的相关性越低越好。有的时候虽然我们买了很多股票，但是如果重仓股相关性差不多，这样的策略就不能做到分散风险和降低波动的作用。所以如果你追求一个稳健的投资组合，那么最好是去投资一些相关性比较低的资产。</p>
+<h3>2. 相关性的定义与计算</h3>
+<p>那么现在来看一下，股票的相关性是如何定义的。相关性通常是指两个投资标的在某个区间内涨跌的相似性。如果二者同涨同跌表示它们高度相关，那么二者涨跌相悖，相关性就越低。相关性的计算，我们用相关系数来表示。相关系数就等于二者的协方差除以二者方差的乘积。得到的值越接近于1，表明二者的相关性越强，涨跌越同步；越接近于-1，表明二者涨跌是朝着相反方向移动的；当相关系数为零时，表明二者是相互独立的，不具有相关性。</p>
+<h3>3. 相关矩阵的程序实现</h3>
+<p>当拓展到多只股票的时候，我们就可以通过计算两两股票之间的相关系数来构建一个相关矩阵。我们来程序实现一下，以茅台、工行和中国平安为例。第一步，先获取这三只股票的历史数据，然后取这三只股票的收盘价，让它们合并在一起，将时间从远到近重新排列。我们把这三只股票的价格画在同一张画布上看一下，观察一下它们的涨跌是否同步。第二步，我们就来计算一下这三只股票的相关矩阵，只需要调用corr函数就可以得到股票的相关矩阵。对角线上的值为1表示的是这三只股票的自相关性。我们来看一下第一行第二列的数值0.11，这表示茅台和工行的股票相关性非常的弱。</p>
+<h3>4. 滚动相关性的可视化</h3>
+<p>还有一个相关性的概念叫做滚动相关性，它指的是在滚动窗口上两个时间序列的相关性。这个概念主要突出的是两个时间序列随时间的相关性。两只股票取工行和中国平安的收盘价合并在一起，构成一个新的数据框。这里的时间窗口window选择了整个时间区间跨度的一半，绘制出来的滚动相关性图像就是这样。从图像中我们可以看出，即使是两只股票具有相关性，它们的相关性强弱也是随时间而变化的，并不总是固定不变的。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">Python</span></li>
+<li><span class="wikilink">金融数据分析</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">量化金融</span></li>
+<li><span class="wikilink">量化投资</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">多元化投资</span></li>
+<li><span class="wikilink">相关性</span></li>
+<li><span class="wikilink">相关系数</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>今天来聊一下多元化投资。Harry mark waith说，多元化是投资中唯一的免费午餐。 Redlo也在它的原则，艺书中将多元化，作为投资界的圣杯，多元化的关键在于使用多种资产。有些资产的相关性越低越好。有的时候虽然我们买了很多股票，但是如果重仓股基本相相如如如果的涨跌差不多，这样的策略就不能做到分散风险和降低波动的作用。所以如果你追求一个稳健的投资组合，那么最好是去投资一些相关性比较低的资产。那么现在来看一下，股票的相关性是如何定义的，相关性通常是指两个投资标的在某个区间内涨跌的相似性。如果二者同涨同跌表示它们高度相关，那么二者涨跌相悖，那么相关性就越低。相关性的计算，我们用相关系数来表示相关系数，就等于二者的协方差除以二者。方差的乘积已开放，得到的值越接近于一，表明二者的相关性越强。涨跌月同步越接近于负一表面，二者涨跌是朝着相反方向移动的当相关系数为零时。表面二者是相互独立的，不具有相关性。当拓展到多只股票的时候，我们就可以通过计算两两股票之间的相关系数来构建一个相关矩阵。我们来程序实现一下，以茅台、工行和中国平安为例，第一步，先获取这三只股票的历史数据，然后取这三只股票的收盘价，让他们合并在一起，将时间从远到近重新排列。我们把这三只股票的价格画在同一张画布上看一下，观察一下它们的涨跌是否同步。第二步，我们就来计算一下这三只股票的相关矩阵，只需要调用润函数就可以得到股票的相关矩阵。对角线上的值为一表示的是这三只股票的自相关性。我们来看一下第一行第二列的数值零点一一，这表示茅台和工行的股票相关性非常的弱，还有一个相关性的概念叫做滚动相关性。他指的是在滚动窗口上两个时间序列的相关性。这个概念主要突出的是两个时间序列，随时间的相关性。两只股票去工行和中国平安取他们的收盘价合并在一起，构成一个新的数据框。这里的时间窗口window选择了整个时间区间跨度的一半，绘制出来的滚动相关性。图像就是这样。从图像中我们可以看出，即使是两只股票具有相关性，它们的相关性强弱也是随时间而变化的，并不总是固定不变的。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

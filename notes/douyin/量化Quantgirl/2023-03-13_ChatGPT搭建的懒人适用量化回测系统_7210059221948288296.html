@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chatgpt搭建的，懒人适用量化系统。 
+#chatgpt应用领域 #python #编程 #量化 #量化交易｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2023-03-13_ChatGPT搭建的懒人适用量化回测系统_7210059221948288296.md · 发布于 2026-08-05 12:17:16</div><nav class="page-links"><a href="https://www.douyin.com/video/7210059221948288296" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>ChatGPT搭建的懒人适用量化回测系统</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7210059221948288296">https://www.douyin.com/video/7210059221948288296</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+分享用ChatGPT开发的量化回测系统，代码由ChatGPT生成，用户只需运行和调试。系统支持自定义股票池、设置回测区间和选择交易策略（如MACD），可输出回测图像和交易记录。作者指出系统尚不完善，仍需人工进行选股、择时和风险控制。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>系统概述</strong>
+用ChatGPT开发的量化回测系统，所有代码由ChatGPT生成，用户只负责运行和调试bug。系统目前只有回测功能，股票需用户自定义，代码和名称保存在字典中。</p>
+</li>
+<li>
+<p><strong>使用方法</strong>
+股票池自定义后，确定回测区间和交易策略即可运行。交易策略也由ChatGPT编写。回测结果包含图像和交易记录。</p>
+</li>
+<li>
+<p><strong>回测演示</strong>
+通过GUI界面启动系统，可选择是否更新股票池历史数据。演示中选择某只股票，回测区间为2020年1月1日至当天，策略选择MACD（双均线策略）。回测图像包含交易信号、技术指标、股票价格和最终仓位，交易日志显示收益率。</p>
+</li>
+<li>
+<p><strong>局限性与建议</strong>
+系统换策略或换股票后收益率可能差异很大。搭建可用系统除编写交易策略外，还需配合选股、择时、风险控制，这些依赖人的智慧。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 系统介绍</h3>
+<p>哈喽大家好，今天来给大家分享一个我用ChatGPT开发的量化回测系统。所有的代码都是由ChatGPT生成的，我只负责运行和调试bug。这个系统目前只有回测功能，股票只是需要用户自定义的。所有股票的代码和名称保存在这个字典里就可以了。接下来只要确定了回测区间和交易策略，就可以直接运行看到回测结果了。我这里用到的交易策略也是由ChatGPT编写的。最后回测结果包含了图像和交易记录。</p>
+<h3>2. 回测演示过程</h3>
+<p>好了，我们来看一下运行效果。这是GUI界面的启动程序，点击运行就启动了我们的量化回测系统。第一个组件询问是否要更新股票池中所有股票的历史数据，更新就是更新到当日最新，我们选择不更新，或者不点也行，默认是不执行。然后我们在这个股票池里点选一个股票，就这个吧。选择回测区间，开始日期我们选择2020年1月1日，结束日期选择今天，这个日期也是自动更新的。接下来选择交易策略，选择MACD，这是一个比较经典的双均线策略。我们运行看一下结果。</p>
+<h3>3. 回测结果展示</h3>
+<p>这个图像是调用backtrader的输出结果，这个图上的信息还是挺多的，包含了交易信号、技术指标、股票的价格，还有最终的这个仓位。我们关掉图像来看一下交易日志，最后这里还显示了收益率。到这里看起来好像还不错，感觉这个系统马上就能用了是吧。</p>
+<h3>4. 系统局限性分析</h3>
+<p>但其实还差得很远，我们换个策略或者换只股票，收益率可能就差得非常多了。总的来说ChatGPT的编程能力不错，但是要搭建一个能用的系统，除了编写交易策略，还需要配合一些选股、择时、风险控制，这些都还是要依赖人的智慧才行。好了今天的分享就到这里，大家如果有什么想交流的欢迎评论区留言，想要源码的也可以在评论区找到我。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">编程工具</span></li>
+<li><span class="wikilink">AI辅助编程</span></li>
+<li><span class="wikilink">回测系统</span></li>
+<li><span class="wikilink">ChatGPT应用</span></li>
+<li><span class="wikilink">ChatGPT</span></li>
+<li><span class="wikilink">量化回测</span></li>
+<li><span class="wikilink">MACD</span></li>
+<li><span class="wikilink">backtrader</span></li>
+<li><span class="wikilink">GUI</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>哈喽大家好,今天来给大家分享一个我用ChatGPT开发的量化回测系统。所有的代码都是由ChatGPT生成的,我只负责运行和调试bug。这个系统目前只有回测功能,股票只是需要用户自定义的。所有股票的代码和名称保存在这个字典里就可以了。接下来只要确定了回测区间和交易策略,就可以直接运行看到回测结果了。我这里用到的交易策略也是由ChatGPT编写的。 最后回测结果包含了图像和交易记录 好了,我们来看一下运行效果 这是GUI界面的启动程序 点击运行就启动了我们的量化回测系统 第一个组件询问是否要更新股票池中所有股票的历史数据 更新就是更新到当日最新 我们选择不更新 或者不点也行,默认是不执行 然后我们在这个股票池里点选一个股票 就这个吧 选择回测区间 开始日期我们选择2020年1月1日 结束日期选择今天 这个日期也是自动更新的 接下来选择交易策略 选择MACD 这是一个比较经典的双均线策略 我们运行看一下结果 这个图像是调用backtrader的输出结果 这个图上的信息还是挺多的 包含了交易信号 技术指标 股票的价格 还有最终的这个仓位 我们关掉图像来看一下交易日志 最后这里还显示了收益率 到这里看起来好像还不错 感觉这个系统马上就能用了是吧 但其实还差得很远 我们换个策略 或者换只股票 收益率可能就差得非常多了 总的来说 Chair GPT的编程能力不错 但是要搭建一个能用的系统 除了编写交易策略 还需要配合一些选股 择时 风险控制 这些都还是要依赖人的智慧才行 好了今天的分享就到这里 大家如果有什么想交流的 欢迎评论区留言 想要圆满的也可以在评论区找到我</p>
+</blockquote>
+</details></main>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>量化交易入门｜P2-编程篇 
+#量化交易 #量化分析 #量化金融   ｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2022-10-22_量化交易入门｜编程篇_7157212438289534222.md · 发布于 2026-08-05 12:24:49</div><nav class="page-links"><a href="https://www.douyin.com/video/7157212438289534222" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>量化交易入门｜编程篇</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7157212438289534222">https://www.douyin.com/video/7157212438289534222</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本期视频介绍量化分析入门所需的编程基础知识，涵盖编程语言选择（推荐Python）、量化系统搭建（数据获取、回测、实盘）以及策略开发的核心要点。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>编程语言选择</strong>
+推荐使用Python，因其学习资料丰富。建议掌握Circle的基础用法，可通过教材入门，大部分书籍附赠源码，同时可结合视频课程和开源项目学习。</p>
+</li>
+<li>
+<p><strong>量化系统搭建</strong>
+量化系统包括数据获取、回测、实盘和策略开发四个模块。数据获取可通过开源财经数据包获取历史数据，实时数据需付费或自行编写爬虫，也可从上市公司财报获取。回测和实盘可选择开源平台（如VNPy，主要支持期货）、第三方量化交易平台或自建系统。</p>
+</li>
+<li>
+<p><strong>策略开发核心</strong>
+策略开发是量化分析最核心的部分，需掌握重要的技术指标和因子。选股、择时和买卖条件需根据技术指标进行判断。算法是最后也是最重要的部分，需要深入学习。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场与编程语言选择</h3>
+<p>Hello，大家好。上期视频分享了入门量化分析需要掌握哪些数学知识？本期视频继续分享，入门量化分析需要掌握哪些编程基础知识？我们分两个模块介绍，首先是编程语言的选择。我这里列出了一些语言的优缺点，直接说结论吧，推荐使用Python。最重要的原因是Python的学习资料非常丰富，还有Circle的一些基础用法也有必要掌握。我这里提供了一份总的书单，就我个人的经验，根据教材入门是学习效率最高的，大部分书籍都附赠源码，这是几本书，如果读完入门是肯定可以的。除此之外，还有一些视频课程也可以学习，还有一些优秀的开源项目，包括论文和源码，这个我目前正在收集整理，将来也会分享给大家。</p>
+<h3>2. 量化系统：数据获取与回测实盘</h3>
+<p>第二个模块是量化系统，包括数据获取、回测、实盘和策略开发。数据获取可以直接从开源的财经数据包获取，就可以直接获取股票的历史数据。要获取股票的实时数据就有一些麻烦，除了一些付费的方式，另外就需要自己编写爬虫从网站抓取，还有一些上市公司会公开财报，也是获取数据的一种方法。获取数据之后就可以进行回测，或是实盘，相应的平台也有很多。你可以选择一些开源平台，也可以选择第三方的量化交易平台，或是自己搭建系统。开源平台也有支持实盘交易的，比如VNPy，这里给出了一些VNPy的书籍和视频课程。VNPy的接口主要支持的是期货，也有一些股票，在国内可能用量化分析做期货交易的人更多一些吧。第三方交易平台有非常多，我这里只列出了一部分。如果你不想花费太多时间在学习工具上的话，也可以选择第三方，可以先从模拟账户开始。当然，第三方也有一些优缺点，最佳的方法当然是自己搭建平台，安全可靠，当然这是更长远的目标了。</p>
+<h3>3. 策略开发</h3>
+<p>最后来说一下策略开发。量化分析最核心的部分，技术指标非常多，但是最重要、最核心、最常用的那些一定要了解。这本书里有几章详细地介绍了很多因子，可以学习一下。接着是策略的编写部分，就需要根据计算得到的技术指标来进行一些判断，选股、择时、买卖条件等等。最后也是最最重要的部分，就是算法，这个时候就需要深入学习了。这是两本我目前正在看的书，我接下来打算就根据这两本书来制作一些视频。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化入门</span></li>
+<li><span class="wikilink">编程基础</span></li>
+<li><span class="wikilink">量化系统</span></li>
+<li><span class="wikilink">实盘交易</span></li>
+<li><span class="wikilink">开源平台</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">Python</span></li>
+<li><span class="wikilink">回测</span></li>
+<li><span class="wikilink">VNPy</span></li>
+<li><span class="wikilink">策略开发</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>Hello,大家好。上期视频分享了入门量化分析，需要掌握哪些数学知识？本期视频继续分享，入门量化分析需要掌握哪些编程基础知识？我们分两个模块介绍，首先是编程语言的选择。我这里列出了一些语言的优缺点，直接说结论吧。推荐使用python.最重要的原因是python的学习资料非常丰富，还有circle的一些基础用法，也有必要掌握。我这里提供了一份总的书单，就我个人的经验，根据教材入门是学习效率最高的，大部分书籍都附赠源码，这是几本书。如果读完入门是肯定可以的。除此之外，还有一些视频课程也可以学习，还有一些优秀的开源项目，包括论文和源码。这个我目前正在收集整理，将来也会分享给大家。第二个模块是量化系统，包括数据获取、回测、入易和策略开发。数据获取可以直接从开源的财经数据包获取，就可以直接获取股票的历史数据。要获取股票的实时数据就有一些麻烦，除了一些付费的方式，另外就需要自己编写爬虫，从网站抓取，还有一些上市公司会公开财报，也是获取数据的一种方法。获取数据之后就可以进行回测，或是实盘相应的平台也有很多。你可以选择一些开源平台，也可以选择第三方的量化交易平台，或是自己搭建系统。开源平台也有支持实盘交易的。比如VNPY,这里给出了一些VNPY的书籍和视频课程。 Vnpy的接口主要支持的是期货，也有一些股票在国内可能用量化分析做期货交易的人更多一些吧。第三方交易平台有非常多，我这里只列出了一部分。如果你不想花费太多时间在学习工具上的话，也可以选择第三方，可以先从模拟账户开始。当然，第三方也有一些优缺点，最佳的方法当然是自己搭建平台，安全可靠，当然这是更长远的目标了。最后来说一下策略开发质量化分析最核心的部分技术指标非常多，但是最重要、最核心、最常用的那些一定要了解。这本书里有几章详细的介绍了很多因子，可以学习一下。接着是策略的编写部分，就需要根据计算得到的技术指标来进行一些判断，选股、择时买卖条件等等。最最后也是最最重要的部分，就是算法，这个时候就需要深入学习了。这是两本我目前正在看的书，我接下来打算就根据这两本书来制作一些视频。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
