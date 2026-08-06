@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文复现】行业ETF切点轮动夏普1.3 原论文：Smart Tangency Portfolio: Deep Reinforcement Learning for Dynamic Rebalancing and Risk-Return Trade-Off（IJFS, 2025）用深度强化学习动态调仓。我们复现改用A股12只行业/主题ETF（涵盖黄金、创业板、新能源车等），样本2021-06-01至2026-07-31，以启发式控制律替代原文PPO训练。 
+框架：在非负权重下，根据风险厌恶λ和持有期h，用252天收益窗求解切点组合。测试了静态网格、旧动态启发式，以及改进动态（MSV+波动袖套）。最终默认方案Blend将改进动态与波动目标静态切点等权混合。 
+核心结果：Blend毛年化约16.5%，Sharpe 1.30，最大回撤-15%；假设20bp成本后Sharpe仍有1.28。等权仅Sharpe 0.32，基准沪深300ETF仅0.04。改进方案明显压制了旧动态的高波动（波动31%）与深回撤（-31%）。 
+局限：未训练原始PPO，仅用代理规则；成本为换手假设，未建模冲击与折溢价。历史回测不代表未来表现，不构成投资建议。 
+#量化学习  #配对交易 #统计套利 #量化  #量化交易  #量化分析 #Quant  #量化策略  #好视频扶持计划｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-08-06_论文复现：A股行业ETF切点轮动策略（深度强化学习代理方案）_7670610172225670441.md · 发布于 2026-08-06 09:02:57</div><nav class="page-links"><a href="https://www.douyin.com/video/7670610172225670441" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>论文复现：A股行业ETF切点轮动策略（深度强化学习代理方案）</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7670610172225670441">https://www.douyin.com/video/7670610172225670441</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+复现IJFS 2025论文Smart Tangency Portfolio，用A股12只行业/主题ETF替代原文行业基金，以半方差优化加波动袖套的启发式控制律替代PPO训练。默认混合方案毛年化约16.5%，夏普1.30，最大回撤-15%，20bp成本后夏普仍1.28，显著优于等权（夏普0.32）和沪深300基准（夏普0.04）。旧动态启发式虽年化更高但夏普仅。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>研究背景与复现框架</strong>
+复现IJFS 2025论文《Smart Tangency Portfolio: Deep Reinforcement Learning for Dynamic Rebalancing and Risk-Return Trade-Off》，原文用深度强化学习在行业ETF上训练策略，网络选择风险目标与持有天数。复现改用A股12只行业/主题ETF（涵盖黄金、创业板、新能源车等），样本期2021-06-01至2026-07-31，以半方差优化加波动袖套的启发式控制律替代完整PPO训练。组合约束：全额多头。</p>
+</li>
+<li>
+<p><strong>策略方案与测试路径</strong>
+测试三条路径：静态网格（每30日在风险目标网格上选样本内夏普更高的权重）、旧动态启发式、改进动态（MSV半方差+波动袖套）。默认混合方案Blend将改进动态半方差路径与波动受控静态切点按日收益等权合成，用于压制旧启发式容易单票满仓的问题。</p>
+</li>
+<li>
+<p><strong>核心回测结果</strong>
+Blend方案毛年化约16.5%，夏普1.30，最大回撤约-15%；假设20bp成本后夏普仍约1.28，对轻度成本不敏感。等权方案夏普仅0.32，基准沪深300ETF仅0.04。改进方案明显压制旧动态的高波动（31%）与深回撤（-31%），旧启发式年化虽更高但夏普仅0.79。</p>
+</li>
+<li>
+<p><strong>局限与使用边界</strong>
+未训练原始PPO，仅用代理规则；成本为换手假设，未建模冲击与折溢价；数据口径与原文不同（本地加权日线主净值），后文数字只对本代理规则与窗口负责，不拿来核对原文表格。历史回测不代表未来表现，不构成投资建议。建议在未完成完整训练之前，不把本代理结果直接等同于原文结论。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 研究背景与复现框架</h3>
+<p>本期复现一篇用深度强化学习调整切点组合风险厌恶与再平衡节奏的研究。原论文在行业ETF上训练策略，网络选择风险目标与持有天数。本复现改用十二只中国主题与行业ETF的本地日线，并用半方差优化加波动袖套替代完整PPO训练。默认混合方案毛年化约16.5%，夏普约1.30，最大回撤约-15%。两年换手假设扣20个基点后，夏普仍约1.28。组合始终全额多头，十二只基金权重非负且求和为一，不使用杠杆与卖空。估计窗口净252个交易日，静态路径大约每30日在风险目标网格上选样本内夏普更高的权重。动态路径则同时给出风险目标与5到60日的持有期。默认混合方案把改进后的动态半方差路径与波动受控的静态路径按日收益等权合成，用来压制旧启发式容易单票满仓的问题。</p>
+<h3>2. 数据口径与回测结果</h3>
+<p>后数据口径与原文并不相同，主要用行业ETF日线与行业基金，复现工程改用本地加权日线主净值，从2021年6月到2026年7月。控制律也不是完整策略网络训练，因此后文数字只对本代理规则与窗口负责，不拿来核对原文表格。静态路径上混合方案表现相对平稳，最大回撤大约-15%。旧启发式累计更高，但回撤大约-31%，波动也被放大。对比我们漫文风格的静态切点已经明显强于等权与市场基准。真正要慎用是过渡集中的旧动态规则。把毛收益与成本近似放在一起看，混合方案年化约16.5%，夏普约1.30，回撤约-15%。改进动态与波动受控静态都在同一量级，旧启发式年化更高，但夏普掉到约0.79。在年换手大约1.2的假设下扣20个基点后，混合方案夏普仍约1.28，说明这个方案对轻度成本并不敏感。</p>
+<h3>3. 结论与使用边界</h3>
+<p>主图把夏普年化与最大回撤并排放在一起，混合方案的优势主要不在追最高累计，而在回撤受控后的风险调整收益窗口里。基准自身偏强时要超额会变薄，因此更要看回撤与夏普，而不是只看阶段性年化。综合来看，可执行默认是混合方案，并用波动袖套限制风险预算，不要默认旧启发式满仓，也不要在未完成完整训练之前，不把本代理结果直接等同于原文。深度强化学习策略是中国基金代理在非完整训练控制律下的结果，边界需要留在用法里。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化学习</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">ETF投资</span></li>
+<li><span class="wikilink">A股研究</span></li>
+<li><span class="wikilink">学术研究复现</span></li>
+<li><span class="wikilink">切点组合</span></li>
+<li><span class="wikilink">深度强化学习</span></li>
+<li><span class="wikilink">ETF轮动</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li><span class="wikilink">主题ETF替代原文行业基金</span></li>
+<li><span class="wikilink">十二只基金</span></li>
+<li><span class="wikilink">主要用行业ETF日线与行业基金</span></li>
+<li><span class="wikilink">深度强化学习策略是中国基金</span></li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>本期复现一篇，用深度强化学习、调整、切点组合风险、厌恶与再平衡节奏的研究。原论文在每股行业基金上训练策略，网络选择风险目标与持有天数本复现，改用十二至中国主题与行业基金的本地日线，并用半方差优化加波动，秀套替代完整万轮训练，默认混合方案盲年化约十六点百分之五。夏普约一点三零，最大回撤约付百分之十五，两年换手假设扣二十个基点后，夏普仍约一点二八组合，始终全额多投十二只基金权重非负且求和为一，不使用杠杆与卖空，估计创曲净二百五十二个交易日，静态路径大约每三十日。在风险目标网格上选样本内，夏普更高的权重动态路径，你则同时给出风险目标于五到六十日的持有期默认混合方案。把改进后的动态半方差路径与波动受控的静态路径，按日收益等权合成，用来压住旧启发，是容易单票满仓的问题。后数据口径与原文并不相同。书倩呢别不主要用每股日线与行业基金、宇宙本工程改用本地前赋权日线主净值从二零二一年六月到二零二六年，七月控制率也不是完整策略网络训练比。因此，后文数字只对本代理宇宙与窗口负责，不拿来核对原文表格，格点靠静值。图上混合方案抬升相对平稳，最大回撤大约负百分之十五。我旧启发式累计更高，但回撤大约负百分之三十一，波动也被放大。 Ab我们漫文风格的静态切点已经明显强于等全于市场基准。真正要慎用的是过渡集中的旧动态规则，把毛表与成本近似放在一起看混合方案年化约十六点五，夏普约一点三零回撤约负百分之十五。他改进动态与波动受控静态都在同一量级，就启发式年化更高。但夏普掉到约零点七九，在年换手大约一点二的假设下扣二十个基点后混合方案。夏普仍约一点二八，说明这条边对轻度成本并不敏感。主图把夏普年化与最大回撤并排放在一起，混合方案的优势主要不在追最高累计，而在回撤受控后的风险调整收益窗里，基准自身偏强时要超额会变薄，因此更要看回撤与夏普，而不是只看阶段性年化。一个综合来看，可执行默认是混合方案的并用波动袖套限制风险预算，不要默认就启发式满仓，也不要在未完成完整训练之前，不把本代理结果直接等同于原文。深度强化学习表格。一个。这是中国基金代理于非完整训练控制率下的结果，边界需要留在用法里。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
