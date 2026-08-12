@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>📈 做AI Trading，必装的3个因子研究 Skill 真正拉开AI Trading 差距的，不只是模型。更重要的是：数据、因子流程和回测验证。 
+这次实测 3 个 QuantSkills 开源 Skill： 
+📊 factor-skill-factory
+批量生成、验证并打包框架中立的 OHLCV 因子技能 
+📈 factor-orthogonalize
+对截面因子进行逐日OLS正交化，并输出残差因子和暴露诊断 
+📉 skill-backtest-overfit
+评估回测过拟合与多重检验风险，计算 DSR、PBO、净化交叉验证和 Harvey-Liu 折减。 
+支持 Codex、Claude Code、Cursor。配合 PandaData SDK 与真实 OHLCV 数据，AI 可以从因子生成、风格清洗，到回测过拟合检查，形成一套更完整的量化研究流程。 
+这 3 个 Skill 已全部开源，欢迎体验。
+📊 数据支持：PandaData
+🤖 Skill 开源：QuantSkills.ai 
+⚠️ 风险提示：视频内容仅用于量化研究、学习交流与技术演示，不构成任何投资建议。市场有风险，投资需谨慎。历史回测不代表未来收益，策略与因子结果需结合真实交易环境进一步验证。 
+#PandaAI  #AITrading   #ClaudeCode  #Codex #QuantSkills｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-08-12_AI_Trading必装的3个QuantSkills开源因子研究Skill_7672966326381481268.md · 发布于 2026-08-12 21:02:25</div><nav class="page-links"><a href="https://www.douyin.com/video/7672966326381481268" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>AI Trading必装的3个QuantSkills开源因子研究Skill</h1>
+<p>抖音 | Panda AI 量变学院 | 原文链接（<a href="https://www.douyin.com/video/7672966326381481268">https://www.douyin.com/video/7672966326381481268</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+视频介绍了三个QuantSkills开源Skill：factor-skill-factory（批量因子生成验证打包）、factor-orthogonalize（截面因子正交化去风格噪音）、skill-backtest-overfit（回测过拟合与多重检验风险评估），配合PandaData SDK与真实OHLCV数据，形成完整的量化研究流程。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>factor-skill-factory：因子批量生成与验证</strong>
+不是简单写因子公式，而是一整套从因子生成、验证到打包的自动化流水线。准备OHLCV数据后告诉AI想生成几个因子，即可自动生因子、出报告，最后把每个因子打包成可直接调用的skill，适合批量验证和挖因子场景。</p>
+</li>
+<li>
+<p><strong>factor-orthogonalize：截面因子正交化与风</strong>
+回测漂亮但实盘糟糕，可能不是因子失效而是alpha混入了风格噪音。该skill对截面因子进行逐日OLS正交化，输出残差因子和暴露诊断报告，帮助减少风格干扰，适合做因子组合的量化研究。</p>
+</li>
+<li>
+<p><strong>skill-backtest-overfit：回测过拟合与多</strong>
+检查回测结果是真信号还是从噪声中挑出的幸运儿。通过DSR、PBO、skill haircut、Sharpe、TRL等指标判断夏普比率是否被过度优化，大幅降低把噪声当alpha的风险。</p>
+</li>
+<li>
+<p><strong>使用方式与开源信息</strong>
+三个skill已全部开源，支持Codex、Claude Code、Cursor，配合PandaData SDK与真实OHLCV数据使用。在QuantSkills.ai搜索英文名即可安装。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场引入</h3>
+<p>如果你正在做AI trading，却还没装这些skill，那你可能还在用最慢的方式做投研。今天分享三个量化研究最值得安装的skill，尤其是最后一个，能让你的agent从能用的AI直接变成懂交易的队友。</p>
+<h3>2. 第一个skill：factor-skill-factory</h3>
+<p>第一个是factor-skill-factory，它不是简单帮你写一个因子公式，而是一整套从因子生成、验证到打包的自动化流水线。准备一份OHLCV数据告诉AI你想生成几个因子，它就能自动生因子、出报告，最后把每个因子都打包成一个能直接调用的skill想法，一来批量验证，挖因子人必装。</p>
+<h3>3. 第二个skill：factor-orthogonalize</h3>
+<p>第二个skill是factor-orthogonalize。回测很漂亮，实盘一团糟，可能不是因子失效，而是你的alpha偷偷混进了风格噪音。它不只帮你把因子洗干净，还会给你一份正交前后的诊断报告，特别适合做因子组合、想减少风格干扰的量化人。</p>
+<h3>4. 第三个skill：skill-backtest-overfi</h3>
+<p>第三个skill是skill-backtest-overfit。它会检查一个漂亮的回测到底是真信号，还是从噪声里挑出来的幸运儿。你把策略收益和试验次数告诉它，它会用DSR、PBO、skill haircut、Sharpe、TRL这些指标判断这个夏普有没有被过度优化。装上它能大幅减少把噪声当alpha的风险。</p>
+<h3>5. 总结与安装指引</h3>
+<p>这三个skill覆盖因子生产、风格清洗、回测体检。装完之后你的AI做量化能力直接翻倍。收藏起来，直接去QuantSkills搜英文名就能安装，快去试试吧。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Panda AI 量变学院</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">AI量化</span></li>
+<li><span class="wikilink">因子挖掘</span></li>
+<li><span class="wikilink">回测验证</span></li>
+<li><span class="wikilink">开源工具</span></li>
+<li><span class="wikilink">量化研究流程</span></li>
+<li><span class="wikilink">风格清洗</span></li>
+<li><span class="wikilink">过拟合检测</span></li>
+<li><span class="wikilink">AITrading</span></li>
+<li><span class="wikilink">QuantSkills</span></li>
+<li><span class="wikilink">因子研究</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">PandaAI</span></li>
+<li><span class="wikilink">QuantSkills AI</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>如果你正在做AI trading,却还没装这些skill,那你可能还在用最慢的方式做投研。今天分享三个量化研究，最值得安装的skill,尤其是最后一个，能让你的agent从能用的AI直接变成懂交易的队友。第一个factor skill factory,它不是简单帮你写一个因子公式，而是一整套从因子生成验证到打包的自动化流水线，准备一份OHLCV数据告诉AI,你想生成几个因子，它就能自动生因子好验证出报告。最后把每个因子都打包成一个能直接调用的skill想法，一来批量验证，挖因子人必装。第二个sill, ll factor or organalize回测很漂亮，实盘一团糟，可能不是因子失效，而是你的alpha偷偷混进了风格噪音。它不只帮你把因子洗干净，还会给你一份正交前后的诊断报标，特别适合做因子组合，想减少风格干扰的量化人。第三个skill back back test overfit.它会检查一个漂量回测到底是真信号，还是从噪声里挑出来的幸运儿。你把策略收益和试验次数好验证。第会个DSRPB、 ill haircut, sharp、 mein TRL.这些指标判断这个sharp有没有被过渡优化装上它能大幅减少把噪声当尔法的风险。这三个alsckile覆盖因子生产风格清洗回测体检装完之后，你的AI做量化能力直接翻倍收藏起来，直接去quant skills搜英文名就能安装，快去试试吧。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
