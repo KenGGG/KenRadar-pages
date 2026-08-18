@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simon林造货分享：用AI运营亚马逊 一周上架2万条listing｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-08-18_Simon林分享：用AI运营亚马逊一周上架两万条Listing_7675245121494977843.md · 发布于 2026-08-18 15:02:46</div><nav class="page-links"><a href="https://www.douyin.com/video/7675245121494977843" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Simon林分享：用AI运营亚马逊一周上架两万条Listing</h1>
+<p>抖音 | Simon林 | 原文链接（<a href="https://www.douyin.com/video/7675245121494977843">https://www.douyin.com/video/7675245121494977843</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+分享其开发的亚马逊Seller Agent Skill，通过亚马逊官方接口实现一周上架两万条Listing。重点讲解上架模块的十二步流程及五道质量控制机制，工具已开源。选品、上架、运营三大模块共十八个子模块，流量和广告等运营环节仍需人工介入，后续将分三期完整分享。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>核心工具与成果概述</strong>
+分享一款开发的亚马逊Seller Agent Skill，通过亚马逊官方接口运营店铺，一周上架两万条Listing。工具包含选品、上架、运营三个大模块，共十八个子模块，现已全部开源，名称在视频左下角。</p>
+</li>
+<li>
+<p><strong>上架十二步流程详解</strong>
+两万条Listing由一千张设计图乘以五个品类再乘以每个品类四个尺寸得出。上架共十二步：设计资产出图→AI Skill放大高清图片→撰写四层内容（标题、五点描述、商品描述等）→品鉴验收→发布→进度指示器→上传对账→合并家族（合并变体、修改标题）→验收→上传A+页面。整个流程实测优化约三周完成。</p>
+</li>
+<li>
+<p><strong>设计前置与自动化工具配置</strong>
+需自行确定设计方案、规格组合、标题规则及禁用词，然后告知AI按要求上传。建议使用Cloud Code调用Codex直接出图，无需经过浏览器。初期需做小范围测试，确认无误后再批量迭代运行。</p>
+</li>
+<li>
+<p><strong>五道质量控制机制</strong>
+虽赋予AI店铺权限，但为防止产品交付纠纷设定五道关卡：第一道标题全局查重、第二道商标违禁词检测、第三道空清单不能通过、第四道只增不减原则、第五道遇不认识错误立即停机研究判断。此外亚马逊有上传配额限制，超限需暂停。</p>
+</li>
+<li>
+<p><strong>工具能力边界与后续规划</strong>
+该Skill仅解决上架问题，不涉及流量和广告。选品拍板、创意判断等仍需自行研判。后续将在Cloud Code或其他Agent中搭建亚马逊运营专用Agent补充流量端功能。共计划分三期分享，下期讲解选品模块。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场与工具概述</h3>
+<p>大家好啊，今天给大家分享一个我开发的亚马逊的Seller Agent Skill。我用它一周上架了两万条亚马逊的Listing，名称在屏幕的左下角。那这个Skill是通过亚马逊官方的接口来运营自己的店铺，它包括选品、上架和运营三个大的模块，这三个大模块是选品、上架、运营，然后包括了十八个小的模块，我这里就不一一念了，大家可以停顿看一下。然后这三块呢是一条产线，它不是三个工具，今天我们先讲上架这个部分，因为上架了两万条Listing，我估计大家也会比较感兴趣，所以先讲这个上架这部分。</p>
+<h3>2. Listing数量构成与上架步骤</h3>
+<p>首先呢说清楚就是两万条Listing不是两万个创意，而是乘出来的，就是一千张设计图乘以五个品类，然后再乘以每个类有四个尺寸，就出来两万条的Listing了。怎么做到呢？其实它的步骤有很多，这里上架一共有十二个步骤。首先是设计资产，出图的话现在各个AI都能出图，大家应该都比较熟悉这块了。然后通过AI的一个Skill的放大，就可以把图片给放大高清，然后再写这四层内容，包括标题啊、五点描述、商品描述这些，然后再品鉴验收，然后再发布。发布了之后有进度指示器，还有上传之后的对账。然后第九步是合并家族，因为它的变体很多嘛，然后AI就能通过这个API去把我们的一个家族去合并了，把变体合并了，然后改标题，然后最后再收尾验收。然后最后一步是上传这个A+页面，就是这些步骤是我一步一步实测优化出来的，所以这整个Skill本身呢其实花了我很多时间，花了三周的时间差不多。然后我现在就全部开源给大家了，名称就在左下角。</p>
+<h3>3. 设计前置与自动化出图</h3>
+<p>我们其实要做的事情就是要确定设计方案，因为这是选品的那个模块会有一些数据出来，你自己得确定自己要用什么样的设计方案，然后才能让AI去出图。出图这个其实也很简单，就是你Cloud Code是可以调用Codex的，就之前我有分享这个视频还有Skill，就是可以去调用这个Codex，直接让它出图，就是不用通过浏览器了，命令端直接就出来。然后还包括这个规格组合啊，这些都是要定好的，还有标题的规则、禁用词啊，这些都是你定好了之后就可以告诉AI，就按照你的要求去上传了。反正最开始的话肯定是要做一个小范围的测试的，就是你要先传一个嘛，看看了没问题之后再把这个你定下来，应该以后就可以去迭代去跑了。呃，后台其实显示成功了，前台其实还是搜不到的，所以还是有一些流程去验收。</p>
+<h3>4. 五道质量关卡与配额限制</h3>
+<p>然后这个是一些遇到问题的一些解决方案吧，其实我都已经更新到Skill里面了。然后嗯大家拿到这个Skill，其实就可以去用了。其实它拿着这个店铺的权限，但是其实不能让它完全的自由发挥啊，因为你涉及到这个产品的交付，会有很多的这个纠纷问题。所以我设定了五道门，就包括第一道是标题的全局查重，然后商标违禁词，然后空了清单不能算过，然后这个还有一个只增不减，哎，不认识就这个停机，就是如果这个错误没有见过，那就要马上去研究判断。那还有两个事情就是呃亚马逊呢对这个配额就是上传的配额是有做配额限制的，撞了就需要去停下来。</p>
+<h3>5. 能力边界与后续分享计划</h3>
+<p>然后这个Skill本身呢解决的是上架，它不解决流量的问题啊，它能做的就包括左边这个视频发布啊，反正就这些功能都搞定了，就是图出来了然后图它也可以是自动化的，你就直接涂出来然后它就全自动的就全都能搞定。他不能做呢就包括这个流量啊、广告啊，就选品拍板啊、创意判断啊这些还是得自己去研判，就是其实可以在Cloud Code里面或者其他Agent里面搭一个亚马逊专门去运营的Agent来解决这些问题，然后再加上这个我左下角这个Skill应该就可以了啊。下一期呢是我会继续分享这个选品啊，当然这个三个模块我已经在这个Skill里面去去去已经是完全的功能了，这三个模块都在里面，你们可以去直接去用，我只是下一期我再做一个分享吧，然后让大家更清晰地了解这个选品那个模块，我一共会做三期，好今天到这，谢谢大家。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Simon林</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">跨境电商</span></li>
+<li><span class="wikilink">亚马逊运营</span></li>
+<li><span class="wikilink">AI工具</span></li>
+<li><span class="wikilink">效率提升</span></li>
+<li><span class="wikilink">Listing批量上架</span></li>
+<li><span class="wikilink">自动化流程</span></li>
+<li><span class="wikilink">AI运营</span></li>
+<li><span class="wikilink">Listing上架</span></li>
+<li><span class="wikilink">自动化</span></li>
+<li><span class="wikilink">codex</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">Amazon Seller Agent AI</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>大家好啊，今天给大家分享一个我开发的亚马逊的seliler agent skill.我用它一周上架了两万条亚马逊的listing名称在屏幕的左下角。那这个scale呢是通过亚马逊官方的接口来运营自己的店铺。它包括选品上架和运营三个大的模块。这三个大模块呢是选品上架运营，然后包括了十八个小的模块，我这里就不一一念了，大家可以呃停顿看一下。然后这三块呢是一条产线，它不是三个工具啊啊今天我们先讲上架这个部分，因为上架了两万条listing,我估计大家也会比较感兴趣。所以先讲这个上架这部分啊。首先呢说清楚就是两万条listing呢不是两万个创意，而是乘出来的就是一千张设计图乘以五个品类。然后再乘以每个类有四个尺寸，就出来两万条的呃，这个listing了，怎么做到呢？其实它的步骤有很多啊，就呃这里是上架有一共有十二个步骤。首先是设计资产，呃，出图的话，现在各个AI都能出图啊，大家应该都比较熟悉这块了。然后呃通过AI的一个skill的放大，然后就可以把它图片给放大高清，然后再写这四层内容，包括标题啊，五点描述上品描述这些，然后再鉴品鉴品验收。然后再发布。发布了之后有方形有进度的指示器，然后还有这个上传之后的对账。然后第九步呢是合并家族，因为它的这个辩题很多嘛，然后AI就能通过这个API去把我们的一个家族去合并了，把自体合并了，然后改标题啊，然后最后再收脸验收。然后最后一步是上传这个a加的页面，就是这些步骤呢是我一步一步实测优化出来的。所以这整个schel本身呢，其实花了我很多时间，花了三周的时间差不多。然后我现在就全部开源给大家了，名称就在左下角。啊，我们其实要做的事情呢，其实就是要你要确定设计方案。因为呃这是选品的那个模块，会有一些数据出来，你自己得确定自己要用什么样的设计方案，然后才能让AI去出图啊，出图这个其实也很简单啊，就是你cloud code是可以调用codex的。就之前我有分享这个视频，还有skill,就是可以去调用这个codex,直接让它出图，就是就不用通过浏览器了，命令端直接就出来。然后还包括这个规格组合啊，这这这这些都是要定好的。还有标括标标题的规则禁用词啊，这些都是你定好了之后就可以告诉AI,就按照你的要求去上传了。反正最开始的话肯定是要做一个呃猫眼的测试的。就是你要先传一个嘛，看看了没问题之后再把这个你定下来，应该以后就可以去呃迭代去跑了。呃，后台其实显示成功了，前台其实还是搜不到的，所以呃还是有一些流程去去验收。然后这个是一些呃遇到的问题的一些解决方案吧。其实我都已经更新到scale里面了。然后嗯大家拿到这个scale,其实就可以去去看a卷呢。其实他拿着这个店铺的权限，但是其实不能让他完全的自由发挥啊，因为你涉及到这个产品的交付，会有很多的这个纠纷问题。所以我设定了五道门，就包括第一道是标题的全局查重。然后商标违禁词，然后空了，清单不能算过，然后这个还有一个只增不减，哎，不认识就这个停机。就是如果这个错误没有见过，那就要马上去研究判断。那还有两还有两个事情，就是呃亚马逊呢对这个配额就是上传的配额是有做配额的限制的。啊，撞了就会就需要去停下来。然后这个schee本身呢，它解决的是上架，它不解决流量的问题啊，他能做的就包括左边这个间频发布啊，反正就这一些的功能都搞定了，就是只要涂出来，但图它也可以是自动化的，你就直接涂出来，然后它就全自动的就全都能搞定。他不能做呢，就包括这个流量啊、广告啊，就选米拍板啊、创意判断啊这些呃还是得自己去研判。就是其实可以在clcode里面或者其他a卷里面搭一个亚马逊专门去运营的agent来解决这些问题。然后再加上这个我左下角这个skill应该就可以了啊。下一期呢是我会继续分享这个选品啊，当然这个三个模块我已经在这个skill里面去去去已经是完全的功能了。这三个模块都在里面，你们可以去直接去用，我只是下一期我再做一个分享吧，然后让大家更清晰的了解这个原品那个模块，我一共会做三期。好，今天到这，谢谢大家。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
