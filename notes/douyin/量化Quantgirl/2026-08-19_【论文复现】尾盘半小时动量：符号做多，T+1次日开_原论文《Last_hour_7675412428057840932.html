@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【论文复现】尾盘半小时动量：符号做多，T+1次日开 原论文《Last hour momentum in the Chinese stock market》(Yang,2021) 用 RESSET tick 研究尾盘半小时动量，只看 r6(13:30‑14:00) 与 r7(14:00‑14:30) 的符号，单纯做多。我们复现改用 xtquant 1 分钟 bar 聚合，样本缩至 2025‑08‑18 至 2026‑08‑14，标的为某只沪深300 ETF。 
+📌 同日混合策略（需 T+0）：
+r6&gt;0 且 r7&gt;0 吃 r7+r8 连乘，r6&gt;0 但 r7≤0 只吃 r7，r6≤0 空仓。扣往返 1bp 后，年化约 8.6%，夏普约 1.83，最大回撤约 -2.9%，但绝对收益远低于全日持有。 
+📌 T+1 适配（可落地）：
+r6&gt;0 于 14:00 买入，次日开盘卖出。相对匹配窗口的 BH，超额累计约 +19.8%，更干净可重复。 
+⚠️ 风险提示：
+1m 数据窗口短，长短样本重合，外推有限；1bp 成本偏乐观；历史回测不代表未来表现，不构成投资建议。 
+#量化学习  #尾盘动量 #ETF择时  #量化 #量化交易  #量化分析  #Quant #量化策略 #论文复现  #好视频扶持计划｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-08-19_【论文复现】尾盘半小时动量：符号做多，T+1次日开_原论文《Last_hour_7675412428057840932.md · 发布于 2026-08-19 09:01:17</div><nav class="page-links"><a href="https://www.douyin.com/video/7675412428057840932" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>【论文复现】尾盘半小时动量：符号做多，T+1次日开 原论文《Last hour</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7675412428057840932">https://www.douyin.com/video/7675412428057840932</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+AI 整理结果解析失败，需人工查看视频原稿。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li><strong>原稿待人工核对</strong>
+本条视频已完成 Whisper 转录，但 AI 结构化摘要解析失败，请以视频原稿为准。</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>[!warning]
+本次 AI 未生成可核验的纠错分段原文。为避免把未经纠错的文字误标为修正版，请查看下方“视频原始转录”，或从详情页重新生成 AI 整理。</p>
+</blockquote>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">AI产业</span></li>
+<li><span class="wikilink">投资策略</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">Last hour AI</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>本期复现一篇关于中国股市尾盘半小时动量的论文，原论文用二零一二至二零一七年的主笔行情，发现下午两点前后半小时收益符号能预测后续半小时本复线改用公开一分钟线聚合，并对a股ETF无法当日回转的制度约束，设计了十四点买入、次日开盘卖出的适配规则。 P线在沪深三百ETF上，同日混合策略扣完往返EBP十四化约百分之八点六。夏普一点八三，最大回撤约负百分之二点九，适配路径相对匹配，窗口累计超额约百分之十九点八。腾。呃，下午交易时段被切成现段，十三点三十分到十四点是r六十四点到十四点，三十分是r七十四点，三十分到十五点，是r八信号，只用r六和r七的收益率符号，不引入其他因子论日原版同日电则需要当日回转制度配合。二六大于零就做多，二七二七大于零就做多。二八混合条件下二六和二七同时为正则持有二七加二八二六为证。但二七非正就只拿二七二六，小于等于零，直接空仓开股ETF的t加一限制，我们设计了核心适配路径。 R六大于零时，在十四点按草末价买入，次日开盘卖出确认板需要等r七也大于零后，在十四点三十分进场。同样，次日开盘了结透策略都扣除了往返EBEP的佣金。近似基准分为日内持有和鱼池仓期对齐的匹配。买入持有可原论文基于主笔行情，样本覆盖二零一二年五月到二零一七年十二月，我们用的是公开行情的一分钟线，聚合出半小时价格呃，实际拿到的窗口是二零二五年八月十八日到二零二六年八月十四日，我共二百四十一个交易日。行论文主要针对沪深三百指数及跟踪ETF本回撤以五幺零三零零为主，b指数面板做对照，同奔口径上原论文部分表格报无成本或往返六BP上线。我们采取更贴近实盘的往返EBP单边零点五BP,最关键的制度差异在于原文假定ETF能当日回转进出，而a股宽基ETF实际是t加一，因此同日协议仅作为对照落地，以适配规则为准。本回测只对这二百四十一个交易日和使用一分钟代理数据的结果负责。从静止曲线看，论文同日混合策略扣完EBP后，走势非常平缓，最大回撤控制在负百分之二点九以内，但绝对收益明显。跑输全日持有表例一目了然，混合净累计百分之八点一五年化百分之八点五七。夏普一点八三儿童日满仓持有累计高达百分之二十七点五四，年化百分之二十九点一。夏普一点八八快。这轮样本期ETF整体上行择时换来的不是更高收益，而是更小的波动和更浅的回撤。看毛收益混合累计能到百分之九点四，一年化百分之九点九零。夏普二点一一扣掉EBP往返成本后下滑约一点三个百分点。发单独吃，尾盘半小时也能拿到年化百分之六点零，夏普一点七七回撤仅负百分之一点六二。但二七段最弱，年化只有百分之二点一二，夏普零点六零可切换到t加一适配后，三条路径的净值表现差异明显。在十四点信号买入，次日开盘，卖出的默认路径累计百分之十一点零，三年化百分之十一点六一。夏普一点八四最大回撤负百分之四点一零，相对匹配窗口的超额累计高达百分之十九点八零，是超额最干净的一条果。如果持有到次日收盘，绝对累积更高，有百分之十四点。五九年化百分之十五点三七，但相对同窗基准反而亏损百分之二点三二，说明多拿的收益来自隔夜趋势，不是策略本身确认版，等阿七确认后再进场，收益更薄。在累计百分之三点六七年化百分之三点八，误刀超五，超额百分之九点四一，更稳也更保守。可核策略在整个回撤期内成交约一百一十六个交易日，毛收益到净收益累计缩水约百分之一点二，六年化减少约百分之一点三三。而且，尾盘时段实际冲击成本可能高于EBP,当前未做建模可落地路径。那上a股宽基ETF的可做路径很明确，用十四点星号，次日开盘了结的规则，十四点进场，次日开盘出场小仓位验证，并且始终以匹配持有窗口的买入持有为基准，不要拿日内满仓持有来比较，那是对不上的。同日，进出规则可以尝试，但仅限于当日回转品种。比如跨境ETF在五幺零三零零上不能直接套，如果拿那只ETF跑图人混合近年化约百分之十三点零，夏普三点六八，回撤仅负百分之一点四。不过，隔夜和日间趋势仍然主导，总账户策略贡献有限。那需要警惕的是，样本及二百四十一个交易日一分钟，数据深度不足，预测r方只有约百分之二点三，盈利依赖有条件才暴露的机制，而非强预测尾部风险不可忽视，不要因短期数字好就放大仓位。总结来看，尾盘半小时动量策略经t加一适配后，在五幺零三零零上实现了年化百分之十一点六，相对匹配窗口累计超额百分之十九点八的收益。哦。本期为二零二五年八月到二零二六年八月同日，混合路径，虽然夏普一点八三回撤仅负百分之二点九，表现稳健。但绝对收益远不及简单持有，更适合作为低波动增强工具，而非主收益来源。很好。我食盆落地的三个关键点是严格使用匹配窗口的买入持有作为基准控制尾盘时段的冲击成本，并且只在小仓位验证，持续跟踪半小时级别动量信号的稳定性。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
