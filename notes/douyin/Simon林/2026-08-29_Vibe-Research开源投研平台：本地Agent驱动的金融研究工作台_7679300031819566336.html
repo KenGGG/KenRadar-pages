@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>打造属于自己的投研Agent：Vibe-Research 开源项目，2200+Star
+#vibecoding  #ai新星计划  #开源项目 #大A @抖音科技｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-08-29_Vibe-Research开源投研平台：本地Agent驱动的金融研究工作台_7679300031819566336.md · 发布于 2026-08-29 12:10:54</div><nav class="page-links"><a href="https://www.douyin.com/video/7679300031819566336" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Vibe-Research开源投研平台：本地Agent驱动的金融研究工作台</h1>
+<p>抖音 | Simon林 | 原文链接（<a href="https://www.douyin.com/video/7679300031819566336">https://www.douyin.com/video/7679300031819566336</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+介绍Vibe-Research（Vibrary Search）开源项目，一套基于Codex Honey开发的本地金融研究工作台，GitHub已获2200+ Star。支持订阅和API双接入方式，内置117个核心信息源，具备本地Agent智能任务执行、每日复盘、个股研究、多空辩论和回测五大核心功能，形成可生长、可验证的完整投研系统。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>项目概述与架构</strong>
+Vibe-Research是一套开源本地运行的金融研究工作台，基于开源Codex Honey开发，将金融数据、研究工具、任务流程和长期记录整合到同一本地Agent模型中。整体架构分为四层：底层为订阅模型与API提供推理能力；第二层为Codex Honey核心；第三层为Vibe-Research整合金融数据、研究方法、计算与回撤校验；第四层为浏览器UI界面，输出研究报告和回测记录。</p>
+</li>
+<li>
+<p><strong>接入方式与信息源</strong>
+提供两种接入方式：一是订阅接入，使用本机登录的Codex和Cloud Code；二是API接入，支持Memo Deep、Seek、Kimi等接口。新版本核心升级之一是增加了117个核心信息源，分为四层：市场与公司层（股市数据）、资讯与市场声音层（investment news、公开新闻）、社区独有数据层（月报产业数据、GPU租金、原材料招聘数据、日历）、政策与准入层（监管名单、管制政策文件）。</p>
+</li>
+<li>
+<p><strong>核心功能一：本地Agent智能研究</strong>
+基于Codex Chinese开源版本开发，用户通过对话提出研究任务，Agent自动判断所需数据，进行检索、计算和回测推进。项目源代码和工作区均在本地，页面、栏目和工具可通过Agent持续修改扩展，使系统成为一套可生长的金融研究工作台。</p>
+</li>
+<li>
+<p><strong>核心功能二至五：市场研究、个股研究、多空辩论与回测</strong>
+市场研究由每日复盘、资讯雷达和产业信号三条线组成，形成当日研究框架。个股研究按公司画像、财务分析、机构预测、估值研究、风险反证五个环节推进，最终形成正式报告并进入研究记录。多空辩论拉取公共事实底稿，多方与空方交替陈述反驳，由中立主持形成观点。回测模块支持大A、港股、美股，内置持有均线、RSI、均线回归等策略，回测完成后自动生成报告进入记录。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 项目开场与概述</h3>
+<p>大家好，今天给大家分享Vibe-Research的最新版。Vibe-Research是一套开源本地运行的金融研究工作台，目前在GitHub上已获得两千两百多个Star。新版本是基于开源的Codex Honey开发的，把金融数据、研究工具、任务、流程和长期记录都装进同一个本地Agent模型，既可以使用本机已经登录的订阅，也可以通过API接入。接下来我们看界面和核心功能。</p>
+<h3>2. 界面布局与架构分层</h3>
+<p>右侧是最新版本的界面，增加了一个首页。左侧功能入口分为三类：第一类是市场，包括每日复盘、资讯、雷达、产业信号和板块中心；第二类是做研究，包括标的研究、多空辩论和回测；第三类是研究资产，包括自选、持仓研报以及研究记录。产品整体架构分为四层：最底层是订阅的模型跟API负责提供推理能力；再往上是Codex Honey，这是新版本核心增加的一层；第三层是Vibe-Research，把金融数据、研究方法、计算回撤这些校验接入这套基于Codex Honey开发的Agent基座；最终进入浏览器的UI，形成每日的复盘研究报告和回测记录及辩论记录。页面上看到的不只是一层聊天框，而是一整套完整的本地金融研究系统接入。</p>
+<h3>3. 接入方式</h3>
+<p>AI有两种接入方式：第一种是订阅接入，也就是可以使用本机登录的Codex和Cloud Code；第二种是API接入，包括Memo Deep、Seek、Kimi等，都可以通过API接口进行接入。</p>
+<h3>4. 信息源体系</h3>
+<p>本次新版本核心另一个方面是增加了一百一十七个核心信息源，包括以前的迭代。首先市场与公司层，指股市数据里已有的一些数据源；其次资讯与市场声音层，通过investment news和公开新闻进行整合；第三层是Vibe-Research社区独有的数据源，包括月报的产业数据、GPU租金数据、原材料招聘数据、日历等；第四层是Vibe-Research独有的政策与准入层，包括一些监管名单和管制公开政策文件。</p>
+<h3>5. 核心功能一：本地Agent</h3>
+<p>本地Agent是新版本最明显的变化，基于Codex Chinese开源版本开发。用户通过对话提出研究任务，Agent会判断需要哪些数据，然后进行检索、计算回测，再推进任务。因为项目源代码和工作区都在本地，页面、栏目和工具都可以通过Agent持续修改和扩展，所以Vibe-Research不只是一个固定的看板，它是一套可以生长的金融研究工作台。</p>
+<h3>6. 核心功能二：市场研究</h3>
+<p>市场研究由每日复盘、资讯雷达和产业信号三条线组成。每日复盘负责大盘情绪、板块与资金；资讯雷达负责跨来源的聚合和英文标题的翻译；产业信号负责月品的产业数据、原材料、招聘和下一个数据的披露时间。这些结果都会被本地Agent合成一套当日的研究框架，方便后续进行标的研究和行业研究。</p>
+<h3>7. 核心功能三：个股研究</h3>
+<p>个股研究按照六个环节推进：公司画像、财务分析、机构预测、估值研究、风险反证，最后形成正式报告。公开的数据、本地研究确定的计算以及证据的编号都会在研究链中被调用，完成后自动进入研究记录，方便后续查验。</p>
+<h3>8. 核心功能四：多空辩论</h3>
+<p>多空辩论功能此前已有，这次再次介绍。该功能会拉取同一份公共的事实底稿，包括行情和财务指标等，再进入多方陈述、空方陈述、多方反驳、空方反驳的循环，最终由中立主持形成观点。</p>
+<h3>9. 核心功能五：回测研究</h3>
+<p>回测模块是使用Agent作为对话入口，只需要直接描述验证的假设即可。目前支持大A、美股、港股，覆盖长线、短线、波段研究，内置持有均线、RSI、均线回归策略。回测完成后，这些假设逻辑组合会组成完整的报告，自动进入回测记录。</p>
+<h3>10. 总结</h3>
+<p>Vibe-Research不是一个模型加一个网页，而是把完整的投研工作装进本地Agent。Codex Honey是一个开源版本，即OpenAI的开源基座，后续会持续迭代更新。随着Codex Chinese能力的提升，Vibe-Research的能力也会持续提升。Vibe-Research的优势在于有一百一十七个信息源提供研究原料，订阅和API均可选择，推荐使用Codex的订阅进行接入。市场复盘、个股研究、多空辩论、回测、长期记录共同组成了这套开源本地可验证的金融研究工作台。今天的分享到此结束，感谢大家的关注。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Simon林</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">AI工具</span></li>
+<li><span class="wikilink">开源</span></li>
+<li><span class="wikilink">金融科技</span></li>
+<li><span class="wikilink">投研平台</span></li>
+<li><span class="wikilink">Agent</span></li>
+<li><span class="wikilink">量化回测</span></li>
+<li><span class="wikilink">Vibe-Research</span></li>
+<li><span class="wikilink">CodexHoney</span></li>
+<li><span class="wikilink">开源项目</span></li>
+<li><span class="wikilink">金融研究</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li><span class="wikilink">抖音科技</span></li>
+<li><span class="wikilink">金融科技</span></li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">GitHub AI</span></li>
+<li><span class="wikilink">OpenAI</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>大家好，今天给大家分享vibrary search的最新版vibrary search是一套开源本地运行的金融研究工作台，目前在github上已经获得超过两千两百个star.新版本是基于开源的codex hones进行开发的，把金融数据、研究工具、任务、流程和长期记录都装进同一个本地a卷模型。既可以使用本机已经登录的订阅，也可以通过API接入。啊，接下来我们看界面和核心功能，右侧这个就是最新版本的界面，我增加了一个首页。然后左侧的功能入口其实分为三类的。第一类是碳市场，包括每日复盘呃，资讯、雷达、产业信号和板块中心。第二类是做研究，包括呃，标的研究，多空辩论和回测。第三类是研究的资产，包括自选啊、持仓研报以及研究记录。产品的整体的架构方面分为四层，最底层是订阅的模型，跟API负责提供推理能力。嗯，再往下是codex harineys,这就是我们新的版本核心增加的一层。然后再有第三层就是library search,再把金融数据研究方法呃，计算回撤。这些校验接入这套呃基于cotex chinese开发的a卷的基座，最终在进入浏览器的UI,形成每日的复盘研究报告和回测记录和辩论记录。所以页面上看到的不只是一层聊天框，而是一整套完整的本地金融的研究的系统接入。 Ai有两种方式，第一种是订阅接入，也就可以也就是可以使用本机登录的context和cloud code.呃，第二种是API接入，就包括memo deep、 seek、 kimi,这些都是可以通过api金容的接口进行接入。呃，本次新版本核心的另外一个方面是增加了一百一十七个核核心的信息源的。当然这个是包括以前的我把信息源进行了一部分的迭代啊，分为这几层啊。首先是市场与公司，这一层是指我们的exstock data里面已经有的一些数据源。然后资讯与市场声音呢是通过invest、 ment news,还有呃公开新闻。这些也是通过呃之前的一些公开的仓库进行了整合。然后第三层呢是我们webrary社区独有的一个数据源啊，包括月评的产业数据，还有GPU的租金的数据员，包括原材料、招聘、数据、日历这些。第四层也是我们burberry search独有的政策与准入啊，包括漂亮国的一些监管的名单，还包括管制的一些公开政策文件。然后功能方面呢，最重要的一个功能就是本地a卷啊，这是新版本最明显的变化。那新版本是基于cotex chinese开源版本开发的。我们的vibrary摄取的基座研究任务，可以通过直接的对话提出a卷会判断需要哪些数据，然后进行检索、计算回测，然后再进行推进。因为项目的源代码和工作区都在本地啊，所以我们的页面跟栏目跟工具也是可以通过这个a卷进行持续的修改跟扩展的。所以我们的library search的新版本不只是一个固定的看板，它也是一套可以生长的金融研究工作台。第二个功能就是把市场给看清楚。市场研究就有每日复盘磁讯、雷达和产业信号三条线组成，每日复盘负责大盘情绪呃，板块与资金资讯、雷达就负责跨来源的聚合吧，还有英文标题的翻译翻译。产业信号呢就负责一些呃月品的产业数据原材料招聘和下一个数据的披露时间。这些结果都会被我们啊本地的这个a卷呃合成一套呃当日的研究框架。然后方便以后进行这个标的的研究，跟行业的研究功能。三呢是个股的研究。个股研究按照六个环节进行了推进啊，公司画像啊、财务分析啊、机构预测，还有估值研究风险反证，最后形形成正式的报告，公开的数据，本地研究确定的计算。还有这些呃，证据的编号都会在啊同一条研究链里面被调用完成之后，会自动进入研究记录，方便后续的查验功能。四就是多轮的多空辩论，这个功能在以前就有了，但是这个功能我觉得还是比较好用，所以就是再说一下，就是多空辩论会拉取同一份公共的事业底。呃，事实底稿啊，就包括呃行情啊，财务指标都是垃圾的。然后再多方的陈述，然后空方陈述多方反驳，空方反驳，最终在中立主持，然后呃形成我们的观点啊功能。五是回测研究，也就是有些粉丝会找到我会提出他们的需求啊，后来提了意思啊，所以有比较多人提出这个回撤，所以我就把这个回测的功能也做进去了。回撤模块呢主要是使用a卷作为对话的一个入口，呃，只需要直接描述验证的假设就可以了。啊，目前就支持大a啊漂亮漂亮股啊，港股，然后覆盖呃长线短线波断研究内置的这个持有均线RSI的均线回归策略。回撤完之后，这些假设逻辑组合会组成完整的报告会，自动进入这个回撤的记录。啊，最终我们总结一下，very search不是一个模型加一个网页，而是把啊完整的进入研究工作装进本地的a卷contex honeys是一个开源的版本，就是open i的这个开源的呃机座啊，后续我会进行持续的这个迭代跟更新。所以呃随着cortect chinese呃能力的提升，我们的library search的能力也是持续的提升的。然后webrresearch的优势是在于我们有一百一十七个信息源提供啊研究的原料，然后订阅跟api也是可以进行选择的啊。当然我更加推荐codex的订阅进行介入啊，然后市场复盘个股研究，多方辩论回撤，长期记录，共同组成了这套开源本地可验证的金融研究工作台。 Ok今天的分享到这里，感谢大家的关注。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
