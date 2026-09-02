@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent用的搜索skill：FactReach AI获得充分的信息，才能更好产出｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-09-02_FactReach_AI：让Agent通过搜索获取事实信息后再产出_7680899368286735635.md · 发布于 2026-09-02 21:05:10</div><nav class="page-links"><a href="https://www.douyin.com/video/7680899368286735635" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>FactReach AI：让Agent通过搜索获取事实信息后再产出</h1>
+<p>抖音 | Simon林 | 原文链接（<a href="https://www.douyin.com/video/7680899368286735635">https://www.douyin.com/video/7680899368286735635</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+介绍FactReach AI开源仓库，基于AgentRICH（7.7万star）改造，整合23个搜索渠道，通过在行为层面对Agent进行约束，强制Agent先搜索验证事实再回答，从而提升AI产出的准确性。适用于投研、研究和日常工作场景。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>项目背景与改造来源</strong>
+基于AgentRICH仓库进行改造，原项目获得7.7万star。作者在原有基础上增加了多个搜索渠道，并强化了行为层面的约束机制。</p>
+</li>
+<li>
+<p><strong>核心功能：23个搜索渠道</strong>
+整合了23种搜索途径，包括免登录的公开渠道、需要cookies登录信息的渠道以及需要凭证的渠道，用户可通过AI助手辅助完成配置。</p>
+</li>
+<li>
+<p><strong>行为层约束：先搜索再回答</strong>
+通过在CodeMD或AgentMD中写入行为约束规则，让Agent在读到skill后知道必须先搜索验证外部事实，再进行答复，避免仅配置能力而Agent忘记调用的问题。</p>
+</li>
+<li>
+<p><strong>应用场景与价值</strong>
+搜索是AI工作的最重要第一步，无论是投研、研究还是日常工作，只有获得准确信息后，AI才能更好地产出。该工具对投研工作具有实用价值。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场与项目来源</h3>
+<p>大家好，今天给大家分享一个AI搜索的仓库叫FactReach。它的意义在于就是让你的AI能够获得到这个事实的搜索的结果。首先开始之前，我先感谢一下AgentRICH的作者，我是在他的仓库进行改造的，因为他的这个仓库拿了7.7万个star，非常的牛。然后我在使用的过程中呢，我就发现很多还有我自己要用到的一些搜索的渠道，然后我就把它给全部整合进去了。目前这个FactReach的版本呢，就是我自己基于AgentRICH进行的一个改造，同时呢我也增加了一些内容，就是要让Agent先查再答，就是让Agent在这个行动的层面，先把外部事实必须先搜索、验证，然后写进CodeMD或者是Codex的AgentMD，或者是其他Agent的AgentMD，就让他先去碰到这些问题的时候，他会想着先去搜索验证之后再去答复。</p>
+<h3>2. 系统配置与搜索渠道</h3>
+<p>首先我们把系统的配置给迭代一个版本，然后能力方面就配了23个这种途径可以去查这些资源。因为如果只配能力，没有在这个行为层面去控制的话，它可能是不记得去调用这些能力的，所以我们在这个仓库本身在行为层面也进行了一个约束，你的AI去读了这个skill的时候，他就知道了，这个是个安装我就不念了。然后这个是让AI先搜索再回答，这是一个全局的配置。然后渠道就有很多，有些是免登录的，然后有一些是需要cookies的登录信息的，大家把仓库下完之后可以问你的AI，他会帮你去配置，这是免登录的，然后这个是需要登录状态的，然后这些是需要凭证的，就是呃你要去用他的凭证。</p>
+<h3>3. 结尾总结</h3>
+<p>今天先分享到这里，就这个搜索这个事情呢，其实我觉得是非常非常重要的，因为你无论你是做研究也好，还是做投研也好，还是做一些自己工作中的事情也好，搜索啊反而是最重要的第一步，因为AI它只有获得到准确的信息之后，它才能够去呃更好地给你做一个产出。OK今天就先分享到这，谢谢大家。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Simon林</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">开源工具</span></li>
+<li><span class="wikilink">AIAgent</span></li>
+<li><span class="wikilink">搜索增强</span></li>
+<li><span class="wikilink">投研辅助</span></li>
+<li><span class="wikilink">GitHub项目</span></li>
+<li><span class="wikilink">FactReach</span></li>
+<li><span class="wikilink">AgentRICH</span></li>
+<li><span class="wikilink">AI搜索</span></li>
+<li><span class="wikilink">工具链</span></li>
+<li><span class="wikilink">投研</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">FactReach AI</span></li>
+<li><span class="wikilink">FactReach AgentRICH AI</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>大家好,今天给大家分享一个A卷搜索的仓库叫Factrich。它的意义呢在于就是让你的A卷能够获得到这个事实的搜索的结果。这是整个的介绍,它有23个渠道。首先开始之前,我先感谢一下Agentrich的作者。我是在他的仓库进行改造的,因为他的这个仓库用了拿了7.7万个star,非常的牛。然后我在使用的过程中呢,我就发现很多还有我自己要用到的一些 搜索的渠道 然后我就把它给全部整合进去了 然后目前这个FakeReach的版本呢 就是我自己基于AgentReach进行的一个改造 同时呢 我也增加了一些内容 就是要让Agent先查再打 就是让Agent在这个行动的层面 先把外部事实必须先搜索 叫他验证 然后写进CodeCode的CodeMD 或者是Codex的AgentMD 或者是其他Agent的AgentMD 就让他先去碰到这些问题的时候 他会想去先搜索验证之后再去答复 首先我们把系统的配置给迭代一个版本 然后能力方面就配了23个这种途径 可以去查这些资源 因为如果只配能力 没有在这个行为层面去控制的话 他可能是不记得去调用这些能力的 所以我们在这个仓库本身 在行为层面也进行了一个约束 你的A卷去读了这个skill的时候 他就知道了 这个是个安装我就不念了 然后这个是让A卷先搜索再回答 这是一个全局的配置 然后渠道就有很多 有些是零件权的 然后有一些是需要cookies的登录信息的 大家把仓库当下之后可以问你的A卷 他会帮你去配置 这是零件权的 然后这个是需要登录状态的 然后这些是需要凭证的 就是呃你要去用他的凭证 ok 今天就先分享到这里 就这个呃搜索这个事情呢 其实我觉得是非常非常重要的 因为你无论你是做研究也好 还是做投研也好 还是做一些自己工作中的事情也好 呃其实搜索啊 反而是最重要的第一步 因为 ai 他只有获得到准确的信息之后 他才能够去呃更好的给你做一个产出 OK今天先分享到这 谢谢大家</p>
+</blockquote>
+</details></main>
+</body>
+</html>
