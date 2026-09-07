@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>941%的交易大赛冠军策略，移植到A股的表现 #财经 #投资 #A股 #交易 #策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-09-03_全美交易大赛冠军策略移植A股回测分析_7681242865565027638.md · 发布于 2026-09-07 21:38:15</div><nav class="page-links"><a href="https://www.douyin.com/video/7681242865565027638" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>全美交易大赛冠军策略移植A股回测分析</h1>
+<p>抖音 | 中产财富说 | 原文链接（<a href="https://www.douyin.com/video/7681242865565027638">https://www.douyin.com/video/7681242865565027638</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本文介绍全美投资大赛冠军Oliver Kell的Cycle of Press Action策略，将其移植到A股进行过去11年回测。策略基于欧奈尔CANSLIM选股法，分四个阶段寻找开仓信号，尽管A股缺少做空机制仍获得可观超额收益，但需警惕流动性、连板、熊市震荡等问题。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>策略背景与A股回测结果</strong>
+2020年美国交易员Oliver Kell凭借Cycle of Press Action策略以941%收益率获得全美投资大赛冠军。该策略纯技术分析主导，无AI、机器学习等复杂工具。移植到A股回测过去11年，基准对比沪深300，整体表现相当不错，经历2015年股灾、2018年单边下跌、2022-2023年熊市后仍大幅跑赢普通散户。</p>
+</li>
+<li>
+<p><strong>CANSLIM选股标准</strong>
+策略第一步借鉴欧奈尔CANSLIM选股法：C为季度收益同比增长大于30%，A为年度收益增长率，N为新 catalyst（原文未详述），S为流通市值50-500亿之间，L为ROE大于8且EPS大于0，I为机构认同度，M为市场趋势。A股简化条件为季度利润同比增超30%、季度营收同比增超30%、ROE&gt;8、EPS&gt;0、流通市值50-500亿。</p>
+</li>
+<li>
+<p><strong>四阶段开仓信号</strong>
+原版文档将行情分为四个阶段，A股只能做多故以震荡上升趋势为例。第一阶段Reversal Extension：底部恐慌性抛售期，放量但为观察期。第二阶段Wedge Pop（楔形突破）：价格首次站稳均线并展开反弹，为第一个开仓点。第三阶段EMA Crossback：回踩均线获得买盘确认支撑，为第二个建仓点。第四阶段Base and Break：横向平台整理后向上突破，为第三个建仓点。第五阶段Exhaustion Extension：加速上行、远离均线、情绪亢奋、放量，此阶段获利了结。</p>
+</li>
+<li>
+<p><strong>策略局限与改进建议</strong>
+A股因不能做空导致下行趋势只能空仓等待，收益不及美股。手动操作需注意三点：一是标的需高增长有业绩，非随意选股；二是保证充足流动性，避免连板涨停走完整段趋势导致无法识别信号；三是避开单边熊市或长期无趋势震荡，假突破多。改进方向可加移动止损保护利润、根据当下市场风格（价值/成长）调整选股逻辑。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 策略背景介绍</h3>
+<p>全美投资大赛获得冠军的策略，如果移植到A股，它的表现怎么样呢？在2020年的时候，有一个交易员叫Oliver Kell，他的策略是Cycle of Press Action，这个策略获得了941%的收益，当时在全美的交易大赛中获得提名。而且这个策略好的一点是没有那么多花里胡哨的东西，什么AI大模型、机器学习、因子分析，这些通通都没有，就像新能源时代朴实无华的燃油车一样。虽然基础，但是稳定可靠，而且是纯技术分析主导的。我把这个策略移植到了A股，回测了过去11年的表现。如果我们的基准是沪深300的话，那么这个策略的表现可以说是相当不错了，尤其是考虑到期间还经历了2015年的股灾、2018年的单边下跌，还有2022、2023年的熊市，它的总体表现肯定是大幅跑赢我们普通散户的。关于策略的详细文档说明，大家可以自己去Traderline上的网站去搜索，Traderline的网站也是作者Oliver Kell创建的。当然我也会把一些关键的东西贴到视频里。</p>
+<h3>2. CANSLIM选股法详解</h3>
+<p>这个策略的核心我认为有三步：第一步选到合适的股票，第二步在合适的股票中找到合适的开仓机会，第三步指引持仓。咱们先说第一步。Oliver Kell借鉴了欧奈尔的经典理论，他采用了欧奈尔的CANSLIM选股法。什么叫CANSLIM呢？这七个字母代表了牛股启动前的七个特征：C是每季度的收益，A是年度的收益增长率，N是新的催化剂，S是流通盘的供给与需求，L是行业内的领涨股，I是机构的认同度，M是市场方向也就是趋势。那在我们的策略中，我们就可以简化为：季度的利润同比增长大于30%，季度的营收同比增长大于30%，ROE大于8，EPS大于0，流通市值在50到500亿之间，避免盘子过大或过小。那我们可以根据上面的这些条件，在我们的策略中把这些东西代码化。</p>
+<h3>3. 四阶段开仓信号</h3>
+<p>接下来选到合适的股票后，我们怎么进行开仓呢？在原版的文档中，Oliver Kell把一段行情分成了四个阶段。因为在A股中只能做多不能做空，所以我只以一段震荡加上升的趋势为例。第一个阶段叫Reversal Extension，它出现在整个循环的一个地步。这个阶段会出现一次普遍性的恐慌性抛售，恐惧情绪占主导，大部分的投资者选择卖出，因为没有办法承受巨额亏损带来的痛苦。在这种高波动的行情中，通常会伴随着放量的现象。在这个阶段还只是观察期，真正的低风险确定性的机会还在后面。接着是第二个阶段，价格开始从底部突破，作者把第一个信号叫做Wedge Pop，也叫做楔形突破，指的是价格在经历反转趋势的延伸后，首次站上了均线，然后成功地展开了反弹。在这个过程中，重点就是要成功的站上均线，而不是和均线粘合，这个阶段也是这个策略的第一个开仓点。在Wedge Pop后，价格通常会再次回踩均线，这个过程也被作者叫做EMA Crossback，这个阶段价格会在均线附近盘整，在得到买盘确认支撑的信号下，就是第二个建仓点。接着到了第三阶段，在行情展开趋势后，价格会有一次短暂的横向平台整理，那么EMA的均线就会快速的跟进，作者把这个阶段的平台整理突破叫做Base and Break，也就是在趋势上行的时候，他做了一个平台整理，然后行情向上突破平台的震荡区间，这个是策略的第三个建仓点。随后也是最后的阶段，作者叫做Exhaustion Extension，通常是一段上行趋势的加速延续，而且伴随着放量，价格大幅的远离均线，通常表现为情绪的极度亢奋以及价格的快速拉升，作者在这个阶段选择了获利了结或者是阶段的止盈。后面的下行趋势也是这几个步骤，只不过它是一个镜像的对称，因为在A股不能做空，所以下行趋势这块咱们就省略了，这也是导致这个策略在A股中收益不及美股的原因，因为少了做空的机会，所有的下行趋势只能空仓等待，并不具备开仓的条件。</p>
+<h3>4. 策略局限与改进建议</h3>
+<p>整体来看这个策略的门槛并不高，如果对于量化选股来说并不是难事，但是大多数的普通投资者，更重要的是去借鉴它开仓的信号还有CANSLIM的选股方法，因为通过数据回测后证明在A股即便你砍掉了这个策略的做空能力，总体来说依然是有效的，是能够获得超额alpha的。如果我们没有能力去自己编写这样的量化程序，其实如果只是针对这个策略的话，完全可以自己手动操作，因为这种高度技术指标化的策略实现起来并没有那么难。最后咱们再说一下，如果手动操作的话，这个策略它存在的一些问题：首先它需要选择好的标的，因为这个策略适用的个股都是高增长有盈利也有业绩的，并不是随便选一个就行；第二就是要保证这个个股的充足流动性，因为如果流动性太弱非常容易被控盘，尤其是在A股在情绪极端的时候，就很容易出现连板涨停，比如10个连板，提前就把一段趋势走完了，这也会导致我们的策略无法识别到开仓信号；第三就是要避免单边熊市或者是长期的震荡无趋势行情，因为在震荡市中会出现很多第二阶段的假突破，导致我们连续的开仓失败。当然我们也可以根据它的理念，再根据自己的风格做出一些策略的改进，比如我们可以加一个移动止损去保护我们的利润，再比如我们可以针对选股逻辑根据当下A股的市场风格进行改进，比如现在到底是炒价值还是炒成长，我们就可以根据相应的风格进行一个个股的筛选。不过无论是什么策略，它盈利的前提是要和自己的性格相互匹配，有的人比如脾气比较急的，那它就不适合中线或者长线；再比如有的手慢的、没有时间盯盘的，那它也不适合做短线。所以好的策略不是照搬照抄，而是在理解其中的内核基础上，再加上自己的性格特征、时间窗口还有自己的风险承受能力。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">中产财富说</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">选股方法</span></li>
+<li><span class="wikilink">交易信号</span></li>
+<li><span class="wikilink">美股策略移植</span></li>
+<li><span class="wikilink">技术分析</span></li>
+<li><span class="wikilink">CANSLIM</span></li>
+<li><span class="wikilink">OliverKell</span></li>
+<li><span class="wikilink">A股回测</span></li>
+<li><span class="wikilink">开仓信号</span></li>
+<li><span class="wikilink">超额收益</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li><span class="wikilink">就像新能源</span></li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>全美投资大赛获得冠军的策略,如果移至到A股,它的表现怎么样呢?在2020年的时候,有一个交易员叫Oliver Kell,他的策略是Cycle of Press Action,这个策略获得了941%的受益,当时在全美的交易大赛中获得投名。而且这个策略,它好的一点是没有那么多花里胡哨的东西,什么AI大模型、机器学习、因子分析,这些通通都没有,就像新能源时代朴实无华的燃油车一样。虽然基础,但是稳定可靠,而且是纯技术分析主导的。 我把这个策略移植到了A股 回测了过去11年的一个表现 如果我们的基准是虎身300的话 那么这个策略的表现可以说是相当不错了 尤其是考虑到期间还经历了2015年的股灾 2018年的单边下跌 还有2002 2023年的熊市 它的总体表现肯定是大幅考验我们普通散户的 关于策略的详细文档说明 大家可以自己去Traderline上的网站去搜索 Traderline的网站也是作者Oliver Kell创建的 当然我也会把一些关键的东西贴到视频里 这个策略的核心我认为有三步 第一步选到合适的股票 第二步在合适的股票中找到合适的开仓机会 第三步指引立场 咱们先说第一步 Oliver Kale借鉴了欧联·威奈尔的经典理论 他采用了欧奈尔的一个Canslame宣估法 什么叫Canslame呢 这七个字母代表了牛股启动签的七个特征 C是每季度的收益 A是年度的收益增长率 N是新的催坏 S是流通盘的供给与需求 L是行业内的零涨股 I是机构的认同度 M是市场方向 也就是趋势 那在我们的策略中 我们就可以简化为 季度的利润同比增长呢 大于30% 季度的营收同比增长呢 大于30% ROE大于8 EPS大于0 流通市值呢 在50到500亿之间 避免盘子过大或过小 那我们可以根据上面的这些条件 在我们的策略中 把这些东西代码化 接下来选到合适的股票后 我们怎么进行开仓呢 在原版的文档中呢 Oliver Kale把一段行情分成了四个阶段 因为在A股中只能做多不能做空 所以我只以一段震荡加上升的趋势为例 第一个阶段叫reversal extension 它出现在整个循环的一个地步 这个阶段会出现一次普遍性的恐慌性抛手 恐惧情绪占主导 大部分的投资者选择卖出 因为没有办法承受巨额亏损带来的痛苦 在这种高暴动的行情中 通常会伴随着放量的现象 在这个阶段还只是观察期 真正的低风险确定性的机会还在后面 接着是第二个阶段 价格开始从第一步突破 作者把第一个信号叫做Wedge Pop 也叫做斜行突破 指的是价格在经历反转趋势的延伸后 首次站上了均线 然后成功的展开了反弹 在这个过程 重点就是要成功的站上均线 而不是和均线粘合 这个阶段也是这个策略的第一个开仓点 在Wedge Pop后 价格通常会再次回踩均线 这个过程也被作者叫做EMA Crossback 这个阶段价格会在均线附近成立 在得到买盘确认支撑的信号下 就是第二个建仓点 接着到了第三阶段 在行情展开趋势后 价格会有一次短暂的横向平台整理 那么EMA的均线就会快速的跟进 作者把这个阶段的平台整理突破 叫做Base and Break 也就是在趋势上行的时候 他做了一个平台整理 然后行情向上突破平台的震荡区间 这个是策略的第三个建仓点 随后也是最后的阶段 作者叫做Exhaustion Extension 通常是一段上行趋势的加速延续 而且伴随着放量 价格大幅的远离均线 通常表现为情绪的极度亢奋 以及价格的快速拉升 作者在这个阶段选择了获利了结 或者是阶段的指引 后面的下行趋势也是这几个步骤 只不过它是一个镜像的对称 因为在A股不能做空 所以下行趋势这块咱们就省略了 这也是导致这个策略在A股中 收益不及美股的原因 因为少了做空的机会 所有的下行趋势只能空仓等待 并不具备开仓的条件 整体来看这个策略的门槛并不高 如果对于量化选顾来说 并不是难事 但是大多数的普通投资者 更重要的是去借鉴它开仓的信号 还有Canslame的选顾方法 因为通过数据回测后 证明在A股 即便你砍掉了这个策略的做空能力 总体来说依然是有效的 是能够获得超额α的 如果我们没有能力 去自己编写这样的量化程序 其实如果只是针对这个策略的话 完全可以自己手动操作 因为这种高度技术指标化的策略 实现起来并没有那么难 最后咱们再说一下 如果手动操作的话 这个策略它存在的一些问题 首先它需要选择好的标的 因为这个策略适用的个股 都是高增长 有盈利 也有业绩的 并不是随便选一个就行 第二就是要保证 这个个股的充足流动性 因为如果流动性太弱 非常容易被控盘 尤其是在A股 在情绪极端的时候 就很容易出现连板涨停 比如10个连板 提前就把一段趋势走完了 这也会导致我们的策略 无法识别到开仓信号 第三就是要避免单边熊市 或者是长期的震荡 无趋势行情 因为在震荡时中 会出现很多第二阶段的假突破 导致我们连续的开仓失败 当然我们也可以根据它的理念 再根据自己的风格 做出一些策略的改进 比如我们可以加一个移动指引 去保护我们的利润 再比如我们可以针对选股逻辑 根据当下A股的市场风格进行改进 比如现在到底是炒价值 还是炒成长 我们就可以根据相应的风格 进行一个个股的筛选 不过无论是什么策略 它盈利的前提 是要和自己的性格相互匹配 有的比如脾气比较急的 那它就不适合中线或者长线 那再比如有的手慢的 没有时间盯盘的 那它也不适合做短线 所以好的策略不是照搬照抄 而是在理解其中的内核基础上 再加上自己的性格特征 时间窗口 还有自己的风险能力</p>
+</blockquote>
+</details></main>
+</body>
+</html>
