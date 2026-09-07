@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【干货】用 Kimi K2.6 做量化策略 去年一直很想跑的一个策略，在 TQQQ 和 SPY 之间择时。由于各方面原因，没有时间/动力去做。最近 Kimi K2.6 上线之后，可以很丝滑的做策略回测，就去尝试了一下，果然很强。更可怕的是查了一下代码，没有未来函数😂 不过回测和实盘肯定有差距，不知道实践下来会有什么样的效果
+#人工智能  #AI #量化交易 #美股 #Kimi｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-05-12_用Kimi_K10.6实现TQQQ与SPY择时量化策略回测_7638796140669963520.md · 发布于 2026-09-07 23:28:03</div><nav class="page-links"><a href="https://www.douyin.com/video/7638796140669963520" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>用Kimi K10.6实现TQQQ与SPY择时量化策略回测</h1>
+<p>抖音 | Jaybee黄 | 原文链接（<a href="https://www.douyin.com/video/7638796140669963520">https://www.douyin.com/video/7638796140669963520</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+作者利用Kimi K10.6完成了一个在TQQQ（三倍做多纳指）与SPY（标普500 ETF）之间进行择时切换的量化策略回测。策略以VIX恐慌指数和13周国债收益率作为择时信号，经过引入止损机制、动量因子和美联储货币政策信号优化后，年化收益达65%，复合收益673.5%，最大回撤仅23.4%，夏普比率1.7。作者认为Kimi的agentic能力使策略开发与优。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>策略回测成果展示</strong>
+最终回测结果显示年化收益65%，复合收益率673.5%，最大回撤23.4%，夏普比率1.7，远优于同期SPY和TQQQ的买入持有策略。</p>
+</li>
+<li>
+<p><strong>策略核心思路</strong>
+在市场情形好时用TQQQ三倍做多纳指表达进攻观点，市场情形较差时用SPY追踪标普500 ETF表达防守观点，结合VIX和宏观数据择时进行仓位轮换。</p>
+</li>
+<li>
+<p><strong>Kimi策略优化迭代</strong>
+第一版策略年化约20%，最大回撤高。Kimi提出引入止损机制、动量因子和美联储货币政策周期作为额外信号。第二版策略进一步使用13周国债收益率加VIX进行择时，并将仓位分档更精细，最终实现策略效果大幅提升。</p>
+</li>
+<li>
+<p><strong>Kimi agentic能力评价</strong>
+Kimi并非被动chatbot，而是主动思考如何择时、获取信息源并将逻辑映射为策略。策略对TQQQ持仓周期较短，对SPY持仓较长。作者认为一键部署每日信号将是下一步完善方向。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场介绍策略回测结果</h3>
+<p>基本上都是非常短期的持仓。Yo大家好，我是老黄。上周我用Kimi K10.6做了一个年化百分之……多少？别踩我键盘啊，年化百分多少？等下来，65%。做了一个年化65%的策略，你看它的复合收益率673.5%，最大回撤23%。我觉得这个……夏普，你干嘛踩我键盘啊？1.7的夏普，非常离谱。这东西怎么做出来呢？</p>
+<h3>2. 策略基本思路与Kimi回测</h3>
+<p>在Kimi 0.6里面你是可以打一个斜杠，你在Agent模式里面打一个斜杠trading strategy backtest，就可以用它预设的一套技能去进行你的策略的回测。我思路其实是这样的，从去年我就一直想做这么一个策略，我想在市场情形好的时候用TQQQ就是说三倍做多纳指，去表达一个比较进攻的观点，然后在市场情形没那么好的时候用SPX就是追踪标普500的ETF，去表达一个比较防守的观点。我希望再用一些宏观的数据去进行一个择时，这就是这个策略的最基本的想法。</p>
+<h3>3. 第一版策略效果与优化方向</h3>
+<p>于是我就把这个策略输入给了Kimi K10.6，这是我说的，帮我想一个TQQQ和SPX的交易策略，做波段，用VIX和其他宏观基本面信息，在他们之间换仓。情势好的时候TQQQ猛攻，情势差的时候SPX防守，他就去做了一个根据这个思路来的一个策略，用VIX还有他其实用了两年期的美国国债的收益率去进行一个择时。这个策略做出来第一个版本就是这个样子，大概年化有个20%，其实不算高，最大回撤非常高，总收益就是从22年到26年也就120%，其实不算一个很好的策略，夏普0.6。它有意思的是，在底下其实提出了一个这个策略能够优化的方向，比如说可以引入一些止损机制，还有再加一些动量因子，把美联储的货币政策周期作为一个额外的信号。</p>
+<h3>4. 第二版优化策略与最终效果</h3>
+<p>同时它给的这个策略，其实是会根据VIX或者恐慌指数不同的程度，对TQQQ和SPX的仓位进行一个轮换，但是它只割了五档仓位，现在就是割得更细，并且会用美联储货币政策的一些信息作为一个额外信号。根据这些思路我就跟他说，请你按照你优化的方向去优化这个策略。他做的引入一个止损机制，增加一个动量因子，引入美联储货币政策的信号。这个美联储货币政策信号最后他用到的就是在这里，13周国债的收益率。他就用13周国债收益率加上VIX去进行一个择时，这就是它第二版的策略的效果，非常逆天。你看它这里还做了一个验证，这里是双重止损的机制，SPY的120日的动量，再加上美联储的货币政策信号，用IRX13周美国国债收益率，更精细的六档权重的分换。对，这是最终的这个效果。这个策略有1.7的夏普，65的年化，最后复合收益到673%，主要它这个最大回撤非常离谱，只有23.4%。</p>
+<h3>5. 策略细节分析与总结评价</h3>
+<p>在这个策略的P&amp;L下面你看SPY和TQQQ的buy and hold都变成了一条直线，就非常变态。其实你还可以去看交易的一些细节，在这个技能底下都有，你可以看到交易的明细，它从什么时候开仓。你会发现它其实是一个稍微持仓的周期没有特别长的这么一个策略，它对SPY会持的比较长，但是它的TQQQ基本上都是非常短期的持仓。这是你可以去验证整个策略，它最终执行的时候是怎么样一个效果。我个人觉得这是一个非常方便的方式。去年我其实一直很想做这一个策略，但你让我自己去做肯定会有一些摩擦，平时做更多的是一些统计套利的量化策略，跟这种做择时的还是不太一样，一直说有这个想法但是没有实践。现在我可以one shot，我只要跟Kimi聊天，我就可以把我的策略进行一个比较基本的回测，看一下这个策略到底怎么样。而且比较有意思的是Kimi它还会自己主动提出一些优化策略的方向，我也是就让他按照这些方向去执行。他甚至能够帮我找到一些还不错的用来择时的指标，并且他做这些事情都是非常agentic地去做，他并不是说只是一个chatbot吐给我一些预设的信息，他真的有自己认真地去思考用什么样的指标进行择时，怎么去获得这些信息源，然后怎么去把它map成一个策略。我觉得这个已经非常优秀了，更好的说让这个东西能够持久化，每天都告诉我这个信号会长什么样子，让我可以直接一键部署，那就太完美了。今天就跟大家分享到这里，谢谢大家拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Jaybee黄</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">人工智能</span></li>
+<li><span class="wikilink">AI工具</span></li>
+<li><span class="wikilink">量化投资</span></li>
+<li><span class="wikilink">美股</span></li>
+<li><span class="wikilink">策略回测</span></li>
+<li><span class="wikilink">Kimi应用</span></li>
+<li><span class="wikilink">Kimi</span></li>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">TQQQ</span></li>
+<li><span class="wikilink">SPY</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>基本上都是非常短期的职舱。 Yo大家好,我是老黄,上周我用KIMI K10.6做了一个年化百分之……多少?别踩我键盘啊,年化百分多少?等下来,65%。做了一个年化65%的策略,你看它的复合收益率673.5%,最大回测23%。我觉得这个……下谱,你干嘛踩我键盘你?1.7的下谱,非常离谱。这东西怎么做出来呢? 去carry.6里面你是可以打一个斜杠 你在agent模式里面打一个斜杠 trading strategy backtest 就可以用它预设的一套技能 去进行你的策略的回策 我思路其实是这样的 从去年我就一直想做这么一个策略 我想在市场情形好的时候 用tqq就是说三倍做多nudge 去表达一个比较进攻的观点 然后在市场情形没那么好的时候 用spx就是追踪标普500的etf 去表达一个比较防守的观点 我希望再用一些宏观的数据 去进行一个择时 这就是这个策略的最基本的想法 于是我就把这个策略输入给了Kimi Kari.6 这是我说的 帮我想一个TQQ SPX的交易策略 做波段 用VIX和其他宏观基本面信息 在他们之间换去 情势好的时候 TQQ猛攻 情势差的时候SPX防守 他就去做了一个 根据这个思路来的一个策略 用VIX 还有他其实用了两年期的 美国国债的收益率 去进行一个择时 这个策略做出来 第一个版本就是这个样子 大概年化有个 20%其实不算高 最大回撤非常高 总收益就是从22到26年 也就120% 其实不算一个很好的策略 夏普0.6 它有意思的是 在底下其实提出了一个 这个策略能够优化的方向 比如说可以引入一些止损机制 还有再加一些动量因子 把美联储的货币政策周期 作为一个额外的信号 同时它给的这个策略 其实是会根据VIX 或者恐慌指数不同的程度 对TQQ和SPX的仓位进行一个轮换 但是它只割了五档仓位 现在就是割得更细 并且会用美联储货币政策的一些信息 作为一个额外信号 根据这些思路 我就跟他说 请你按照你优化的方向去优化这个策略 他做的引入一个止损机制 增加一个重量因子 引入美联储货币政策的信号 这个美联储货币信号 最后他用到的就是在这里 13周国债的收益率 他就用13周国债收益率 加上VIX去进行一个择时 这就是它第二版的策略的效果 非常逆天 你看它这里还做了一个验证 这里是双重止损的机制 SPY的120日的动量 再加上美联储的货币政策信号 用IRX13中美国国债收益率 更精细的六涨权重的分换 对这是最终的这个效果 这个策略有1.7的下谱 65的年化 最后复合收益到673% 主要它这个最大回撤非常离谱 只有23.4% 在这个策略的PL下面 你看SPY和TQQ的buy and hold 都变成了一条直线 就非常变态 其实你还可以去看交易的一些细节 在这个技能底下都有 你可以看到交易的明细 它从什么时候开仓 你会发现它其实是一个稍微 持仓的周期没有特别长的这么一个策略 它对SPY会持的比较长 但是它的TQQ基本上都是非常短期的持仓 这是你可以去验证整个策略 它最终执行的时候 是怎么样一个效果 我个人觉得这是一个 非常方便的方式 去年我其实一直很想 做这一个策略 但你让我自己去做 肯定会有一些摩擦 平时做更多的是一些 统计套利的量化策略 跟这种做择实的 还是不太一样 一直说有这个想法 但是没有实践 现在我可以one shot 我只要跟Kimmy聊天 我就可以把我的策略 进行一个比较基本的回策 看一下这个策略到底怎么样 而且比较有意思的是 Kimmy他还会自己主动 提出一些优化策略的方向 我也是就让他 按照这些方向去执行 他甚至能够帮我找到一些 还不错的用来择时的指标 并且他做这些事情 都是非常agentic的去做 他并不是说只是一个chatbot 吐给我一些预设的信息 他真的有自己认真的去思考 用什么样的指标进行择时 怎么去获得这些信息源 然后怎么去把它map成一个策略 我觉得这个已经非常优秀了 更好的说让这个东西能够持久化 每天都告诉我这个信号 会长什么样子 让我可以直接一键部署 那就太完美了 今天就跟大家分享到这里 谢谢大家拜</p>
+</blockquote>
+</details></main>
+</body>
+</html>
