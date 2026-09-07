@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【干货】一口气图解AI前沿AutoResearch自动研究 来填坑了！前几天我发了一条视频，讲的是一个老哥用Andrej Karpathy大神的开源项目Auto Research把一个千问模型在本地电脑上跑起来的例子。这算是近期很有意思的一个AI领域范式创新今天我们来拆解一下Auto Research的底层逻辑是什么样的？怎么用？在哪里用？它有怎样的可能性供我们尝试？ #人工智能 #AI #科技 #科研  #Openclaw｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-04-01_AutoResearch自动研究框架详解与应用前景_7623731471378828559.md · 发布于 2026-09-08 00:11:51</div><nav class="page-links"><a href="https://www.douyin.com/video/7623731471378828559" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>AutoResearch自动研究框架详解与应用前景</h1>
+<p>抖音 | Jaybee黄 | 原文链接（<a href="https://www.douyin.com/video/7623731471378828559">https://www.douyin.com/video/7623731471378828559</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本文介绍Andrej Karpathy开源的AutoResearch项目，这是一个meta optimization框架，通过让AI迭代实验寻找最优路径。项目上线两周获得5.2万GitHub星标，已应用于模型量化、GPU优化等场景，具有广泛的商业应用潜力。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>项目背景与热度</strong>
+Andrej Karpathy的AutoResearch项目两周前上线，GitHub已获得5.2万星标。多个成功案例包括让千问397B模型在本地MacBook上以5.5 tokens/秒运行，以及将GPU核函数训练效率提升10倍。</p>
+</li>
+<li>
+<p><strong>核心工作原理</strong>
+AutoResearch是一个meta optimization过程：给定AI目标后，AI通过不断做实验、看指标、迭代优化，最终找到达到目标的最优路径。任何可量化指标的流程都可以应用此框架。</p>
+</li>
+<li>
+<p><strong>循环流程详解</strong>
+完整循环包括：读取历史上下文→提出变更方案→commit并运行实验→记录结果→与当前最优比较→保留或否决。实验崩溃时会尝试修复，多次失败则记录原因并跳过。</p>
+</li>
+<li>
+<p><strong>应用潜力与个人展望</strong>
+框架适用于代码速度优化、P&amp;L管理、广告投放ROI提升、流量优化等可量化场景。作者计划下期分享个人使用体验、优缺点分析及自定义调整方案。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场与项目介绍</h3>
+<p>大家好，我是老王，最近Karpathy的AutoResearch项目特别的火，就它两周前上线，现在在Github上已经有五万两千星了，很多人用AutoResearch这个思路去做了很多疯狂的事情，比如说让AI去自动化的把一个千问397B的模型，不断的优化量化，最后让它能够在本地的MacBook上跑起来，并且能够达到5.5tokens per second，还有人呢用AutoResearch不断的去让AI加速它的GPU的核函数，使得它的训练效率现在比平时快了10倍，这些都是这两周内真实发生的事情。</p>
+<h3>2. 核心概念解释</h3>
+<p>AutoResearch用一句话讲的就是你给定AI一个目标，然后AI不断地通过去做实验看指标，做实验看指标，然后这样不断地去迭代，最终找出一条最优的能够达到你的目标的路径，这么一个过程，实际上它是一个meta optimization。</p>
+<h3>3. 循环流程详解</h3>
+<p>那么AutoResearch一整个循环的内部呢，长这个样子。首先在每次AutoResearch loop开始的时候呢，你会让AI去读取so far的上下文，就是之前做哪些实验，有哪些动作是成功的，有哪些动作是不成功的。接着呢根据这个实验结果，以及你想要AI优化的目标，AI去propose some changes，提出变更。比如说如果你要优化一个神经网络的话，那么它可能是把某些层挪到另一些层前面，或者它去优化你的embedding或者tokenizer。接着呢它就commit proposal，并且开始run这整个流程。我们在讲的时候，就会用它最原始的设定。</p>
+<h3>4. 实验处理机制</h3>
+<p>那么在AutoResearch开始的时候呢，你需要让AI读取你的实验的上下文，就是说so far你到底做了什么事情，哪些东西work，哪些东西不work，哪些东西跑崩了，全部都记录在一个文档里面，然后AI去读。读完之后呢，根据你给定AI的目标，那比如说如果你是神经网络训练的话，那你就是希望AI能够提高他在验证集validation set上面的表现，比如说降低validation loss。然后呢AI就根据他刚才读取的上下文propose一个改变，然后呢他就把这个改变commit，然后开始训练神经网络，或者说如果你是做什么核函数的优化的话，那他就是改变并且开始跑实验。</p>
+<h3>5. 结果评估与保存</h3>
+<p>如果这个神经网络的训练，或者说这个实验崩了呢，首先尝试能不能把这个东西修复了，如果能修复的话呢，那么就继续跑，那如果不能修，也要把这个不能修复的事实给记录下来，那么就说明这个尝试，它不是因为没有提升，而是因为一些其他原因而崩溃了。如果它几次都修不好，就先让它过去。那如果这个实验没有跑崩的话呢，你就可以看到一个结果，那么你就把这个结果给记录下来，记录到results.tsv里面。在记录完结果之后，你就要去比较这个结果，跟当前最优的结果比起来到底怎么样，如果它确实优化了我们想要的那个指标，比如说validation上面的performance OK，那么这就是一个好的优化，我们就把这次的改变保留下来，把它推到我们的主分支上，merge进去。但如果这一次的改变并没有给我们带来比现在更好的提升，那我们就把它否决掉，虽然我们还是会把它记录下来，但我们不会把它保存进我们的主分支里面。</p>
+<h3>6. 应用潜力分析</h3>
+<p>OK那么进行完整个流程之后，你就又回到让AI读上下文，然后提出变更提交训练，然后这么一个loop不断的循环下去。OK那么这就是一个AutoResearch循环。当你跑完了这么一个循环，你就会进入下一个循环。这里面其实你可以看出一点，就是说任何能够有可量化指标的流程，我们都可以用AutoResearch去让AI帮我们找到去提高，然后达到我们这个可量化指标的一个最优的路径。那这个东西取决于你到底有多少的时间和Token，我个人感觉它实际上是一个范式上的突破，虽然它看起来好像跟我们已有的一些框架非常相似，但它厉害的地方在于，实际上生活中有很多任务是可量化的，并且它能够带来很多的经济价值，比如说你的代码的速度是可量化，然后你的P&amp;L是可量化，然后呢你去做不管是广告投放还是什么的，你的ROI都是可量化的，流量是可量化的，所以我觉得很快，我们会看到AutoResearch在各个领域开花结果。</p>
+<h3>7. 结尾与预告</h3>
+<p>我目前发现最有意思的一种玩法呢，就是说你把一篇文章，或者说Best Practice丢给AI，然后让AI根据这个文章的思路，去用AutoResearch这个框架，帮你完成一些事情，比如说帮你把千问397B不断的压缩优化，最后让它能够，在你的本地机制上跑起来，并且5.5 tokens per second，这个事情就非常疯狂，但是现在已经有可能了。今天就跟大家分享到这里，下一节呢，我会跟大家分享一下，我自己用AutoResearch以来，觉得大家有什么优点，什么缺点，然后我自己对AutoResearch的一些调整，今天就这样，谢谢大家，拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Jaybee黄</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">AI</span></li>
+<li><span class="wikilink">机器学习</span></li>
+<li><span class="wikilink">自动化</span></li>
+<li><span class="wikilink">框架</span></li>
+<li><span class="wikilink">开源项目</span></li>
+<li><span class="wikilink">科技</span></li>
+<li><span class="wikilink">AutoResearch</span></li>
+<li><span class="wikilink">metaoptimization</span></li>
+<li><span class="wikilink">Karpathy</span></li>
+<li><span class="wikilink">模型量化</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>Auto Research用一句话讲的就是你给定AI一个目标,然后AI不断地通过去做实验看指标,做实验看指标,然后这样不断地去迭代,最终找出一条最优的能够达到你的目标的路径这么一个过程,实际上它是一个meta optimization。 大家好,我是老王,最近NJKPATHY的Auto Research项目特别的火,就它两周前上线,现在在Github上已经有五万两千星了,很多人用Auto Research这个思路去做了很多疯狂的事情,比如说让AI去自动化的把一个签问397B的模型, 不断的优化量化 最后让它能够在本地的MacBook上跑起来 并且能够达到5.5tokens per second 还有人呢 用Auto Research不断的去让AI加速它的GPU的荷函数 使得它的训练效率现在比平时快了10倍 这些都是这两周内真实发生的事情 但我发现还是有很多朋友不知道 Auto Research这个框架它到底在做什么 以及说它在什么样的场合底下比较有用 那么今天我就可以做一期视频把这个事情讲清楚 那么Auto Research用一句话讲的就是你给定AI一个目标 然后AI不断地通过去做实验看指标 做实验看指标 然后这样不断地去迭代 最终找出一条最优的 能够达到你的目标的路径 这么一个过程 实际上它是一个meta optimization 那么它一整个循环的内部呢 长这个样子 首先在每次auto research loop开始的时候呢 你会让AI去读取so far的一个上下文 就是之前做哪些实验 有哪些动作是成功的 有哪些动作是不成功的 接着呢 根据这个实验结果 以及你想要AI优化的目标 AI去propose some changes 提出变更 比如说如果你要优化一个神经网络的话 那么它可能是把某些层挪到另一些层前面 或者它去优化你embedding或者tokenizer 接着呢它就commitproposal 并且开始run这整个流程 我们就用Kapakfi最原始的那个repository 来讲一下Auto Research到底怎么work的 它是用Auto Research来做化它的一个叫做Nanochess的模型 就是一个极简版的GPT2 你会看到这整个项目的设定 实际上是跟神经网络的训练有关的 那我们也是可以把它推广到 其他不同的任务上面去 我们在讲的时候 就会用它最原始的那个设定 那么在Auto Research开始的时候呢 你需要让AI读取你的实验的上下文 就是说so far你到底做了什么事情 哪些东西work哪些东西不work 哪些东西跑崩了 全部都记录在一个文档里面 然后AI去读 读完之后呢 根据你给定AI的目标 那比如说如果你是神经网络训练的话 那你就是希望AI能够提高 他在验证级 validation set上面的表现 比如说降低validation loss 然后呢 AI就根据他刚才读取的上下文 propose一个改变 然后呢 他就把这个改变commit 然后开始训练神经网络 或者说如果你是做什么荷安数的优化的话 那他就是改变并且开始跑实验 如果这个神经网络的训练 或者说这个实验崩了呢 首先尝试能不能把这个东西修复了 如果能修复的话呢 那么就继续跑 那如果不能修 也要把这个不能修复的事实给记录下来 那么就说明这个尝试 它不是因为没有提升 而是因为一些其他原因而崩溃了 如果它几次都修不好 就先让它过去 那如果这个实验没有跑崩的话呢 你就可以看到一个结果 那么你就把这个结果给记录下来 记录到results.tsv里面 在记录完结果之后 你就要去比较这个结果 跟当前最优的结果 比起来到底怎么样 如果它确实优化了我们想要的那个指标 比如说validation上面的performance OK 那么这就是一个好的优化 我们就把这次的改变保留下来 把它推到我们的主分支上 merge进去 但如果这一次的改变并没有给我们带来 比现在更好的提升 那我们就把它否决掉 虽然我们还是会把它记录下来 但我们不会把它保存进我们的主分支里面 OK那么进行完整个流程之后 你就又回到让AI读上下文 然后提出变更提交训练 然后这么一个loop不断的循环下去 OK那么这就是一个auto research循环 当你跑完了这么一个循环 你就会进入下一个循环 这里面其实你可以看出一点 就是说任何能够有可量化指标的流程 我们都可以用Auto Research 去让AI帮我们找到去提高 然后达到我们这个可量化指标的一个最优的路径 那这个东西取决于你到底有多少的时间和Token 我个人感觉它实际上是一个范式上的突破 虽然它看起来好像跟我们已有的一些框架非常相似 但它厉害的地方在于 实际上生活中有很多任务是可量化的 并且它能够带来很多的经济价值 比如说你的代码的速度是可量化 然后你的P&amp;L是可量化 然后呢你去做 不管是广告投放还是什么的 你的ROI都是可量化的 流量是可量化的 所以我觉得很快 我们会看到 Auto Research在各个领域开化结果 我目前发现最有意思的一种玩法呢 就是说你把一篇文章 或者说Best Practice丢给AI 然后让AI根据这个文章的思路 去用Auto Research这个框架 帮你完成一些事情 比如说帮你把签问397B 不断的压缩优化 最后让它能够 在你的本地机制上跑起来 并且5.5 tokens per second 这个事情就非常疯狂 但是现在已经有可能了 今天就跟大家分享到这里 下一节呢 我会跟大家分享一下 我自己用Auto Research以来 觉得大家有什么优点 什么缺点 然后我自己 对Auto Research的一些调整 今天就这样 谢谢大家 拜拜</p>
+</blockquote>
+</details></main>
+</body>
+</html>
