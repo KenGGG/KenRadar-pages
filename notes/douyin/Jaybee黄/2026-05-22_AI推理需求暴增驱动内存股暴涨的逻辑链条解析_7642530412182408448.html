@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>为啥AI 推理需求增加，让内存赢麻了 逻辑链条是这样：
+agent 需求增加-&gt; KV Cache 增加 -&gt; HBM 需求增加，但 HBM 供给无法瞬间调整，于是短时间供不应求。
+        
+#人工智能  #AI  #内存  #英伟达  #半导体｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-05-22_AI推理需求暴增驱动内存股暴涨的逻辑链条解析_7642530412182408448.md · 发布于 2026-09-07 23:10:24</div><nav class="page-links"><a href="https://www.douyin.com/video/7642530412182408448" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>AI推理需求暴增驱动内存股暴涨的逻辑链条解析</h1>
+<p>抖音 | Jaybee黄 | 原文链接（<a href="https://www.douyin.com/video/7642530412182408448">https://www.douyin.com/video/7642530412182408448</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本文解释了AI推理需求增长如何驱动内存股上涨的完整逻辑链条：AI推理需存储大量上下文（KV Cache）→ HBM需求激增 → 全球仅三星、海力士、美光三家供应 → 短期产能无法快速扩张 → 供需失衡推高内存价格，带动内存股暴涨，且这一趋势短期内难以缓解，甚至可能挤压消费电子用内存供应。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>AI推理与训练的核心差异：上下文存储需求</strong>
+AI推理与训练不同，推理的瓶颈在于上下文（Context）管理。每次生成新token时，若需重新计算前面所有token，时间复杂度将指数级增长。因此必须将上下文存储在内存中，供后续推理读取复用。这催生了context engineering、in-context learning等上下文管理技术的发展。</p>
+</li>
+<li>
+<p><strong>HBM供需错配：三大厂商垄断导致短期供给刚性</strong>
+推理场景中最关键部件是高带宽内存（HBM），全球仅三星、海力士和美光三家具备生产能力。随着云服务提供商（Hyperscaler）为推理优化算力大量下单，三家厂商订单暴增。但新建内存工厂需经历选址、建厂、购设备等物理时间，短期内无法快速扩产，导致供需严重失衡。</p>
+</li>
+<li>
+<p><strong>股价传导机制：从业绩兑现到市场预期</strong>
+HBM订单暴增直接反映在三大厂商的财务报表上，市场在数据印证后疯狂买入内存股。分析师同步上调预期，形成业绩与情绪双重推动的股价暴涨。整个链条为：AI推理需求↑→上下文存储需求↑→HBM需求↑→内存厂营收↑→股价↑。</p>
+</li>
+<li>
+<p><strong>潜在外溢影响：内存过热或将挤压消费电子</strong>
+短期内内存供不应求的状态难以缓解，可能导致消费电子用内存（手机、笔记本）价格上升。由于AI算力买家出价能力更强，传统消费电子厂商在竞争中处于劣势。分析人士判断，内存的狂热行情大概率才刚刚开始。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场与核心问题引入</h3>
+<p>大家好，小黄最近内存股是涨得非常的疯狂，很多人都知道一个结论就是AI的需求暴增导致了内存股的增长。但实际上为什么AI需求增加就会带动内存股上涨，这里面有一些逻辑上的细节是这个结论里面没有完全展示出来的。所以今天主要是想跟大家把这里面的细节掰扯清楚，比较简短低性地跟大家讲清楚。</p>
+<h3>2. AI推理需求与上下文存储逻辑</h3>
+<p>实际上这个事情是这样，不是普通的AI需求，它是AI的推理需求。从AI的推理，它跟训练不一样，在推理的时候瓶颈主要在于上下文。现在我们看到最多的推理场景是AI编程，比如说写代码，你让AI去写下文，中间其实要存好多的上下文。存储上下文其实又出现了各种各样的技术，以前叫context engineering到今年变成叫做in-context learning，实际上都是有关上下文管理的。由于大量的AI Agent活动过程中生产出了一堆的上下文，而AI在进行预测的时候就需要有一个地方把它们存起来。因为如果你不存上下文的话，相当于每一次你吐下一个token的时候都需要重新算一遍这些上下文。那这个计算的时间复杂度就会指数级的增加，相当于你每算一个token就是要重新把前面所有token都算一遍，这样就很不划算。肯定是每算一个token你就把这些东西存起来，当你需要算下一个token的时候你再把这些东西从内存里面读出来，这个方式比较方便。但由于推理需求的增长是指数级的，就导致了你就要很多很多的内存去存AI活动中的这些上下文，这就是导致内存需求增加的最根本的原因。</p>
+<h3>3. HBM需求爆发与供给端垄断格局</h3>
+<p>实际上它在现实中就会表现为由于AI推理需求的增加，所以很多这些Hyperscale云服务提供商他们就要去购买很多这种针对推理优化的算力。这些算力需要大量的内存，于是他们就要去向这些做内存的工厂去下订单。尤其是在推理过程中，高带宽显存是最重要的一个部件，但是HBM在全球只有三星、海力士和美光这三家能够做，所以他们三家订单就暴增。那他们三家的订单暴增就反映在他们的报表上面，于是市场反应过来的时候就疯狂地去买内存。</p>
+<h3>4. 完整逻辑链条总结</h3>
+<p>实际上从大的方向讲就是这么一个链条，就是AI推理的需求增长导致了需要存储大量的上下文，而存储这些上下文需要内存。所以这些做算力的或者说做售算力的人他们就疯狂的去向内存厂下订单，对内存厂的需求就疯狂的增长，然后这推动了他们报表上面的增长，导致了各种分析师对内存股的预期进行调整，于是这些股价就暴增了，它就这么一个链条。</p>
+<h3>5. 供给刚性与潜在市场影响</h3>
+<p>另一方面市场上如果想要提高内存的供应它也不是马上就能做到。你从选址、建厂、买设备这些东西都需要花物理上的时间，就是你要跑通一个新的内存工厂才有可能去把这些需求scale up。所以在短期内它就一定是一个供需非常不平衡的状态，所以很多人也预测说短期内内存的过热并不会迅速的得到解决，我个人也是抱持这样的观点。那这可能会导致另一个问题就是说其他需要内存的那些消费电子设备他们的价格可能会涨价，因为那些买内存去做AI算力的人他们能够出更多的钱，比起买内存去做手机去做笔记本电脑的这些商家。所以大家拭目以待这个内存的狂热大概率才刚刚开始。今天就跟大家分享到这里谢谢大家拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Jaybee黄</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">人工智能</span></li>
+<li><span class="wikilink">半导体</span></li>
+<li><span class="wikilink">内存</span></li>
+<li><span class="wikilink">英伟达</span></li>
+<li><span class="wikilink">产业链分析</span></li>
+<li><span class="wikilink">供需逻辑</span></li>
+<li><span class="wikilink">AI推理</span></li>
+<li><span class="wikilink">内存股</span></li>
+<li><span class="wikilink">HBM</span></li>
+<li><span class="wikilink">KVCache</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">英伟达</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>大家好，小黄最近内存股是涨得非常的疯狂。那么很人都知道的一个结论就是AI的的需求暴增，然后导致了内存股的增长实实上。为什么AII需需增增就会会导致内存增加后推动内内股上涨？这实际上里面有一些逻辑上的细节，是这个结论里面没有完全展示出来的。所以今天主要是想跟大家把这里面的细节掰示清楚的好，能够比较简短。短是呢我们低性的跟大家讲清楚。实际上这个事情是这样样，不是普通的AI需求，它是AI的推理需求。从AI的推理，它跟训练不一样，在推理的时候，瓶颈主要在于出来的其其现。现在我们看到最多多的一推推理的场景是AI的程比说说写代代码，你让AI去写下文，那中间其实要存好多的上下最了存储上下文，其实又出现了各各各各样技术术。以以前context engineering到今年变成叫做做inness,实际上都是有关于上下文管理的。由于大量的AI agent的活动过程中生产出了一堆的上下文，而AI在进行预测的时候，就需要有一个地方把它们存起来。因为如果你不存淀上下文的话，相当于每一次你吐下一个token的时候，都需要重新算一遍这些上下文。那它的这个计算的时间复杂度就会指数级的增加，相当于你每算一个token,就是要重新把前面所有token都算一遍，这样就很不划算。肯定是每算一个token,你就把这些东西存起来。当你需要算下一个token的时候，你再把这些东西从内存里面读出来，这个方式比较方便。但由于推理的需求的增长是这么指数级的，就导致了你就要很多很多的内存去存AI活动中的这些上下文。这个就是导致内存需求增加的最根本的原因。那实际上它在现实中就会表现为由于AI这个推理需求的增加。所以就很多这些hyperscale这种云服务提供商，他们就要去购买很多这种针对推理优化的算力。这些算力需要大量的内存，于是他们就要去向这些做内存的工厂去下订单。尤其是在推理过程中，高带宽显存是最重要的一个部件。但是HBM在全球只有三星、海力士和美光这三家能够做。所以他们三家订单就暴增。那他们三家的订单暴增就反映在他们的报表上面。于是市场反应过来的时候，就疯狂的去买内存。实际上从大的方向讲，就是这么一个链条，就是AI推理的需求增长导致了需要存储大量的上下文，而存储这些上下文需要内存。所以这些做算力的，或者说朱售算力的人，他们就疯狂的去向内存厂下订单，对内存厂的需求就疯狂的增长。然后这推动了他们报表上面的增长，导致了各种分析师对内存股的呃预期进行调整。于是这些股价就暴增了，它就这么一个链条。另一方面，市场上如果想要提高内存的供应，它也不是马上就能做到。你从选址、建厂、买设备这些东西都需要花物理上的时间，就是你要跑通一个新的内存工厂，才有可能去把这些需求scale up.所以在短期内它就一定是一个供需非常不平衡的状态。所以很多人也预测说，短期内内存的过热并不会迅速的得到解决。我个人也是抱持这样的观点，那这可能会导致另一个问题，就是说其他需要内存的那些消费电子设备，他们的价格可能会涨价。因为那些买内存去做AI算力的人，他们能够出更多的钱。比起买内存去做手机，去做笔记本电脑的这些商家。所以大家拭目以待，这个内存的狂热大概率才刚刚开始。今天就跟大家分享到这里，谢谢大家，拜拜。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
