@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>大A投研Agent：Vibe-Research 增加Workbuddy接入，增加Mac端｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-09-07_Vibe-Research_v1.1版本更新：Workbuddy接入与Mac客户_7682765802155593001.md · 发布于 2026-09-08 16:18:28</div><nav class="page-links"><a href="https://www.douyin.com/video/7682765802155593001" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Vibe-Research v1.1版本更新：Workbuddy接入与Mac客户</h1>
+<p>抖音 | Simon林 | 原文链接（<a href="https://www.douyin.com/video/7682765802155593001">https://www.douyin.com/video/7682765802155593001</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+个人开发者分享投研Agent工具Vibe-Research的v1.1版本更新内容，包括Workbuddy本地登录接入、Mac独立客户端（仅Apple芯片版）、A卷深度研究模式、标的研究六阶段流程、多空辩论、回测、研报整理、持仓管理与资讯雷达联动等功能，底层采用先进Agent架构，研究过程可追溯可复查。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>版本概览与核心更新</strong>
+Vibe-Research已更新至v1.1版本，GitHub仓库获得近2400个Star。本次主要更新两点：Workbuddy本地登录接入，自动检测登录状态完成订阅；Mac独立客户端发布（仅Apple芯片版本，Windows和Intel芯片版本因开发者精力有限未制作）。</p>
+</li>
+<li>
+<p><strong>核心功能模块详解</strong>
+首页支持API接入与Workbuddy接入；A卷模式提供深度思考（联网检索+计算）与快速回答两种模式；每日复盘覆盖大盘、板块、产业链等；标的研究包含立项、财务、估值、风险、成稿六个阶段并生成附录；多空辩论模块对同一资料正反方论证；回测内置多种方法无需繁琐填表；研报整理模块归档历史资料；持仓管理关联资讯雷达新闻与公告；研究记录可归档每次对话。</p>
+</li>
+<li>
+<p><strong>技术架构与未来规划</strong>
+底层架构基于先进Agent框架，研究过程严格限制资料可追溯、结果可复查。产业链模块后续将逐步加载酸粒、人形机器人、创新药等信息。作者欢迎用户提Issue反馈问题并持续迭代。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场与版本概览</h3>
+<p>大家好，本期给大家分享个人投研Agent——Vibe-Research的最新版本v1.1。这个仓库目前已经拿了将近2400的Star。本期的版本迭代主要更新了Workbuddy的接入，还有Mac的独立客户端。这是一个接入的界面，点开首页之后会有接入的选项，它会自动检测你本地的登录情况，然后进行这个订阅的接入。最下面这个是API的接入，还是跟传统的一样。</p>
+<h3>2. 首页与A卷模式</h3>
+<p>在首页的对话框下面有一些模块的一站直达，当然在左侧的栏目也会有。这就是整体目前的功能，后续我也会逐步开发新的功能，包括产业信号这一块、板块中心这块会逐步完善，然后更新视频分享给大家。你点开首页之后会提示你接入，点击未接入会跳入刚才展示的那个对话框进行接入。开启A卷模式默认是关闭的，因为开启A卷之后它会进行比较深度的思考，对每个问题都进行深度思考，比较浪费时间跟浪费Token。如果你确实要做一些研究时，我建议开启A卷。关闭之后它回答得会比较快，减少很多深入研究检索的逻辑，会凭模型的一些记忆直接回答；开启之后就会有联网检索和计算的过程。上面是一个对话框，下面是工具栏。</p>
+<h3>3. 每日复盘与产业链模块</h3>
+<p>第二个模块是每日复盘，这里也可以跟模型交互。点当日复盘会复盘整体当日的大体情况。产业链包括很多东西，比如板块、酸粒、人形机器人等模块，后续我会直接把信息都加载进去，大家能直接用。后续我会一步一步开发，包括人形机器人、创新药等。产业信号目前只加载了GPU相关的内容。</p>
+<h3>4. 标的研究与多空辩论</h3>
+<p>标的研究会有很多环节，一共有六个阶段：立项、财务、估值、风险、成稿。最终会保留标的研究的证据、计算和资料缺口，有个证据附录。研究完之后会有个附录。如果对研究结构不满意，可以直接跟A卷沟通，让它更改底层的研究分析方法。这是报告和证据，标的研究后有很多资料来源，所以会有附录作为留存。多空辩论模块是用同一份资料，进行正方反方论证，可以看出最终的多空焦点，更好地研究标的。</p>
+<h3>5. 回测、研报与持仓管理</h3>
+<p>回测不需要太多填表，把思路说清楚即可。回测模块内置了各式各样的回测方法，都已加载进去，跟A卷说了之后A卷会进行选择，再补充一些信息就可以开始。有趋势回测、短线回测等各方面，都已提前把模块写好，跟A卷交流即可。研报模块把资料整理起来，以前看的资料会乱，这里可以整理。持仓模块添加自选股后会关联到资讯雷达里的新闻和公告，只有添加了自选才会联动查找新闻和公告信息。</p>
+<h3>6. 研究记录与Mac客户端</h3>
+<p>研究记录方面，每次绘画都可以归档到研究记录里，跟AI聊的时候也可以归档。这个是非常重要的更新——做了Mac的客户端，是苹果芯片版本。由于是个人开发者，Windows版本不做，也没有太多时间；上一代苹果Intel芯片版本也不做了，确实没有太多时间，还在开发其他项目。</p>
+<h3>7. 总结与展望</h3>
+<p>最后做一个总结：Vibe-Research底层架构是一个Agent，采用目前较先进的Agent框架，属于比较好用的架构，相当于有一个投研智能体在背后。搭架构时严格限制了资料处处可追溯，研究过程和结果能复查，按照这个逻辑开发，欢迎大家重复使用。有问题可以提Issue，我会进行解决。今天的分享就到这里，感谢大家的关注，谢谢大家。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Simon林</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化投资</span></li>
+<li><span class="wikilink">投研工具</span></li>
+<li><span class="wikilink">AIAgent</span></li>
+<li><span class="wikilink">股票研究</span></li>
+<li><span class="wikilink">开源工具</span></li>
+<li><span class="wikilink">macOS</span></li>
+<li><span class="wikilink">Vibe-Research</span></li>
+<li><span class="wikilink">投研Agent</span></li>
+<li><span class="wikilink">Workbuddy</span></li>
+<li><span class="wikilink">Mac客户端</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>大家好,本期给大家分享个人投研agent,vibreSearch的最新版本v1.1 这个仓库目前已经拿了将近2400的star,然后本期的版本迭代主要更新了workbody的接入,还有mac的独立的客户端 这是一个接入的界面,点开首页之后会有接入的选项,它会自动检测你本地的登录情况,然后进行这个订阅的接入 然后最下面这个就是API的接入,还是跟传统的一样 一样 这个是在首页的绘画下面有一个这些模块的一站直达 当然在我们的这个左侧的栏目也会有啊 这就是整体目前的功能 后续也会 我也会逐步的再增加更开发新的功能 包括产业信号这一块 还有板块中心这块会逐步的完善 然后更新视频分享给大家 这是首页啊 就是你点开首页之后会提示你接入 你会你点击这个未接入 它会跳入刚刚才展示的那个对话框进行接入的 然后开启A卷这个模式呢就是默认是关闭的 因为开启A卷之后他会进行比较深度的思考 对每个问题都进行深度的思考 所以会比较浪费时间跟浪费token 当然你要确实要做一些研究的时候 我建议是开启这个A卷的 那关闭之后他回答的会比较快 会减少很多深入研究检索的逻辑 会凭模型的一些记忆进行直接的回答 开启之后就会有联网取出跟计算的过程 这是整个点开首页的一个展示 上面是一个对付框 然后下面是这个工具 第二个模块是整个每日的复盘 然后这里也可以为这个跟模型交互 然后这个复盘的话 点一个当日复盘 它就会复盘整体的当日的大体的情况 产业链这个就包括很多东西了 就包括板块 包括酸粒 包括人性机器人这些 这些模块 后续我会直接把信息都加载进去 然后大家能直接用 后续我会一步一步开发 包括三例人机械创新药这些赶快 产业信号呢 就是目前只加载了这个GPU的租金 之前视频有分享 这个是标的的研究 标的的研究会有很多的环节 一共有六个阶段 它有化项 财务 以至于期 估值 风险 反正 还有成稿 最终也会保留标的研究的证据 还有计算 还有资料的缺口 就这有个证据附录 就是你研究完之后 它会有个附录 当然对这个研究的结构不满意的话 你也可以直接跟这个A卷去沟通 让他去更改底层的这个分析研究的方法 这是报告跟证据 就是你标的研究之后 有好多这个资料的来源 所以会有个附录作为留存 这是多空辩论的模块 就是同一份资料 然后进行这个正方反方进行论证 然后就可以看出最终的一个多空的焦点 然后你也可以更好的去研究这个标的 这个是回测 回测的话 其实不需要去有太多的填表 而是说你要把你的思路给说清楚就可以了 因为我在这个回测模块里面内置了各式各样的回测的方法 我都已经加载进去了 然后你跟A卷说了之后 A卷会进行选择 然后再让你补充一些信息就可以开始了 就是趋势的回测 然后还有短线的回测 还有各方面的 我都已经提前把这个模块写好了 你跟A卷交流就可以 然后这个是研报 把资料整理起来 就在以前看的资料会乱 然后这里面就可以整理 然后这个研究 这个是持仓 然后这个是下面这个是研究记录 研究记录的话 就你每次绘画你都可以归档 然后就到研究记录里面了 就跟AI聊的时候都可以归档 分析也可以归档 然后这个是持仓 还有些这个持仓 咨询股的话 你添加之后呢 它就会关联到这个资讯雷达里面的新闻 还有资讯雷达里面的公告 就是你只有添加了自选 他才会去联动的找他的新闻 跟这个公告信息就可以看到 OK这就刚才说的研究记录 他都会可以记录下来 每次绘画都可以记下来 以后你就可以去重新翻一下这个绘画 这个也是一个非常重要的更新 就是做了一个Mac的客户端 然后这个是苹果芯片的 由于我是个人开发者 所以这个windows我就不做了 我确实没有太多时间 然后那个上一代的 苹果的intel的芯片 我也不做了 确实没有太多时间 还在开发其他的项目 ok 最后做一个总结 就是vibreSearch 其实底层的架构是一个agent 就是kodex hannis 就是目前最先进的agent 所以呢 它属于一个比较好用的一个架构 相当于有一个投研的智能体在背后 然后呢 它是属于就是在整个的这个 这个搭这个架构的时候 已经严格限制了它的这个资料有处处 然后研究过程结果能复查 就是按照这个逻辑来开发的 所以也欢迎大家重复的使用 有问题可以提Easyu 然后我会进行解决 OK今天的分享就到这里 也感谢大家的关注 谢谢大家</p>
+</blockquote>
+</details></main>
+</body>
+</html>
