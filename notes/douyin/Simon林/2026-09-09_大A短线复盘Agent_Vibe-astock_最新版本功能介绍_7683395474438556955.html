@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>大A短线复盘Agent：Vibe-astock #vibecoding #codex #claudecode #ai新星计划｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-09-09_大A短线复盘Agent_Vibe-astock_最新版本功能介绍_7683395474438556955.md · 发布于 2026-09-09 13:18:23</div><nav class="page-links"><a href="https://www.douyin.com/video/7683395474438556955" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>大A短线复盘Agent Vibe-astock 最新版本功能介绍</h1>
+<p>抖音 | Simon林 | 原文链接（<a href="https://www.douyin.com/video/7683395474438556955">https://www.douyin.com/video/7683395474438556955</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+介绍了Vibe-astock短线研究Agent工作台的最新改版，接入了Cotex、Hineys和Workbody等AI模型，包含钉盘、复盘、资讯雷达、标的研究、独方辩论、回测等功能模块，作者强调该工具仅供研究参考不作为投资建议。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>工具改版与模型接入</strong>
+最新版本对整个基座进行了较大改造，接入了Cotex（开源AI模型）、Hineys，同时支持Workbody的本地接入，通过分析师辩论模式按预设流程运行。</p>
+</li>
+<li>
+<p><strong>核心功能模块</strong>
+包含钉盘（实时动态、昨日梯队筛选、盘中核验）、复盘模块（收盘后自动生成市场全面分析）、资讯雷达（事件概率、A股公告、行业新闻）、标的研究、独方辩论（个体标的深入分析）、回测模块（预埋多种回测逻辑）。</p>
+</li>
+<li>
+<p><strong>使用建议与仓库说明</strong>
+简单问题无需开启A卷，深度分析建议开启A卷以获得更全面的研究；仓库未来迭代较少，大版本已定型，后续主要通过issue收集反馈更新，强调仅供研究参考不作为投资依据。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 版本介绍与模型接入</h3>
+<p>大家好，本期给大家分享Vibe-Astock，我的短线研究Agent工作台的最新版本。最新版本对整个基座进行了比较大的改造，接入了Cotex、Hineys，然后同时也支持Workbody的接入。版本是通过分析师辩论，按照预设的流程进行的。新版接入了目前全世界通用AI最聪明的Cotex，另外一个就是Honk代码，因为Cotex开源了，所以可以把它接进来。考虑到好多朋友没有左边这两个订阅，所以就把Workbody给接进来了，大家可以用本地的Workbody直接接入Vibe-Astock进行使用。</p>
+<h3>2. 首页与A卷功能说明</h3>
+<p>首页有绘画栏和下面的一些模块，可以直接点击。左上角有个开启A卷的选项，如果说你开启的话，整个A卷就会进行比较深度的思考。平时问一些简单的问题，比如问什么PE是多少呀，今天多少个涨停之类的，直接问问就好了，不用开A卷。开启A卷它会进行一些比较深入的分析跟思考，大家对整个标的进行研究的话，还是要开启A卷会好一些。</p>
+<h3>3. 钉盘模块功能</h3>
+<p>这是一个钉盘的一级目录，下面有盘前数据、实时动态、昨日的梯队还有盘中的核验。这是一个昨日的梯队，鼠标点过去就会看到昨天三百以上或者这里还可以选择二百以上的股票，有时候二百以上特别多，所以就给大家筛了三百以上，或者也可以点这里选项选二百以上，然后就可以看到所有的今天的反馈。这个是盘中的一个复盘的核验，大家也可以仔细研究一下。</p>
+<h3>4. 复盘与资讯模块</h3>
+<p>复盘模块点一下生成，复盘就会在收盘之后对整体的市场情况进行一个全面的分析，包括昨日强势股的反馈、政策效应、亏钱效应这些，都会把这些历史依据和历史样例留下来。这个是近五天的热度，大家就可以看到近五天里大概是个什么情况，这个是用来分析情绪的，做短线的朋友们都会懂。资讯雷达包含事件的概率、A股的公告、公开新闻，这个是要加自选之后才会显示的。Investment News是比较全面的各行各业的新闻，点开就能看得到。</p>
+<h3>5. 标的研究与回测功能</h3>
+<p>这是标的研究，还有一个独方辩论，属于个体标的的深入的研究。比如在手板分析里面其实有很多的手板股，就有需要的就可以专门在这边做一个深入的研究，或者看到二百、三百觉得非常关注的，就可以在这里面进行研究一下。相当于它接了很多接口，对数据进行一个分析，给一个比较全面的解析。回测的话，就可以按照自己的逻辑跟它进行自然语言交互，它就会进行一个回测，里面有好多的回测逻辑跟模块都已经预埋进去了。</p>
+<h3>6. 总结与仓库迭代说明</h3>
+<p>最后总结一下，这个Vibe-Astock就是看见变化、留下一句、继续核验。整个仓库就是给大家做研究用的，不作投资的依据，大家看一下数据分析就好了。从整体的仓库迭代上来说，因为我本身不是做短线研究的，只是做了一些调研，知道大家需要什么东西，然后就把它给列进去了。未来这个仓库的更新可能会比较少，因为这个版本是个大版本，之后大家有问题就提issue，我看到了会进行更新，但是大的逻辑方面应该就这样了，已经定下来了。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Simon林</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">股票市场</span></li>
+<li><span class="wikilink">短线交易</span></li>
+<li><span class="wikilink">AI工具</span></li>
+<li><span class="wikilink">复盘系统</span></li>
+<li><span class="wikilink">量化研究</span></li>
+<li><span class="wikilink">Vibe-Astock</span></li>
+<li><span class="wikilink">短线研究</span></li>
+<li><span class="wikilink">Agent</span></li>
+<li><span class="wikilink">Cotex</span></li>
+<li><span class="wikilink">复盘</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>大家好，本期给大家分享vib s stock呃，我的短线研究agent工作台的最新版本。最新版本呢对整个基座进行了比较大的改造，接入了cotex hineys然后同时呢也支持work body的接入。呃，然后版本呢其实是呃通过分析师与并论，是按照预设的流程进行的。然后新版呢就接入了现在目前全世界通用a卷最聪明的cotex.然啊另外一个就是honcock code嘛，然后现在因为cotex开源了，所以我就可以把它给接进来了。呃，然后考虑到呃好多朋友都没有左边这两个订阅，所以我就把work body给接进来了。大家可以用本地的work body直接接接这这个呃work by stock进行一个使用。嗯，首页的话就是有个绘画栏，还有下面的一些模块，可以直接点击啊。这里啊还要说一下，就是左上角这个开启a卷。如果说你开启的话，呃，整个呃a卷就会进行比较深度的思考啊，平时问一些简单的问题啊，问什么PE是什么呀？然后今天进行多少个啊这个那个封封顶啊，然后这些简单的问题直接问问他就好了。不用开这个开前一卷开学a卷，它会进行一些比较深入的分析跟思考啊，大家对整个标的进行研究的话，还是要开启a卷会好一些啊。这是一个钉盘。呃，钉盘的一级目录，下面有盘名数据实时动态，昨日的梯队还有盘中的核验啊，这是一个昨日的梯队。就是大家就一点过去就会看到昨天这个呃三百以上啊，或者这里还可以选择二百以上。有时候因为二百以上有时候特别多啊，所以我就我就给大家筛了一个三百以上，或者你也可以点这里选项二百以上。然后就可以看到所有的这个今天的反馈，在这个是盘中的一个一个复盘的核验啊，大家也可以呃仔细研究一下。然后到第二到第二个模块，就是复盘的模块。复盘的模块呢就点一下生成，复盘就会在收盘之后就会对整体的市场情况呃进行一个全面的分析，包括昨日强势股的反馈啊，还有政策效应，这些还有亏钱效应。这些嗯这个是一个呃依据啊，就是这些分析都会把这些历历史的依据啊，包括历史的样例都给留下来。嗯，这个是近五天的热度啊，大家就可以看到近五天里大概是个什么情况啊，这个是用来呃分析情绪的啊，这个做短线的朋友们，他呃大家都会懂啊。呃，资讯雷达资讯雷达是嗯这是有是呃这个事件的概率，还有a股的公告，还有公开新闻呢，这个是要加自选之后才会显示的啊。这个investment news呢就是呃比较全面的各行各业的新闻啊，点开就能看得到啊，这个是标的研究，然后还有一个独方辩论啊，这个属于一个呃个体标的的深入的研究。就比如说在这个呃手板分析，这里面其实有很多的手板股，你就有有需要的就可以专门在这边做一个深入的研究，或者看到呃二百啊三百啊，觉得非常关注的，就可以在这里面进行研究一下吧。就是相当于它会呃接了很多接口，这个这个a卷，它会对一些数据进行一个分析，给一个比较全面的解析吧。这是一个回测回测回测的话，就你就可以按照你的逻辑跟他直接这个与自然圆交交互，它就会进行一个回撤。然后这里面有好多的这种回撤的逻辑跟模块，我都已经预埋进去了。嗯，这个是呃自己的标的啊，这个不说嗯，最后总结一下，就是这个vibral s dog就是看见变化留下一句继续核验。然后整个仓库呢就是给大家做研究用的啊，就不作回这个投资的依据。然后大家啊看一下数据分析分析就好了。嗯，然后从整体的仓库的迭代上来说，因为我本身不是做这个短线研究的啊，只是说做了一些调研，然后知道大家需要什么东西，然后我就把它给列进去了。呃，未来这个仓库的更新可能会也比较少啊，因为可能就这个版本是个大版本之后，就嗯大家有问题就提issue.然后之后我我看到我会进行更新的，但是大的逻辑方面应该就这样了，就定下来了。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
