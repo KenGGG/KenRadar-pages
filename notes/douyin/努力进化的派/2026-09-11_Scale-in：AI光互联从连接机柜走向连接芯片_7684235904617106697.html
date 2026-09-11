@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>什么是Scale-in？为何是Scale-out的100倍 AI光互联正在从Scale-out、Scale-up继续向芯片内部推进。Scale-in瞄准GPU/XPU与芯片、内存之间的超高带宽连接，潜在带宽需求可达Scale-up的约10倍。随着HBM容量、功耗和先进封装面临瓶颈，内存池化与光I/O有望成为下一阶段方向，光通信的长期逻辑正从“连接机柜”走向“连接芯片”。
+ #ScaleIn 　#光互联 　#CPO 　#AI算力 　#光模块｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-09-11_Scale-in：AI光互联从连接机柜走向连接芯片_7684235904617106697.md · 发布于 2026-09-12 06:08:47</div><nav class="page-links"><a href="https://www.douyin.com/video/7684235904617106697" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Scale-in：AI光互联从连接机柜走向连接芯片</h1>
+<p>抖音 | 努力进化的派 | 原文链接（<a href="https://www.douyin.com/video/7684235904617106697">https://www.douyin.com/video/7684235904617106697</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本文介绍AI光互联新趋势Scale-in，即芯片内部及芯片与内存之间的超高带宽光互联。Scale-in潜在带宽可达Scale-up的10倍、Scale-out的100倍。随着HBM面临物理瓶颈，内存池化与光I/O成为下一阶段方向。文章分析三条技术路线（硅光+DWDM、VCSEL/Micro VCSEL、Micro LED）、市场节奏及产业链机会，指出2027。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>Scale-in定义与技术演进</strong>
+AI光互联正从Scale-out（服务器与交换机连接）、Scale-up（机柜内芯片间连接）向Scale-in（芯片内部及芯片与内存间连接）演进。Scale-in目标是在几毫米到约一米距离内实现chip-to-chip和chip-to-memory的高速光互联，潜在带宽需求可达Scale-up的10倍、Scale-out的100倍。不同厂商对Scale-in定义有差异：英伟达指DPU网络，NVIDIA指芯片内数据搬运；行业共识指托盘内部芯片之间、芯片与内存之间的光互联。</p>
+</li>
+<li>
+<p><strong>内存瓶颈与内存池化架构</strong>
+HBM每增加一颗都占用封装面积、中介层布线、CoWoS产能及供电散热，无法无限堆叠。现实方案为分层内存加内存池化：GPU内部SRAM负责超低延迟热数据，本地HBM负责高性能计算，上下文/温冷数据及租户共享容量逐步放到外部HBM内存池，由几十颗GPU动态共享。类似云计算将CPU算力池化，现在开始池化AI最昂贵的资源之一——内存。典型架构包括Memory-to-Memory光互联、OCS光交换总机（如Google TPU v8托盘）、MPU内存处理单元（负责地址映射、KV cache调度、页面迁移、。</p>
+</li>
+<li>
+<p><strong>三条技术路线对比</strong>
+第一条：硅光+DWDM，总带宽高、距离长，适合Memory Fabric。Marvell收购Solidot AI推出的Photonibrary已有7.2T光互联模块，卡位最深，正在转向平台型供应商。第二条：VCSEL/Micro VCSEL，优势是低成本、阵列化、低功耗，适合短距大规模并行，核心理念是'wide and slow'（用大量低速并行替代少量高速）。Montage与Coherent是代表，英伟达分拆两家，投资20亿美元并附带采购承诺，产业实现顺序是先Scale-out再Scale-i。</p>
+</li>
+<li>
+<p><strong>市场节奏与产业链机会</strong>
+当前GPU与HBM仍以电互联为主，英伟达机架核心仍是可插拔光模块+CPO/NPO，尚需解决散热、阵列化、可靠性问题。2027年先看Scale-up光学CPO/NPO放量，Scale-in大概还需2-3年甚至更久。第一档：有现时订单加Scale-in预期的公司，如Marvell、Credo、内存控制器厂商、 Photonibrary、Montage与Coherent（其激光器/VCSEL及OCS基本面由Scale-out/CPO支撑，Scale-in为远期期权）。第二档：技术弹性大但商业确定性低。</p>
+</li>
+<li>
+<p><strong>投资逻辑与结论</strong>
+AI算力越强，数据越成瓶颈，光必须离芯片越来越近：从可插拔光模块到NPO/CPO，到Optical I/O、die-to-die、die-to-memory，本质是光电转换边界不断向芯片内存迁移。投资者不必急于寻找Scale-in概念股，而应看清趋势，关注2027年前后Scale-up放量带来的先机机会。Scale-in是远期方向，但其背后的分层内存架构升级将重塑整个AI基础设施价值链。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. Scale-in概念引入</h3>
+<p>最近光通讯领域出现了一个新的关键词，叫Scale-in。如果说过去几年市场关注800G、1.6T光模块连接服务器和交换机，也就是我们通常说的Scale-out。那今年热潮CPO和NPO光靠近交换芯片，那么Scale-in更加激进，光继续往芯片内部走，从机柜之间走到机柜内部，再到服务器托盘内部，最终目标只连GPU跟内存。这可能是AI光互联下一阶段最重要的技术路线之一。</p>
+<h3>2. Scale-in定义</h3>
+<p>什么是Scale-in呢？它是指在几毫米或者是大概一米的距离内实现data bandwidth，也就是chip-to-chip以及chip-to-memory，计算芯片跟内存的高速光互联。那注意啊，不同厂商对Scale-in的定义还是有所不同的。英伟达是指DPU网络，NVIDIA是指芯片内数据的搬运。那我们讨论的是光通讯行业的共识版本，也就是托盘内部芯片之间、芯片跟内存之间的光互联。</p>
+<h3>3. 为何Scale-in突然重要</h3>
+<p>为什么Scale-in突然变得重要了？AI瓶颈正在从算不动转向数据不通。算力增长远快于内存带宽和容量的提升，越靠近GPU核心，数据流就越恐怖。以某种参考为例，Scale-out大概是一点六TB每秒，Scale-up Envisioning 6大概是十四点四TB每秒，提升了九倍。那本地的HBM4带宽大概是二十二TB每秒，折合是一百七十六TB每秒，又高了一个数量级。而Scale-in瞄准的正是内存级带宽，那他的潜在机会可能是Scale-up的十倍，Scale-out一百倍。</p>
+<h3>4. HBM瓶颈与内存池化方案</h3>
+<p>但是HBM也遇到了物理墙，每增加一颗HBM都占用封装面积、中介层布线、CoWoS产能以及供电散热，没有办法无限的进行堆叠。因此呢，现实方案不是说HBM消失，而是分层内存加内存池化。那GPU内部SRAM负责是超低延迟热数据，而本地HBM负责高性能计算，上下文、温冷数据呢以及这个租户共享容量，逐步的放到外部的HBM或者是HBM内存池里，有几十颗GPU动态共享。那这类似云计算将CPU的算力池化，现在呢开始池化AI最昂贵的资源之一：内存。</p>
+<h3>5. 内存池化架构组件</h3>
+<p>那关键架构组件有包括内存池Memory-to-Memory。我们以Google为例，它的TPU v8托盘已经出现水冷光学OCS光交换总机，能够在九千六百颗芯片之间共享大概两PB的HBM，动态调整拓扑。那MPU也就是内存处理单元，相当于内存池的调度中心，负责地址映射、KV cache调度、页面迁移、QoS以及可靠性管理。典型产品比如说SK海力士以及Micron合作的CMAX，它是集成了十六颗ARM芯片，在上下文推理中，吞吐量可以达到单GPU基准的六点五倍。那AI基础设施正在从GPU中心转向计算加内存加互联共同系统拓扑。那这也解释了为什么Marvell等公司正在加速布局AC光互联、内控制器和近内存计算。</p>
+<h3>6. 技术路线一：硅光加DWDM</h3>
+<p>接下来我们看三条技术路线。第一条是硅光加DWDM，它呢总带宽高、距离长，适合Memory Fabric。Marvell收购的Solidot AI推出的Photonibrary已经有了七点二T光互联模块，卡位最深，正在转向平台型的供应商。</p>
+<h3>7. 技术路线二：VCSEL与Micro VCSEL</h3>
+<p>VCSEL或者是Micro VCSEL是第二条路线，优势呢是低成本、阵列化、低功耗，适合短距大规模并行。核心理念呢是wide and slow，也就是用大量低速并行替代少量高速，然后总VCSEL量呢映射更低。那Montage跟Coherent是代表，英伟达分拆两家，投资了二十亿美元，并附带采购承诺。那它的产业实现顺序是现在先Scale-out，然后呢Scale-in，确定性是比较高的。</p>
+<h3>8. 技术路线三：Micro LED光互联</h3>
+<p>Micro LED光互联是第三条路线，那它的功耗比较低，不需要传统的激光器，它瞄准的是DPU到HBM的连接。三星、美光、海力士都已经投资了。那如果成功呢，将会开辟全新的芯片级光互联市场。</p>
+<h3>9. 市场节奏与公司分层</h3>
+<p>最后我们看市场节奏以及映射公司。那目前GPU HBM还是以电互联为主，英伟达的机架核心仍然是可插拔+CPO/NPO，尚需解决散热、阵列化、可靠性的问题。光进入封装内部要求更高了。二零二七年，我们先看Scale-up光学CPO/NPO的放量。那Scale-in大概还是要再往后两三年，甚至是更久。那第一代产品带宽远远未达现在的预期。第一档是有现时订单加Scale-in预期的，Marvell、Credo加内存控制器加Photonibrary、Montage跟Coherent，它的激光器VCSEL以及OCS基本面呢是由Scale-out CPO支撑，那Scale-in呢是他们的远期期权。那第二档呢是技术弹性大，但是商业确定性低，Ayar Labs以及IO的初创公司。那第三档我们来看中兴通讯，不仅传统可插拔光模块，光进入这个托盘后，它在光引擎以及内存池有早期的布局。而且呢产业进化每一颗这个GPU光连接价值不断的在拉升。立讯精密系统集成的趋势，未来光进入到机柜，需要整合光引擎、散热、光纤连接器、PCB、电源等机柜级别的EMS可能有新的增量价值。</p>
+<h3>10. 结论与投资建议</h3>
+<p>那AI算力越强，数据越成瓶颈，光就必须离芯片越来越近，从可插拔光模块到NPO/CPO，到Optical I/O、die-to-die、die-to-memory。本质是光电转换边界不断向芯片内存迁移，这也是未来几年光通信行业最值得持有的。最终的产业地图。那投资者呢不必急于寻找Scale-in的概念股，而是应该看清这一个趋势，并且关注二零二七年前后Scale-up放量带来的先机机会。而Scale-in是远期方向，但它背后的分层内存架构升级，将重塑整个AI基础设施的价值链。以上就是本期内容，如果对你有所启发，欢迎点赞关注，我是拍，我们下期见。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">努力进化的派</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">ScaleIn</span></li>
+<li><span class="wikilink">光互联</span></li>
+<li><span class="wikilink">CPO</span></li>
+<li><span class="wikilink">AI算力</span></li>
+<li><span class="wikilink">光模块</span></li>
+<li><span class="wikilink">HBM</span></li>
+<li><span class="wikilink">内存池化</span></li>
+<li><span class="wikilink">硅光</span></li>
+<li><span class="wikilink">VCSEL</span></li>
+<li><span class="wikilink">MicroLED</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">英伟达</span></li>
+<li><span class="wikilink">CPO NPO AI</span></li>
+<li><span class="wikilink">CPO AI</span></li>
+<li><span class="wikilink">Solidot AI</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>那最近呢光通讯领域出现了一个新的关键词，叫scale in.如果说过去几年市场关注八百g一点六t光模块连接服务器和交换机，也就是我们通常说的scale out.那今年热潮CPO和NPO光靠近交换芯片，那么scale in更加激进光继续往芯片内部，走从机柜之间走到机柜内部，再到服务器托盘内部最终目标只连GPU跟内存。这可能是AI光互联下一阶段最重要的技术路线之一。那什么是scale in呢？它是指在几毫米或者是大概一米的距离类实现datto带，也就是芯力之间以及呢啊chip to memory计算芯片跟内存的高速光互联。那注意啊不同厂商对scale in的定义还是有所不同的。英伟达了是指DPU网络呃，nata呢是指芯力内数据的搬运。那我们讨论的呢是呃光通讯行业的共识版本，也就是托盘内部芯片之间，芯片跟内存之间的光互联。那为什么scale in突然变得重要了？Ai瓶颈正在从算不动？转向数据，未不径算力增长，远快于内存带宽和容量的提升，越靠近GPU,核心数据流就越恐怖。以robin为例，scale out大概是一点六TB每秒，scale up enviling六，大概是十四点四TB,每秒提升了九倍。那本地的HBM四带宽大概是二十二TB每秒，折合是一百七十六TB每秒又高了一个数量级。而scale in瞄准的正是内存级带宽，那他的潜在机会可能是scale up的十倍，scale out一百倍。但是HBN也遇到了物理墙，每增加一颗HBM都占用啊封撞面积、中介层布线、covers产能以及供电散热没有办法无限的进行堆叠。因此呢，现实方案不是说HBM消失，而是分层内存加内存池化。那GPU内部swam负责是超低延迟热数据，而本地HBM负责高性能计算a cave cash上下文温冷数据呢以及这个租户共享容量，逐步的放到外部的DVM或者是HBM内存池里面有几十颗GPU动态共享。那这类似云计算将CPU的算力池化，现在呢开始池化，AI最昂贵的资源之一。内存那关键架构组件有包括内存池memory two.我们以google为例，它的TPU八t托盘已经出现的水冷光学OCS光交换总机能够在九千六百颗芯片之间共享大概两PB的HPM动态调整拓扑。那MPU也就是内存处理单元，相当于内存池的调度中心，负责地址影射KV、 cash调度页面迁移QOS以及可靠性管理典型产品。比如说呃SK、海力士以及movel合作的CMMAX,它是集成了十六颗arm芯片，在上下文推理中，吞吐量可以达到单GPU基准的六五点五倍。那AI基础设施正在从GPU中心转向计算加内存加互联共同系统拓扑。那这也解释了为movel等公司正在加速布局AC光互联内内控控器和近内存计算。接下来我们看三条技术路线，第一条是硅光加DWDM,它呢总带宽高，距离长，适合memory february mavel收购的sallst tae AI推出的ftonony abruer已经有了七点二t光互联。呃，模块卡位最深正在转向平台是你的供应商，而VCSEL或者是呃michao, VCSE是第条路线，优势呢是低成本e阵，略化，低功耗适合量。短距大规模并行核心理念呢是y and slow,也就是宽宽慢用大量量距离规模并通行行少量量高速l然后总scsce量呢映射更低。那momenton跟coo heaven是代表伟达达分购购两家投资资了二十亿美元，并附带采购承诺。那它的产业实现顺序是现呢？是scale r然后呢是scale,确确性是比较高的。 Michael LED光互联是第三条路线，那它的功耗比较低，呃，没有不需要传统的激光器，它瞄准的是带的diets, PU到HBM、三星、美光、海力士都已经投有投资了。那如果成功呢，将会开辟全新的芯片及光互联市场。最后我们看市场节奏以及这个映映射公司，那目前GPUHBM是以还是以电互联为主。英伟达的机架核心仍然是同CPUNPO,尚需解决散热量略可靠性的问题，光进入封装内部要求更高了。二零二七年，我们先看scale up光学scp ONPO的放量，那scale in大概还是要再往后两三年，甚至是更久啊，那第一代产品带宽远未达远的的。现我进来看看三档档，第档档是有现时订单加scale in期传的的mavela c加CSL加内存控制器加phone onony february. The momenton跟hohever它的激光器VCSEL以及OCS基本面呢是由scale out CPO支撑。那scale in呢是他们的远期期权。那第二档呢是技术弹性大，但是商业确定性低，a vancila以及啊IO的初创公司。那第三档我们来看中继续创，不仅传统可差拔光模主光进入这个托盘后，它的在光引擎以及memory pool内存池。那有早期的布局机，而且呢产业进化每一颗这个GPU光连接价值不断的在拉升。立讯精密系统集成的趋势，未来光进入到机柜，需要整合光引擎、散热、光纤连接器、PCB电源等机柜级别的EMS可能有新的增量价值。那AI算力越强，数据AI机成瓶颈，光就必须离芯片越来越近，从可插拔光模块到NPOCPO opt ical, IO die to die die to memory.本质是光电转换边界不断向芯片内存迁移，这也是未来几年，光动线行业最值得持换。最终的产业地图。那投资者呢不必急于寻找skill in的概念股，而是应该看清这一个区势，并且关注二零二七年前后scale up放量带来的先性机会。而scill in是远期方向，但它背后的分层内存啊直化结构升级，将重塑整个AI基础设施的价值链。以上就是本期内容，如果对你有所启发，欢迎点赞关注，我是拍，我们下期见。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
