@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>手撕因子第三天 - 聪明钱去哪里 今天讲的这个因子是alpha003，它其实是Williams Accumulation Distribution(WAD) 在六日的求和。虽然公式看着吓人但实际上理解之后觉得还好。希望对大家有帮助！此外，回答一个很多朋友问到的问题 -- 图怎么画的？答：exaclidraw #量化交易 #人工智能 #搞钱 #投资 #股票｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2025-11-08_手撕因子第三天_-_聪明钱去哪里_7570126837691600134.md · 发布于 2026-09-17 20:30:23</div><nav class="page-links"><a href="https://www.douyin.com/video/7570126837691600134" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>手撕因子第三天 - 聪明钱去哪里</h1>
+<p>抖音 | Jaybee黄 | 原文链接（<a href="https://www.douyin.com/video/7570126837691600134">https://www.douyin.com/video/7570126837691600134</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+讲解Alpha191中的Alpha003因子，该因子基于Williams Accumulation Distribution（WAD）指标，通过将过去六天的WAD值求和来度量聪明钱流动的方向与幅度。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>因子概述</strong>
+Alpha003是Alpha191中的第三个因子，本质是Williams Accumulation Distribution（WAD）在过去六天的求和。虽然公式看起来复杂，但拆开后可理解为一个分类讨论情形下的累加过程。</p>
+</li>
+<li>
+<p><strong>WAD计算方法</strong>
+WAD由20世纪70年代的William开发，用于观察市场聪明钱流动。计算方式：若今日收盘价等于昨日收盘价（横盘），记为0；若上涨，用收盘价减去真实低位（今日最低价与昨日收盘价中较低者）；若下跌，用收盘价减去真实高位（今日最高价与昨日收盘价中较高者）。</p>
+</li>
+<li>
+<p><strong>因子逻辑与应用</strong>
+将过去六天的WAD累加，可统计聪明钱的净流入方向与幅度，比单纯计算收盘价变化更科学，因为纳入了日内高低点信息。还可对结果进行Rank处理，用于截面排序筛选聪明钱流入或流出较多的标的。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. Alpha003因子简介</h3>
+<p>Yo大家好，我是老黄，一分钟因子系列第三期，我们今天来讲Alpha191里面的第三个因子Alpha003。他的表达式呢，长这样，已经写了两行了。对，但如果你把他这个表达式呢，拆成一个数学的形式的话，就是这样，就是Sigma从I等于0一直加到5，然后对这么一个个分类讨论的情形进行一个求和。这个东西假设我们把它记成ST的话，这东西其实就是一个数字，它是根据昨天的收盘价和今天的收盘价算出来的一个数字。</p>
+<h3>2. WAD计算方法详解</h3>
+<p>对，那如果你去仔细看它表达式，你会发现这东西其实是什么？这个东西其实就是技术指标叫做Williams Accumulation Distribution，是上个世纪70年代一个叫做Williams的交易员，他总结出来的一套观察市场的方法。那他的这个理论基础是什么呢？其实就是去度量聪明钱在往哪个方向流动，然后他流动的这个幅度有多大。那我们来看一下这个Williams Accumulation Distribution具体怎么算。他这么说，就是说如果CT等于CT减一，也就是说今天是一个横盘的行情，那这时候认为我不知道聪明钱往哪流，我给他记成零。对，那如果今天收涨了，CT大于CT减一了，是什么情况呢？这时候我要去算今天的收盘价减去一个叫做真实低位的数字。这个真实低位呢是怎么算呢？就是说今天的最低价跟昨天的收盘价之间最低的那个。那也就是说这24个小时内，我们观察到的市场达到的最低的点，对吧？那这个时候呢，你认为今天的贡献，也就是说这个聪明钱一共流入了CT减去这个真实低位这么多的量。对，那么反过来，如果今天收跌了呢？那你就用CT减去这个Max(HT和CT减1)，也就是说过去24个小时内最高的价格。那最高价格就是说今天的最高价跟昨天的收盘价之间最高的那个，那就是我们观测到的24个小时里面最高价格。</p>
+<h3>3. WAD逻辑与可视化</h3>
+<p>那为什么要这么算呢，它背后的逻辑是什么？Williams当时他是这么model，就是说你把每一天都当成是一个多空力量的对决。那么空方能够达到的最低位是什么？就是今天的最低价，或者说如果昨天收盘价非常低的话，这就是所谓的真实低位。那多方能达到的最高值是什么？就是今天的最高跟昨天的收盘之间更高的那个点。那这个我给大家画了一个可视化，描述了一下这个计算过程，我就不详细展开了，大家可以在这里停留一会理解一下它的整个计算过程。</p>
+<h3>4. 因子计算与应用</h3>
+<p>那我们继续往下，刚才那个因子它有一个summation的部分，就是说它是把这个Williams Accumulation Distribution过去六天的值给加起来。那就是说你对于每一天，你都要去算这个WAD，你要算六次，最后你把它加起来。加完之后呢，它其实统计的就是说过去六天这个聪明钱，它流动的这个方向。那它就比你单纯的去算过去六天收盘价的delta加起来要更科学一点，因为它上面把一些日内的信息给统计进去了。那这个因子我们还可以怎么玩呢？你可以在外面再套一个rank，对吧？那这样就相当于你用这个过去六天Williams Accumulation Distribution的去sort你的截面，那说不定你就可以挑出过去这些核更大的，也就是说过去聪明钱流入更多的，然后过去六天聪明钱流入更少的。对，那今天就跟大家分享到这，谢谢大家拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Jaybee黄</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">因子模型</span></li>
+<li><span class="wikilink">技术面分析</span></li>
+<li><span class="wikilink">聪明钱</span></li>
+<li><span class="wikilink">WAD</span></li>
+<li><span class="wikilink">量化因子</span></li>
+<li><span class="wikilink">量化投资因子解析</span></li>
+<li><span class="wikilink">AI产业</span></li>
+<li><span class="wikilink">股票市场</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>把这个Williams Accumulation Distribution过去六天的值给加起来。加完之后呢,他却统计的就是说过去六天这个聪明前,他流动的这个方向。 Yo大家好,我是老黄,一分钟因子系列第三期,我们今天来讲Alpha191里面的第三个因子Alpha003。 他的表达式呢,长这样,已经写了两行了。对,但如果你把他这个表达式呢,拆成一个数学的形式的话,就是这样,就是Sigma从I等于0一直加到5,然后对这么一个分类讨论的情形进行一个求和。 这个东西假设我们把它记成ST的话 这东西其实就是一个数字 它是根据昨天的收盘价和今天的收盘价算出来的一个数字 对那如果你去仔细看它表达是 你会发现这东西其实是什么 这个东西其实就是技术指标叫做Williams Accumulation Distribution 是上个世纪70年代一个叫做Williams的家园员 他总结出来的一套观察市场的方法 那他的这个理论基础是什么呢 其实就是去度量聪明前再往哪个方向流动 然后他流动的这个幅度有多大 那我们来看一下这个Williams Accumulation Distribution 具体怎么算 他这么说 就是说如果CT等于CT减一 也就是说今天是一个横盘的行情 那这时候认为我不知道聪明前往哪留 我给他记成零 对 那如果今天收涨了 CT大于CT减一了 是什么情况呢 这时候我要去算今天的收盘价 减去一个叫做真实低位的数字 这个真实低位呢 是怎么算呢 就是说今天的最低价 跟昨天的收盘价之间最低的那个 那也就是说这24个小时内 我们观察到的市场达到的最低的点 对吧 那这个时候呢 你认为今天的贡献 也就是说这个聪明前一共流入了 CT减去这个真实低位这么多的量 对 那么反过来 如果今天收跌了呢 那你就用CT减去这个Maximo HT和CT减1 也就是说过去24个小时内最高的价格 那最高价格就是说今天的最高价 跟昨天的收弹价之间最高的那个 那就是我们观测到的 24个小时里面最高价格 那为什么要这么算呢 它背后的逻辑是什么 Williams当时他是这么model 就是说你把每一天都当成是一个多空力量的对决 那么空方能够达到的最低位是什么 就是今天的最低价 或者说如果昨天收盘价非常低的话 这就所谓的真实低位 那多方能达到的最高值是什么 就是今天的最高 跟昨天的收盘之间更高的那个点 那这个我给大家画了一个可视化 描述了一下这个计算过程 我就不详细展开了 大家可以在这里停留一会理解一下 它的整个计算过程 那我们继续往下 刚才那个因子 它有一个summation的部分 就是说它是把这个 Williams Accumulation Distribution 过去六天的值给加起来 那就是说你对于每一天 你都要去算这个WAD 你要算六次 最后你把它加起来 加完之后呢 它其实统计的就是说 过去六天这个聪明前 它流动的这个方向 那它就比你单纯的去算 过去六天收盘价的delta 加起来要更科学一点 因为它上面把一些 日内的信息给统计进去了 那这个因子我们还可以怎么玩呢 你可以在外面再tow一个rank 对吧 那这样就相当于你用这个 过去六天Williams Accumulation Distribution的 核去sort你的截面 那说不定你就可以挑出过去这些 核更大的 也就是说过去聪明前流入更多的 然后过去六天聪明前流入更少的 对那今天就跟大家分享到这 谢谢大家拜拜</p>
+</blockquote>
+</details></main>
+</body>
+</html>
