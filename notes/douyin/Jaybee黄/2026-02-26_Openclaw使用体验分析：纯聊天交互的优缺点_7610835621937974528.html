@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>我对Openclaw优缺点的分析 最近Openclaw火的一塌糊涂，已经成了github史上增长最快的项目，很多AI厂商也在跟进，比如kimi推出了kimi claw。我个人认为这种纯聊天的交互形式还是有可以优化的地方，但必须承认，把上下文工程对用户隐藏起来是一个很正确的design choice #人工智能 #kimi #智能体 #AI #openclaw｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-02-26_Openclaw使用体验分析：纯聊天交互的优缺点_7610835621937974528.md · 发布于 2026-09-17 17:21:01</div><nav class="page-links"><a href="https://www.douyin.com/video/7610835621937974528" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Openclaw使用体验分析：纯聊天交互的优缺点</h1>
+<p>抖音 | Jaybee黄 | 原文链接（<a href="https://www.douyin.com/video/7610835621937974528">https://www.douyin.com/video/7610835621937974528</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+作者分享使用Openclaw两周多的体验，将其与Cursor/Clack Code对比。Openclaw隐藏了上下文管理和中间过程，以纯聊天形式运行在聊天软件中，降低了使用门槛，但程序员用户可能感到控制感不足。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>Openclaw的核心特点：隐藏上下文管理</strong>
+Openclaw将上下文工程管理对用户隐藏，由agent自主决策，这使得它足够简单到可以直接运行在聊天软件中，用户无需携带笔记本电脑，用手机即可交互。</p>
+</li>
+<li>
+<p><strong>与Cursor/Clack Code的对比：控制感差异</strong>
+Cursor/Clack Code面向程序员，假设用户具备上下文管理能力和工具使用能力，可以新建文件夹开启全新上下文。Openclaw的任务均由agent自主决策，专业用户可能感到缺少自己把控的感觉。</p>
+</li>
+<li>
+<p><strong>使用体验：中间过程不可见带来的问题</strong>
+Openclaw在执行任务时不展示中间过程，用户如果对流程有控制欲会感到不适，需要不断对话确认agent是否按照意图执行，存在心理负担。</p>
+</li>
+<li>
+<p><strong>附加优势：社交化和可玩性</strong>
+由于运行在聊天软件中，可以拉群让不会写代码的家人也能使用Openclaw，可玩性很强。其他功能如共享skill、网络安全漏洞等属老生常谈未展开。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场与背景介绍</h3>
+<p>大家好，我是老黄，我用Openclaw已经有两周多了，想跟大家分享一下我的使用体验。首先，作为一个重度的Cursor和Clack Code用户，刚切换到Openclaw会有一点不太习惯。</p>
+<h3>2. 缺点一：中间过程不可见</h3>
+<p>Openclaw在进行任务的时候不会给你看到它的中间过程。如果你本身对流程有一个控制欲的话，你就会觉得很难受，因为你看不到它中间是怎么做这些步骤的。比如说我有一个info，希望它是利用我的info去执行任务的，中间我很怕它自己去造轮子，这个时候我需要不断的对话去确认它确实是真的在按照我的意图去执行，这就会有一些心理上的负担。</p>
+<h3>3. 缺点二：缺少可控性</h3>
+<p>Cursor或者Clack Code这样的产品是面对程序员的，它assume你有进行上下文管理的并且使用一些工具的能力。比如说你对一个项目你可以新建一个文件夹，那它就是全新的上下文，你开启一个新的对话也是全新的上下文，并且它有一些上下文管理的工具以及能够让你在不同的对话里面切换。但是Openclaw里面这些东西都是混的，所有这些任务都是agent自主决策，很依赖agent本身的能力。所以作为一个程序员，有些时候你会觉得好像少了一点能够自己把控的感觉。</p>
+<h3>4. 优点：简化设计是成功关键</h3>
+<p>但是我觉得这所谓的缺陷也正是它能够火的原因之一。就是因为它可以直接运行在你的聊天软件里面，你像Cursor或者Clack Code由于它提供的功能是给专业用户的，所以那最少也是需要一个命令行。命令行本身不是general public会去使用的工具。所以Openclaw它由于把所有的这些上下文管理的功能都对用户隐藏起来，就是它全部用agent自己去决策，反而使得它足够简单到能够在一个聊天软件上直接运行。好处也非常明显，就是说你不用带一个笔记本电脑出门了，只要用你的手机，手机是你二十四小时随身的，所以你带着你的手机就可以跟他进行交互，你也不用去看中间那些结果，那种东西还是会增加你的认知负担。</p>
+<h3>5. 附加优势与结尾</h3>
+<p>第三个比较有意思的就是说由于它正好是运行在聊天软件里面，所以你可以拉一个群。家里人即便不会写代码他们也可以玩Openclaw，可玩性很强。那像它的其他的功能，比如说你可以共享你的skill啊或者说他的一些网络安全上的漏洞，我觉得是老生常谈的事情，这里就不做展开。那今天跟大家分享到这，谢谢大家，拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Jaybee黄</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">AI产品</span></li>
+<li><span class="wikilink">智能体</span></li>
+<li><span class="wikilink">用户体验</span></li>
+<li><span class="wikilink">产品设计</span></li>
+<li><span class="wikilink">工具对比</span></li>
+<li><span class="wikilink">Openclaw</span></li>
+<li><span class="wikilink">KimiClaw</span></li>
+<li><span class="wikilink">AI智能体</span></li>
+<li><span class="wikilink">上下文管理</span></li>
+<li><span class="wikilink">Cursor</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">Openclaw Kimi Claw AI</span></li>
+<li><span class="wikilink">agent AI</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>哟大家好，我是老黄，我用open call已经有两周多了。想跟大家分享一下我的使用体验。首先，作为一个重度的cursor和clck code的用户，刚切换到open call会有一点不太习惯。一是open call.它在进行任务的时候，它不会给你看到它的中间过程。如果你本身对流程有一个控制域的话，你就会觉得很难受。因为你看不到它中间是怎么做这些步骤的。比是说我有一个info,呃，希望他是利用我的info去执行任务的。那么呃中间我很怕他自己去造轮子。呃，这个时候我需要不断的对话去确认，它确实是真的在嗯按照我的意图去形式，这就会有一些心理上的负担。第二我觉得是cursor或者clck code这样的产品，它本身是面对程序员的嘛。所以他assume你有进行上下文管理的，并且使用一些工具的能力。就是说你对一个项目你可以新建一个文件夹，那它就是全新的上下文。你开启一个新的对话，也是全新的上下文。并且它有一些上下文管理的工具，以及能够让你在不同的对话里面切换。但是open call里面这些东西都是混的，所有这些任务都是agent自主决策，很依赖agent本身的能力。所以作为一个prosummer,有些时候你会觉得好像少了一点能够自己把控的感觉。但是我觉得这所谓的缺陷，也正是它能够火的原因之一。就是因为它可以直接运行在你的聊天软件里面，你像cursure或者clar code.由于它提供的功能是给专业用户的，所以那最少也是需要一个另一行。呃，然后命令行本身不是general public会呃去使用的工具。所以open call它由于把所有的这些上下文管理的功能都对用户隐藏起来，就是它全部用agent自己去决策，反而使得它足够简单到能够在一个聊天软件上直接运行，好处也非常明显。就是说你不用带一个笔记本电脑出门了，只要用你的手机，那手机是你二十四小时随身的吗？所以你带着你的手机，你就可以跟他进行交互，你也不用去看中间那些结果，那种东西还是会增加你的认知负担。嗯，第三个比较有意思的就是说由于它正好是运行在聊天软件里面，所以你可以拉一个群。家里人即便不会写代码，他们也可以玩open core,可玩性很强。那么像它的其他的功能，比如说你可以共享你的skill啊，或者说他的一些网络安全上的漏洞。我觉得是老生常谈的事情，这里就不做展开。那今天跟大家分享到这，谢谢大家，拜拜。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
