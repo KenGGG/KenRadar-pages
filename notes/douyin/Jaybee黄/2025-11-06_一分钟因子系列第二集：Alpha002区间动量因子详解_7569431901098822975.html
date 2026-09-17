@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>1分钟手撕1个因子：区间动量 感谢大家对因子系列的支持，我们继续一分钟因子系列，今天讲alpha002，这个因子本质上就是用CLV在时序上作差。那么话不多说直接开讲﻿ #量化交易  #人工智能  #搞钱  #投资  #股票｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2025-11-06_一分钟因子系列第二集：Alpha002区间动量因子详解_7569431901098822975.md · 发布于 2026-09-17 20:33:36</div><nav class="page-links"><a href="https://www.douyin.com/video/7569431901098822975" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>一分钟因子系列第二集：Alpha002区间动量因子详解</h1>
+<p>抖音 | Jaybee黄 | 原文链接（<a href="https://www.douyin.com/video/7569431901098822975">https://www.douyin.com/video/7569431901098822975</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+老黄讲解Alpha002因子，该因子基于CLV（收盘位置价值）技术指标在时序上的差分，用于刻画多空力量在一天内的变化。内容涵盖CLV的计算原理、多空博弈比喻、可视化分档及扩展应用方法。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>Alpha002因子简介与公式拆解</strong>
+Alpha002是一个简单的因子，数学表达为minus delta CLV(1)，其中CLV的第一个算子是(C-L)/(H-L)，周期为1。CLV即Closed Location Value（收盘位置价值），是一种常见技术指标。</p>
+</li>
+<li>
+<p><strong>CLV的计算原理与多空博弈比喻</strong>
+CLV展开后为C减去(H+L)/2，其中(H+L)/2是最高价和最低价的中点，称为区间中点。最高价代表多头最强力量，最低价代表空头最强力量，可想象为拔河博弈。CLV衡量收盘价偏离区间中点的程度，反映日内多空力量对比。</p>
+</li>
+<li>
+<p><strong>CLV的可视化分档解释</strong>
+收盘价接近高位时CLV接近正1；接近区间中点时为微弱正数；略低于中点时为微弱负数；接近最低点时为较大负数。CLV在一定程度上刻画了一天内的多空力量对比。</p>
+</li>
+<li>
+<p><strong>因子扩展与应用方法</strong>
+Alpha002本质是今日CLV减昨日CLV，描述多空力量在一天内的变化。可在此基础上再套一个rank，筛选出多空力量日内变化剧烈的股票，也可作为继续构筑因子的基础方法。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场与因子引入</h3>
+<p>多空力量在今天的分布，跟它在昨天的分布做对比。所以它描述的，你可以认为说它是一种多空力量在一天内的变化。大家好，我是老黄，今天我们回到一分钟因子系列的第二集。今天我们要讲的是这个Alpha002。它就是一个比较简单的因子，大家看它的表达是长这个样子。如果你把它写成一个数学的形式的话，就是minus delta，它这里面第一个算子是这个(C-L)除以(H-L)，然后这个周期是1。OK，那我们简单拆解一下这个因子。但实际上它是什么呢？实际上它是一个叫做Closed Location Value的一个技术指标，这是一个比较常见的技术指标。</p>
+<h3>2. CLV原理与多空博弈比喻</h3>
+<p>那它在讲一个什么事情呢？我们不妨把这里面的括号打开看一下。首先C-L你还是保持，但你减去的这个H-C，就是最高点减去收盘价，俗称上影线。这个东西呢，你把它括号打开完之后，它就2C减去括号H+L，你再把这个2作为一个scaler给提出来，那你最后得到的就是这么一个东西：C减去(H+L)除以2。(H+L)除以2是什么？就是最高价和最低价中间的那个中点，俗称叫区间中点。你可以认为它是什么呢？就是最高价是这个多头的最强势的力量决定的，然后最低价呢，是空头最强势的力量决定的。你可以把它想象成是一个多头跟空头之间的拔河，或者说博弈。那么这个绳子中点的那个红线，大家都玩过拔河吧，绳子中点那个红线呢，就是这个地方。对，那么它这个CLV它讲的是什么呢？就是说最后这个收盘价，也就是说最终这个拔河停止的时候，终点到底在什么位置，就收盘价离它真正的区间中点偏移了多少。那如果你收盘价比区间中点要高，那是不是说明多头的力量稍微强一点？如果你的收盘价比区间中点要低，那是不是说明空头的力量会更强一点？就这么回事。</p>
+<h3>3. CLV可视化分档</h3>
+<p>那么我们可以把它是整个计算过程可视化出来，你看大致分为这么几种情况：假设你收得很接近高位的话，那最后你会发现你这个CLV算出来是一个比较大的、接近于正一的这么一个值；如果你的收盘价很接近区间中点，那就是一个微弱的正数；如果你收盘价是略低于区间中点的话，就是一个比较微弱的负数；那么如果你收盘价非常接近最低点的话，就是一个比较大的负数。那它其实就是说CLV在一定程度上能刻画一天之内这个多空力量的对比。</p>
+<h3>4. 因子扩展与应用</h3>
+<p>我们再看回到这个因子，它不只是CLV这么简单，它是minus delta CLV。delta CLV是什么？就是今天的CLV减昨天的CLV。那也就是说多空力量在今天的分布跟它在昨天的分布做对比，所以他描述的，你可以认为说，它是一种多空力量在一天内的变化。那么这个因子你还能怎么玩呢？比如说在外面你能不能再套一个rank，可以，那你就可以sort出这个多空力量在某一在一天内变化非常剧烈的一些票，有一些多空力量在一天内变化不那么剧烈的票。对吧？这就是一种基于这个因子往下继续构筑因子的方法。对，今天就跟大家分享到这里，谢谢大家，拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Jaybee黄</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">因子研究</span></li>
+<li><span class="wikilink">动量因子</span></li>
+<li><span class="wikilink">CLV</span></li>
+<li><span class="wikilink">教程</span></li>
+<li><span class="wikilink">区间动量</span></li>
+<li><span class="wikilink">多空力量</span></li>
+<li><span class="wikilink">收盘价</span></li>
+<li><span class="wikilink">技术指标</span></li>
+<li><span class="wikilink">因子构建</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>多空力量在今天的分布,跟它在昨天的分布做对比。所以它描述的,你可以认为说它是一种多空力量在一天内的变化。大家好,我是老黄,今天我们回到一分种因子系列的第二集。今天我们要讲的是这个α002。它就是一个比较简单的因子,大家看它的表达是长这个样子。如果你把它写成一个数学的形式的话,就是minus delta,它这里面第一个算源是这个C-L-H-L,除H-L,然后这个周期是1。OK,那我们简单拆解一下这个因子。 但实际上它是什么呢 就是实际上它是一个叫做 closed location value的一个技术指标 这是一个比较常见的一个技术指标 那它在讲一个什么事情呢 我们不妨把这里面的括号打开看一下 首先C-L你就还是保持 但你减去的这个H-C 就是最高点减去收盘价 最高价减去收盘价 俗称上影线 这个东西呢 你把它括号打开完之后 它就两倍的CT减去括号HT加LT 你再把这个2作为一个scaler给提出来 那你最后得到的就是这么一个东西 这是CT减去HT加LT除以2 HT加LT除以2是什么 就是最高价和收盘价中间的那个终点 俗称叫区间终点 你可以认为它是什么呢 就是最高价是这个多头的最强势的力量决定的 然后最低价呢 是空头最强势的力量决定的 你可以把它想象成是一个空头跟多头之间的拔河 或者说博弈 那么这个绳子终点的那个红线 大家都玩过拔河吧 绳子终点那个红线呢 就是这个地方 对 那么它这个CLV它讲的是什么呢 就是说最后这个收盘价 也就是说最终这个拔河停止的时候 终点到底在什么位置 就收盘价离它真正的区间终点偏移了多少 那如果你收盘价比区间终点要高 那是不是说明多头的力量稍微强一点 如果你的收盘价比区间终点要低 那是不是说明空头的力量会更强一点 就这么回事 那么我们可以把它是整个计算过程可视化出来 你看大致分为这么几种情况 假设你收得很接近高位的话 那最后你会发现你这个CLV算出来是一个比较大的 接近于正一的这么一个值 如果你的收盘价很接近区间终点 那就是一个微弱的正数 如果你收盘价是略低于区间终点的话 就是一个比较微弱的负数 那么如果你收盘价非常接近 最低点的话 就是一个比较大的负数 那它其实就是说 CLV在一定程度上能刻画一天之内 这个多空力量的对比 我们再看回到这个因子 它不只是CLV这么简单 它是minus delta CLV1 delta CLV1是什么 就是今天的CLV减昨天的CLV 那也就是说多空力量在今天的分布 跟它在昨天的分布做对比 所以他描述你可以认为说 它是一种多空力量在一天内的变化 那么这个因子你还能怎么玩呢 比如说在外面你能不能再套一个rank 可以 那你就可以sort出 这个多空力量在某一 在一天内变化非常剧烈的一些票 有一些多空力量在一天内变化 不那么剧烈的票 对吧 这就是一种基于这个因子 基于往下继续构杂因子的方法 对呢 今天就跟大家分享到这里 谢谢大家拜拜</p>
+</blockquote>
+</details></main>
+</body>
+</html>
