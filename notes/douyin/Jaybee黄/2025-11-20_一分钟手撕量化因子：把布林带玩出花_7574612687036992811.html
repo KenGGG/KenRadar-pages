@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>一分钟手撕量化因子：怎么把布林带玩出花 继续一分钟因子系列，今天跟大家分享alpha004，这个因子其实是一个把布林带和量比揉在一起做的缝合怪，不过大家可以感受一下它的思路，最重要的就是学习思路。#量化交易   ﻿ ﻿#人工智能   ﻿   ﻿ ﻿#赚钱   ﻿  #用AI学量化交易   ﻿#股票｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2025-11-20_一分钟手撕量化因子：把布林带玩出花_7574612687036992811.md · 发布于 2026-09-17 20:27:31</div><nav class="page-links"><a href="https://www.douyin.com/video/7574612687036992811" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>一分钟手撕量化因子：把布林带玩出花</h1>
+<p>抖音 | Jaybee黄 | 原文链接（<a href="https://www.douyin.com/video/7574612687036992811">https://www.douyin.com/video/7574612687036992811</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+本期讲解 Alpha004 因子，该因子结合均线与布林带逻辑对市场情形进行分类打分（1/-1）。核心思路是判断两日均价是否突破八日布林带上轨或下轨，若未突破则检查量比；最后通过可视化展示均值回归与成交量配合的实战意义。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>因子背景与表达式解读</strong>
+Alpha004 是量化机构常用的经典因子之一，其数学表达式较为复杂，肉眼难以直接理解。该因子本质上是对市场情形进行分类讨论：根据不同条件赋予正一或负一的分数值。</p>
+</li>
+<li>
+<p><strong>布林带逻辑与均值回归</strong>
+因子利用八日收盘价求和得到八日均价，并计算其标准差构建非标准形态的布林带上轨和下轨。若两日均价突破上轨或下轨（即出现在一个标准差以外），则预期发生均值回归；否则继续检查成交量条件。</p>
+</li>
+<li>
+<p><strong>量比条件的补充判断</strong>
+当均线未触发布林带突破时，因子会进一步考察当日成交量与过去二十日平均成交量的关系（即量比）。若量比大于 20 日均值，则给予正一评分；其他所有情况均打负一分。</p>
+</li>
+<li>
+<p><strong>泛化思路与可视化建议</strong>
+该因子可进一步泛化为由参数 n、k 控制的通用形式，并可调整标准差倍数或周期（如改为十六日）。通过绘制八日均线、两日均价及布林带的互动图，能更直观地理解因子的物理意义。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场与因子介绍</h3>
+<p>大家好，我是老黄一分钟因子系列第四期。今天我们来讲阿尔法一九一的阿尔法零零四第四个因子。这个东西的表达式是这样，现在已经写了四行字儿了。你会发现这东西已经诡异到这个难以用肉眼去理解它到底在讲什么了。因为现在量化机构去做因子的时候，多数已经是用机器求完了。一般就是用 net programming 或者说遗传算法，去自动化的生成一堆因子，然后进行筛选入库这么一个流程。但是我们为了夯实基础呢，还是得继续学一学这种经典的方法。</p>
+<h3>2. 市场情形分类与打分逻辑</h3>
+<p>那我们来看一下这个因子到底要讲什么？它其实是一个对市场情形的分类讨论，就是说对不同的市场情形，你给一个正一或者负一的分数值。那我们先看到的第一个条件：在什么情况下给负一呢？就是这个 summation CT 八除以八，也就是说 summation 就是求和，CT 是收盘价，八就是对八日的收盘价进行求和，然后再除以八，得到八日均值；min GT 八其实就是 min CT 八；STDCT 八则是标准差 over period 八，即八日收盘价的这个标准差。</p>
+<h3>3. 布林带突破与均值回归</h3>
+<p>也就是说八日均价加上八日标准差小于 summation CD 二除以二（两人群指定的阈值）。如果大家看过我很古早的一个视频，讲那个布林带你会发现这东西其实是一个非标准形态的布林带的上轨。假设价格服从正态分布，求一个均值和一个标准差后，认为价格出现在两个标准差以外的概率比较低。所以如果有一天价格出现这两个标准差以外呢？你就可以期待一个均值回归。但他在这儿用的是一个标准差：他说两日均价出现在八日均价的一个标准差以外。</p>
+<h3>4. 成交量条件与最终打分</h3>
+<p>那如果它没突破上轨呢？你就去看它有没有突破下轨，即两日均价是否在八日均价减去一个标准差以外。OK。那如果这两个条件都不满足的时候呢？那我们来看一下成交量：它是看什么成交量呢？就是说当日的量跟过去二十日的均量，你看它是 min VT 逗号二十，就是对过去二十天求它的均值。对，也就是说当你的量比过去二十天要更大一点的时候呢，还是可以打一个正一分；Otherwise 其他所有情况全部打负一分，就这么简单的一个因子啊。</p>
+<h3>5. 泛化思路与总结</h3>
+<p>大家千万不要被它那个数学表达式给唬住。实际上这东西如果你理解它背后的物理意义没那么难。对，那写程序中画就是这么一个东西，我就不照着念了，大家可以记一下。那这个时候呢，你也可以考虑怎么变体：你想一下那个布林带，你怎么去泛化它？其实布林带泛化成一个 n 和 k 两个参数控制的一个值的话，你就可以把它写成这个样子；如果这里面我能不能变成乘以两倍八日的标准差，我能不能乘三倍八日标准差，我能不能把日改成十六日都可以，这样你就变化出很多个因子吧。最后呢在这儿给大家画一个可视化，大家可以更直观地去理解这个因子到底在讲什么：你可以看这个八日均线跟两日均价它们之间的一些交叉，尤其是这个均线跟布林带的互动。那这里时间原因我也不详细展开了，大家回去好好的复习一下。行，那今天就跟大家分享到这，谢谢大家，拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Jaybee黄</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">人工智能</span></li>
+<li><span class="wikilink">赚钱</span></li>
+<li><span class="wikilink">用AI学量化交易</span></li>
+<li><span class="wikilink">股票</span></li>
+<li><span class="wikilink">布林带</span></li>
+<li><span class="wikilink">均值回归</span></li>
+<li><span class="wikilink">量比</span></li>
+<li><span class="wikilink">遗传算法</span></li>
+<li><span class="wikilink">AI产业</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>大家好，我是老黄一分钟因子系列第四期。今天我们来讲阿尔法一九一的阿尔法零零四第四个因子这个东西的表达式是这样，现在已经写了四行字儿了。你会发现这东西已经诡异到这个难以用肉眼去理解它到底在讲什么了。因为现在量化机构去y因子的时候，多数已经是用机器求完了。一般就是用net programming或者说遗串算法，去自动化的生成一堆因子，然后进行筛选入库这么一个流程。但是我们为了夯实基础呢，还是得继续学一学这种经典的方法。那我们来看一下这个因子到底要讲什么？它其实是一个对市场情形的分类讨论，就是说对不同的市场情形，你给一个正一或者负一的负值，或者说你就是给加一分减一分OK.那我们先看到的第一个条件在什么情况下给负一呢？就是这个summation CT八除以八，也就是说summation就是求和求和CT什么收盘价那八就是什么对八日的收盘价进行求和，然后再除以八，那得得到什么？就是八日的均值值，min GT八，这东西其实就min CT八，然后这个STDCT八呢，standard deviation CT over period八，什么意思呢？ Standard deviation标准差CT还是收盘价价八就是八日。那也就是说八日收盘价的这个标准差。对，那也就是说八日均值加上八日标准差小于summation CD二除以二两人群指定的就位f二。如果大家看过我很古早的一个视频，讲那个布林带你会发现这东西其实是一个非标准形态的布林带的上轨布林带是什么？你假设这个价格是一个正态分布，那么你就可以求一个均值，还有一个标准差。那么你认为价格出现在两个标准差以外的这个概率是比较低的。所以如果有一天价格出现了这两个标准差以外呢，你就可以期待一个均值回归，就这么简单一个事儿。但他在这儿呢，他用的是一个标准差，他是说两日均价出现在八日均价的呃一个标准差以外。对这么一个事儿，那就是他第一个条件就是说两日均价突破了八日均价的呃，八日布林带的上轨。那如果它没突破上轨呢，你就去看它有没有突破下轨。两日均价在不在？八日均价减去一个标准差以外OK.那如果这两个条件都不满足的时候呢，那我们来看一下成交量，它是看什么成交量呢？就是说当日的量跟过去二十日的均料，你看它是min VT呃，逗号二十，就是说对过去二十天求它的均值。对，也就是说当你的量比过去二十天要更大一点的时候呢，还是可以打一个正一分。 Otherwise其他所有情况全部打负一分，就这么简单的一个因子啊，大家千万不要被它那个数学表达式给辅助。实际上这东西如果你理解它背后的物理意义没那么难。对，那写程中画就是这么一个东西，我就不照着念了，大家可以记一下。那这个时候呢，你也可以考虑怎么变体，你想一下那个布林带，你怎么去泛化它。其实布林带泛化成一个n和k两个参数控制的一个值的话，你就可以把它写成这个样子，对吧？那如果这里面我能不能变成乘以两倍八日的标准差，我能不能乘三倍八日标准差，我能不能把日改成十六日都可以，这样你就变化出很多个因子吧。最后呢在这儿给大家画一个可视化，大家可以更直观的去理解这个因子。他到底在讲一个什么事情。你就可以看这个八日均线跟两日均线它们之间的一些交叉，尤其是这个均线跟布林带的互动。那这里时间原因呢我也不详细展开了，大家回去好好的复习一下。行，那今天就跟大家分享到这，谢谢大家，拜拜。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
