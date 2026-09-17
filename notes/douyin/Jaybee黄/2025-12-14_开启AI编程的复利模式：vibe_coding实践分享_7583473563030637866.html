@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>开启AI编程的复利模式 最近有学生跟我说他爱上了vibe coding，我很开心。大部分人或多或少听过这样的说法 —— 学习/习惯 vibe coding最好的方式是做一个side project。那么在一众可能得side project中什么样的side project可能是做起来性价比最高的？今天跟大家分享一下我的理解 #人工智能 #智能体 #cursor #claude #用AI学量化交易｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2025-12-14_开启AI编程的复利模式：vibe_coding实践分享_7583473563030637866.md · 发布于 2026-09-17 17:31:29</div><nav class="page-links"><a href="https://www.douyin.com/video/7583473563030637866" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>开启AI编程的复利模式：vibe coding实践分享</h1>
+<p>抖音 | Jaybee黄 | 原文链接（<a href="https://www.douyin.com/video/7583473563030637866">https://www.douyin.com/video/7583473563030637866</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+作者分享通过语音转文本方式进行vibe coding（语音交互编程）的方法论，建议以做一个语音转文本工具作为第一个side project，可作为后续所有项目的复利基础。结合Cursor中使用Geminipro添加主题色的实操案例，说明语音迭代比打字更高效，适合快速表达需求并与AI共创。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>vibe coding的背景与招聘趋势</strong>
+作者的学生表示爱上了vibe coding（语音编程）。李菲菲在采访中提到，其初创公司招聘软件工程师时已不太看重学历，更看重候选人是否愿意使用AI工具进行共创，以及学习快速演化新工具的能力。</p>
+</li>
+<li>
+<p><strong>核心方法论：从文字交互转向语音交互</strong>
+用语音跟AI交互比打字更高效。类比于你不会每天给实习生写消息提需求，而是口头表达需求后让对方完成再检查。作者为此自研了语音转文本工具，将语音转录结果直接粘贴给AI，迭代速度更快。</p>
+</li>
+<li>
+<p><strong>语音 vs 打字的适用场景</strong>
+语音适合快速迭代表达需求；打字适合需要系统性地描述需求、或在AI完成工作后整理文档时锤炼思考的场景。</p>
+</li>
+<li>
+<p><strong>实操案例：用Geminipro为UI添加白天主题色</strong>
+作者使用自研语音转录工具，配合Cursor中的Geminipro，逐步提出修复需求：添加白天主题色、顶部栏过粗需优化、暗夜与白天切换功能异常等。通过语音+截图反馈，迭代效果逐步改善。</p>
+</li>
+<li>
+<p><strong>语音转文本side project的复利价值</strong>
+建议将语音转文本工具作为第一个vibe coding的side project，因为它不仅是一个项目，更是后续所有项目的复利工具。局限性在于需要相对独立的空间来持续说话，适合居家办公或有安静环境的人。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场与vibe coding背景</h3>
+<p>那么之前有朋友问，我说如果要开始vibe coding，应该做一个什么样的side project比较好？我觉得最好的side project就是你做一个这种语音转文本的side project。因为它可以不只是你的第一个vibe coding的项目，它还是你之后所有项目的复利，之后所有项目都可以用上这个项目。大家好是小黄。最近有一个学生跟我说，他爱上了vibe coding。我听到这个事情非常开心。因为像前阵子李菲菲在他的一个采访里面有讲说他的那个startup，现在招software engineer的时候，他已经不太看重这个软件工程师的学历。而且如果是一个原教旨主义的软件工程师，就是说不怎么喜欢在工作中使用AI的这种软件工程师，他们是不愿意收的。他们现在更看重的能力是你有没有能力去学习，尤其是学习一个正在快速演化的工具，有没有能力去用AI跟你共创一些东西。那我今年算是跟AI共创了很久了，有一些心得。所以想跟大家分享一个关于vibe coding的小方法。</p>
+<h3>2. 语音交互比打字更高效</h3>
+<p>那么话不多说，直接开始。实际上我这个工作方法也没有说呃，这个fine啊，实际上就是说我们要从本来是用于文字跟AI交互，我们就直接改成语音跟AI交互。为什么？是这样的，你想象一下，你跟一个实习生讲话，你大概率不会每天都给实习生写一个消息，或者是写小纸条跟你沟通。你肯定是说我用口头的方式跟他表达一个需求，然后工程师啪啪啪把事做完了过来给你检查。然后呢，你再更新你的需求，是这么一个迭代的方式。但适合你要快速的迭代出一个东西的时候，我就自己写了一个语音转录的app。那么这样子我可以用我的语音转录的app跟所有的AI讲话，不管是Gemini那个Studio、Google的SQ还是我在学里面。因为Cursor它自带的也是有一个语音转录的功能，但是我发现它的中文识别效果并不是特别好。这是我自己写了一个。比如说我现在你看我停止这个transcription，它就会开始process我们的这个录音，然后把它转用成一个中文。它也直接在我的粘贴板里面，我就直接copy paste给那个AI。</p>
+<h3>3. 实操演示：为UI添加白天主题色</h3>
+<p>像比如说现在我们想要把这个Figma UI里面增加一个主题色，是一个白天的颜色。因为我我有这个暗夜的颜色，我们希望AI去做这么一个事情。Ok然后我停止转录，我就在这个新的需求里面给到Gemini Pro，让他去碰这个事儿。那么我们趁Gemini还在工作的时候呢，讲一下什么时候比较适合打字。我认为呢它很适合你想要去非常系统的把你的这个需求描述明白。这个时候你可以去写作，或者说你在AI帮你写完了一个事儿之后，你去整理成文档。对，那这个时候你是通过写作去锤炼你的思考，写作是一个思考过程。好，那现在AI完成工作，我们来看一下做的效果。你看他这个白天模式，它加了一个toggle，嗯，但是他其实也没有做出来。所以呢我现在继续跟他对话，让他去把这个东西给修复了。并且你看它上面这一行很粗，这不是一个很好的设计，你跟他说要考虑这个问题。所以我给他截一个图，然后我跟他说，现在顶部这一层太粗了，因为现在挤到了一起之后变得特别的高。还有就是切换暗夜和白天的这个toggle好像没有用。我就switch之后，它还是跟我这个系统的主题色是一样的。当你提一个需求的时候，你这样提它就比较舒服。</p>
+<h3>4. 语音转文本项目的复利价值与局限</h3>
+<p>那么之前有朋友问，我说如果要开始vibe coding，应该做一个什么样的side project比较好？我觉得最好的side project就是你做一个这种语音转文本的side project。因为它可以不只是你的第一个vibe coding的项目，它还是你之后所有项目的复利，你知道所有项目都可以用上这个项目。当然了它也是有一个局限性的。因为你在这个过程中要不断的说话，所以也需要一个独立的空间。或者像我这样经常work from home的，没有这方面的担忧。那我去看一下他做的怎么样，这个版本就比上一个版本好了很多嘛。你看它可以一键也是切换暗夜跟白天，但我觉得它的白天的功能，它还是可以再优化一点主题色配的还不是很对。但是你可以看到就是说不断的用这个方法交互下去，你自己也省心，你不用打太多字。那今天就跟大家分享到这里，谢谢大家，拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Jaybee黄</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">AI工具</span></li>
+<li><span class="wikilink">编程效率</span></li>
+<li><span class="wikilink">语音交互</span></li>
+<li><span class="wikilink">sideproject</span></li>
+<li><span class="wikilink">Cursor教程</span></li>
+<li><span class="wikilink">Gemini</span></li>
+<li><span class="wikilink">vibecoding</span></li>
+<li><span class="wikilink">语音转文本</span></li>
+<li><span class="wikilink">AI编程</span></li>
+<li><span class="wikilink">Cursor</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">Gemini Pro side project AI</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>那么之前有朋友问，我说如果要开始vie coding,应该做一个什么样的size project比较好？我觉得最好塞project就是你做一个这种语音转文本的cze project.因为它可以不只是你的第一个vip coding的项目，它还是你之后所有项目的复利之后，所有项目都可以用上这个项目。目大家好是小黄。最近有一个学生跟我说，他爱上了web coding.我听到这个事情非常开心。因为像前阵子李菲菲在他的一个采访里面有讲说他的那个start up.现在招soffer engineer的时候，他已经经太看重这个软件工程师的学历。而且如果是一个原教职主义的软件工程师，就是说不怎么喜欢在工作中使用AI的这种软件工程师，他们是不愿意收的。他们现在更看重的能力是你有没有能力去学习，尤其是学习一个正在快速演化的一个工具，有没有能力去用AI跟你共创一些东西。那我今年算是跟AI共创了很久了，有一些心得。所以想跟大家分享一个小的关于web coding的需要方法。那么话不多说，直接接始，实际际上我这个工方法也没有说呃，这个ffany y实际上就是说我们要从本来是用于文字跟AI交互，我们就直接改成语音跟AI交互。为什么？是这样的，你想象一下，你跟一个实习生讲话，你大概率不会每天都给实习生写一个消息，提案例，我是医生，写小纸条跟你沟通。你肯定是说我用口头的方式跟他表达一个需求，然后是医生啪啪怕把事做完了过来给你检查。然后呢，你再更新你的需求是这么一个迭代的方式。但适合你要快速的迭代出一个东西的时候，我就自己写了一个语音转录的app.那么这样子我可以用我的语音转录的app跟所有的AI讲话，我不敢跟到germany那个AS studio、 google SSQ还还是我在学里面。因为cursor它自带的也是有一个语音转录的功能，但是我发现它的中文识别效果并不是特别好。这是我自己写了一个。比如说我现在你看我停止这个transription,它就会开始process我们的这个录音，然后把它转用成一个中文。它也直接在我的粘贴板里面，我就直接copy pace给那个AI.像比如说现在我们想要把这个f的UI里面增加一个主题色，是一个白天的颜色。因为我我有这个暗夜的颜色，我们希望AI去做这么一个事情。 Ok,然后我停止转录，我就在这个新的需求里面给到german三pro,让他去碰这个事儿。那么我们趁germany还在工作的时候呢，讲一下什么时候比较适合打字。我认为呢它很适合你想要去非常系统的把你的这个需求描述明白。这个时候你可以去写作，或者说你在AI帮你写完了一个事儿之后，你去整理成文档。对，那这个时候你是通过写作去锤炼你的思考，写作是一个思考过程。好，那现在AI完成工作，我们来看一下做的效果。你看他这个白天模式，它加了一个tgo,嗯，但是他其实也没有做出来。所以呢我现在继续跟他对话，让他去把这个东西给修复了。并且你看它上面这一行很粗，这不是一个很好的设计，你跟他说要考虑这个问题。所以我给他截一个图，然后我跟他说，现在顶部这一层太粗了，因为现在挤到了一起之后变得特别的高。还有就是切换暗夜和白天的这个作本好像没有用。我就作tophin之后，它还是跟我这个系统的主题色是一样的。当你提一个需求的时候，你这样提它就比较舒服。那么之前有朋友问，我说如果要开始的mc coding,应该做一个什么样的side project比较好？我觉得最好塞project就是你做一个这种语音转文本的side project.因为它可以不只是你的第一个reccoding的项目，它还是你之后所有项目的福利，你知道所有项目都可以用上这个项目。当然了它也是有一个局限性的。因为你在这个过程中要不断的说话，所以也需要一个独立的空间。或者像我这样经常work from home的，没有这方面的担忧。那我去看一下他做的怎么样，这个版本就比上一个版本好了很多嘛。你看它可以一键也是切换暗夜跟白天，但我觉得它的白天的功能，它还是可以再优化一点主题。色配的还不是很对。但是你可以看到就是说不断的用这个方法交互下去，你自己也省心，你不用打太多字。对，那今天就跟大家分享到这里，谢谢大家，拜拜。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
