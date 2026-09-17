@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>【纯干货】怎样用claude在本地跑通387B模型 分享一个最近看到的很疯狂的成果 — 喂给claude code，一篇论文，让他按照autoresearch的框架，根据论文里的tricks魔改千问397B，结果真的成了，在m3 pro的macbook上每秒钟能吐5.5个token，大家可以去github围观flash-moe这个项目。我们离ai递归造ai还有多远 #ai #人工智能 #千问 #kimi #大模型｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-03-24_项目背景与成果_7620820688944860456.md · 发布于 2026-09-17 17:15:14</div><nav class="page-links"><a href="https://www.douyin.com/video/7620820688944860456" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>项目背景与成果</h1>
+<p>抖音 | Jaybee黄 | 原文链接（<a href="https://www.douyin.com/video/7620820688944860456">https://www.douyin.com/video/7620820688944860456</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+AI 整理结果解析失败，需人工查看视频原稿。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li><strong>原稿待人工核对</strong>
+本条视频已完成 Whisper 转录，但 AI 结构化摘要解析失败，请以视频原稿为准。</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 案例引入：MacBook运行千问3.5</h3>
+<p>然后这个老哥做了一个很疯狂的事情，他就把这篇文章喂给Claude，然后让Claude用Auto Research跑。大家最近看到一个非常疯狂的新闻，就是一个叫damwd的，他成功在自己的MacBook Pro上面，用M3 Max芯片，在自己的电脑上面跑通了最新的千问3.5 397B的那个模型。就那个模型本身要求的内存是有两百零九G，但他在自己的电脑本地端跑起了这个模型，而且可以达到5.5个token，不是second，还是很慢。但你就知道这件事情结果上就很疯狂，而且他做的过程更疯狂。</p>
+<h3>2. 技术原理：MOE与权重调度</h3>
+<p>然后直接把一篇论文丢给Claude，让Claude去实现了一篇论文里面的思路。然后把这个事情做出来，为什么能做到这个事情呢？就是因为你知道那个千问3.5，它是一个Mixture of Experts模型，就是混合专家模型。MoE就是MOE模型里面，它有很多个专家模型。然后一个token进来的时候，它只会激活某些专家做推理。一个token进来，一个MoE模型，它只有某些权重会被激活，然后有一些权重是不激活的。二三年，苹果发了篇文章叫LM Flash。这篇文章就是说如果有一些权重不激活，那你为什么不干脆把那些权重放到SSD上面去？然后你只是在一个token需要推理的时候，你把那些会被激活的专家模型的权重拉到你的内存里面。然后呢，你不需要他们时候，你就要把他们丢回SSD，就这么一个简单的思路。那因为推理的过程中，还有一个特点，就是token之间会有比较高的相关性嘛，所以通常来讲会被激活的那些专家模型，他们也是比较相同的。你用这样模型的权重读进你的内存里面呢，你还不用很快的把它释放，因为下一个token可能还会需要到这些。那总体就是说由于你可以把一些权重放到SSD里面，所以你的内存不需要放那么多的权重。因此即便是一个参数量很大的模型，你也可以把它大部分放到SSD上面，然后少部分放到内存上面。这个是那篇文章的思路啊思路。</p>
+<h3>3. AI执行：AutoResearch探索路径</h3>
+<p>然后这个老哥做了一个很疯狂的事情，他就把这篇文章喂给Claude，然后让Claude用Auto Research。Auto Research是最近Erica Party开源的一个项目。这个项目简而言之呢，就是说你可以给AI一个目标，然后在这个过程中呢AI会自动的去探索路径，怎么去达到这个目标。那通常它是被用在神经网络的训练上面。比如说AI可能会自己发现一些新的呃网络结构，比如说他会改变某几个层的顺序，然后使得你在OOS上面表现会更好。那这哥们儿呢他也是用Auto Research的这个范式，他让AI自己想办法去把千问3.5啊397B这个模型，通过苹果的那篇论文给出来的方法论，不断的进行各种尝试，最终让他能够在他的MacBook上跑起来。那这个过程中，Claude就不断的尝试嘛。最后他一共写了五千多行的Objective C++，他写的那个Objective C++是为了完成刚才我讲的从SSD安全重放到内存，然后再把一些内存上权重丢回SSD上。这个过程用Objective C要这样做，这个就会更快，就全部都靠自己发现的路径。</p>
+<h3>4. 技术细节：量化与自定义Shader</h3>
+<p>还有一个呢就是Claude发现了可以对权重进行量化。所以说本来可能是32bit的权重，最后把它量化到了4bit。那量化完这个权重呢，他又写了一千多行的Metal Shader，就是说能够把这个4bit的权重再解压回一个正常格式。因为苹果自带的MPS，它只能处理32bit或者16bit的格式，它处理不了4bit。于是靠着自己造轮子，造了一个能处理4bit的一个Shader。就这件事情也非常离谱。在写了一堆Objective C++代码，写了一堆Metal Shader，还有一些其他的杂七杂八的代码之后呢，成功的把一个千问3.5 397B的模型在一个MacBook上跑起来。而且他最终每秒钟可以输出5.5个token，不算慢了。你要知道这是一个397B的模型，这哥们呢就把它做研究的整个过程全部都开源了，就传到GitHub上面。大家如果有兴趣的话，可以去看一下，我觉得这个非常惊艳。</p>
+<h3>5. 总结启示：AI杠杆与知识共享</h3>
+<p>两个takeaway，一个就是今年的AI的执行能力，跟前几年是完全不一样的。从2025年12月开始，Andrej Karpathy发自己讲，他已经不用手写代码了，没有一行代码是自己写的。然后第二个事情就是说从idea产生到落地的这个速度，几乎你现在可以说用光速来，就这哥们他什么都没做，他只是把一篇文章喂给了AI，让AI自己去Auto Research，然后AI就Auto Research出来。我觉得今年大家一定要做的一个事情，就是说如果你想要做一个什么事情，直接让AI去做。然后呢，如果你想不到好的方法，你可以让AI去读论文，就你把一篇好的论文喂给AI，AI一定能给你找到一个好的方法。你相当于有两个杠杆，一个是执行力的杠杆，AI可以不知疲倦的为你解决问题。另一个你还有知识共同体的杠杆，就是太多人把他们的研究成果公开了。这里面只要少部分是有质量的，把这些东西拿给AI，让AI去做，你就可能在一个周末做出一件之前大家完全不敢想这样的事情。那今天就跟大家分享到这里，我要去玩一下这个项目，拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Jaybee黄</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">AI产业</span></li>
+<li><span class="wikilink">半导体</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>然后这个老哥做了一个很疯狂的事情，他就把这篇文章喂给cloud,然后让cloud用auto research丢。大家后说啊，今近看到一个非常疯狂的新闻，就是一个叫damwds的，他成功在自己的macbook pro上面。但是m三net芯片在自己的电脑上面跑通了最新的千问三点五三百九十七b的那个模型，就那个模型本身要求的内存是有两百零九g但他在自己的电脑本地端跑起了这个模型，而且可以达到五点五个token,不是second还是很慢。但就你知道这件事情结果上就很疯狂，而且他做的过程更疯狂。但是直接把一篇论文丢给cloud,让cloud去实现了一篇论文里面的思路。然后把这个事情做出来，为什么能做到这个事情呢？就是因为你知道那个千问三点五，它是一个mixture of expret模型，就是混合专家模型。 Me所就是MOE模型里面，它有很多个专家模型。然后一个token进来的时候，他只会激活某些专家做推理的时候，一个token进一个ME模型，他只有某些权重会被激活，然后有一些权重是不激活。二三年，苹果发了篇篇文文章叫LM的flash.这篇文章就是说如果有一些权重不激活，那你为什么不干脆把那些权重放到SSD上面去？然后你只是在一个token需要推理的时候，你把那些会被激活的专家模型的权重拉到你的内存里面。然后呢，你不需要他们时候，你就要把他们丢回SSD,就这么一个简单的思路。那因为推理的过程中，还有一个特点，就是token之间会有比较高的相关性嘛，所以通常来讲会被激活的那些专家模型，他们也是比较相同的。你用这样模型的权重，读进，你的内存里面呢，你还不用很快的把它释放。因为下一个token可能还会需要到这些。那总体就是说由于你可以把一些权重放到SSD里面，所以你的内存不需要放那么多的权重。因此即便是一个参数量很大的模型，你也可以把它大部分放到SSD上面，然后少部分放到内存上面。这个是那篇文章的思路啊思路。然后这个老哥做了一个很疯狂的事情，他就把这篇文章喂给cloud,然后让cloud用auto research. Auto research是最近enrica party开源的一个项目。这个项目简而言之呢，就是说你可以给AI一个目标，然后在这个过程中呢AI会自动的去探索路径，怎么去达到这个目标。那通常它是被用在神经网络的训练上面。比如说AI可能会自己发现一些新的呃网络结构比是说他会改变某几个层的顺序，然后使得你在out of sample上面表现会更好。那这哥们儿呢他也是用auto research的这个范式，他让AI自己想办法去把千万三点五啊三九七b这个模型通过苹果的那篇论文给出来的方法论，不断的进行各种尝试，最终让他能够在他的macbook上跑起来。那那这个过程中，class code就不断的尝试嘛。最后他一共写了五千多行的objective c加加，他写的那个object c加加是为了呃完成。刚才我讲的说从SSD安全重放到内存，然后再把一些内存上权重丢回SSD上。这个过程用object TC要这样做，这个就会更快，就全部都靠自己发现的路径。还有一个呢就是cot发现了可以对权重进行量化。所以说本来可能是三十二bit的权重，最后把它量化到了四遍。那量化完这个权重呢，他又写了一千多行的metal shadder在吗？就是说能够把这个四bit的权重再解压回一个正常格式。因为苹果自带的MOX,它只能处理三十二bit或者十六bit的格式，它处理不了四bit.于是靠着自己造轮子，造了一个能处理四bit的一个shaden.就这件事情也非常离谱，在写了一堆objective c加加代码，写了一堆metal shader,还有一些其他的杂七杂八的代码之后呢，成功的把一个千万三点五三九七b的模型在一个macbook上跑起来。而且他最终每秒钟可以突出五点五个token,不算慢了。你要知道这是一个三百九十七b的模型，这哥们呢就把它做研究的整个过程全部都开源了，就传到da up上面。大家如果有兴趣的话，可以去看一下，我觉得这个非常惊艳。两个take位，一个就是今年的AI的执行能力，跟前几年是完全不一样的。从二零二五年十二月开始，安吉卡发费自己讲，他已经不用手写代码了，没有一行代码是自己写的。然后第二个事情就是说从idea产生到落地的这个速度，几乎你现在可以说用光速来，就这哥们他什么都没做，他只是把一篇文章喂给了AI,让AI自己去auto research,然后AI就auto research出来。我觉得今年大家一定要做的一个事情，就是说如果你想要做一个什么事情，直接让AI去做。然后呢，如果你想不到好的方法，你可以让AI去读论文，就你把一篇好的论文喂给AIAI,一定能给你找到一个好的方法。你相当于有两个杠杆，一个是一个执行力的杠杆，AI可以不知疲倦的为你解决问题。另一个你还有知识共同体的杠杆，就是太多人把他们的研究成果公开了。这里面只要少部分是有质量的，把这些东西拿给AI,让AI去做。你就可能在一个周末做出一件之前，大家完全不敢想这样的事情。那今天就跟大家分享到这里，我要去玩一下这个项目，拜拜。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
