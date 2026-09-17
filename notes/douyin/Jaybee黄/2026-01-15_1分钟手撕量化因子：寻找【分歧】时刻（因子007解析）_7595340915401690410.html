@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>1分钟手撕量化因子：寻找【分歧】时刻 前阵子放假，有两周没更新因子系列了，今天来回复大家的催更！007这个因子，它背后的逻辑是：市场吵得最凶的时候，往往机会也最大。007 是一个典型的「分歧因子」：用价格行为找到市场分歧最大的标的；再用量的变化做确认，到底是不是噪音。#AI #量化交易 #数学 #科技 #投资｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-01-15_1分钟手撕量化因子：寻找【分歧】时刻（因子007解析）_7595340915401690410.md · 发布于 2026-09-17 17:25:44</div><nav class="page-links"><a href="https://www.douyin.com/video/7595340915401690410" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>1分钟手撕量化因子：寻找【分歧】时刻（因子007解析）</h1>
+<p>抖音 | Jaybee黄 | 原文链接（<a href="https://www.douyin.com/video/7595340915401690410">https://www.douyin.com/video/7595340915401690410</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+视频解析了量化因子007的构建逻辑。该因子为典型的“分歧因子”，通过计算近三日VWAP与收盘价的极值差捕捉价格分歧，并结合成交量变化进行确认，旨在识别市场分歧最大且具资金博弈迹象的交易机会。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>因子核心定义</strong>
+因子007是典型的“分歧因子”，通过价格行为捕捉市场分歧最大的标的，并用成交量变化进行确认，以区分有效信号与市场噪音。</p>
+</li>
+<li>
+<p><strong>价格分歧构建逻辑</strong>
+底层计算VWAP（成交量加权均价）与收盘价（Close）的差值。VWAP代表当日博弈后的公允价格，Close代表收盘时刻的市场观点。取近三日VWAP-Close的最大值与最小值分别做Rank后相加，极弱与极强同时凸显时，说明标的波动剧烈、市场分歧显著。</p>
+</li>
+<li>
+<p><strong>量能确认机制</strong>
+将价格分歧得分乘以近三日成交量变化（ΔVolume）的Rank值，利用放量或缩量的资金动向对价格分歧进行二次确认，验证分歧背后是否存在真实的交易价值。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场与因子定位</h3>
+<p>哟大家好，我是老黄。一分钟因子系列第七集，因子007。它其实是我们目前可能讲过最复杂的一个因子。所以先跟大家一句话总结，它是用来找到市场对它分歧最大，并且用量去进行确认的这么一个因子。</p>
+<h3>2. 因子构成解析</h3>
+<p>那为什么这么说？其实我们看这个因子，它其实分成两个部分，就是两个东西的积。一个是rank(ΔVolume)，用量做出来的一个rank；还有一个是左边的这一部分，它是通过一些价格信息做的一个rank。</p>
+<h3>3. VWAP与收盘价含义</h3>
+<p>我们来看一下左边这一部分在讲什么事情。最核心的是它底层的这个括号里面有一个VWAP减Close这个事情在说什么？就是说VWAP大家都知道是成交量加权均价。我在之前的视频里面有讲过成交量加权均价，你可以认为是一天内在市场博弈之后，最终通过成交量确认出来的一个公允价格。你可以认为是那一天市场对这个标的的一个评分。对，那Close是什么？Close你可以认为是收盘时刻市场对这个标的的一个观点。那么你想一下，如果收盘时刻的这个价格会比成交量加权均价要稍微低一点，说明什么？收盘时刻市场相对一整天来讲，看跌的。在这个时候，VWAP减Close就会是一个正数。同样的，如果收盘时刻Close比VWAP要稍微大一点，那么VWAP减Close就会是一个负数。但是这其实是一个看涨的，说明市场的收盘时刻觉得应该再往上一点。</p>
+<h3>4. 极值计算与分歧捕捉</h3>
+<p>那有了这么一个理解之后，我们再去看它这个max(VWAP-Close, 3)在说一件什么事情？它就是說在近三天内，我们去找VWAP减Close最大的那一天的那个数字。它实际上是找到最弱的收盘时刻，在三天内最弱的那个程度的这么一个值。对，那同样的你去做min，因为大家要知道VWAP减Close它越小，说明越好，越大说明越不好。你如果取这个minimum，那也是一样的，是找到对三天内收盘时刻最强的时候，那个强的幅度。它这里面有一个操作，其实有一点小思考的。用rank(max(VWAP-Close, 3))加上rank(min(VWAP-Close, 3))。因为想为什么你要去找这个最弱时刻的最弱程度，但是你还加上这个最强时刻最强程度，就感觉是有点混淆。但实际上我认为他是在讲说，如果有一个标的，他在最近三天内最弱的时候超弱，最强的时候特别强。这时候说明了什么？说明市场对它价格分歧非常大，就是它这三天内有一个巨大的波动。那你可以认为它其实就是用波动去确认，去找哪个标的这个市场分歧很大。</p>
+<h3>5. 量能确认与总结</h3>
+<p>在三天内它再乘以一个rank(ΔVolume, 3)，就是这三天内量比。它用量比去进行一个确认。所以我们才回到开头说，这个因子讲的其实上就是找到分歧最大，然后用放量或者缩量去确认的这么一个因子。那我觉得从这个因子的构造里面，其实我们是能学到不少东西的。那今天就跟大家分享到这里，谢谢大家，拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Jaybee黄</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">因子研究</span></li>
+<li><span class="wikilink">技术分析</span></li>
+<li><span class="wikilink">投资策略</span></li>
+<li><span class="wikilink">AI</span></li>
+<li><span class="wikilink">量化因子</span></li>
+<li><span class="wikilink">分歧因子</span></li>
+<li><span class="wikilink">VWAP</span></li>
+<li><span class="wikilink">成交量加权均价</span></li>
+<li><span class="wikilink">价格行为</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>哟大家好，我是老黄一分钟因子系列第七集FF法零零七。它其实我们目前可能讲过最复杂的一个因子。所以先跟大家一句话总结，它是用来找到市场对它分歧最大并且用量去进行确认的这么一个因子。那为什么这么说？其实我们看这个因子，它其实分成两个部分，它就是两个东西的积，一个是rank调调vovolume一个用量做出来的一个rank.还有一个是左边的这一部分，它是通过一些价格信息做的一个rank.我们来看一下，它是左边这一部分里面在讲什么事情。最核心的是它底层的这个括号里面有一个v web减close这个事情在说什么？就是说v web大家都知道是成交量加权均价。我在之前的视频里面有讲过成交量加权均价，你可以认为是一天内在市场博弈之后，最终通过成交量确认出来的一个公允价格。你可以认为是那一天市场对这个标的的一个rank.对，那close是什么？收？那你可以认为是收盘时刻市场对这个标的的一个观点。那么你想一下，如果收盘时刻的这个价格会比成交量加权均价要稍微低一点，说明什么？收盘时刻市场相对一整天来讲，看跌的。在这个时候，v web减close就会是一个正数。同样的，如果收盘时刻close,比v web要稍微大一点，那么v web减cos就会是一个负数。但是这其实是一个看涨的说明市场的收盘时刻觉得啊应该再往上一点。那有了这么一个理解之后，我们再去看它这个max v web减close三在说一件什么事情。他就是说在近三天内，我们去找v web减close最大的那一天的那个数字。它实际上是找到最弱的收盘时刻，在三天内最弱的那个程度的这么一个值。对，那同样的你去做me,因为大家要知道v web减close它越小，说明越好越大，说明越不好。你如果取这个minimum,那也是一样的，是找到对三天内收盘时刻最强的时候，那个强的幅度，它这里面有一个操作，其实有一点小思考的。用rank max UF减close三，加上rank min, the web键close三。因为想为什么你要去找这个最弱时刻的最弱的程度，但是你要还要加上这个最强时刻最强的程度，就感觉是有点混淆。但实际上我认为他是在讲说，如果有一个标的，他在最近三天内最弱的时候，超弱最强的时候特别强。这时候说明了什么？说明市场对它价格分歧非常大，就是它这三天内有一个巨大的波动。那你可以认为它其实就是用波动去确认去找哪个标的。这个市场分歧很大，在三天内它再乘以一个rank delta volume三，就是这三天内量比它用量比去进行一个确认。所以我们才回到开头说这个，因此他讲的其实上就是找到分歧最大，然后用放量或者缩量去确认的这么一个因子。那我觉得从这个因子的构造里面，其实我们是能学到不少东西的那今天就跟大家分享到这里，谢谢大家，拜拜。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
