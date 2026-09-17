@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>量化因子学习06 | 这个因子哪错了 今天跟大家继续分享alpha191的alpha006，这个因子表达里面的sign算子的使用有点问题，拿掉会更好。其实随着我们对alpha191学习的深入就会发现，这里面很多表达式都有点点小瑕疵。不过问题不大，重要的是学思路，下次继续。 ﻿ ﻿#量化交易 #人工智能 #投资 #股票 #搞钱｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2025-12-11_Alpha191因子学习06：Alpha006中sign算子的问题与优化_7582405429884505350.md · 发布于 2026-09-17 17:33:19</div><nav class="page-links"><a href="https://www.douyin.com/video/7582405429884505350" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Alpha191因子学习06：Alpha006中sign算子的问题与优化</h1>
+<p>抖音 | Jaybee黄 | 原文链接（<a href="https://www.douyin.com/video/7582405429884505350">https://www.douyin.com/video/7582405429884505350</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+视频讲解Alpha191研报中的第六个量化因子Alpha006，该因子用于找到四天内复合价格下跌幅度最大的标的。核心问题是因子表达式中使用了sign算子，会将delta值压缩为-1、0、1三个离散值，损失大量信息。建议实践中直接去掉sign算子，保留弱势价格的四日delta完整值后再做rank排名。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>Alpha006因子概述</strong>
+Alpha006是Alpha191中相对简单的因子，目标是找到四天内某一复合价格下跌幅度最大的标的。</p>
+</li>
+<li>
+<p><strong>复合价格定义</strong>
+因子使用0.85倍开盘价加0.15倍最高价作为复合价格，该价格定义偏向弱势，因为最高权占比仅15%。</p>
+</li>
+<li>
+<p><strong>sign算子的问题</strong>
+在计算四日delta后，因子对结果取sign（符号函数），将连续值映射为-1、0、1三个离散值，损失了大量截面信息。作者认为实践中应去掉sign算子，直接对四日delta进行rank排名。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 因子概述与核心逻辑</h3>
+<p>大家好，我是黄黄，今天是我用AI从零开始学习量化交易第二百七十五天。今天我们继续一起学习经典的量化研报《阿尔法一九一》里的第六个量化因子阿尔法零零六。那话不多说，我们直接开始，这个算是我们目前学到的比较简单的一个因子。它用一句话来总结，就是说他找到四天内某一个复合价格下跌幅度最大的标的。</p>
+<h3>2. 复合价格与差值计算</h3>
+<p>那它是怎么做这件事情的呢？就是通过rank、sign、delta，然后这个复合价格我们来看一下这个因子。首先我们去看它括号里面最深处的部分，它是零点八五倍的开盘加上零点一五倍的最高价这么一个价格定义的复合价格。它这个价格呢是相对比较弱势，因为它没有考虑很多的最高价，你看它只有百分之十五的最高价。然后呢，你定义了这么一个复合价格之后呢，下一步他做的就是说delta这个复合价格，四，也就是说今天的这个复合价格减去四天前的那个复合价格的差，也就是说复合价格的变化，四天其实就是一周的尺度嘛。</p>
+<h3>3. Sign操作与信息损耗</h3>
+<p>对，然后他接下来做了一个比较迷惑的一个做法，就是他在获得了这个差之后呢，它做了一个sign，就是取符号。取符号什么意思呢？就是说如果你这个差是个正数，那就映射成正一；如果是个负数，就映射成负一；如果它们正好相等，那就映射成零。这里面有一个问题，就是说其实会磨掉很多的信息。因为你整个截面上所有的标的，最后就会被映射成负一、零或者正一三个数字。对，这样其实很多信息少掉了。</p>
+<h3>4. Rank排序与实战建议</h3>
+<p>然后他在做一个rank。所以我觉得实践中你可能可以直接把这个sign给去掉，对吧？这样你就可以保留整个弱势价格的差在过去四天内的变化。然后呢，你做完这个弱势价格的delta之后，你再对它进行一个排名。也就是说其实排前面的那些东西，因为你又取了一个负号，取完负号之后，排前面的那些东西就会是弱势价格的差更负的那些，会更小的。对，然后反而就是弱势价格差更正的、更大的就会排在后面。那这个因子讲的就是这么一个事儿。Ok，那今天就跟大家分享到这里，谢谢大家，拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Jaybee黄</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">因子挖掘</span></li>
+<li><span class="wikilink">Alpha研究</span></li>
+<li><span class="wikilink">因子优化</span></li>
+<li><span class="wikilink">量化因子</span></li>
+<li><span class="wikilink">sign算子</span></li>
+<li><span class="wikilink">复合价格</span></li>
+<li><span class="wikilink">delta</span></li>
+<li><span class="wikilink">rank排名</span></li>
+<li><span class="wikilink">弱势价格</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>大家好，我是是黄黄，今天是我用AI从零开始学习，量化交易第第两百七十五天。今天我们继续一起学习经典的量化研报，阿尔法一九一里的第六个量化因子阿尔法零零六。那话不多说，我们直接开始，这个算是我们目前学到的比较简单的一个因子。它用一句话来总结，就是说他找到四天内某一个复合价格下跌幅度最大的标的。那它是怎么做这件事情的呢？就是通过rank sine、 delta,然后这个复合价格我们来看一下这个因子。首先我们去看它括号里面最深处的部分，它是零点八五倍的开盘，加上零点一五倍的最高价这么一个价格定义的一个复合价格。它这个价格呢是相对比较弱势，因为它没有考虑很多的这个最高价。你看它只有百分之十五的最高价。然后呢，你定义了这么一个复合价格之后呢，下一步他做的就是说delta这个复合价格。然后四也就是说今天的这个复合价格减去四天前的那个复合价格的差，也就是说复合价格的变化，四天其实就是一周的尺度嘛。对，然后他接下来做了一个比较迷惑的一个做法，就是他在获得了这个差之后呢，它他做了一个sign,就是取符号。取符号什么意思呢？就是说如果你这个差是个正数，那就映射成正一。如果是个负数，就映射成负一，如果它们正好相等，那就映射成零。这里面有一个问题就是说其实会磨掉很多的信息。因为你整个截面上所有的标的，最后就会被映射成leader是负一或者零或者正一三个数字。对，这样其实很多信息少掉了，然后他在做一个rank.所以我觉得实践中你可能可以直接把这个sign给去掉，对吧？这样你就可以保留整个弱势价格的差。在过去四天内。然后呢，你做完这个弱势价格的delta之后，你再对它进行一个排名。也就是说其实排前面的那些东西，因为你又取了一个负号，取完负号之后，排前面的那些东西就会是弱势价格的差，更负的那些会更小的。对，然后反而就是弱势价格差，更正的更大的就会排在后面对。那这个英子讲的就是这么一个事儿。 Ok那今天就跟大家分享到这里，谢谢大家，拜拜。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
