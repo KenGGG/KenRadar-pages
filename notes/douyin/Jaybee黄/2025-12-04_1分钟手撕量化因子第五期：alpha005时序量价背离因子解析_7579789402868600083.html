@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>1分钟手撕量化因子 - 时序 量价背离 大家催更的一分钟因子第五集来了，今天讲alpha005，这个因子和alpha001很像，里面提到的算子像TSMAX之类的其实也可以换成别的算子，总而言之alpha005也是一个比较经典的量价因子。 #量化交易 #人工智能 #deepseek #用AI学量化交易 #投资｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2025-12-04_1分钟手撕量化因子第五期：alpha005时序量价背离因子解析_7579789402868600083.md · 发布于 2026-09-17 20:24:06</div><nav class="page-links"><a href="https://www.douyin.com/video/7579789402868600083" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>1分钟手撕量化因子第五期：alpha005时序量价背离因子解析</h1>
+<p>抖音 | Jaybee黄 | 原文链接（<a href="https://www.douyin.com/video/7579789402868600083">https://www.douyin.com/video/7579789402868600083</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+讲解Alpha005量价因子的构造逻辑，引入时序算子TS max和TS rank概念。因子核心为先计算成交量排名与最高价排名在5天窗口内的相关性，再取该相关性在过去3天内的时序最大值并取反，目的是找到量价配合程度最差的时刻。因子构造具有灵活性，可替换不同变量（volume/high/close/VWAP等）与算子。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>因子概述与新增算子介绍</strong>
+Alpha005是Alpha系列中一行但含多个括号的因子，引入了两种新的时序算子：TS max（时序最大值）和TS rank（时序排名）。这两个算子是在时间序列上进行运算，而非截面运算。该因子与Alpha001类似，同属经典的量价类因子。</p>
+</li>
+<li>
+<p><strong>TS rank与变量替换</strong>
+TS rank表示某变量在过去N个交易日内的时序排名百分位。例如TS rank(volume, 5)表示成交量在过去5天中的排名百分位，最高为1.0，最低为0.0。同理TS rank(high, 5)为最高价的5日排名百分位。将两者分别记为x1和x2后，相关性运算correlation(x1, x2, 5)即为成交量排名与最高价排名在5天窗口内的相关系数，描述量价的趋同程度。</p>
+</li>
+<li>
+<p><strong>因子完整拆解与计算流程</strong>
+将相关性简记为c，则因子外层为-1乘以ts_max(c, 3)，即负一乘以相关性在过去3天内的时序最大值。取反后意味着寻找量价配合程度最差（相关性最低）的时刻。计算流程为：先以5天窗口滑动计算两个TS rank序列，再以3天窗口对相关性序列取时序最大值并取反。</p>
+</li>
+<li>
+<p><strong>因子变体与构造思路</strong>
+因子构造具有高度灵活性，可将volume替换为low、close、VWAP等，将high同样替换为其他价格变量，TS max也可替换为截面max或其他算子。通过在不同位置不断替换算子和变量进行暴力穷举，是构造因子的常见方式。Alpha001与Alpha005均描述量与价的趋势背离或趋同关系，但描述角度不同。构造因子时建议赋予其一定的物理现实意义。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场与因子概述</h3>
+<p>那我是老黄一分钟因子系列第五期。我们今天来讲Alpha001里面的Alpha005。今天这个因子呢它就一行，看起来比较简单，但实际上还有很多括号。今天我们会引入一种新的算子，叫做时序算子。你看它这有一个叫TS max，还有一个叫TS rank。这两个东西进行运算是它在时间序列上进行运算的，而不是在截面上进行运算的。大家看很多研报的时候，如果你看到TS rank，它讲的就是这么一个意思。</p>
+<h3>2. TS rank解释</h3>
+<p>那我们怎么拆解这个因子呢？我们先去看最里面的括号表达什么。这里面有两个东西，一个叫TS rank。什么意思呢？就是成交量在过去五个交易日内的时序排名。也就是说今天的成交量在过去五天的成交量里面到底排在一个什么百分位。如果今天成交量是最高的话，那就是记1.0；如果是最低的话呢，那就是0.0；那如果是排第二呢就0.8，因为你是在过去五天八十的百分位上，所以就0.8，对，就这么算。这边还有一个叫TS rank(high, 5)，一个意思就是说最高价在过去五个交易日内它的百分位排多少。</p>
+<h3>3. 变量替换与相关性</h3>
+<p>那么我们不妨把其中一个叫x1，另一个叫x2，你做变量替换之后呢，这个东西就变成为一个correlation(x1, x2, over period 5)，就是五天内x1跟x2的相关性。但是我们都知道x1跟x2是什么，所以这个相关性它要表达的是成交量的排名跟最高价的排名在五天内的相关性，实际上描述的是量价的趋同程度。</p>
+<h3>4. 外层算子与因子含义</h3>
+<p>然后呢我们再做一个变量替换，把这个correlation变成一个c，那么最外层的括号就变成了-1乘以ts_max（时序上的最大值），over period of 3。也就是说成交量和最高价排名的相关性在过去三天内哪天达到最大，就这么简单一个事情。那说人话他到底在做什么呢？他想要做的是找到最近的三天内量价配合程度最高、最好、最趋同的那个时刻是在第一天还是第二天还是第三天。但是你乘以一个负一呢，那你就取反，也就是说找到配合最不好的那个时刻了。</p>
+<h3>5. 计算流程可视化说明</h3>
+<p>底下呢同样会有一个可视化帮大家理解这个计算的过程。你先拿一个时间窗口五天，然后你去算它的TS rank，volume TS rank(5)，你就算出两个数字，然后你滑这个窗口，往后面滑。对，连续滑个五天呢你就得到了x1这个序列和x2这个序列，因为你要去做相关性嘛所以你要滑五天。然后呢你再把这个相关性再往后滑三天，最后就得到了这个因子，然后就算出来了。</p>
+<h3>6. 因子变体与构造思路</h3>
+<p>那么这个因子还能怎么变呢？你想一下，这里面这个TS rank(volume, 5)能不能变成TS rank(low, volume, 5)，对吧？那这个high能不能变成low，能不能变成close，能不能变成VWAP都可以，对吧？那这里算的是TS max，我如果用一个截面上的max会怎么样呢？这都可以换。所以你会发现构造因子的时候，如果你掌握的一些基本技巧，你就可以构造出很多种因子。大家做遗传算法的时候也是，你在一个位置上可以把那个算子不断地换啊、不断地暴力穷举，那就是一种构造因子的方式。当然你最好构造的这个因子有一定的物理现实意义。如果大家回忆起来的话，Alpha001跟Alpha005其实他们都是讲量跟价的趋势背离或者趋同的因子。所以你会发现其实你可以构造很多因子去描述量跟价，当然他们描述的这个能力以及他描述的方面会是不一样的。</p>
+<h3>7. 结束语</h3>
+<p>那今天就跟大家分享到这里，谢谢大家，拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Jaybee黄</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">因子挖掘</span></li>
+<li><span class="wikilink">时序分析</span></li>
+<li><span class="wikilink">量价关系</span></li>
+<li><span class="wikilink">编程实现</span></li>
+<li><span class="wikilink">时序算子</span></li>
+<li><span class="wikilink">TSmax</span></li>
+<li><span class="wikilink">TSrank</span></li>
+<li><span class="wikilink">量价因子</span></li>
+<li><span class="wikilink">相关性</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>那我是老黄一分钟因子系列第五期。我们今天来讲阿尔法一九一里面的阿尔法零零五，今天这个因子呢它就一行看起来比较简单，但实际上还有很多括号。那且今天我们会引入一种新的算子，叫做时序算子。就是你看它这有一个叫TS, max,还有一个叫TSKK.那这两个东西是进行运算呢，就是它在在时序列列进行运算的，而不是在截面上进行运算。那大家看很多研报的时候，如果你看到时SSKK,它就讲的就是这么一个意思。 Ok,那我们怎么拆解这两个因子呢？我们先去看到这个最里面的这括括号表达什么？这里面有两两东东，一一个叫TS rank逗号号。什么意思呢？呢？就是成成交量在过去五个交易日内的持序排名。也就是说今天的这个成交量在过去五天的成交量里面，到底排在一个什么百分位。如果今天成交量如果是最高的话，那就是记一点零。如果是最低的话呢，那就是零点零。那如果是排第二呢，就零点八，因为你是在过去五天，就是在八十的百分位上，所以就零点八。对，就这么算。那这边还有一个叫volut s rank high一个意思就是说最高价在过去五个交易日内它的百分位排多少？那么我们不妨把其中一个叫x一，另一个叫x二。你做变量替换之后呢，这个东西就是变成为一个coalisation x一、x二over period五，就是五天内x一跟x二的相关性。但是我们都知道x一跟x二是什么？所以这个相关性它要表达什么呢？是成交量的排名跟最高价的排名在五天内的相关性。实际上它描述的是什么？是量价的这个趋同程度。然后呢，我们再做一个变量替换，把这个correlation变成一个c对，那么最外层的这个括号就变成了minus one乘以就是负一乘以TS max时序上的最大值。 Over periperiod of三，也就是说，成交量和最高价排名的相关系在过去三天内哪天达到最大，就这么简单一个事情。那说人话他到底在做什？他想要做的是找到最近的三天内量价配合程度最高最好。最趋统的那个时刻，在第一天还是第二天还是第三，但是你成为一个负一，那你就取反，也就是说找到配合最不好的那个时刻了。那么底下呢同样会有一个可视化帮大家理解这个计算的过程。你先拿一个时间窗口五天，然后你去算它的TS back k无DS bank four五，你就算出两个数字，然后你滑这个窗口，你往后面滑。对，连续滑个五天呢，你就得到了x一这个序列和x二这个序列。因为你要去做相关性嘛，所以你要滑五天。然后呢，你再把这个相关性呢再往后滑，三天，最后就得到了这个因子，然后就算出来就是一点零。对，那么这个因子还能怎么变？你想一下，这里面这个TS rank vo五能不能变成TS rank load vo五，对吧？那这个high能不能变成low,能不能变成cos,能不能变成v web都可以，对吧？那这里算的是TS max,我如果用一个截面上的max会怎么样呢？这都可以换。所以你会发现这构造因子的时候，如果你掌握的一些基本技巧，你就可以构造出很多种因子。那大家做遗串算法的时候，也是你在一个位置上，你可以把那个算子呃不断的换啊，不断的暴力穷举，那就是一种构造因子的方式。当然就是你最好构造的这个因子有一定的物理现实意义。那如果大家回忆起来的话，阿尔法零零一跟阿尔法零零五，其实他们都是讲量跟价的趋势背离或者趋同的因子。所以你会发现其实你可以构造很多因子去描述量跟价。当然他们描述的这个能力，以及他描述的方面会是不一样的。对，那今天就跟大家分享到这里，谢谢大家，拜拜。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
