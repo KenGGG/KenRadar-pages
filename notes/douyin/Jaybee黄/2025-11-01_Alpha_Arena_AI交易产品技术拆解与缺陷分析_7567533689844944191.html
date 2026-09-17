@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>手把手带大家拆解近期大火的AI交易产品 其实没有那么神，主要就是让LLM给结构化输出，然后在前端展示。从马上有人做出开源版就可以看出来技术难度不高。它的confidence用的是LLM-as-a-judge的解决方案，也是有缺陷的。不过话说回来，在AI和交易这个方向上，Alpha Arena肯定是一个成功的产品，作为一个产品，它的marketing是教科书级的。大家如果感兴趣，有空可以手把手带大家做一个出来。#量化交易  #人工智能  #搞钱  #投资  #股票｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2025-11-01_Alpha_Arena_AI交易产品技术拆解与缺陷分析_7567533689844944191.md · 发布于 2026-09-17 20:37:27</div><nav class="page-links"><a href="https://www.douyin.com/video/7567533689844944191" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Alpha Arena AI交易产品技术拆解与缺陷分析</h1>
+<p>抖音 | Jaybee黄 | 原文链接（<a href="https://www.douyin.com/video/7567533689844944191">https://www.douyin.com/video/7567533689844944191</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+视频拆解近期热门的AI交易产品Alpha Arena，指出其技术难度不高，核心是LLM结构化输出。分析了confidence评分的缺陷（LLM-as-a-judge导致离散分布）和时间序列文本化丧失时间意义的问题。同时肯定其产品设计成功和营销手法，并建议可用于量化/AI岗位面试参考。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>技术原理：API结构与数据结构</strong>
+通过浏览器Inspect查看Network部分，可发现前端与后端的API交互。核心API包括account total（展示总持仓）和conversation（模型对话）。每个conversation object包含模型ID（Grok/GPT/DeepSeek等）、user prompt（包含时间信息、调用次数、价格数据等）和LLM response。response分为六个类别：signal（hold/sell等）、invalidation condition（退出条件）、confidenc。</p>
+</li>
+<li>
+<p><strong>缺陷一：confidence评分机制问题</strong>
+通过分析confidence分布发现，0.65这个数字出现频率极高，呈现离散分布而非连续分布。原因是使用了LLM-as-a-judge方案，让大语言模型打分时倾向于打某几个固定分数，这是已被实践验证的问题。作者用Python脚本分析了整段conversation的JSON数据并绘制分布图，证实了这一点。</p>
+</li>
+<li>
+<p><strong>缺陷二：时间序列文本化丧失时间意义</strong>
+项目将MACD、RSI等技术指标以文字形式表征为时间序列，输入给大模型。但由于Transformer基于token预测机制，文本序列在大模型中没有时间意义，纯粹的文字输入难以做出可靠预测。DeepSeek表现较好可能是因为对MACD、RSI等基础指标认知更深刻。</p>
+</li>
+<li>
+<p><strong>产品设计与营销分析</strong>
+虽然技术层面没有特别厉害的地方，但Alpha Arena在产品设计和营销上非常成功。UI采用今年流行的复古设计风格，说明团队有专业的设计和市场推广人员。leaderboard展示各模型的盈亏、交易时长和手续费等数据，增强了可信度。</p>
+</li>
+<li>
+<p><strong>风控猜想与面试建议</strong>
+推测项目在模型开仓时会在另一个book开相反头寸进行风险对冲，因此看到的只是大模型头寸，实际公司成本主要是费率和API call。建议准备量化或AI岗位面试的朋友，可以参考这些分析要点，有助于展示对AI交易产品的理解。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. Alpha Arena项目介绍</h3>
+<p>又大家好，我是老黄。相信最近大家都被这个Alpha Arena的项目给刷屏了，就这玩意儿。大家应该都在不同的媒体平台上看到的这个东西很多次。它的话题就是用不同的代言模型去做交易。那今天我们就主要讲一下它这个背后的技术原理到底是什么样的。</p>
+<h3>2. API调用与模型分析</h3>
+<p>那这里跟大家讲一个小技巧。就是在它的这个网站上呢，你是可以点Inspect，然后你看它的这个Network这个部分。对，那么在这个Network这个部分，你就可以看到这里面有一堆的API Call，就是说其实是这个网页的前端跟它后端怎么交互。所以你点进这每一个，比如说这个account total，就是说每一段时间让你看到它的这个总的持仓。然后最有趣的是它这个叫做conversation的这一个API，如果你点进去的话，它大概长这个样子，就是说它这里面每一个小的一个object里面有一个ID，这个ID是这个大模型的，它可能是Groq，或也可能是GPT，也可能是DeepSeek或者千问。然后你会发现它这有一个user prompt，It has been 8,281 minutes since you started trading, the current time is 什么什么什么，and you've been invoked 多少多少次。然后呢接下来我们会provide you with the variety of state data, price data, prediction什么什么什么，这是他交给那个原模型的prompt。这个东西呢你在前端这个model chat里面其实也是可以看得到，你只要点开，那就有这些东西。那他除了这个user prompt呢，还有一个很有意思，你可以看到他这里有一个LLM response，这个response呢他分成六个类，这里面呢他对于每一个他会做出他自己的signal，就是说应该是hold还是sell，还有对这个trade的invalidation condition，就是说什么时候退出这个trade。你看它退出的机制非常简单，这是一个非常非常简单的条件判断。这个还稍有介绍给了一个confidence，告诉你说它对这个invalidation condition的置信程度是怎么样的。但是我仔细扫了一眼，你看它这个confidence 0.65这个数字出现的次数非常高、非常频繁，那为什么会出现这个情况呢，通常是因为你用LLM as a judge，就是说你让大语言模型去给一个东西打分的时候，语言模型会倾向只打某几个分数，这是一个大家已经在实践中证明过出现的事情。因为问题就发生计算出来了，它应该是一个连续的分布。</p>
+<h3>3. 置信度分布问题分析</h3>
+<p>那么我做了一件什么事呢？我就把它这一整段conversation的JSON都copy-paste下来，我让Cloud Code帮我写了一个Python脚本去分析这个数据，尤其这个confidence或者说置信度的分布，然后算出来的一张图就长这么一个样子，它就变成了只有这么离散的几个数字在它的置信度里面出现，它不是连续的，并且0.65这个数字出现的频率非常高，就是说明它那打分一定是LLM打，不是通过某种科学的计算方式的，这是它方法论的一个缺陷。</p>
+<h3>4. Prompt设计缺陷</h3>
+<p>另一个问题在于说它这个user prompt，它会把你看过去一段时间的什么MACD、RSI一个是以期为period的，另一个是14期的，反正就是说把一些基本的技术指标用文字的形式写下来，就它一个时间序列用文字的形式表征出来，然后呢给到大模型。但对于大模型来说，这些输入全部都是文字，然后基于transformer的机制，在一个一个地去predict下一个token。这里面就是说你把时间序列作为文本序列输进去，然后让大模型基于一个文本序列去预测的话，实际上在大模型的脑海里面，这个文字序列是没有时间的意义的。那么这就是它的另一个问题，就是说你把一堆纯文本丢给大模型，妄图让它predict出一个非常可靠的预测，这个事情大概是不靠谱的。</p>
+<h3>5. 项目评价与总结</h3>
+<p>你会发现它还是有一点小用，为什么呢？因为大模型在它的预训练的过程中学会了一些基本的概念，比如说像什么MACD、RSI，因为这些都非常基础的基础指标，对吧？这些东西呢他在看到你的user prompt的时候，你user prompt说啊我过去一段时间MACD是怎么样、RSI是怎么样，你告诉他MACD和RSI的一些值的时候，然后他可能想OK那就可能意味着某种情况，那这种情况有什么发生。这个也是他现在的这个live里面说明了一些事情，比如说你看那个DeepSeek为什么能够跑得很好，因为可能DeepSeek对MACD和RSI的认知比其他人更深刻一点。当然大家也知道这个DeepSeek谁训练的，对吧？对，那么这是以上我对这个项目的一个看法，就是说它的技术没有什么太厉害的，但最重要的是它这个概念，就是用AI去做trading这个事情非常好玩，并且把它做成了一个这样子的交互界面。而且大家如果仔细看的话，这个界面其实是一种今年比较流行的复古设计，说明这个团队他们还是非常认真的在设计他们的UI，应该是一个比较专业的做产品marketing的一个团队做的事情。还有一个就是说大家如果去看它的leaderboard，在它这个leaderboard里面你可以看到每一个模型现在那个盈亏，包括他们是做了这么久的trade，他花的手续费有多少。对，那对于这个项目我的一个猜想是，他们在模型开一个头寸的时候，他应该会在另一个book上开另一个相反的头寸，使得他的风险在这个上面是对冲掉的。所以就我们看到的这个大模型的盈亏好像他有些trade赚钱、有些trade亏钱，但是对这个公司来讲他的主要成本就在于这个费率和一些API call而已，对这个费率是真实他花掉的钱。你看到的是他大模型的头寸，但你没看到他另一个book的头寸，这个是一个比较基本的风控的一个常识。那当然这个只是我猜测啊，因为如果是我的话，我会这么做控制自己的风险。那么最后就是如果有朋友准备面试量化的岗位或者一些AI的岗位，然后你在面试过程中谈到的这个项目的话呢，你就可以把我刚才讲的那些东西复述一遍，相信会对你的面试有所帮助。那么这期我们就分享到这里，后面大家如果足够感兴趣并且我有空的话呢，可以尝试带大家手把手复现这个东西。那今天就分享到这里，谢谢大家拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Jaybee黄</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化交易</span></li>
+<li><span class="wikilink">人工智能</span></li>
+<li><span class="wikilink">AI投资</span></li>
+<li><span class="wikilink">技术分析</span></li>
+<li><span class="wikilink">产品拆解</span></li>
+<li><span class="wikilink">大模型应用</span></li>
+<li><span class="wikilink">AlphaArena</span></li>
+<li><span class="wikilink">AI交易</span></li>
+<li><span class="wikilink">LLM-as-a-judge</span></li>
+<li><span class="wikilink">技术指标</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">Alpha Arena AI</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>又大家好,我是老黄。相信最近大家都被这个Alpha Arena的项目给刷屏了,就这玩意儿。大家应该都在不同的是要媒体平台上看到的这个东西很多次。它的话题就是用不同的代言模型去做交易。那今天我们就主要讲一下它这个背后的技术原理到底是什么样的。那这里跟大家讲一个小技巧。就是在它的这个网站上呢,你是可以点Inspect,然后你看它的这个Network这个部分。对,那么在这个Network这个部分,你就可以看到这里面有一堆的API Call,就是说其实是这个网页的前端。 跟它后端怎么交互 所以你点进这每一个 比如说这个account total 就是说每一段时间 让你看到它的这个总的职仓 然后最有意思的是 它这个叫做conversation的这一个API 如果你点进去的话 它大概长这个样子 就是说它这里面 每一个小的一个object 里面有一个ID 这个ID是这个大模型的 它可能是groke 或也可能是GPT 也可能是deep seek 或者签问 然后你会发现 它这有一个user prompt It has been 8,281 minutes since you started trading the current time is 什么什么什么 and you've been invoked 多少多少次 然后呢接下来我们会provide you with the variety of state data price data prediction 什么什么什么 这是他交给那个原模型的 prompt 这个东西呢 你在前段这个model chat 里面 其实也是可以看得到 你只要点开 那就有这些东西 那他除了这个user prompt 呢 还有一个很有意思 你可以看到他这里有一个LLM response 这个response呢 他分成六个类 这里面呢 他对于每一个 他会做出他自己的signal 就是说应该是hold 还是sell 还有对这个trade的invalidation condition 就是说什么时候退出这个trade 你看它退出的机制非常简单 这是一个非常非常简单的条件判断 这个还稍有介绍的给了一个confidence 告诉你说 它对这个invalidation condition的置信程度是怎么样的 但是我仔细扫了一眼 你看它这个confidence 0.65这个数字出现的次数非常高 非常频繁 那为什么会出现这个情况呢 通常是因为你用lm as a judge 就是说你让大语言模型去给一个东西打分的时候 语言模型会倾向只打某几个分数 这是一个大家已经在实践中 证明过出现的一个事情 因为问题就发生计算出来了 它应该是一个连续的分布 那么我做了一件什么事呢 我就把它这一整段conversation的 JSON都copy-paste下来 我让Cloud Code帮我写了一个 Python脚本去分析这个数据 尤其这个confidence 或者说知性度的分布 然后算出来的一张图 就长这么一个样子 它就变成了 只有这么离散的几个数字 在它的知性度里面出现 它不是连续的 并且0.65这个数字出现的频率非常高 就是说明它那打分一定是LIM打 不是通过某种科学的计算方式的 这是它方法论的一个缺陷 另一个问题在于说 它这个user prompt 它会把你看过去一段时间的 什么MACD RSI 一个是什么 以期为period的 另一个是14期的 反正就是说 把一些基本的技术指标 用文字的形式写下 就它一个时间序列 用文字的形式表征出来 然后呢给到弹幕形 但对于弹幕形来说 这些输入全部都是文字 然后基于transformer的机制 在一个一个的去predict下一个token 这里面就是说你把时间序列 作为文本序列输进去 然后让大元模型基于一个文本序列去预测的话 实际上在大模型的脑海里面 这个文字序列是没有时间的意义的 那么这就是它的另一个问题 就是说你把一堆纯文本丢给元模型 妄图让它predict出一个非常可靠的预测 这个事情大概是不靠谱的 你会发现它还是有一点小用 为什么呢 因为大模型在它的预训练的过程中 学会了一些基本的概念 比如说像什么MACD RSI 因为这些都非常基础的基础指标 对吧 这些东西呢 他在看到你的user prompt的时候 你user prompt说啊 我过去一段时间MACD是怎么样 RSI是怎么样 你告诉他MACD和RSI的一些值的时候 然后他可能想OK 那就可能意味着某种事项情况 那这种情况有什么发生 这个也是他现在的这个live里面 说明了一些事情 比如说你看那个Deep Seek 为什么能够跑得很好 因为可能Deep Seek对MACD和RSI的认知 比其他人更深刻一点 当然大家也知道这个Deep Seek 谁训练的对吧 对 那么这是以上我对这个项目的一个看法 就是说它的技术没有什么太厉害的 但最重要的是它这个概念 就是用AI去做training这个事情非常好玩 并且把它做成了一个这样子的交互界面 而且大家如果仔细看的话 这个界面其实是一种 今年比较流行的复古设计 说明这个团队 他们还是非常认真的在设计他们的UI 应该是一个比较专业的 做餐饮marketing的一个团队做的事情 还有一个就是说 大家如果去看它的leaderboard 在它这个leaderboard里面 你可以看到每一个模型 现在那个盈亏 包括他们是做了这么久的trade 他花的手续费有多少 对那对于这个项目 我的一个猜想是 他们在模型开一个头寸的时候 他应该会在另一个book上 开另一个相反的头寸 使得他的风险在这个上面 是对冲掉的 所以就我们看到的 这个大模型的盈亏 好像他有些trade赚钱 有些trade亏钱 但是对这个公司来讲 他的主要成本就在于 这个费率和一些API call而已 对这个费率是真实他花掉的钱 你看到的是他大模型的头寸 但你没看到他另一个book的头算 这个是一个比较基本的风控的一个常识 那当然这个只是我猜测啊 因为如果是我的话 我会这么做控制自己的风险 那么最后就是如果有朋友 准备面试量化的岗位 或者一些AI的岗位 然后你在面试过程中 谈到的这个项目的话呢 你就可以把我刚才讲的那些东西复述一遍 相信会对你的面试有所帮助 那么这期我们就分享到这里 后面大家如果足够感兴趣 并且我有空的话呢 可以尝试带大家手把手复现这个东西 那今天就分享到这里 谢谢大家拜拜</p>
+</blockquote>
+</details></main>
+</body>
+</html>
