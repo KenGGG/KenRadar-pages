@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>开启新系列 - 1分钟手撕1个因子 最近准备开启一个新系列，尝试把alpha191的每一个因子都讲一遍，alpha191是一篇很经典的研报，过一遍alpha191可以深化大家对各种算子的理解，那么话不多说直接开讲﻿ ﻿#量化交易 #人工智能 #搞钱 #投资 #股票｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2025-10-30_开启新系列：1分钟手撕Alpha-0.01因子_7566785352128646419.md · 发布于 2026-09-17 20:39:20</div><nav class="page-links"><a href="https://www.douyin.com/video/7566785352128646419" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>开启新系列：1分钟手撕Alpha-0.01因子</h1>
+<p>抖音 | Jaybee黄 | 原文链接（<a href="https://www.douyin.com/video/7566785352128646419">https://www.douyin.com/video/7566785352128646419</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+博主老黄宣布启动“一分钟因子”系列，旨在通过解读经典研报《阿尔法一九一》中的因子深化理解。本期详细拆解了名为 Alpha-0.01 的相关性算子（Correlation），该算子结合了成交量变化率与日内收益率的排名，用于衡量过去六天内量价走势的背离程度。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>系列背景与目标</strong>
+博主老黄在量化领域遇到瓶颈后决定重新研读经典研报《阿尔法一九一》，并计划将学习过程记录下来，开启“一分钟因子”新系列，尝试用一分钟讲透一个因子的构造逻辑。</p>
+</li>
+<li>
+<p><strong>Alpha-0.01 因子定义</strong>
+该因子源自经典研报《阿尔法一九一》，其数学表达式看似复杂，但本质是一个相关性（Correlation）算子。它由两个二元算元组成：第一个是成交量的变化率排名，第二个是日内收益率的排名。</p>
+</li>
+<li>
+<p><strong>成交量算元的拆解</strong>
+第一个算元涉及 log(VT) 减去 log(VT-1)，利用对数性质转化为交易量之比（量比），即交易量的变化率。最终该部分表示的是过去六天成交量的变化率的排名（rank）。</p>
+</li>
+<li>
+<p><strong>收益率算元的拆解</strong>
+第二个算元是收盘价减去开盘价再除以开盘价，代表日内的收益率。对该数值进行 rank 操作后，得到日内收益率的排名。整个因子最终计算的是这两个排名的相关系数并取负值。</p>
+</li>
+<li>
+<p><strong>因子的经济含义</strong>
+该因子的核心逻辑是衡量过去六天内量价走势的背离程度。如果成交量变化与价格变动方向不一致，则相关性低或为负，因子可能产生信号。博主自嘲原计划讲一分钟却讲了五分钟，但力求内容精炼且有收获。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 开场介绍</h3>
+<p>Hello,大家好，我是老黄。我量化示范有几个月了，最近发现自己在量化上遇到一些瓶颈。所以我觉得我需要好好的补一下因子方面的功课，我就准备重新去认真的读一下一些经典的研，报以经经典的因子构造的方式，顺便把这个学习的过程记录下来，跟大家一起分享。那这个就是我最近准备做的一个新的系列，叫做一分钟因子系列。我就尝试一分钟讲一个因子，希望能够把我的理解跟大家讲透。</p>
+<h3>2. Alpha-0.01 介绍</h3>
+<p>今天跟大家讲的一个因子叫做alpha零零一，这个是从一边很经典的研报叫阿尔法。一九一里面得到的那这个阿尔法零零一它是什么呢？它的数学表达式长这个样子，就如果你光看这个数学表达式，你会觉得非常恐怖。但如果你把公式写下来的话，它就是长这个样子。</p>
+<h3>3. 算子本质解析</h3>
+<p>那这其实就是一个correlation相关性算子，那相关性是一个二元算子，就是里面会有两个算元，其中一个算元呢叫做这个rank, delta log VT一。然后另一个叫做rank,什么CT点OT出游看着非常复杂。但实际上你把它拆解call是correlation相关系。</p>
+<h3>4. 成交量部分详解</h3>
+<p>那第一个算子呢它是rank delta log VT一塔。是一个什么算子呢？塔呢？其实是一个二元算子，它后面那个位置就是说多少天？就比如说我们这里用的这个delta log VT一，他就是说log VT减去log VT减一。就是说今天的交易量的对数减去昨天的交易量的对数。那大家都知道对数函数有一个非常好的性质，就是对数函数相减的时候，相当于它里面那个东西变成一个除法。所以它最后会变成一个什么呢？就是log VT除以log VT减一VT除以VT等于一什吗？是量比的，就是说交易量的变化率。所以说这整个算员最后他要说一件什么事情，就是说对数成交量的变化率，然后再叠加一个rank, rank就是排名嘛。因为通常我们做的是一个截面策略</p>
+<h3>5. 收益率部分详解</h3>
+<p>那我们再看它第二个善缘是什么？就是CT减OT除以OT.那这个CT减OT是什么？就是收盘价减开盘价嘛，然后再除以开盘价呢是什么？就是日内的收益率，所以你再叠一个ram,就是日内收益率的排名。</p>
+<h3>6. 总结与含义</h3>
+<p>那其实这整个因子他说的一件事情就是说我们拿过去六天的成交量的变化率的排名和过去六天的日内收益率的排名，我们来给它做一个相关，然后取负。那这件事情呢，他其实在看的就是说我们用人话讲就说过去六天内量价走势的背离程度。对，本来打算讲一分钟的，结果一不小心讲了五分钟，希望这五分钟也是足够精炼，能够让大家有所收获。那今天就这样，谢谢大家，拜拜。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">Jaybee黄</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">factor_modeling</span></li>
+<li><span class="wikilink">Alpha-0.01</span></li>
+<li><span class="wikilink">相关性算子</span></li>
+<li><span class="wikilink">量价背离</span></li>
+<li><span class="wikilink">成交量变化率</span></li>
+<li><span class="wikilink">日内收益率</span></li>
+<li><span class="wikilink">量化交易/因子挖掘</span></li>
+<li><span class="wikilink">AI产业</span></li>
+<li><span class="wikilink">股票市场</span></li>
+<li><span class="wikilink">投资策略</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>Hello,大家好，我是老黄。我量化示范有几个月了，最近发现自己在量化上遇到一些瓶颈。所以我觉得我需要好好的补一下因子方面的功课，我就准备重新去认真的读一下一些经典的研，报以经经典的因子构造的方式，顺便把这个学习的过程记录下来，跟大家一起分享。那这个就是我最近准备做的一个新的系列，叫做一分钟因子系列。我就尝试一分钟讲一个因子，希望能够把我的理解跟大家讲透。那话不多说，我们就直接开始。今天跟大家讲的一个因子叫做alpha零零一，这个是从一边很经典的研报叫阿尔法。一九一里面得到的那这个阿尔法零零一它是什么呢？它的数学表达式长这个样子，就如果你光看这个数学表达式，你会觉得非常恐怖。但如果你把公式写下来的话，它就是长这个样子。那它这其实就是一个correlation相关性算子，那相关性是一个二元算子，就是里面会有两个算元，其中一个算元呢叫做这个rank, delta log VT一。然后另一个叫做rank,什么CT点OT出游看着非常复杂。但实际上你把它拆解call是correlation相关系。那第一个算子呢它是rank delta log VT一塔。是一个什么算子呢？塔呢？其实是一个二元算子，它后面那个位置就是说多少天？就比如说我们这里用的这个delta log VT一，他就是说log VT减去log VT减一。就是说今天的交易量的对数减去昨天的交易量的对数。那大家都知道对数函数有一个非常好的性质，就是对数函数相减的时候，相当于它里面那个东西变成一个除法。所以它最后会变成一个什么呢？就是log VT除以log VT减一VT除以VT等于一什吗？是量比的，就是说交易量的变化率。所以说这整个算员最后他要说一件什么事情，就是说对数成交量的变化率，然后再叠加一个rank, rank就是排名嘛。因为通常我们做的是一个截面策略，那我们再看它第二个善缘是什么？就是CT减OT除以OT.那这个CT减OT是什么？就是收盘价减开盘价嘛，然后再除以开盘价呢是什么？就是日内的收益率，所以你再叠一个ram,就是日内收益率的排名。那其实这整个因子他说的一件事情就是说我们拿过去六天的成交量的变化率的排名和过去六天的日内收益率的排名，我们来给它做一个相关，然后取负。那这件事情呢，他其实在看的就是说我们用人话讲就说过去六天内量价走势的背离程度。对，本来打算讲一分钟的，结果一不小心讲了五分钟，希望这五分钟也是足够精炼，能够让大家有所收获。那今天就这样，谢谢大家，拜拜。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
