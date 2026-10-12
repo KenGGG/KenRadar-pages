@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>开源WorldQuant BRAIN Alpha自进化研究工具解析｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-10-11_开源WorldQuant_BRAIN_Alpha自进化研究工具解析_7657939246027640116.md · 发布于 2026-10-12 09:20:08</div><nav class="page-links"><a href="https://www.douyin.com/video/7657939246027640116" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>开源WorldQuant BRAIN Alpha自进化研究工具解析</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7657939246027640116">https://www.douyin.com/video/7657939246027640116</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+介绍QuantML-Research开源仓库，封装WorldQuant BRAIN Alpha研究流程，支持字段快照、黄金模板、IS诊断与自相关管理，构建可进化的Agent技能包。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>开源框架封装研究流程</strong>
+该开源仓库QuantML-Research/wq-alpha-research是一套针对WorldQuant BRAIN平台的Alpha研究技能包。它将字段查找、因子模板、IS诊断、自相关检查与经验写回整合成闭环流程，把零散的Alpha操作转化为可进化的Agent技能。项目内置USA TOP3000延迟1的4367个BRAIN数据字段快照，支持离线搜索，无需联网即可快速定位字段，大幅提升研究效率。</p>
+</li>
+<li>
+<p><strong>轻量化依赖与使用门槛</strong>
+项目结构清晰，核心包括技能说明剧本、脚本目录与数据目录三个部分。自进化脚本负责拉取账户Alpha并生成经验摘要，数据目录存放完善字段元数据。依赖极简，仅需requests和numpy两个库。但需注意：项目完全依赖有效BRAIN账号凭据，字段快照为静态数据需手动更新，仅提供高效挖掘循环框架，不承诺固定Sharpe或通过率，仅供学习交流使用。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 项目概述与核心功能</h3>
+<p>Alpha挖掘能自我进化，这个开源仓库正是自我进化的WorldQuant Alpha研究技能包。它把挖掘流程封装成一套Agent可读的Playbook。看项目，围绕字段速查、黄金模板、IS诊断、自相关核对与经验写回，构建流水线。现有四千三百六十七个USA TOP3000字段快照，支持离线搜索快查询。项目开头就点明搜索标的，把零散的Alpha操作转化为可进化的Agent技能。这个开源项目只公开通用规则，绝不携带凭据或私有记录。它让每一轮研究都能沉淀为可复用的经验，快速上手。</p>
+<h3>2. 上手流程与项目结构</h3>
+<p>从阅读技能说明开始，掌握字段选择与IS失败诊断。本地字段搜索无需联网运行。一段代码即可完成关键检索、配置凭据后执行量化。脚本仅需Python requests和numpy两个库就能提炼经验并自更新。技能包结构一目了然，核心是技能说明、剧本脚本目录与数据目录。自净化脚本负责拉取账户Alpha并生成经验摘要。数据目录里则存放完善的字段元数据，可供参赛者或需要本地字段检索的研究者使用，但必须持有有效凭据。且字段快照为静态，需要时需手动重新拉取。技能框架只提供高效的Alpha挖掘循环，不承诺固定Sharpe。采用非商业许可。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">WorldQuant</span></li>
+<li><span class="wikilink">Alpha挖掘</span></li>
+<li><span class="wikilink">开源工具</span></li>
+<li><span class="wikilink">量化研究</span></li>
+<li><span class="wikilink">因子研究</span></li>
+<li><span class="wikilink">量化投资工具</span></li>
+<li><span class="wikilink">AI产业</span></li>
+<li><span class="wikilink">投资策略</span></li>
+<li><span class="wikilink">资产配置</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">WorldQuant BRAI</span></li>
+<li><span class="wikilink">BRAI</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>阿尔法挖掘能自我进化，这个开源仓库正是自我进化的word count. Alpha研究技能包，它把挖掘流程封装成一套agent可读的play book看项目，围绕字段速查、黄金模板、IS诊断、自相关核对与验验写，构建流水即看项四千千三百六十七个USA top三千字段快照，支持离线搜索快项目。说开开头就点名搜标，把零散的alpha操作转化为可进化的agent技能。这个开源项目只公开通用规则，绝不携带凭据或私有记录。它让每一轮研究都能沉淀为可复用的经验，快速上手。从阅读技能说明开始，掌握字段，选择与IS失败诊断本地字搜索索需需网运运行一段，代代即即关键键检索配置凭据后执行资金化。脚即仅需pythrequest和none pay两个库就能能提炼经验，并自更新。技能不结构一目了然。核心是技能，说明剧本脚本目录与数据目录自净化脚本负责拉取账户。尔法并生成经验。摘要，数据目录里则存放完善的字段元数据可bring参赛者或需要本地字段检索的研究者，但必须持有有效凭据。且字段快照为静态，需要时，需手动重新拉取技能框架，只提供高效的阿尔法挖掘循环，不承诺固定事儿，采用非商业许可。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

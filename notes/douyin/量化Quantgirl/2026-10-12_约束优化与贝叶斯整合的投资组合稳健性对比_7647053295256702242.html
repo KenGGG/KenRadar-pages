@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>约束优化与贝叶斯整合的投资组合稳健性对比｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-10-12_约束优化与贝叶斯整合的投资组合稳健性对比_7647053295256702242.md · 发布于 2026-10-12 09:20:08</div><nav class="page-links"><a href="https://www.douyin.com/video/7647053295256702242" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>约束优化与贝叶斯整合的投资组合稳健性对比</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7647053295256702242">https://www.douyin.com/video/7647053295256702242</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+论文实证对比无约束、约束优化及Black-Litterman模型，发现加权重上限可显著降低集中风险，贝叶斯框架能更好平衡市场观点与主观判断，提升组合稳健性。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>约束优化显著提升组合稳健性</strong>
+论文对比显示，无约束均值方差优化易产生极端集中的角落组合，对输入参数高度敏感。引入15%单资产权重上限后，组合分散度大幅改善，虽然牺牲部分理论效率，但在样本外测试中夏普比率更高、最大回撤更小，风险调整后收益更优。</p>
+</li>
+<li>
+<p><strong>贝叶斯框架兼顾市场均衡与主观观点</strong>
+Black-Litterman模型通过引入先验不确定性参数与投资者主观观点，生成了更符合经济直觉的资产配置。该方式有效缓解了传统优化对输入参数的敏感性，在保持分散化的同时平衡了市场观点与个人判断，为实战提供了稳健路径。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 无约束与约束优化对比</h3>
+<p>约束与自由哪个更好？这张图直观展示了投资组合优化中的核心矛盾。作者通过对比两种路径，引出了本文要探讨的关键问题。这篇论文系统评估了五种主流的投资组合优化技术。作者选取了十只美股在近两年的回撤期内，重点比较了它们的绩效、配置、稳定性和集中风险。投资组合优化固然重要，但其传统方法对输入参数过于敏感，极易导致组合不够分散。为此，该文通过一个持股组合的实证分析来评估约束和风险因子的实际影响。我们具体来看方法，图中无约束优化直接寻找风险最低点，但可能高度集中。而约束优化则是在一个受限的盒子里寻找最优解，以强制实现分散化，从而降低单一资产的特质性风险。作者采用了约束优化，例如给每只股票的权重设置了百分之十五的上限，在最小化整体风险的同时确保了投资组合的多样性。论文回测显示，无约束的全局最小方差组合是个角落解，高度集中于苹果、埃克森美孚和谷歌三只股票，权重合计超过百分之七十八，这完全是在追逐风险最低的资产。一旦加上权重约束，结果就大不相同了，组合变得非常均衡，特斯拉、沃尔玛、美国银行和苹果都达到了接近百分之十五的上限，实现了作者所期望的分散化配置。在样本外绩效上，约束组合累计回报百分之十六点七七，夏普比率五点三六，最大回撤仅负百分之三点一八，虽然回报略低于无约束组合，但其风险调整后收益和抗跌性表现稳健。</p>
+<h3>2. Black-Litterman模型应用与结论</h3>
+<p>接着，作者采用了Black-Litterman模型，设定了先验不确定性参数，并融入了两个主观观点：一是苹果将跑赢谷歌百分之二，二是特斯拉能有百分之十的回报。总结来说，这篇论文发现，约束优化牺牲了部分理论效率，却换来了更好的稳定性。而Black-Litterman模型则提供了一个平衡市场观点与个人判断的有效框架。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">股票市场</span></li>
+<li><span class="wikilink">投资组合优化</span></li>
+<li><span class="wikilink">约束优化</span></li>
+<li><span class="wikilink">夏普比率</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">量化投资研究</span></li>
+<li><span class="wikilink">投资策略</span></li>
+<li><span class="wikilink">资产配置</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li><span class="wikilink">美国银行</span></li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>约束与自由哪个更好？这张图直观展示了投资组合优化中的核心矛盾。作者通过对比两种路径，引出了本文要探讨的关键问题。这篇论文系统评估了五种主流的投资组合优化技术。作者选取了十只美股在近两年的回撤期内，重点比较了他们的绩效配置、稳定性和集中风险投资组合优化。至于重要，但其传统方法对输入参数过于敏感，为易导致组合不够分散。为此，该文通过一个每股组合的实证分析来评估约束和风险因子的实际影响。我们具体来看，方法，图中无约束优化直接寻找风险最低点，但可能高度集中。而约束优化则是在一个受限的盒子里寻找最优解，以强制实现分散化，为此，降低单一资产的特质性风险。作者采用了约束优化，例如他们给每只股票的权重设置了百分之十五的上限，这样就在最小化整体风险的同时，确保了投资组合的多样性。论文回测显示，无约束的全局最小方差组合是个角落，解高度集中于苹果。埃克森美孚和谷歌三只股票权重合计超过百分之七十八。这完全是在追逐风险最低的资产，一旦加上权重约束，结果就大不相同了，组合变得非常均衡。特斯拉、沃尔玛、美国银行和苹果都达到了接近百分之十五的上限，实现了作者所期望的分散化配置。在样本外绩效上约束组合，累计回报百分之十六点七七。夏普比率五点三六，最大回撤仅负百分之三点一八。虽然回报略低于无约束组合，但其风险调整后收益和抗跌性表现稳健。接着，作者采用了black leaderman模型，他们设定了鲜艳不确定性参数，并融入了两个主观观点，一是苹果将跑赢谷歌百分之二。二是特斯拉能有百分之十的回报。总结来说，这篇论文发现，约束优化牺牲了部分理论效率，却换来了更好的稳定性。而black litatman模型则提供了一个平衡市场观点与个人判断的有效框架。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

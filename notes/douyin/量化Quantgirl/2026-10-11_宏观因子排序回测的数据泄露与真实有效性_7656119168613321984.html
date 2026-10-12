@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>宏观因子排序回测的数据泄露与真实有效性｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-10-11_宏观因子排序回测的数据泄露与真实有效性_7656119168613321984.md · 发布于 2026-10-12 09:20:08</div><nav class="page-links"><a href="https://www.douyin.com/video/7656119168613321984" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>宏观因子排序回测的数据泄露与真实有效性</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7656119168613321984">https://www.douyin.com/video/7656119168613321984</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+研究引入克利夫兰联储实时CPI替代月末数据构建无泄露基准。发现KNN基线可追平LLM中位数信号，模型增量价值集中于极端月份，揭示数据时效性是回测核心。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>数据泄露是宏观回测的核心陷阱</strong>
+传统宏观因子排序回测常因误用月末已公布数据（如CPI）而引入约十天的前瞻信息，导致回测结果系统性高估。该研究通过引入克利夫兰联储的日度实时预测替代事后数据，构建了严格受控决策时信息集的回测基准。这一调整堵住了最易被忽视的泄露源头，确保模型在t月末仅能获取当时实际可见的宏观与市场变量，使回测逻辑回归真实交易场景。</p>
+</li>
+<li>
+<p><strong>检索增强模型的有效边界在于信号来源</strong>
+三十六个月回测显示，基于7B大模型的流水线月度因子排序IC中位数达正0.154，但统计显著性不足。关键发现是，仅依赖实时通胀预测与宏观相似期检索的KNN基线即可追平该中位数水平。这表明正向排序信号主要源于正确、及时的信息集构建，而非大模型自身的复杂推理能力。大模型的边际贡献主要体现在极端行情月份的判别上，从而推高了均值IC与多空组合夏普比率。</p>
+</li>
+<li>
+<p><strong>实证结论偏向诊断性且需进一步解耦</strong>
+研究证实实时数据与类比检索是因子排序收益的核心驱动力，大模型增量价值集中于长尾风险应对。但受限于三十六个月的样本长度，统计效力偏弱，且大模型因额外摄入事件摘要导致与基线信息集未严格对齐，比较更多属协议层面。后续计划冻结全量日志与随机种子以保障可复现，并通过延长窗口进一步剥离大模型在不同排序区间的实际作用。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 研究背景与任务设定</h3>
+<p>用真实决策时信息量化因子排序能力。这篇论文构建了一个泄露可控的月度基准，用7B检索增强大模型，在不窥探未来数据的约束下，测试风格因子排序。宏观预测常因数据发布时间差而虚增能力。作者指出，当月CPI在月末并不可得，直接读取会泄露约十天的前瞻信息。研究改用克利夫兰联储存档的日度实时预测来替代，堵上这个泄露点。任务设定很讲究，只有输入会截止到决策时刻观测滞后平移的forward宏观变量，其他市场指标再叠加上非同步的克利夫兰联储CPI实时预测。模型只能拿到t月末实际能看见的信息。流水线基于量化QA 0.5.7，字节大模型分为评论家和行动者。评论家从至少一年前检索四个宏观相似月份，压缩出一条战术规则。行动者则结合当前状态和滚动规则，最终给七个因子打出零到一分。每一步逻辑也很清晰：先构建实时状态和检索相似历史，再由评论家大模型生成一条规则，存入六条规则的滚动窗口。最后，行动者大模型在贪心解码下确定性输出得分排序，整个链条信息严格滞后。</p>
+<h3>2. 核心回测结果</h3>
+<p>从表中关键结果看，基于该预测的全流水线表现，月度Rank IC中位数为正0.154，均值为正0.131。但均值显著性、95%置信区间跨越零，说明这三十六个月数据下的统计显著性还不够。谁在发力？零样本和注入原始相似期的效果基本为零。评论家合成规则把均值拉高，但中位数仍趴地。加入实时预测是最大的单次跃迁，中位数跳至0.154。有意思的是，一个单纯的KNN相似期基线也能追平中位数，但均值低得多。拆分三个无重叠的十二个月子窗口，全流水线的平均Rank IC均为正区间，在0.111到0.165之间。这说明信号方向并非昙花一现，在连续的几个年度切片里保持一致。多空检验更直观：做多排名前二，做空排名末二因子，全流水线得到夏普0.71，年化回报百分之四点二，远优于KNN和岭回归。这暗示模型在极端排序的月份中贡献了更有效的配置价值。</p>
+<h3>3. 结论与局限</h3>
+<p>论文把发现拆成两层：一方面实时通胀实时预测和宏观相似期检索解释了绝大部分中位数信号，KNN也够用；另一方面，大模型的边际增效集中在极端排序的月份，从而抬高了平均Rank IC和夏普。这可能来自对因子暴露的非线性交互。作者特别警示了一个极易忽视的泄露源：月末回测直接拿当月最终CPI，等于偷看了未来宏观状态。用克利夫兰联储每日实时预测替代，才让信息集回到真实的决策时，否则回撤会系统性地夸大收益。这也是KNN能与大模型追平中位数的共同基础。局限也很坦诚：三十六个月的样本里，平均Rank IC的统计效率低，结果未达常规显著性。而且，大模型额外接收了事件摘要，与KNN的信息集并非严格对齐，这层比较更接近协议对比。另外，评估范围仅限于美股风格因子。为可复现，作者计划冻结发布、实时预测档案、提示模板、逐月得分和全量评论加规则日志，连随机树种子都固定了。下一步打算延长窗口来增厚数据，并继续解耦大模型在极端或中心排序中到底如何发挥作用。整体看，这篇论文验证了在严格的决策时约束下，检索增强7B模型能得出方向为正的因子排序信号且此窗口稳定。但核心发现偏诊断性：实时数据和相似期检索挑起大梁，大模型的增量增值则集中在长尾，而泄露是这块拼图中最不该被忽视的一环。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">宏观经济</span></li>
+<li><span class="wikilink">股票市场</span></li>
+<li><span class="wikilink">AI产业</span></li>
+<li><span class="wikilink">量化策略</span></li>
+<li><span class="wikilink">数据泄露</span></li>
+<li><span class="wikilink">宏观因子排序</span></li>
+<li><span class="wikilink">实时预测</span></li>
+<li><span class="wikilink">KNN基线</span></li>
+<li><span class="wikilink">LLM边际贡献</span></li>
+<li><span class="wikilink">学术论文解析</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>用真实决策时信息量化一千因子排序能力。这篇论文构建了一个泄露受控的月度基准，用七字节检索增强大模型，在不窥探未来数据的约束下，测试每股风格因子排序。宏观预测，常因数据发布时间差而虚增能力。作者指出，当月CPI在月末并不可得直接读取，会泄露约十天的前瞻信息研究，改用克利夫兰联储存档的日度及时预测来替代堵上这个泄露点任务设定很讲究，直有输入，会截止到决策时刻观测滞后平移的FORD宏观变量。其他市场指标再叠加上非特档的克利夫兰联储CPI及时预测模型，只能拿到t月末实际能看见的信息。流水线股于是量化QA点五杠七。字节大模型分为评论家和行动者，评论家从至少一年前检索四个宏观相似月份压缩出一条战术规则。行动者则结合当前状态和滚动规则，缓冲区给七个因子打出零到一分，每日末写也很清晰。先构建实时状态和检索相似史，再由评论家大模型生成一条规则，存入六条规则的滚动窗口。最后，行动者大模型在探心解码下确定性的输出，因此得分排序，整个链条信息严格滞后。从表中关键结果看，韩吉是预测的全流水线表现。最优中位月排名九十九，为正零点一五四，均值为正零点一三一。但均值jute、 trip、置信区间跨越零，说明这三十六个月数据下的统计显著性还不够。谁在发力？零样本和注入原始相似期的效果基本为零。评论家合成规则，把均值拉高，但中卫仍趴地加入，即使预测是最大的单次跃迁，中位跳至零点一五四。有意思的是在一个单纯的KNN,类似七基线也能追平中卫，但均值低得多。看，三个无重叠的十二个月子窗口，全流水线的平均排名九十九，全数为正区间。在零点一一一到零点一六五之间，这说明信号方向并非昙花一现，在连续的几个年度切片里保持了一致，镂空检验更直观做多排名前二做空，排名末二因子，全流水线路得夏普零点七欧，年化回报百分之四点二远，优于KNN和领回归。这暗示模型在极端排序的月份中贡献了更有效的配置价值。论文把发现拆成两层，一方面实时通胀及时预测和宏观类似期检索解释了绝大部分中卫信号，KNN也够用。另一方面，大模型的边际增效集中在极端排序的月份，从而抬高了均值九十九和夏普。这可能来自对因子暴露的非线性交互。作者特别警示了一个极易忽视的泄露源。月末回测，直接拿当月，最终CPI等于偷看了未来宏观状态，用克利夫兰联储每日及时预测替代，才让信息集回到真实的决策时，否则回撤会系统性的夸大收益。这也是KNN能与大模型追平中位的共同基础局限也很坦诚。三十六个月的样本里，均值九十九的统计效率低，结果未达常规显著性。而且，大模型额外接收了事件摘要，与KNN的信息集并非严格对齐，这层比较更接近协议对比。另外，评估范围仅限于美股风格因子。为了可复现，作者计划冻结发布，及时预测档案提示模板逐月得分和全量评论加规则，日志连随机树种子都固定了，下一步打算延长窗口来增厚数据，并继续解耦大模型，在极端或中心排序中到底如何发挥作用。整体看，这篇论文验证了在严格的决策时约束下，检索，增强七b模型能得出方向为正的因子排序信号，且此窗口稳定。但核心发现偏诊断性实时数据和类似七检索挑起大梁大模型的余量，增值则集中在肠尾，而泄露是这块平图中最不该被忽视的一环。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

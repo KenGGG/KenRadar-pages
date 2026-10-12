@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>路径签名分解在配对交易中的双重过滤策略｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-10-12_路径签名分解在配对交易中的双重过滤策略_7642628452222340392.md · 发布于 2026-10-12 09:20:08</div><nav class="page-links"><a href="https://www.douyin.com/video/7642628452222340392" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>路径签名分解在配对交易中的双重过滤策略</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7642628452222340392">https://www.douyin.com/video/7642628452222340392</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+提出分段签名c和增量协变d双重过滤器策略，在中美期货测试中夏普比率显著优于基线策略，结果具统计显著性。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>传统配对交易局限与签名分解创新</strong>
+传统配对交易依赖线性基准，难以捕捉复杂的非线性系统关系。该方法将资产价格路径的二阶签名分解为两部分：有向面积A代表非线性交互强度，增量协变d反映同向或反向交互方向。原始签名存在歧义问题，路径多次交叉时正负面积相互抵消会掩盖真实交互强度，分段签名c通过识别路径与弦线的所有焦点消除正负抵消效应，C值越小代表交互越强。</p>
+</li>
+<li>
+<p><strong>双重过滤策略及实证测试结果</strong>
+策略框架为标准化价差计算，第一重过滤器要求分段签名C小于阈值以确保强交互，第二重要求增量协变D大于零确保同向运动。在中美期货五组配对中测试，使用2024年11月至12月分钟数据，以金属期货为例验证价差平稳性。SE-SIG-DIFF策略夏普比率显著高于基线策略且最大回撤更低，九组参数下策略夏普提升始终最高，JK闷末检验p值远小于0.05，统计显著。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 研究背景与方法介绍</h3>
+<p>大家好，今天分享一个配对交易的新工具。我们通过分解路径签名，构建了双重过滤器策略，核心是两个新指标，分段签名C用来过滤资产间的非线性交互，增量协变D则用来判断他们的运动方向是否一致。传统配对交易依赖线性基准，难以捕捉复杂的非线性系统性，非线性方法要么忽略短期互动，要么缺乏可解释性。资产价格路径提供了一个直观度量的非线性交互指标，路径签名即勒维面积，它直观度量了资产之间非线性交互。我们将二阶签名分解为两部分，A是有向面积代表非线性交互，D是增量协变，反映同向或反向交互。</p>
+<h3>2. 分段签名与焦点识别方法</h3>
+<p>直接使用原始签名会有歧义，复杂的系统里路径多次交叉，这时有向面积的正负部分可能相互抵消，从而掩盖了真实的交互强度。如图所示，上下波动的路径与直线围出的镜面积可能很小，但实际交互非常频繁，原始有向面积A失效了。因此，我们引入了分段签名C，它通过识别路径与弦线的所有焦点将大区间分割，这样就能消除正负抵消。C值越小，代表交互越强。如何找焦点呢？我们采用线性插值法，当相邻两个点的价格位于弦线两侧时，就判定存在一个焦点，从而进行分段。</p>
+<h3>3. 策略框架与实证结果</h3>
+<p>策略框架如下，首先计算标准化价差，第一重过滤器要求分段签名C小于阈值，确保强交互。第二重要求增量协变D大于零，确保同向运动。我们在中美期货的五组配对中进行测试，使用2024年11月到12月的分钟数据，并预先筛选相关性和赫斯特指数，对比了四种策略版本，这是价差均值回复性的检验。以金属期货为例，其赫斯特指数小于0.5，证实了价差的平稳性，适合进行配对交易。来看金属期货组的结果，SE-SIG-DIFF策略其夏普比率显著高于其他基线策略，同时最大回撤也更低。从累计收益曲线可以清晰看到带有双重过滤器的策略也就是这条蓝线持续领先于其他策略，表现最为稳健。结果具有稳健性和统计显著性，在九组不同参数下，我们的策略夏普提升始终最高，JK闷末检验的p值远小于0.05，例如鸡Canadas ties i配对的p值低至4.4乘以10的负33次方。结论是分段签名和增量协变提供了可解释的非线性信号，双重过滤器策略显著提升了表现，未来可扩展到更多资产类别和实时交易中。以上就是本次分享的全部内容，感谢大家的聆听，欢迎提问。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">量化投资</span></li>
+<li><span class="wikilink">统计套利</span></li>
+<li><span class="wikilink">路径签名</span></li>
+<li><span class="wikilink">配对交易</span></li>
+<li><span class="wikilink">分段签名</span></li>
+<li><span class="wikilink">增量协变</span></li>
+<li><span class="wikilink">夏普比率</span></li>
+<li><span class="wikilink">量化投资研究</span></li>
+<li><span class="wikilink">投资策略</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>大家好，今天分享一个配对交易的新工具。我们通过分解路径签名，构建了双重过滤器策略，核心是两个新指标，分段签名c用来过滤资产间的非线性交互增量协变d则用来判断他们的运动方向是否一致。传统对交交依赖线性性基难以深捉，复杂杂非线性性系系现非非线性方法，要么忽略短期互动，么么非深度学习，那依缺乏可相例直直看一简简单例直直条资产价格路径维出了一个线线性系系么？是来量变积，它直观观度度量了他之之间非线性交互。我们将二阶签名分解为两部分，a是来维面积代表非线性交互。 A是增量协变，反映同向或反向交互，直接使用原始签名会会歧义。在直更杂杂的系分直路径对多次交叉，这时来回面积的正负部分可能相互抵消，从而掩盖了真实的交互强度。这正是问题所在，如图所示，上下波动的路径与直线为出的镜面积可能很小，但实际交互非常频繁，原始来围面积a失效了。因此，我们引入了分段签名c他通过识别路径与弦线的所有焦点将大区间分割，这样就能消除正负抵消。C值越小，代表交互越强，如何找焦点呢？好，我们采用线性差置法。当相邻两个点的价格位于弦线两侧时，就判定存在一个焦点，从而进行分段策略。框架如下，首先计算标准化价差，第一重过滤器要求分段签名c小于阈值，确保强交护。第二重要就是求增量协变d大于零，确保同向运动。我们在中美期货的五组配对中进行测试使用。二零二四年十一到十二月的分钟数据，并预先筛选相关性和赫斯特指数对比了四种策略版本，这是价差、均值、回复性的检验。以金属期货为例，其赫斯特指数小于零点五，证实了价差的平稳性，适合进行配对交易。来看金属期货组的结果，我们的SE杠SIG杠DIFF策略，其夏普比率显著高于其他基线策略，同时最大回撤也更低。 Two从累计收益曲线可以清晰看到带有双重过滤器的策略，也就是这条蓝线持续领先于其他策略，表现最为稳健，结果具有稳健性和统计显著性。在九组不同参数下，我们的策略夏普提升始终最高JK闷末检验的p值远小于零点零五。例如，鸡canandas ties i配对的p值低至四点四乘以十的负三十三次方警接来说，分段签名和增量协变提供了可解释的非线性信号，双重过滤器策略显著提升了表现，未来可扩展到更多资产类别和实时交易中。以上就是本次分享的全部内容，感谢大家的聆听，欢迎提问。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

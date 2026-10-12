@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python绘制QQ图验证正态分布｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2022-11-02_Python绘制QQ图验证正态分布_7161358877458500899.md · 发布于 2026-10-12 09:20:07</div><nav class="page-links"><a href="https://www.douyin.com/video/7161358877458500899" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>Python绘制QQ图验证正态分布</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7161358877458500899">https://www.douyin.com/video/7161358877458500899</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+讲解使用Python的probplot函数绘制QQ图，通过分位数对比判断工行股价是否近似正态分布，直观诊断数据分布特征。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>QQ图原理与判断标准</strong>
+QQ图是一种概率分布图，通过将两个概率分布相互作图来比较分布特征。纵坐标为样本分位数，横坐标为标准正态分布分位数。当散点落在直线y=x附近时，说明样本符合正态分布；直线斜率代表样本标准差，截距代表样本均值。多数数据分位数值介于负二到二之间时，说明两个样本分布接近完美相关，QQ图比直方图更具诊断性。</p>
+</li>
+<li>
+<p><strong>工行股价案例与源码实现</strong>
+以验证工行股票价格是否近似正态分布为例，横坐标设标准正态分布分位数，纵坐标为工行价格分位数。源码需调用statsmodels库中的probplot函数，导入依赖包后将数据转为百分比，设置八乘四网格画布和子图111，以标准正态分布为对比进行绘制。运行结果中所有点落在红线上表示完美正态分布，工行股价数据分布为近似正态分布。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. QQ图概念引入</h3>
+<p>本节课学习使用Python绘制QQ图。大家还记得我们前面课程绘制过股票价格分布的直方图，当时我们说这只股票的价格分布是近似正态分布的，当时我们使用肉眼观察它的对称性得出的结论。那么有没有一种更精确的方法来判断它是否近似正态分布呢？QQ图就是实现这种对比的一种方法。QQ图是一种概率分布图，通过将两个概率分布相互作图来比较两个概率分布的图形化方法。QQ图本质是一种分布图，纵坐标为某一样本的分位数，横坐标为另一个样本的分位数。</p>
+<h3>2. 工行案例与判断标准</h3>
+<p>回到之前的例子，如果我们要验证工行的股票价格分布是否近似正态分布，那么我们就可以设置横坐标为标准正态分布的分位数，纵坐标为工行价格的分位数。如果散点图落在直线y等于x附近，也就是图中这条红线，就说明纵坐标的样本符合正态分布，并且直线斜率代表样本标准差，截距代表样本均值。当所有点都完全落在红线上，说明数据分布与正态分布完美契合。当多数数据在分位数值介于负二到二之间时，说明两个样本的分布接近于完美相关。由此可见，我们所研究的工行股票价格数据，其分布是近似正态分布的。</p>
+<h3>3. 源码讲解与总结</h3>
+<p>我们来看一下源码绘制QQ图，需要调用在pandas中的statsmodels用到的绘图函数，是probplot。代码的前两行导入相应的依赖包。第三行表示将data中的数据都转为百分比。第四行表示绘图的画布是一个八乘四的网格。第五行表示向画布中添加唯一的子图，代码111表示这是唯一的子图。第六行调用statsmodels中的probplot函数绘制QQ图，这里作为对比的分布是标准正态分布。最后一行将图像绘制出来。最后做个总结，QQ图通常比比较样本的直方图更具有诊断性，通常用于将数据集合理论模型进行比较。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">QQ图</span></li>
+<li><span class="wikilink">正态分布</span></li>
+<li><span class="wikilink">probplot</span></li>
+<li><span class="wikilink">量化投资</span></li>
+<li><span class="wikilink">股票价格</span></li>
+<li><span class="wikilink">量化投资教程</span></li>
+<li><span class="wikilink">股票市场</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>本节课学习使用python绘制QQ图。大家还记得我们前面课程绘制过股票价格分布的直方图。当时我们说这只股票的价格分布是近似正态分布的。当时我们使用肉眼观察它的对称性得出的结论。那么有没有一种更精确的方法来判断它是否近似正态分布呢？ Qq图就是实现这种对比的一种方法。 Qq图是一种概率分布图，通过将两个概率分布相互作图来比较两个概率分布的图形化方法。Qq图本质是一种分布图，纵坐标为某一样本的分位数。纵坐标是另一个样本的分位数。回到之前的例子，如果我们要验证工行的股票价格分布是否近似正态分布，那么我们就可以设置横坐标为标准正态分布的分位数。纵坐标为工行价格的分位数，如果散点图落在直线y等于x附近，也就是图中这条红线，就说明纵坐标的样本符合正态分布，并且直线斜率代表样本标准差截距。代表样本均值，我们来看一下源码绘制QQ图，需要调用在pad中的status用到的绘图函数，是prob plot代码的前两行，导入相应的依赖包。第三行表示，将data中的数据都转为百分比。第四行表示，绘图的画布是一个八乘四的网格。第五行表示，向画布中添加唯一的子图代码幺幺幺表示这是唯一的指图。第六行调用status中的probper plot函数绘制qq图。这里作为对比的分布是标准正态分布，那么表示标准正态分布最后一行将图像绘制出来看一下运行结果。当所有点都完全落在红线上，说明数据分布与正态分布完美。对，应当多数数据在分位数值介于负二到二之间时，说明两个样本的分布接近于完美相关。由此可见，我们所研究的工行股票价格数据，其分布是近似状态分布的。最后做个总结，qq图通常比比较样本的直方图更具有诊断性，通常用于将数据集合理论模型进行比较。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

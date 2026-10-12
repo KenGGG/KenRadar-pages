@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ETF轮动策略：组合构建比信号更重要｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-10-12_ETF轮动策略：组合构建比信号更重要_7644234963411324166.md · 发布于 2026-10-12 09:20:08</div><nav class="page-links"><a href="https://www.douyin.com/video/7644234963411324166" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>ETF轮动策略：组合构建比信号更重要</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7644234963411324166">https://www.douyin.com/video/7644234963411324166</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+全球ETF复合动量策略直接追涨在2021-2024年亏损35.5%，加入分散化选股与风险平价配权后收益转为69.3%，说明Alpha主要来自组合构建而非动量信号本身。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>动量信号有效但组合构建才是关键</strong>
+研究使用20/60/120日复合动量对12只全球ETF排序并每月换仓，信号本身能够有效识别阶段性强势品种。但纯追热点的等权组合在2021-2024年震荡市中亏损35.5%，最大回撤达53.1%，根源在于排名靠前的ETF往往集中在同一板块，相关性过高导致趋势反转时回撤加倍。</p>
+</li>
+<li>
+<p><strong>分散化选股叠加风险平价大幅改善绩效</strong>
+在不改变动量排序信号的前提下，仅调整组合构建方式：每类资产至多选一只且两两相关性低于0.75，同时采用风险平价或最小方差计算权重。优化后全样本总收益约69.3%，年化夏普比率0.79，最大回撤降至23.4%，显著优于静态等权基准的24%收益，策略样本外至2024年7月仍保持稳定表现。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 研究背景与问题</h3>
+<p>看这条净值曲线，全球ETF轮动策略能赚钱吗？本研究将揭示一个关键瓶颈与破解之道。我们发现静态配置在全球市场轮动中常常失效，因此聚焦两个核心命题：复合动量能否识别阶段强势？策略亏损的瓶颈究竟在信号还是在组合构建？</p>
+<h3>2. 策略回测与结果</h3>
+<p>我们回测覆盖了十二只跨境与行业ETF，包括A股、美股、日股和欧股，根据月末调仓并假设单边交易费率为万分之一。根据全样本绩效对照表，静态等权基准的收益约为百分之二十四，而本策略在优化后实现了近百分之七十的总收益，夏普比率也提升至零点七九，这是策略的主净值曲线。可以看到，经过优化后的策略净值稳步上行，超越了静态配置基准，并且在二零二二年的市场回调中表现出了更好的韧性。</p>
+<h3>3. 失败原因与解决方案</h3>
+<p>通过四宫格分策略对照，我们能清晰看到不同模块的贡献：纯追热度的策略净值长期低迷，而加入分散化选股与风险平价配权后，绩效得到了根本性改善。为什么纯追热度会失败？它在二零二二年初同步跳水，长期亏损约百分之三十五点五，最大回撤深达百分之五十三。这是因为排名靠前的ETF常属于同一板块，相关性集中，导致反转时回撤加倍。我们的破解方法是分散化选股加稳健配权，通过控制相关性，同信号下策略收益从负百分之三十五点五转为正百分之七点三。采用风险平价或最小方差配权，全样本收益可达约百分之六十九，夏普比零点七九。</p>
+<h3>4. 样本外验证与结论</h3>
+<p>我们将策略样本外扩展至二零二四年七月以后，如图中PPO曲线所示，策略在近期市场中继续保持了稳健的表现，初步验证了其样本外的有效性。我们推荐的方案是用相关性过滤分散选股，复合动量信号权重为零点五、零点三、零点二，最后采用风险平价配权，全样本收益百分之六十九点三，夏普零点七九。局限在于费率假设较简单，因为样本期约四点五年。结论是，复合动量能够刻画全球ETF的阶段性强势，但纯追高会导致集中风险亏损约百分之三十五，而分散化选股结合稳健配权可带来约百分之六十九的收益，显著优于基准。核心其实在于阿尔法主要来自组合构建，而非动量公式本身。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">股票市场</span></li>
+<li><span class="wikilink">量化分析</span></li>
+<li><span class="wikilink">ETF轮动</span></li>
+<li><span class="wikilink">复合动量</span></li>
+<li><span class="wikilink">风险平价</span></li>
+<li><span class="wikilink">组合构建</span></li>
+<li><span class="wikilink">分散化选股</span></li>
+<li><span class="wikilink">量化策略研究</span></li>
+<li><span class="wikilink">投资策略</span></li>
+<li><span class="wikilink">资产配置</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li>暂无明确资产、产品或地点</li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>看这条净值曲线全球ETF轮动策略能赚钱吗？本研究将揭示一个关键瓶颈与破解之道，我们发现静态配置在全球市场轮动中常常失效。因此，本研究聚焦两个核心命题，复合动量能否识别阶段强势策略亏损的瓶颈，究竟在信号还是在组合构建？我们回测覆盖了十二只跨境与行业ETF,包括a股、美股、日股和o股。根据月末调仓并假设单边交易费率为万分之一，根据全样本绩效对照表，静态等全基准的收益约为百分之二十四，而本策略在优化后实现了近百分之七十的总收益，夏普比率也提升至零点七九，这是策略的主净值曲线。可以看到，经过优化后的策略，净值稳步上行包著，超越了近济静态配置基准，并且在二零二二年的市场回调中表现出了更好的韧性。通过四宫格分策略对照，我们能清晰看到不同模块的贡献，纯追热度的策略净值长期低迷，而加入分散化选股与风险评价配权后，绩效得到了根本性改善。为什么纯追热度会失败？他在二零二二年初同步跳水，长期亏损约百分之三十五点五，最大回撤深达百分之五十三。这是因为排名靠前的ETF常属于同一板块，相关性集中，导致反转时回撤加倍。我们的破解方法是分散化选股加稳健配权，通过控制相关性同信号下策略收益从负百分之三十五点五转为正百分之七点三。采用风险评价获最小方差配权，全样本收益可达约百分之六十九。夏普比零点七九，我们将策略样本外扩展至二零二四年。七月以后，如图中PPO曲线所示，而策略在近期市场中继续保持了稳健的表现，初步验证了其样本外的有效性。我们推荐的方案是用相关性过滤分散选股负荷动量信号权重为零点五零点三零点二。最后采用风险评价配权，全样本收益百分之六十九点三。夏普零点七九。局限在于费率，假设较简单，因为样本期约四点五年。结论是，复荷动量能够刻画全球ETF的阶段性强势，但纯追高会导致集中风险亏损约百分之三十五，而分散化选股结合稳健配权可带来约百分之六十九的收益显著优于基准。核心其实在于阿尔法主要来自组合构建，而非动量公式本身。</p>
+</blockquote>
+</details></main>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>用ChatGPT搭建的量化回测系统演示｜KenRadar</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f7f5; color: #202124; }
+    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
+    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
+    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
+    h1, h2, h3 { line-height: 1.25; color: #111827; }
+    h1 { font-size: 30px; margin: 24px 0 16px; }
+    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h3 { font-size: 17px; margin-top: 24px; }
+    p, li { font-size: 16px; line-height: 1.8; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
+    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
+    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
+    .meta { color: #6b7280; font-size: 13px; }
+    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
+    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
+    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
+    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
+    details.transcript[open] summary { margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2023-03-13_用ChatGPT搭建的量化回测系统演示_7210059221948288296.md · 发布于 2026-10-12 09:20:07</div><nav class="page-links"><a href="https://www.douyin.com/video/7210059221948288296" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
+  <main><h1>用ChatGPT搭建的量化回测系统演示</h1>
+<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7210059221948288296">https://www.douyin.com/video/7210059221948288296</a>）</p>
+<h2>一、内容简述</h2>
+<h3>（一）一句话结论</h3>
+<blockquote>
+<p><strong>一句话结论</strong>
+博主分享用ChatGPT生成的量化回测系统，支持自定义股票池和交易策略，运行MACD双均线策略展示回测结果。</p>
+</blockquote>
+<h3>（二）核心内容</h3>
+<ol>
+<li>
+<p><strong>系统功能与操作演示</strong>
+博主展示了一个由ChatGPT生成全部代码的量化回测系统，目前仅支持回测功能，用户需自行定义股票池（股票代码和名称存入字典），设定回测区间和交易策略后即可运行。系统采用GUI界面，可更新历史数据至当日最新，支持选择股票、设置回测日期，并内置MACD双均线经典策略，回测结果包含BackTrader输出的技术指标图表和详细交易日志。</p>
+</li>
+<li>
+<p><strong>系统局限与理性评价</strong>
+博主强调该系统距离实用仍有较大差距，更换策略或股票后收益率可能显著恶化。他认为GPT的编程能力确实不错，但要搭建真正可用的系统，还需配合选股择时、风险控制等环节，这些关键环节仍需依赖人的智慧，无法完全交由AI完成。</p>
+</li>
+</ol>
+<h2>二、分段原文</h2>
+<blockquote>
+<p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
+</blockquote>
+<h3>1. 系统介绍与代码来源</h3>
+<p>大家好，今天来给大家分享一个我用ChatGPT开发的量化回测系统，所有的代码都是由ChatGPT生成的。我只负责运行和调试。这个系统目前只有回测功能，股票池是需要用户自定义的，所有股票的代码和名称保存在这个字典里就可以了。接下来只要确定了回测区间和交易策略，就可以直接运行，看到回测结果了。我这里用到的交易策略也是由ChatGPT编写的，最后回测结果包含了图像和交易结果。</p>
+<h3>2. GUI操作与回测演示</h3>
+<p>好了，我们来看一下运行效果，这是GUI界面的启动程序，点击运行就启动了我们的量化回测系统。第一个组件询问是否要更新股票池中所有股票的历史数据，更新就是更新到当日最新，我们选择不更新，不点也是不执行。然后我们在这个股票池里，你点选一个股票，就这个吧。选择回测区间开始日期，我们选择2020年1月1日，结束日期选择今天，这个日期也是自动更新的。接下来选择交易策略，选择MACD，这是一个比较经典的双均线策略。我们运行看一下结果，这个图像是调用BackTrader的输出结果，这个图上的信息还是挺多的，包含了交易信号、技术指标、股票的价格，还有最终的仓位。我们关掉图像，来看一下交易日志，最后这里还显示了收益率。到这里，看起来好像还不错，感觉这个系统马上就能用了是吧？</p>
+<h3>3. 系统局限与总结</h3>
+<p>但其实还差的很远，我们换个策略或者换只股票，收益率可能就差得非常多了。总的来说，GPT的编程能力不错，但是要搭建一个能用的系统，除了编写交易策略，还需要配合一些选股择时风险控制，这些都还是要依赖人的智慧才行。好了，今天的分享就到这里，大家如果有什么想交流的，欢迎评论区留言，想要源码的也可以在评论区找到我。</p>
+<h2>三、知识关联</h2>
+<h3>来源与类型</h3>
+<ul>
+<li><span class="wikilink">量化Quantgirl</span></li>
+<li><span class="wikilink">抖音</span></li>
+<li><span class="wikilink">视频笔记</span></li>
+<li><span class="wikilink">KenRadar</span></li>
+</ul>
+<h3>相关主题</h3>
+<ul>
+<li><span class="wikilink">AI产业</span></li>
+<li><span class="wikilink">ChatGPT</span></li>
+<li><span class="wikilink">量化回测</span></li>
+<li><span class="wikilink">MACD策略</span></li>
+<li><span class="wikilink">Python编程</span></li>
+<li><span class="wikilink">BackTrader</span></li>
+<li><span class="wikilink">AI应用工具分享</span></li>
+<li><span class="wikilink">股票市场</span></li>
+<li><span class="wikilink">投资策略</span></li>
+</ul>
+<h3>人物</h3>
+<ul>
+<li>暂无明确人物</li>
+</ul>
+<h3>相关机构/公司</h3>
+<ul>
+<li>暂无明确机构或公司</li>
+</ul>
+<h3>历史事件</h3>
+<ul>
+<li>暂无明确历史事件</li>
+</ul>
+<h3>资产/产品/地点</h3>
+<ul>
+<li><span class="wikilink">BackTrader AI</span></li>
+</ul>
+<details class="transcript"><summary>四、视频原始转录</summary>
+<blockquote>
+<p>[!quote]- 展开查看原始转录
+以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
+<p>Hello,大家好，今天来给大家分享一个我用亲爱的GPT开发的量化回测系统，所有的代码都是由恰恰GPT生成的。我只负责运行和调试效g这个系统目前只有回测功能，股票池是需要用户自定义的，所有股票的代码和名称保存在这个字典里就可以了。接下来只要确定了回测区间和交易策略，就可以直接运行。看到回测结果了，我这里用到的交易策略也是由恰TGPT编写的。最后回测结果包含了图像和交易结果。好了，我们来看一下运行效果，这是GUI界面的启动程序。点击运行就启动了我们的量化回测系统。第一个组件询问是否要更新股票池中所有股票的历史数据更新就是更新到当日最新，我们选择不更新，我们不点也问是否是不执行。然后我们在这个股票池里，你点选一个股票，就这个吧。选择回撤区间开始日期，我们选择二零二零年一月一日结束日期，选择今天这个日期也是自动更新的。接下来选择交易策略，选择mac d这是一个比较经典的双均线策略。我们运行看一下结果，这个图像是调用back trader的输出结果，这个图上的信息还是挺多的，包含了交易信号，技术指标股票的价格，还有最终的这个仓位。我们关掉图像，来看一下交易日志。最后这里还显示了收益率，到这里，看起来好像还不错，感觉这个系统马上就能用了，是吧？但其实还差的很远，我们换个策略或者换只股票，收益率可能就差的非常多了。总的来说，GPT的编程能力不错，但是要搭建一个能用的系统，除了编写交易策略，还需要配合一些选股择时风险控制，这些都还是要依赖人的智慧才行。好了，今天的分享就到这里，大家如果有什么想交流的，欢迎评论区留言，想要源码的也可以在评论区找到我。</p>
+</blockquote>
+</details></main>
+</body>
+</html>
