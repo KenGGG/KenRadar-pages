@@ -8,3 +8,4 @@
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 button{min-width:44px}.topbar nav a{display:inline-flex;align-items:center;min-height:44px}.toc{max-height:calc(100vh - 125px);overflow:auto}.toc a{min-height:44px;display:flex;align-items:center}
 @media(max-width:768px){.filters input{font-size:16px}}
+.topic-row button{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px}.topic-row button small{margin-left:0}
