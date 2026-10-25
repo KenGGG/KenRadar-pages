@@ -1,47 +1,22 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CAPM模型原理及Python实现讲解｜KenRadar</title>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f5; color: #202124; }
-    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
-    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
-    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
-    h1, h2, h3 { line-height: 1.25; color: #111827; }
-    h1 { font-size: 30px; margin: 24px 0 16px; }
-    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
-    h3 { font-size: 17px; margin-top: 24px; }
-    p, li { font-size: 16px; line-height: 1.8; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
-    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
-    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
-    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-    .meta { color: #6b7280; font-size: 13px; }
-    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
-    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
-    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
-    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
-    details.transcript[open] summary { margin-bottom: 18px; }
-  </style>
-</head>
-<body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2023-01-02_CAPM模型原理及Python实现讲解_7183894549779975476.md · 发布于 2026-10-12 11:35:11</div><nav class="page-links"><a href="https://www.douyin.com/video/7183894549779975476" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>CAPM模型原理及Python实现讲解</h1>
-<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7183894549779975476">https://www.douyin.com/video/7183894549779975476</a>）</p>
-<h2>一、内容简述</h2>
-<h3>（一）一句话结论</h3>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><meta name="description" content="讲解线性模型在金融领域的优势，介绍CAPM资本资产定价模型原理，并展示用Python线性回归实现计算贝塔系数的方法。">
+<title>CAPM模型原理及Python实现讲解｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<script defer src="../../../assets/site.js"></script></head>
+<body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
+<nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
+<main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>CAPM模型原理及Python实现讲解</h1><p class="muted">量化Quantgirl · douyin · 视频发布于 2023-01-02 11:40:04</p><nav class="page-links"><a href="https://www.douyin.com/video/7183894549779975476" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 线性模型在金融领域的优势</a><a href="#section-6">2. CAPM模型原理介绍</a><a href="#section-7">3. Python实现CAPM模型</a><a href="#section-8">三、知识关联</a><a href="#section-9">来源与类型</a><a href="#section-10">相关主题</a><a href="#section-11">人物</a><a href="#section-12">相关机构/公司</a><a href="#section-13">历史事件</a><a href="#section-14">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a></details><div class="article-copy"><p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7183894549779975476">https://www.douyin.com/video/7183894549779975476</a>）</p>
+<h2 id="section-1">一、内容简述</h2>
+<h3 id="section-2">（一）一句话结论</h3>
 <blockquote>
-<p><strong>一句话结论</strong>
+<p><strong>一句话结论 · 内容来源的摘要</strong>
 讲解线性模型在金融领域的优势，介绍CAPM资本资产定价模型原理，并展示用Python线性回归实现计算贝塔系数的方法。</p>
 </blockquote>
-<h3>（二）核心内容</h3>
+<h3 id="section-3">（二）核心内容</h3>
 <ol>
 <li>
 <p><strong>线性模型在金融领域的两大优势</strong>
@@ -52,25 +27,25 @@
 CAPM模型研究证券预期收益率与风险资产之间的关系，是现代金融价格理论的支柱。公式中，Ri表示证券预期收益率，Rf为无风险利率，β_i衡量证券无法被分散的系统性风险，Rmkt为预期市场回报率。单个证券期望收益率由无风险利率和风险溢价两部分组成。风险溢价取决于贝塔系数，贝塔值越高，风险越高，补偿也越高。通过Python的statsmodels库进行线性回归，斜率即贝塔系数，代表证券系统性风险高低。</p>
 </li>
 </ol>
-<h2>二、分段原文</h2>
+<h2 id="section-4">二、分段原文</h2>
 <blockquote>
 <p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
-<h3>1. 线性模型在金融领域的优势</h3>
+<h3 id="section-5">1. 线性模型在金融领域的优势</h3>
 <p>Hello，大家好，从今天起，我们就进入到本书第二章内容的学习，金融中的线性问题。今天的课程只有两个内容。首先我们来看一看，在金融领域中，应用线性模型有哪些优势？第一个，线性模型非常简单，搭建也很简单，但是它却有着非常广泛的应用，能解决非常多的实际问题，比如资产证券定价。稍后我们将以CAPM模型为例，为大家展示线性模型是如何工作的。除此之外，线性模型还被用于解决最优资产配置问题。简单易解，是线性模型最突出的优点。线性模型的另一个优势是可以确保得到一个全局最优解。而在解决实际的金融问题时，找到全局最优解，也就意味着找到了最佳的投资方案。以上就是我们要介绍的线性模型在金融领域中的两个主要优势。</p>
-<h3>2. CAPM模型原理介绍</h3>
+<h3 id="section-6">2. CAPM模型原理介绍</h3>
 <p>接下来我们来看一看今天的课程内容，首个非常有名的线性模型，CAPM，资本资产定价模型。CAPM主要研究证券市场中资产的预期收益率和风险资产之间的关系，以及均衡价格是如何形成的，是现代金融市场价格理论的支柱，广泛应用于投资决策和公司理财领域。从公式上来看，就是一个非常简单的线性模型，只有四个项等号。左边的Ri表示证券i的预期收益率。等号右边的第一项，Rf表示无风险利率。等号右边的第二项是一个乘积的形式，其中β_i表示证券i的贝塔系数，贝塔系数衡量的是证券i无法被分散的系统性风险。Rmkt表示的是预期的市场回报率。到这里，我们对CAPM模型就可以这样解释：单个证券的期望收益率由两部分组成，无风险利率以及对所承担风险的补偿，即风险溢价。风险溢价的大小取决于该证券的贝塔系数，贝塔值越高，表明单个证券的风险越高，所得到的补偿也越高。</p>
-<h3>3. Python实现CAPM模型</h3>
+<h3 id="section-7">3. Python实现CAPM模型</h3>
 <p>下面我们通过代码来简单实现一下。首先导入相应的依赖包statsmodels。第二行stock_returns表示股票的收益率，也就是因变量。而第三行market_returns表示预期的市场收益率，也就是自变量Rmkt。调用statsmodels中的线性回归函数，就可以得到阿尔法和贝塔，分别表示线性函数的截距和斜率。在这个例子中，我们主要关注的是斜率贝塔系数，大小就代表了该证券的系统性风险高低。</p>
-<h2>三、知识关联</h2>
-<h3>来源与类型</h3>
+<h2 id="section-8">三、知识关联</h2>
+<h3 id="section-9">来源与类型</h3>
 <ul>
 <li><span class="wikilink">量化Quantgirl</span></li>
 <li><span class="wikilink">抖音</span></li>
 <li><span class="wikilink">视频笔记</span></li>
 <li><span class="wikilink">KenRadar</span></li>
 </ul>
-<h3>相关主题</h3>
+<h3 id="section-10">相关主题</h3>
 <ul>
 <li><span class="wikilink">AI产业</span></li>
 <li><span class="wikilink">CAPM</span></li>
@@ -82,11 +57,11 @@ CAPM模型研究证券预期收益率与风险资产之间的关系，是现代�
 <li><span class="wikilink">股票市场</span></li>
 <li><span class="wikilink">资产配置</span></li>
 </ul>
-<h3>人物</h3>
+<h3 id="section-11">人物</h3>
 <ul>
 <li>暂无明确人物</li>
 </ul>
-<h3>相关机构/公司</h3>
+<h3 id="section-12">相关机构/公司</h3>
 <ul>
 <li><span class="wikilink">介绍CAPM资本</span></li>
 <li><span class="wikilink">能解决资产证券</span></li>
@@ -97,20 +72,22 @@ CAPM模型研究证券预期收益率与风险资产之间的关系，是现代�
 <li><span class="wikilink">比如资产证券</span></li>
 <li><span class="wikilink">CAPM主要研究证券</span></li>
 </ul>
-<h3>历史事件</h3>
+<h3 id="section-13">历史事件</h3>
 <ul>
 <li>暂无明确历史事件</li>
 </ul>
-<h3>资产/产品/地点</h3>
+<h3 id="section-14">资产/产品/地点</h3>
 <ul>
 <li>暂无明确资产、产品或地点</li>
 </ul>
-<details class="transcript"><summary>四、视频原始转录</summary>
+<div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
 <p>[!quote]- 展开查看原始转录
 以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
 <p>Hello,大家好，从今天起，我们就进入到本书第二章内容的学习金融中的线性问题。今天的课程只有两个内容。首先我们来看一看在金融领域中，应用线性模型有哪些优势？第一个线性模型非常简单，搭建也很简单，但是它却有着非常广泛的应用，能解决非常多的实际问题。比如资产证券定价。稍后我们将以camp模型为例，为大家展示线性模型是如何工作的。除此之外，线性模型还被用于解决最优资产配置问题。简单易解，是线性模型最突出的优点。线性模型的另一个优势是可以确保得到一个全局最优解。而在解决实际的金融问题时，找到全局最优解，也就意味着找到了最佳的投资方案。以上就是我们要介绍的线性模型在金融领域中的两个主要优势。接下来我们来看一看今天的内角首个非常有名的线性模型。 Camp CAPM资本资产定价模型camp主要研究证券市场中资产的预期收益率和风险资产之间的关系以及均衡价格是如何形成的，是现代金融市场价格理论的支柱，广泛应用于投资决策和公司理财领域。从公式上来看，就是一个非常简单的线性模型，只有四个项等式。左边的向RI表示，证券i的预期收益率等式右边的第一项RF表示，无风险利率等式右边的第二项是一个乘积的形式，其中贝塔i表示正确。 I的贝塔系数贝塔系数衡量的是证券爱无法被分散的系统性风险。 Ermkt表示的是预期的市场回报率，到这里我们对看p模型就可以这样解释。单个证券的期望收益率由两部分组成，无风险利率以及对所承担风险的补偿及风险溢价。风险溢价的大小取决于该证券的贝塔系数贝塔值越高，表明单个证券的风险越高，所得到的补偿也越高。下面我们通过代码来简单实现一下。首先导入相应的依赖包status.第二行stock returns表示，股票的收益率也就是因变量。而i第三行market returns表示，预期的市场收益率也就是自变量EMRKT,调用status中的线性回归函数就可以得到阿尔法和贝塔分别表示线性函数的截距和斜率。在这个例子中，我们主要关注的是斜率贝塔期值大小就代表了该证券的系统性风险高低。</p>
 </blockquote>
-</details></main>
-</body>
-</html>
+</details></div></div></article><section id="related" data-topics="[&quot;AI产业&quot;, &quot;CAPM&quot;, &quot;资本资产定价模型&quot;, &quot;贝塔系数&quot;, &quot;线性模型&quot;, &quot;量化投资&quot;, &quot;Python&quot;, &quot;股票市场&quot;, &quot;资产配置&quot;]" data-current="notes/douyin/量化Quantgirl/2023-01-02_CAPM模型原理及Python实现讲解_7183894549779975476.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 线性模型在金融领域的优势</a><a href="#section-6">2. CAPM模型原理介绍</a><a href="#section-7">3. Python实现CAPM模型</a><a href="#section-8">三、知识关联</a><a href="#section-9">来源与类型</a><a href="#section-10">相关主题</a><a href="#section-11">人物</a><a href="#section-12">相关机构/公司</a><a href="#section-13">历史事件</a><a href="#section-14">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-25 21:49</span></footer>
+<nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
+<dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
+<script id="kr-metadata" type="application/json">{"title": "CAPM模型原理及Python实现讲解", "relative_url": "notes/douyin/量化Quantgirl/2023-01-02_CAPM模型原理及Python实现讲解_7183894549779975476.html", "platform": "douyin", "creator": "量化Quantgirl", "external_content_id": "7183894549779975476", "published_at": "2023-01-02 11:40:04", "topics": ["AI产业", "CAPM", "资本资产定价模型", "贝塔系数", "线性模型", "量化投资", "Python", "股票市场", "资产配置"], "summary": "讲解线性模型在金融领域的优势，介绍CAPM资本资产定价模型原理，并展示用Python线性回归实现计算贝塔系数的方法。", "source_url": "https://www.douyin.com/video/7183894549779975476"}</script></body></html>

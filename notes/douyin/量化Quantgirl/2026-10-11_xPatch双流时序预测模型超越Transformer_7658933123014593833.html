@@ -1,47 +1,22 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>xPatch双流时序预测模型超越Transformer｜KenRadar</title>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f5; color: #202124; }
-    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
-    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
-    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
-    h1, h2, h3 { line-height: 1.25; color: #111827; }
-    h1 { font-size: 30px; margin: 24px 0 16px; }
-    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
-    h3 { font-size: 17px; margin-top: 24px; }
-    p, li { font-size: 16px; line-height: 1.8; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
-    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
-    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
-    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-    .meta { color: #6b7280; font-size: 13px; }
-    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
-    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
-    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
-    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
-    details.transcript[open] summary { margin-bottom: 18px; }
-  </style>
-</head>
-<body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-10-11_xPatch双流时序预测模型超越Transformer_7658933123014593833.md · 发布于 2026-10-12 11:35:12</div><nav class="page-links"><a href="https://www.douyin.com/video/7658933123014593833" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>xPatch双流时序预测模型超越Transformer</h1>
-<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7658933123014593833">https://www.douyin.com/video/7658933123014593833</a>）</p>
-<h2>一、内容简述</h2>
-<h3>（一）一句话结论</h3>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><meta name="description" content="AAAI 2025录用论文提出xPatch，采用CNN+MLP双流架构替代Transformer，基于指数移动平均分解趋势与季节分量，预测精度超越PatchTST等模型，训练推理速度提升近5倍。">
+<title>xPatch双流时序预测模型超越Transformer｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<script defer src="../../../assets/site.js"></script></head>
+<body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
+<nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
+<main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>xPatch双流时序预测模型超越Transformer</h1><p class="muted">量化Quantgirl · douyin · 视频发布于 2026-07-05 14:52:19</p><nav class="page-links"><a href="https://www.douyin.com/video/7658933123014593833" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. xPatch模型概述与动机</a><a href="#section-6">2. 双流架构设计细节</a><a href="#section-7">3. 分块操作与网络结构</a><a href="#section-8">4. 损失函数与学习率调度</a><a href="#section-9">5. 实验结果与性能对比</a><a href="#section-10">三、知识关联</a><a href="#section-11">来源与类型</a><a href="#section-12">相关主题</a><a href="#section-13">人物</a><a href="#section-14">相关机构/公司</a><a href="#section-15">历史事件</a><a href="#section-16">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a></details><div class="article-copy"><p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7658933123014593833">https://www.douyin.com/video/7658933123014593833</a>）</p>
+<h2 id="section-1">一、内容简述</h2>
+<h3 id="section-2">（一）一句话结论</h3>
 <blockquote>
-<p><strong>一句话结论</strong>
+<p><strong>一句话结论 · 内容来源的摘要</strong>
 AAAI 2025录用论文提出xPatch，采用CNN+MLP双流架构替代Transformer，基于指数移动平均分解趋势与季节分量，预测精度超越PatchTST等模型，训练推理速度提升近5倍。</p>
 </blockquote>
-<h3>（二）核心内容</h3>
+<h3 id="section-3">（二）核心内容</h3>
 <ol>
 <li>
 <p><strong>去注意力架构的设计动机</strong>
@@ -56,29 +31,29 @@ xPatch将单变量序列在特征提取前即分解为趋势与季节残差两�
 在十个标准长时预测数据集上的实验表明，统一回看窗口下xPatch在60%数据集取得最优MSE、70%最优MAE；超参调整后提升至70%最优MSE、90%最优MAE，平均MSE相对CARD改进5.29%，相对PatchTST改进7.87%。损失函数采用反正切缩放MAE，对远期误差给予平缓权重，配合S形学习率预热与衰减策略减少过拟合。计算开销方面，由于不使用自注意力，参数量与运算量显著降低，单步训练仅3.1ms，比CARD快4.8倍，推理快5.5倍，适合资源受限的长时预测部署场景。</p>
 </li>
 </ol>
-<h2>二、分段原文</h2>
+<h2 id="section-4">二、分段原文</h2>
 <blockquote>
 <p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
-<h3>1. xPatch模型概述与动机</h3>
+<h3 id="section-5">1. xPatch模型概述与动机</h3>
 <p>在本期我们解读xPatch，一个基于指数季节性趋势分解的双流时间序列预测模型。这篇论文提出，用指数移动平均提取趋势，让线性流处理趋势，非线性流建模季节残差。这篇论文设计了一个非Transformer的长时预测架构，它把EMA分解得到的趋势分量送入线性MLP流，季节残差送入非线性CNN流，最后凭借两种表示得到预测。作者指出，Transformer的自注意力是排列不变的位置编码，只能部分恢复时序顺序。先前的工作如DLinear已证明时序归纳偏置和分解对多数LTSF场景更重要。该工作用指数移动平均取代简单移动平均进行分解。EMA对较早观测赋予指数衰减权重，避免了SMA的边界填充和首尾偏差。</p>
-<h3>2. 双流架构设计细节</h3>
+<h3 id="section-6">2. 双流架构设计细节</h3>
 <p>作者将序列解释为平滑趋势和剩余季节分量，让后者进入非线性流，从而更快捕捉趋势变化。Patch为每个通道独立建模，屏蔽了通道间干扰。它先对每个单变量序列做EMA分解，得到趋势与季节性两个分量，随后分别送入线性流和卷积流，最后融合双流输出形成完整预测。公式上，每个单变量序列在特征提取前就被分解为趋势和季节残差，这一点与PatchTST和CARD保持一致，让本文能在无注意力条件下更干净地比较分块和通道独立性的贡献。MLP流省略激活函数，专注学习压缩的线性趋势特征。CNN流则采用分块、GLU、批量归一化和深度可分离卷积捕捉非线性周期模式。线性趋势流从分解后的趋势分量中提取结构化表示，因为趋势往往是平滑且接近线性的，简单的线性变换足以建模其长期走向。这一流没有非线性激活，避免了不必要的复杂度，同时把容量留给季节流去处理复杂的波动。</p>
-<h3>3. 分块操作与网络结构</h3>
+<h3 id="section-7">3. 分块操作与网络结构</h3>
 <p>在非线性流中，分块操作把每个单变量的季节残差展开成子序列token，让重复的季节模式更突出。作者采用块长16、步长8，与PatchTST、Xt和CARD一致。CNN流使用分组数等于通道数的深度卷积，让每个分块通道拥有专属时序滤波器，并设置大小等于块长的残差路径跨越深度可分离阶段，在保留原始嵌入的同时学习周期变换。CNN输出被展平后送入一个两层线性MLP头。这一设计借鉴了PatchTST，先扩展隐藏维度并应用GLU，再投影回目标长度。这样，融合后的两流表示最终被映射为多步预测，既保留了趋势的线性结构，又整合了季节的复杂变化。</p>
-<h3>4. 损失函数与学习率调度</h3>
+<h3 id="section-8">4. 损失函数与学习率调度</h3>
 <p>一带着反正切缩放的MAE损失。不同于CARD从衰减过快的权重函数，反正切系数从1逐渐逼近约0.214，提供更缓慢的时序衰减。在学习率调度上，采用平滑的sigmoid预热与衰减。前一个逻辑项平滑提低学习率，避免训练初期的动荡。后一个逻辑项在后期缓慢降低学习率，抑制长达上百轮训练中的过拟合。</p>
-<h3>5. 实验结果与性能对比</h3>
+<h3 id="section-9">5. 实验结果与性能对比</h3>
 <p>实验覆盖十个常用数据集，包括电力、交通、天气集，评估指标为MSE和MAE。在所有四个预测长度上取平均，基线包含AutoFormer、PatchTST。在统一协议下，xPatch在六十个预测场景中取得了最优结果，相对于CARD平均MSE降低了2.46%。这一结果说明，在严格控制设置下，双流分解加非线性分块卷积可以稳定超越包括最新Transformer变体在内的多种基线。进一步调整回溯长度和超参数后，xPatch在七十个场景中全面领先，相较于CARD平均MSE改善幅度达到5.29%。这表明模型在不同数据尺度和季节性强度下都具有稳健的提取能力，且能从更长回溯中持续获益。在计算开销上，xPatch由于不使用自注意力，参数量与运算量都保持较低。凭借双流设计让趋势和季节分量可以独立高效计算，对比实验显示它在训练和推理阶段都具有速度优势，适合部署在资源受限的长时预测场景中。Patch证明了分块和通道独立性无需Transformer也能获胜，CNN加MLP双流在多数基准上超越近期基于注意力的模型。</p>
-<h2>三、知识关联</h2>
-<h3>来源与类型</h3>
+<h2 id="section-10">三、知识关联</h2>
+<h3 id="section-11">来源与类型</h3>
 <ul>
 <li><span class="wikilink">量化Quantgirl</span></li>
 <li><span class="wikilink">抖音</span></li>
 <li><span class="wikilink">视频笔记</span></li>
 <li><span class="wikilink">KenRadar</span></li>
 </ul>
-<h3>相关主题</h3>
+<h3 id="section-12">相关主题</h3>
 <ul>
 <li><span class="wikilink">AI产业</span></li>
 <li><span class="wikilink">算力中心</span></li>
@@ -91,29 +66,31 @@ xPatch将单变量序列在特征提取前即分解为趋势与季节残差两�
 <li><span class="wikilink">Transformer替代</span></li>
 <li><span class="wikilink">学术论文解读</span></li>
 </ul>
-<h3>人物</h3>
+<h3 id="section-13">人物</h3>
 <ul>
 <li>暂无明确人物</li>
 </ul>
-<h3>相关机构/公司</h3>
+<h3 id="section-14">相关机构/公司</h3>
 <ul>
 <li>暂无明确机构或公司</li>
 </ul>
-<h3>历史事件</h3>
+<h3 id="section-15">历史事件</h3>
 <ul>
 <li>暂无明确历史事件</li>
 </ul>
-<h3>资产/产品/地点</h3>
+<h3 id="section-16">资产/产品/地点</h3>
 <ul>
 <li><span class="wikilink">AAAI</span></li>
 <li><span class="wikilink">Transformer AAAI</span></li>
 </ul>
-<details class="transcript"><summary>四、视频原始转录</summary>
+<div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
 <p>[!quote]- 展开查看原始转录
 以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
 <p>在本期我们解读x pat,一个基于指数季节性趋势分解的双流时间序列预测模型。这篇论文提出，用指数移动平均提取趋势，让线性流处理趋势非线性流建模季节残差。这篇论文设计了一个非transformer的常识预测架构，它把EMA分解得到的趋势分量送入线性MLP流，季节编差送入非线性CNN流。最后凭借两种表示得到预测。作者指出，transformer的自注意力是排列不变的位置编码，只能部分恢复时序顺序。先前的工作如d linear,以证明时序归偏和分解，对多数LTSF场景更重要。该工作用指数移动平均取代简单移动，平均进行分解。 Ema对较早观测指赋与指数衰减权重，避免了SMA的边界填充和首尾偏差。作者将序列解释为平滑趋势和剩余季节分量，让后者进入非线性流，从而更快捕捉趋势。变化。帕ch为每个通道独立建模屏蔽了通道间干扰。他先对每个单变量序列做EMA分解，得到趋势与季节性两个分量，两个分量，随后分别送入线性流和卷积流，最后融合流输出，形成完整的预测预测。公式上，每个单变量序列在特征提取前就被分解为趋势和季节残差，这一点与patchter和card保持一致，让本文能在无注意力条件下更干净的比较分块和通道独立性的贡献，或者有意让MLP留省略、激活函数、专注学习压缩的线性趋势特征。Cn流则采用分块在GLU批量归一化和深度可分离。卷积捕捉非线性周期模式，慢性趋势流从分解后的趋势分量中提取结构化表示，因为趋势往往是平滑且接近线性的，简单的线性变换足以建模其长期走向这一流，没有非线性激活，避免了不必要的复杂度，同时把容量留给季节流去处理复杂的波动，在非线性流中分块操作，把每个单变量的季节残差展开成子序列token,让重复的季节模式更突出。作者采用块长十六步长八与patch test xt和card一致DN流，使用分组数等于通道数的深度卷积，让每个分块通道拥有专属时序滤波器和大小等于块长残差路径跨越深度可分离阶段。在保留原始嵌入的同时，学习周期变换DNN输出，被展平后送入一个两层列LP投。这一设计借鉴了ph XT先扩展隐藏度度并应用GL,在投投回回标长长度。这样，柔合后的两流表示，最终被映射为多步预测，既保留了趋势的线性结测，既整合了季节的复杂变化，i一带着切缩放的MAE损失不同于card,从衰减过快的权重函数，反正切系数从一起逐渐b近约零点二一四提供更缓慢的时欲衰减。在学习率调度，采用平滑的sigmoid的预热与衰减。前一个逻辑项平滑提低学习率，避免训练初期的动荡。后一个逻辑项在后期缓慢降低学习率，抑制长达上百轮训练中的过拟合。在实验覆盖十个常用数据集，包括电力、交通天气集评估指标为MSE和MAE.在所有四个预测长度上，取平均基线包含autoformer patch. Tst在统一协议下，x patch在六十个预测场景中取得了最优结果，相对于card平均MSE降低了百分之二点四六。评一结果说明，在严格控制设置下，双流分解加非线性分块卷积，可以稳定超越，包括最新transformer变体在内的多种基限，进一步调整回溯长度和超参数后，x patch在七十个场景中全面领先。相较于cart平均MSE改善幅度达到百分之五点二九。这表明模型在不同数据力度和季节性强度下都具有稳健的提取能力，且能从更长回溯中持续获益。在计算开销上，x patch由于不使用自注意力参，数量与运算量都保持较低。必c双流设计让趋势和季节分量可以独立高效计算。对比实验显示，它在训练和推理阶段都具有速度优势，适合部署在资源受限的常识预测场景中，patch证明了分块和通道独立性，无需transformer,也能获胜。Cnn加MLP双流在多数基准上超越近期基于注意力的模型。</p>
 </blockquote>
-</details></main>
-</body>
-</html>
+</details></div></div></article><section id="related" data-topics="[&quot;AI产业&quot;, &quot;算力中心&quot;, &quot;xPatch&quot;, &quot;时间序列预测&quot;, &quot;指数移动平均&quot;, &quot;CNN&quot;, &quot;MLP&quot;, &quot;长时预测&quot;, &quot;Transformer替代&quot;, &quot;学术论文解读&quot;]" data-current="notes/douyin/量化Quantgirl/2026-10-11_xPatch双流时序预测模型超越Transformer_7658933123014593833.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. xPatch模型概述与动机</a><a href="#section-6">2. 双流架构设计细节</a><a href="#section-7">3. 分块操作与网络结构</a><a href="#section-8">4. 损失函数与学习率调度</a><a href="#section-9">5. 实验结果与性能对比</a><a href="#section-10">三、知识关联</a><a href="#section-11">来源与类型</a><a href="#section-12">相关主题</a><a href="#section-13">人物</a><a href="#section-14">相关机构/公司</a><a href="#section-15">历史事件</a><a href="#section-16">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-25 21:49</span></footer>
+<nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
+<dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
+<script id="kr-metadata" type="application/json">{"title": "xPatch双流时序预测模型超越Transformer", "relative_url": "notes/douyin/量化Quantgirl/2026-10-11_xPatch双流时序预测模型超越Transformer_7658933123014593833.html", "platform": "douyin", "creator": "量化Quantgirl", "external_content_id": "7658933123014593833", "published_at": "2026-07-05 14:52:19", "topics": ["AI产业", "算力中心", "xPatch", "时间序列预测", "指数移动平均", "CNN", "MLP", "长时预测", "Transformer替代", "学术论文解读"], "summary": "AAAI 2025录用论文提出xPatch，采用CNN+MLP双流架构替代Transformer，基于指数移动平均分解趋势与季节分量，预测精度超越PatchTST等模型，训练推理速度提升近5倍。", "source_url": "https://www.douyin.com/video/7658933123014593833"}</script></body></html>

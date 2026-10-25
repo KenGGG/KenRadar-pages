@@ -1,47 +1,22 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>股指期货跨期套利策略复现：EMD-ARIMA年化22.8%｜KenRadar</title>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f5; color: #202124; }
-    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
-    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
-    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
-    h1, h2, h3 { line-height: 1.25; color: #111827; }
-    h1 { font-size: 30px; margin: 24px 0 16px; }
-    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
-    h3 { font-size: 17px; margin-top: 24px; }
-    p, li { font-size: 16px; line-height: 1.8; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
-    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
-    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
-    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-    .meta { color: #6b7280; font-size: 13px; }
-    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
-    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
-    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
-    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
-    details.transcript[open] summary { margin-bottom: 18px; }
-  </style>
-</head>
-<body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-10-21_股指期货跨期套利策略复现：EMD-ARIMA年化22.8%_7699120412155841801.md · 发布于 2026-10-25 11:26:49</div><nav class="page-links"><a href="https://www.douyin.com/video/7699120412155841801" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>股指期货跨期套利策略复现：EMD-ARIMA年化22.8%</h1>
-<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7699120412155841801">https://www.douyin.com/video/7699120412155841801</a>）</p>
-<h2>一、内容简述</h2>
-<h3>（一）一句话结论</h3>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><meta name="description" content="复现2022年论文，用经验模态分解与ARIMA预测沪深股指期货跨期价差，2014-2026样本净年化22.8%，夏普1.01。EMD相比未分解版本收益提升仅0.9个百分点，并非充分来源。">
+<title>股指期货跨期套利策略复现：EMD-ARIMA年化22.8%｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<script defer src="../../../assets/site.js"></script></head>
+<body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
+<nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
+<main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>股指期货跨期套利策略复现：EMD-ARIMA年化22.8%</h1><p class="muted">量化Quantgirl · douyin · 视频发布于 2026-10-21 21:59:28</p><nav class="page-links"><a href="https://www.douyin.com/video/7699120412155841801" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 论文复现概述与策略参数</a><a href="#section-6">2. 对照实验与样本设置</a><a href="#section-7">3. 费用假设与跳空处理方式</a><a href="#section-8">4. 费率敏感性与阈值调整效果</a><a href="#section-9">5. 结论与可落地要点</a><a href="#section-10">三、知识关联</a><a href="#section-11">来源与类型</a><a href="#section-12">相关主题</a><a href="#section-13">人物</a><a href="#section-14">相关机构/公司</a><a href="#section-15">历史事件</a><a href="#section-16">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a></details><div class="article-copy"><p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7699120412155841801">https://www.douyin.com/video/7699120412155841801</a>）</p>
+<h2 id="section-1">一、内容简述</h2>
+<h3 id="section-2">（一）一句话结论</h3>
 <blockquote>
-<p><strong>一句话结论</strong>
+<p><strong>一句话结论 · 内容来源的摘要</strong>
 复现2022年论文，用经验模态分解与ARIMA预测沪深股指期货跨期价差，2014-2026样本净年化22.8%，夏普1.01。EMD相比未分解版本收益提升仅0.9个百分点，并非充分来源。</p>
 </blockquote>
-<h3>（二）核心内容</h3>
+<h3 id="section-3">（二）核心内容</h3>
 <ol>
 <li>
 <p><strong>策略框架与交易规则</strong>
@@ -56,29 +31,29 @@
 费用假设对结果影响显著：若将每腿费率从万分之0.23降至万分之0.15，EMD-ARIMA年化收益可从22.8%升至28.7%。换月跳空处理方式也直接决定净值曲线形态——若将跳空缺口的账面浮盈浮亏计入净值，策略表现会被未真正持有的价格跳变人为放大，因此复现坚持换月当天空仓且跳空不入账。2025年5月6日以来的短样本中，未分解ARIMA年化13.1%、夏普1.08，优于EMD版本的8.0%和0.61，进一步验证EMD并非收益提升的充分来源。该策略的日频框架可直接应用，但投资者需能承受约-36%的历。</p>
 </li>
 </ol>
-<h2>二、分段原文</h2>
+<h2 id="section-4">二、分段原文</h2>
 <blockquote>
 <p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
-<h3>1. 论文复现概述与策略参数</h3>
+<h3 id="section-5">1. 论文复现概述与策略参数</h3>
 <p>本期复现一篇用经验模态分解和机器学习做股指期货跨期套利的论文。沪深300当月减下月价差在2014年6月6日至2026年10月21日，扣费后年化22.8%，夏普1.01，最大回撤-35.8%。每个交易日收盘预测下一日价差，高于1点买当月卖下月，低于-1点反向，绝对值小于1点平仓。费用按每腿万分之0.23，换月当天的连续合约跳空不计盈亏，7.5倍名义杠杆。2015到2016年的回撤仍需承担。价差定义为当月收盘减下月收盘，每个交易日收盘只用当日即此前最近1000个价差变动做次日预测。经验模态分解会先拆成高频、低频和残差，再分别预测后加总。</p>
-<h3>2. 对照实验与样本设置</h3>
+<h3 id="section-6">2. 对照实验与样本设置</h3>
 <p>未分解的自回归对照走同一条开平规则：预测高于1点买当月卖下月，低于-1点反向，绝对值小于1点平仓，名义杠杆十倍，前一的7.5倍。原文用沪深300股指期货当月连续和下月连续建仓，样本止于2020年7月31日，窗口2503个交易日。本复现改用东财的当月连续和下月连续行情，从2010年4月16日到2026年10月21日，主净值仍从2014年6月6日算起，并另列2025年5月6日起的短样本。合约到期之后第一个交易日空仓，跳空不入账，有仓就先平掉旧的一对，下一交易日在新信号重开。夏普用的无风险利率是央行一年期存款利率的近似。</p>
-<h3>3. 费用假设与跳空处理方式</h3>
+<h3 id="section-7">3. 费用假设与跳空处理方式</h3>
 <p>2015年10月24日后按1.5%计，主净值用阈值1的EMD-ARIMA，每腿万分之0.23，跨越跳空不入账。它和未分解ARIMA的终点都大约是初始资金的11倍，最大回撤集中在2015到2016年。EMD-ARIMA为-35.8%，未分解ARIMA为-36.5%，而EMD平均规则的回撤约-47.2%。分解本身并没有把风险做低，可能长样本里分解后的自回归只比未分解版本高0.9个百分点，年化22.8%对21.9%，夏普1.01对0.93，回撤都在-36%附近。大累计收益按净值减一计算。综合规则要求两种预测必须同向才持仓，年化降到10.7%，回撤收到-22.8%，持仓时间只有18%。</p>
-<h3>4. 费率敏感性与阈值调整效果</h3>
+<h3 id="section-8">4. 费率敏感性与阈值调整效果</h3>
 <p>按每一条腿收万分之0.23，开仓、平仓和换月时的平旧建新都算进去。若改成万分之0.15，长样本EMD-ARIMA年化会从22.8%升到28.7%。若把连续合约换月跳空直接计入盈亏，净值会被没有真正持有的跳变放大，所以主结果坚持换月当天空仓跳空不入账。2025年5月6日到2026年10月21日，未分解ARIMA年化13.1%，夏普1.08，高于EMD-ARIMA的8.0%和0.61。综合规则年化8.9%，夏普1.21，回撤-2.6%。把阈值从1提到4或8后，长样本年化降到6.4%和5.6%，夏普约0.3，回撤仍有-25.7%，少交易并没有换来更好的风险收益。</p>
-<h3>5. 结论与可落地要点</h3>
+<h3 id="section-9">5. 结论与可落地要点</h3>
 <p>未分解ARIMA需要和EMD-ARIMA并行记账，找样本两者接近，近期反而是未分解版本更强。若更在意回撤，综合规则用10.7%的年化换-22.8%的回撤。7.5倍名义杠杆下-35.8%的历史回撤已经是扣费并去掉换月跳空之后的结果。2025年以来356个交易日也盖不住2015到2016年那段压力。扣掉换月跳空和每腿万分之0.23之后，EMD-ARIMA在2014年6月6日至2026年10月21日年化22.8%，夏普1.01，最大回撤-35.8%，相对未分解ARIMA只高0.9个百分点，近期还落后。能直接用的是1000日滚动加1点阈值、换月空仓和双腿计费。这套日频框架组合上首先要能承受约-36%的历史回撤。</p>
-<h2>三、知识关联</h2>
-<h3>来源与类型</h3>
+<h2 id="section-10">三、知识关联</h2>
+<h3 id="section-11">来源与类型</h3>
 <ul>
 <li><span class="wikilink">量化Quantgirl</span></li>
 <li><span class="wikilink">抖音</span></li>
 <li><span class="wikilink">视频笔记</span></li>
 <li><span class="wikilink">KenRadar</span></li>
 </ul>
-<h3>相关主题</h3>
+<h3 id="section-12">相关主题</h3>
 <ul>
 <li><span class="wikilink">股票市场</span></li>
 <li><span class="wikilink">量化交易</span></li>
@@ -91,28 +66,30 @@
 <li><span class="wikilink">量化策略复现</span></li>
 <li><span class="wikilink">投资策略</span></li>
 </ul>
-<h3>人物</h3>
+<h3 id="section-13">人物</h3>
 <ul>
 <li>暂无明确人物</li>
 </ul>
-<h3>相关机构/公司</h3>
+<h3 id="section-14">相关机构/公司</h3>
 <ul>
 <li>暂无明确机构或公司</li>
 </ul>
-<h3>历史事件</h3>
+<h3 id="section-15">历史事件</h3>
 <ul>
 <li>暂无明确历史事件</li>
 </ul>
-<h3>资产/产品/地点</h3>
+<h3 id="section-16">资产/产品/地点</h3>
 <ul>
 <li>暂无明确资产、产品或地点</li>
 </ul>
-<details class="transcript"><summary>四、视频原始转录</summary>
+<div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
 <p>[!quote]- 展开查看原始转录
 以下内容由 funasr:paraformer-zh 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
 <p>本期复现一篇，用经验模态分解和机器学习做股指期货跨期套利的论文。沪深三百当月减下月价差在二零一四年六月六日至二零二六年十月二十一日扣费后，近年化百分之二十二点八，低普一点零一，最大回撤负百分之三十五点八。每个交易日收盘预测下，一日价差高于一点买当月卖，下月低于负一点反向绝对值小于一点平仓费用，按每腿万分之零点二倍换月当天的连续合约跳空不尽盈亏七点五倍。名义下二零一五到二零一六年的回撤仍要按时承担。按价差定义为当月收盘减去下月收盘，每个交易日收盘只用当日，即此前最近一千个价差变动做下一日预测经验。模态分解会先拆成高频低频和残差，再分别预测后加总。每未分解的自回归对照走同一条开平规则预测高于一点买当月卖，下月低于负一点，反向绝对值小于一点，平仓名义杠杆十倍前一的七点五倍。好原文用沪深三百股指期货当月连续和下月连续建的样本止于二零二零年七月三十一日窗口两千五百零三个交易。日本复线改用东财的当月连续和下月连续行情。从二零一零年四月十六日到二零二六年十月二十一日，主净值仍从二零一四年六月六日算起，并另列二零二五年五月六日起的短样本空仓塔塔到期之后，第一个交易日空仓跳空不入账。有仓就先平掉旧的一对。下一交易日，在新信号重开，夏普用的无风险利率只是央行一年期存款利率阶梯的近似。二零一五年十月二十四日后，按百分之一点五零主净值用阈值一点的EMD二维码，美腿瘦万分之零点二三，跨越跳空不入账。它和未分解二维码的终点都大约是初始资金的十一倍，最大回撤集中在二零一五到二零一六年。Emd二维码为负百分之三十五点八。未分解二维码为负百分之三十六点五，而EMD平均规则的回撤大约负百分之四十七点二。分解本身有并没有把风险做低，可能涨样本里分解后的自回归只比未分解版本高零点九个百分点，年化百分之二十二点八对百分之二十一点九。夏普一点零一对、零点九三回撤都在负百分之三十六附近。大累计收益按净值减一计算。可能两种预测必须同向才持仓的综合规则。年化降到百分之十点七，回撤收到负百分之二十二点八，持仓时间只有百分之十八点零。毕业按每一条腿收万分之零点二三，开仓平仓和换月时的平就重开都算进去。若改成每单位零点一五元长样本，EMB爱发年化会从百分之二十二点八升到百分之二十八点七。若把连续合约换月跳空，直接接近盈亏净值，会被没有真正持有的跳变放大。所以主结果坚持换月当天空仓跳空不入账个。二零二五年五月六日到二零二六年十月二十一日未分解瑞码，年化百分之十三点一。夏普一点零八高于ae MD瑞码的百分之八点零和零点六一。综合规则，年化百分之八点九，夏普一点二一回撤负百分之二点六。把阈值从一点提到四点或八点后长样本。年化降到百分之六点四和百分之五点六，下补大约零点三回撤，仍有负百分之二十五点。七少交易并没有换来更好的风险收益。五、未分解二维码，需要和EMD二维码并行记账找样本，两者接近近期反而是未分解版本更强。若更在意回撤综合规则，用百分之十点七的年化换付百分之二二点八的回撤，七点五倍名以下负百分之三十五点八的历史回撤已经是扣费，并去掉换月跳空之后的结果。两二零二五年以来，三百五十六个交易日也盖不住二零一五到二零一六年那段压力扣掉，幻月跳空和美腿万分之零点二三。之后，EMD阿瑞玛在二零一四年六月六日至二零二六年十月二十一日年化百分之二十二点八。夏普一点零一最大回撤负百分之三十五点八，相对未分解阿瑞玛只高零点九个百分点，近期还落后，能直接用的是一千日滚动一点阈值，换月空仓和双腿计费。这套日屏框架组合上，首先要能承受大约负百分之三十六的历史回撤。</p>
 </blockquote>
-</details></main>
-</body>
-</html>
+</details></div></div></article><section id="related" data-topics="[&quot;股票市场&quot;, &quot;量化交易&quot;, &quot;股指期货&quot;, &quot;跨期套利&quot;, &quot;经验模态分解&quot;, &quot;ARIMA&quot;, &quot;统计套利&quot;, &quot;量化复现&quot;, &quot;量化策略复现&quot;, &quot;投资策略&quot;]" data-current="notes/douyin/量化Quantgirl/2026-10-21_股指期货跨期套利策略复现：EMD-ARIMA年化22.8%_7699120412155841801.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 论文复现概述与策略参数</a><a href="#section-6">2. 对照实验与样本设置</a><a href="#section-7">3. 费用假设与跳空处理方式</a><a href="#section-8">4. 费率敏感性与阈值调整效果</a><a href="#section-9">5. 结论与可落地要点</a><a href="#section-10">三、知识关联</a><a href="#section-11">来源与类型</a><a href="#section-12">相关主题</a><a href="#section-13">人物</a><a href="#section-14">相关机构/公司</a><a href="#section-15">历史事件</a><a href="#section-16">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-25 21:49</span></footer>
+<nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
+<dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
+<script id="kr-metadata" type="application/json">{"title": "股指期货跨期套利策略复现：EMD-ARIMA年化22.8%", "relative_url": "notes/douyin/量化Quantgirl/2026-10-21_股指期货跨期套利策略复现：EMD-ARIMA年化22.8%_7699120412155841801.html", "platform": "douyin", "creator": "量化Quantgirl", "external_content_id": "7699120412155841801", "published_at": "2026-10-21 21:59:28", "topics": ["股票市场", "量化交易", "股指期货", "跨期套利", "经验模态分解", "ARIMA", "统计套利", "量化复现", "量化策略复现", "投资策略"], "summary": "复现2022年论文，用经验模态分解与ARIMA预测沪深股指期货跨期价差，2014-2026样本净年化22.8%，夏普1.01。EMD相比未分解版本收益提升仅0.9个百分点，并非充分来源。", "source_url": "https://www.douyin.com/video/7699120412155841801"}</script></body></html>

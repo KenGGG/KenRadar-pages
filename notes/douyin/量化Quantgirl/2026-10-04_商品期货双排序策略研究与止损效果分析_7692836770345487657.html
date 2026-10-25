@@ -1,47 +1,22 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>商品期货双排序策略研究与止损效果分析｜KenRadar</title>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f5; color: #202124; }
-    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
-    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
-    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
-    h1, h2, h3 { line-height: 1.25; color: #111827; }
-    h1 { font-size: 30px; margin: 24px 0 16px; }
-    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
-    h3 { font-size: 17px; margin-top: 24px; }
-    p, li { font-size: 16px; line-height: 1.8; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
-    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
-    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
-    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-    .meta { color: #6b7280; font-size: 13px; }
-    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
-    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
-    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
-    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
-    details.transcript[open] summary { margin-bottom: 18px; }
-  </style>
-</head>
-<body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-10-04_商品期货双排序策略研究与止损效果分析_7692836770345487657.md · 发布于 2026-10-12 11:35:12</div><nav class="page-links"><a href="https://www.douyin.com/video/7692836770345487657" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>商品期货双排序策略研究与止损效果分析</h1>
-<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7692836770345487657">https://www.douyin.com/video/7692836770345487657</a>）</p>
-<h2>一、内容简述</h2>
-<h3>（一）一句话结论</h3>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><meta name="description" content="分享2015年论文《商品期货双排序交易策略》，基于动量与期限结构双重排序构建多空组合，1979-2011年年化收益20.22%，波动24.91%。四种止损策略中仅全组合止损可显著降风险，单头寸止损因打断持有逻辑效果有限。">
+<title>商品期货双排序策略研究与止损效果分析｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<script defer src="../../../assets/site.js"></script></head>
+<body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
+<nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
+<main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>商品期货双排序策略研究与止损效果分析</h1><p class="muted">量化Quantgirl · douyin · 视频发布于 2026-10-04 23:35:50</p><nav class="page-links"><a href="https://www.douyin.com/video/7692836770345487657" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 策略回测业绩概述</a><a href="#section-6">2. 研究目标与核心问题</a><a href="#section-7">3. 商品期货定位与收益来源</a><a href="#section-8">4. 期限结构机制解析</a><a href="#section-9">5. 双信号组合逻辑</a><a href="#section-10">6. 样本设置与数据处理</a><a href="#section-11">7. 风险收益指标体系</a><a href="#section-12">8. 多空收益与危机表现</a><a href="#section-13">9. 单头寸止损效果分析</a><a href="#section-14">10. 全组合止损效果</a><a href="#section-15">11. 结论与风险提示</a><a href="#section-16">三、知识关联</a><a href="#section-17">来源与类型</a><a href="#section-18">相关主题</a><a href="#section-19">人物</a><a href="#section-20">相关机构/公司</a><a href="#section-21">历史事件</a><a href="#section-22">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a></details><div class="article-copy"><p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7692836770345487657">https://www.douyin.com/video/7692836770345487657</a>）</p>
+<h2 id="section-1">一、内容简述</h2>
+<h3 id="section-2">（一）一句话结论</h3>
 <blockquote>
-<p><strong>一句话结论</strong>
+<p><strong>一句话结论 · 内容来源的摘要</strong>
 分享2015年论文《商品期货双排序交易策略》，基于动量与期限结构双重排序构建多空组合，1979-2011年年化收益20.22%，波动24.91%。四种止损策略中仅全组合止损可显著降风险，单头寸止损因打断持有逻辑效果有限。</p>
 </blockquote>
-<h3>（二）核心内容</h3>
+<h3 id="section-3">（二）核心内容</h3>
 <ol>
 <li>
 <p><strong>双排序策略构建方法与回测结果</strong>
@@ -60,41 +35,41 @@
 论文指出商品期货双排序策略在1979至2011年样本期内实现了显著正收益，年化20.22%，风险调整表现优于同期商品指数和标普500。止损并非收益来源，单头寸止损因与动量信号冲突效果不佳，全组合止损可适度降低波动和尾部风险但改善有限。策略选品信号与整体风控应分开评估，止损需谨慎设计以避免干扰原有逻辑。论文未计入交易成本，历史回测不代表未来表现，不构成投资建议。</p>
 </li>
 </ol>
-<h2>二、分段原文</h2>
+<h2 id="section-4">二、分段原文</h2>
 <blockquote>
 <p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
-<h3>1. 策略回测业绩概述</h3>
+<h3 id="section-5">1. 策略回测业绩概述</h3>
 <p>本期分享一篇商品期货双排序的研究。一九七九年到二零一一年，多空组合年化百分之二十点二二，收益风险比零点八一。规则是每月用动量和期限结构各排一次做多，两边都强的近月合约做多，两边都弱的持有一个月。四种止损都没有明显压低风险。全组合止损，只把年化波动从百分之二十四点九一降到百分之二十二点四七。这是历史样本，不构成交易建议。</p>
-<h3>2. 研究目标与核心问题</h3>
+<h3 id="section-6">2. 研究目标与核心问题</h3>
 <p>核对的是两件事：动量和期限结构叠在一起，能不能做出可核对的商品期货收益；以及止损能不能把绝对风险压下去。全样本年化百分之二十点二二，危机期间更强。单头寸止损没有实质改善，全组合止损只能削掉有限的尾部。</p>
-<h3>3. 商品期货定位与收益来源</h3>
+<h3 id="section-7">3. 商品期货定位与收益来源</h3>
 <p>四大品种期货会被拿来和股票比较，是因为历史上它出现过接近股票的收益，又能分散股票组合，有时还被当成通胀对冲。期货既能做方向，也能做相对价值。生产者和消费者把价格风险转给愿意承担的人，收益里同时有现货涨跌、展期和抵押品利息。主动策略要的是商品之间的横截面差别，而不是被动持有商品指数。</p>
-<h3>4. 期限结构机制解析</h3>
+<h3 id="section-8">4. 期限结构机制解析</h3>
 <p>基线结构分成两种：远期比近月贵是正向市场，滚动持有近月多头往往在换月时吃亏；近月比远期贵是反向市场，多头滚动时可能拿到正的展期收益。图上左边的价格随到期日抬高，右边随到期日下降。同样是换月曲线，形状会把收益往相反方向推。库存低的时候便利收益高、稀缺，更容易走到近月更贵的曲线——期限结构。因此，带着对后面收益的信息，生产者卖出期货避险，接多头的一方要有补偿风险溢价，跟着进套保需求走。曲线向上或向下，都可能留下横截面差别。</p>
-<h3>5. 双信号组合逻辑</h3>
+<h3 id="section-9">5. 双信号组合逻辑</h3>
 <p>动量和期限结构一起用，就是在抓这种还没被抹平的差别。同样把近期涨得多的当成赢家，跌得多的当成输家，赌的是横截面上的强弱还会延续。期限结构看近月相对远月贵不贵，数值高说明近月定价更有利，更接近反向市场。两个信号都强才做多，两个都弱才做空，只强一边并不进组合。</p>
-<h3>6. 样本设置与数据处理</h3>
+<h3 id="section-10">6. 样本设置与数据处理</h3>
 <p>示例是日频期货和展期收益。样本从一九七九年一月到二零一一年十月，合约从早期大约二十二个增到后来大约三十五个，覆盖能源、金属、农产品和牲畜等交易。最近月临近到期再换月合约，可以进出样本缺掉的权重摊到剩下的头寸上。多头和空头各自用足抵押品，合在一起相对投入的抵押品大约有两倍。期货敞口四个多头和四个空头，其商品要等到下一次月度建仓才重新考虑。做多的是动量和期限结构两边都靠前的近月合约，做空的是两边都靠后的，只有七。就这八个名字，用在上个月的动量和展期收益来算，避免用到当月还没走完的价格。头寸持有一个月，月末再排序并回到等权。持有期内权重随涨跌漂移，不按主观想法每天调，多头和空头的收益再合成一条组合。</p>
-<h3>7. 风险收益指标体系</h3>
+<h3 id="section-11">7. 风险收益指标体系</h3>
 <p>海评价不止看赚没赚到，还看年化波动、下行波动以及百分之九十九置信水平下的三十日风险价值，再配上收益风险比和索提诺，看这些风险有没有被收益补偿。平均收益的t统计用来判断这段正收益是不是更像偶然钱样本。从一九七九年二月到二零一一年十月，年化收益百分之二十点二二，年化波动百分之二十四点九一下行波动百分之一七点一三，也是时日百分之九十九风险价值百分之二十点二七，收益风险比零点八一，索提诺一点一八。多头贡献大约百分之一二点二八，空头贡献大约百分之七点九四，收益显著为正。但绝对波动和尾部都不小。同期商品指数和标普的收益风险比分别只有零点二四和零点四三。在危机前年化大约百分之十七点一二，波动百分之二十四点三六，收益风险比零点七零。从二零零七年二月起的危机区间年化百分之三十四点五零，波动升到百分之二十七点九二，收益风险比一点二四，索提诺一点八三。</p>
-<h3>8. 多空收益与危机表现</h3>
+<h3 id="section-12">8. 多空收益与危机表现</h3>
 <p>同期标普由正转负，多空不完全靠商品普涨，下跌时空投也能贡献，而且每月换仓会跟着商品分化重选。但这只是这一段历史，不能理解成危机一定利于量化，不对波度偏高。作者又试了四种止损：单个头寸的累计亏损、对近期亏损加权的指数加权延续亏损天数，以及整个组合亏到阈值就全部平掉。</p>
-<h3>9. 单头寸止损效果分析</h3>
+<h3 id="section-13">9. 单头寸止损效果分析</h3>
 <p>前三种盯着单只商品刹车。双重排序本身已经用动量决定持仓，再用价格亏损提前平仓，可能打断原来的一个月持有，换来的是更高换手和错过反弹的可能。I三属止损礼三闪三阈值的年化大约百分之二十点九七，和原策略的百分之二十点二二接近，波动却升到百分之二十五点零七。百分之五阈值收益掉到百分之十五点六五，波动升到百分之二十七点五六。更严的单头村刹车没有把风险降下来，收益风险比还更差。速加权把近期亏损看得更重，百分之五阈值衰减系数零点六，年化大约百分之十八点六零，波动几乎停在百分之二十四点九二。收益少了，风险没少，收益风险比和索蒂诺落到大约零点七五和一点零八，都不如不设止损时的零点八一和一点一八。再连续五日亏损才平仓，年化大约百分之二十点九九，海源策略的百分之二十点二二几乎一样。三十日风险价值从百分之二十点二七略降到百分之十八点八八，但波动还略高，柱状图上正收益月份也差不多，风险调整后几乎没有经济差别。</p>
-<h3>10. 全组合止损效果</h3>
+<h3 id="section-14">10. 全组合止损效果</h3>
 <p>喝醋我全组合百分之五止损是四种里唯一明显削波动的。年化收益从百分之二十点二二到百分之十九点九三，波动从百分之二十四点九一降到百分之二十二点四七。三十日百分之九十九风险价值从百分之二十点二七降到百分之十三点七六，收益风险比零点八九，索提诺一点三一。正收益月份从百分之五十一点二七降到百分之四十三点一七，尾步小了，赚钱的月份也少了。安头寸止损容易和多辆信号撞车，提前离场会打乱一个月的持有期，所以收益和风险往往一起变差。全组合规则看的是整组亏损，不是某一只商品的短暂回撤，波动和尾部降的更明显，但改善仍然有限，再加上交易成本优势还会再薄一层。</p>
-<h3>11. 结论与风险提示</h3>
+<h3 id="section-15">11. 结论与风险提示</h3>
 <p>过回到开头的数字，商品期货双排序在一九七九年到二零一一年年化百分之二十点二二，收益风险比零点八一。危机区间年化百分之三十四点五零，主要代价是年化波动大约百分之二十四点九一，三十百分之九十九风险价值大约百分之二十点二七。止损没有成为收益来源，全组合止损那么只把波动降到百分之二亿二点四七。历史样本不构成交易建议。</p>
-<h2>三、知识关联</h2>
-<h3>来源与类型</h3>
+<h2 id="section-16">三、知识关联</h2>
+<h3 id="section-17">来源与类型</h3>
 <ul>
 <li><span class="wikilink">量化Quantgirl</span></li>
 <li><span class="wikilink">抖音</span></li>
 <li><span class="wikilink">视频笔记</span></li>
 <li><span class="wikilink">KenRadar</span></li>
 </ul>
-<h3>相关主题</h3>
+<h3 id="section-18">相关主题</h3>
 <ul>
 <li><span class="wikilink">量化投资</span></li>
 <li><span class="wikilink">统计套利</span></li>
@@ -107,29 +82,31 @@
 <li><span class="wikilink">股票市场</span></li>
 <li><span class="wikilink">投资策略</span></li>
 </ul>
-<h3>人物</h3>
+<h3 id="section-19">人物</h3>
 <ul>
 <li>暂无明确人物</li>
 </ul>
-<h3>相关机构/公司</h3>
+<h3 id="section-20">相关机构/公司</h3>
 <ul>
 <li><span class="wikilink">样本覆盖能源</span></li>
 <li><span class="wikilink">覆盖能源</span></li>
 </ul>
-<h3>历史事件</h3>
+<h3 id="section-21">历史事件</h3>
 <ul>
 <li>暂无明确历史事件</li>
 </ul>
-<h3>资产/产品/地点</h3>
+<h3 id="section-22">资产/产品/地点</h3>
 <ul>
 <li>暂无明确资产、产品或地点</li>
 </ul>
-<details class="transcript"><summary>四、视频原始转录</summary>
+<div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
 <p>[!quote]- 展开查看原始转录
 以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
 <p>本期分享一篇商品期货双排序的研究。一九七九年到二零一一年，多空组合年化百分之二十点二二，收益风险比零点八一。规则是每月用动量和期限结构各排一次做多，两边都强的近月合约做多，两边都弱的持有一个月四种止损都没有明显压低风险。全组合止损，只把年化波动从百分之二十四点九一降到百分之二十二点四七，这是历史样本不构成交易建议了。核对的是两件事，动量和期限结构叠在一起，能不能做出可核对的商品、期货收益以及止损，能不能把绝对风险压下去？全样本年化百分之二十点二二，危机期间更强单头寸止损没有实质改善。全组合止损只能削掉有限的尾部。四大品期货会被拿来和股票比较，是因为历史上它出现过接近股票的收益，又能分散股票组合，有时还被当成通胀对冲。期货既能做方向，也能做相对价值。生产者和消费者把价格风险转给愿意承担的人收益里，同时有现货涨跌展期和抵押品利息。主动策略要的是商品之间的横截面差别，而不是被动持有。商品指数。基线结构分成两种，远期比近月贵是正向市场滚动持有。近月多头往往在换月时吃亏。近月比远期贵是反向市场，多头滚动时可能拿到正的展期收益。图上，左边的价格随到期日抬高，右边随到期日下降。同样是换月曲线，形状会把收益往相反方向推，库存低的时候便利收益高稀缺，更容易走到近月更贵的曲线期限结构。因此，带着对后面收益的信息，生产者卖出期货避险，接多头的一方要有补偿风险溢价，跟着进套宝需求走，曲线向上或向下，都可能留下横截面差别动量和期限结构一起用。就是在抓这种还没被抹平的差别，同样把近期找的多的当成赢家，跌的多的当成输家，赌的是横截面上的强弱，还会延续期限结构。看近月相对远月贵不贵，数值高，说明近月定价更有利，更接近反向市场。两个信号都强才做多，两个都弱才做空，只强一边并不进组合。夏季是日频期货和展期收益样本从一九七九年一月到二零一一年十月，合约从早期大约二十二个增到后来大约三十五个，覆盖能源、金属、农产品和牲畜等交易。最近月临近到期，再换月合约，可以进出样本缺掉的权重，摊到剩下的头寸上多头和空头各自用足抵押品合在一起相对投入的抵押品大约有两倍。期货敞口四个多头和四个空头，其商品要等到下一次月度建仓才重新考虑。做多的是动量和期限结构，两边都靠前的。进月合约做空的是两边都靠后的，只有七。就这八个名字，金浩用上个月的动量和展期收益来算，避免用到当月还没走完的价格头寸，持有一个月月末再排序并回到等权。持有期内权重随涨跌漂移，不按主观想法，每天调多头和空头的收益，再合成一条组合。海评价不止看赚没赚到，还看年化波动、下行波动以及百分之九十九置信水平下的三十日风险价值，再配上收益风险比和索提诺看这些风险有没有被收益补偿平均收益的t统计，用来判断这段正收益是不是更像偶然钱样本。从一九七九年二月到二零一一年十月，年化收益百分之二十点二二年，化波动百分之二十四点九。一下行波动百分之一七点一三，也是时日百分之九十九风险价值百分之二十点二七，收益风险比零点八一索提诺一点一八，多头贡献大约百分之一二点二八，空头贡献大约百分之七点九四，收益显著为正。但绝对波动和尾部都不小。同期商品指数和标普的收益风险比分别只有零点二四和零点四三。在危机前年化大约百分之十七点一二，波动百分之二十四点三六，收益风险比零点七零。从二零零七年二月起的危机区间年化百分之三十四点五零，波动升到百分之二十七点九二，收益风险比一点二四。索提诺一点八三同期标普由正转负多空，不完全靠商品普涨，下跌时空投也能贡献，而且每月换仓会跟着商品分化重选。但这只是这一段历史，不能理解，成危机一定利于量化，不对波度偏高。作者又试了四种止损单个头寸的累计亏损，对近期亏损加权的指数加权延续亏损天数以及整个组合亏到阈值就全部平掉。前三种盯着单只商品刹车双重排序，本身已经用动量决定持仓，再用价格亏损，提前平仓，可能打断原来的一个月持有，换来的是更高换手和错过反弹的可能。 I三属止损礼三闪三阈值的年化大约百分之二十点九七，和原策略的百分之二十点二二，接近波动却升到百分之二十五点零七百分之五。阈值收益掉到百分之十五点六五，波动升到百分之二十七点五六。更严的单头村刹车没有把风险降下来，收益风险比还更差速加权，把近期亏损看得更重。百分之五阈值衰减系数零点六十年化大约百分之十八点六零，波动几乎停在百分之二十四点九二。收益少了，风险没少，收益风险比和索蒂诺落到大约零点七五和一点零八，都不如不设止损时的零点八一和一点一八，再连续五日亏损才平仓，年化大约百分之二十点九九。海源策略的百分之二十点二二几乎一样。三十日风险价值从百分之二十点二七，略降到百分之十八点八八，但波动还略高。柱状图上正收益月份也差不多。风险调整后几乎没有经济差别。喝醋我全组合百分之五，止损是四种里唯一明显削波动的年化收益从百分之二十点二二到百分之十九点九三，波动从百分之二十四点九一降到百分之二十二点四七。三十日百分之九十九风险价值从百分之二十点二七降到百分之十三点七六，收益风险比零点八九。索提诺一点三一正收益月份从百分之五十一点二七降到百分之四十三点一。七尾步小了，赚钱的月份也少了。安头寸止损容易和多辆信号撞车，提前离场，会打乱一个月的持有期。所以，收益和风险往往一起变差。全组合规则看的是整组亏损，不是某一只商品的短暂回撤。波动和尾部降的更明显，但改善仍然有限，再加上交易成本优势还会再薄一层过回到开头的数字商品期货双排序在一九七九年到二零一一年年化百分之二十点二二，收益风险比零点八一。危机区间年化百分之三十四点五零，主要代价是年化波动大约百分之二十四点九一三十百分之九十九，风险价值大约百分之二十点二七。止损没有成为收益来源，全组合止损，那么只把波动降到百分之二亿二点四七。历史样本不构成交易建议。</p>
 </blockquote>
-</details></main>
-</body>
-</html>
+</details></div></div></article><section id="related" data-topics="[&quot;量化投资&quot;, &quot;统计套利&quot;, &quot;商品期货&quot;, &quot;双排序策略&quot;, &quot;动量&quot;, &quot;期限结构&quot;, &quot;止损策略&quot;, &quot;量化投资研究&quot;, &quot;股票市场&quot;, &quot;投资策略&quot;]" data-current="notes/douyin/量化Quantgirl/2026-10-04_商品期货双排序策略研究与止损效果分析_7692836770345487657.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 策略回测业绩概述</a><a href="#section-6">2. 研究目标与核心问题</a><a href="#section-7">3. 商品期货定位与收益来源</a><a href="#section-8">4. 期限结构机制解析</a><a href="#section-9">5. 双信号组合逻辑</a><a href="#section-10">6. 样本设置与数据处理</a><a href="#section-11">7. 风险收益指标体系</a><a href="#section-12">8. 多空收益与危机表现</a><a href="#section-13">9. 单头寸止损效果分析</a><a href="#section-14">10. 全组合止损效果</a><a href="#section-15">11. 结论与风险提示</a><a href="#section-16">三、知识关联</a><a href="#section-17">来源与类型</a><a href="#section-18">相关主题</a><a href="#section-19">人物</a><a href="#section-20">相关机构/公司</a><a href="#section-21">历史事件</a><a href="#section-22">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-25 21:49</span></footer>
+<nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
+<dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
+<script id="kr-metadata" type="application/json">{"title": "商品期货双排序策略研究与止损效果分析", "relative_url": "notes/douyin/量化Quantgirl/2026-10-04_商品期货双排序策略研究与止损效果分析_7692836770345487657.html", "platform": "douyin", "creator": "量化Quantgirl", "external_content_id": "7692836770345487657", "published_at": "2026-10-04 23:35:50", "topics": ["量化投资", "统计套利", "商品期货", "双排序策略", "动量", "期限结构", "止损策略", "量化投资研究", "股票市场", "投资策略"], "summary": "分享2015年论文《商品期货双排序交易策略》，基于动量与期限结构双重排序构建多空组合，1979-2011年年化收益20.22%，波动24.91%。四种止损策略中仅全组合止损可显著降风险，单头寸止损因打断持有逻辑效果有限。", "source_url": "https://www.douyin.com/video/7692836770345487657"}</script></body></html>

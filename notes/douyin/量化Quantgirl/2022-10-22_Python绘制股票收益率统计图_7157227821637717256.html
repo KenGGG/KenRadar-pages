@@ -1,47 +1,22 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Python绘制股票收益率统计图｜KenRadar</title>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f5; color: #202124; }
-    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
-    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
-    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
-    h1, h2, h3 { line-height: 1.25; color: #111827; }
-    h1 { font-size: 30px; margin: 24px 0 16px; }
-    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
-    h3 { font-size: 17px; margin-top: 24px; }
-    p, li { font-size: 16px; line-height: 1.8; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
-    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
-    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
-    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-    .meta { color: #6b7280; font-size: 13px; }
-    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
-    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
-    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
-    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
-    details.transcript[open] summary { margin-bottom: 18px; }
-  </style>
-</head>
-<body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2022-10-22_Python绘制股票收益率统计图_7157227821637717256.md · 发布于 2026-10-12 11:35:11</div><nav class="page-links"><a href="https://www.douyin.com/video/7157227821637717256" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>Python绘制股票收益率统计图</h1>
-<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7157227821637717256">https://www.douyin.com/video/7157227821637717256</a>）</p>
-<h2>一、内容简述</h2>
-<h3>（一）一句话结论</h3>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><meta name="description" content="讲解股票收益率的三种可视化方法：日收益率、累计收益率（加法与乘法）及收益率直方图。">
+<title>Python绘制股票收益率统计图｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<script defer src="../../../assets/site.js"></script></head>
+<body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
+<nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
+<main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>Python绘制股票收益率统计图</h1><p class="muted">量化Quantgirl · douyin · 视频发布于 2022-10-22 14:59:39</p><nav class="page-links"><a href="https://www.douyin.com/video/7157227821637717256" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 三种收益率统计形式介绍</a><a href="#section-6">2. 日收益率代码实现与绘图</a><a href="#section-7">3. 累计收益率两种计算方法</a><a href="#section-8">4. 直方图与describe统计量</a><a href="#section-9">三、知识关联</a><a href="#section-10">来源与类型</a><a href="#section-11">相关主题</a><a href="#section-12">人物</a><a href="#section-13">相关机构/公司</a><a href="#section-14">历史事件</a><a href="#section-15">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a></details><div class="article-copy"><p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7157227821637717256">https://www.douyin.com/video/7157227821637717256</a>）</p>
+<h2 id="section-1">一、内容简述</h2>
+<h3 id="section-2">（一）一句话结论</h3>
 <blockquote>
-<p><strong>一句话结论</strong>
+<p><strong>一句话结论 · 内容来源的摘要</strong>
 讲解股票收益率的三种可视化方法：日收益率、累计收益率（加法与乘法）及收益率直方图。</p>
 </blockquote>
-<h3>（二）核心内容</h3>
+<h3 id="section-3">（二）核心内容</h3>
 <ol>
 <li>
 <p><strong>日收益率计算与累计收益两种算法</strong>
@@ -52,27 +27,27 @@
 日收益率直方图用于展示数据分布情况，横坐标为收益率区间，纵坐标为频数。以工行为例，其日收益率分布接近正态分布，提示该类金融资产可能存在套利空间。describe()函数可快速输出均值、标准差、极值、分位数等多种统计量，便于对收益率进行量化分析。</p>
 </li>
 </ol>
-<h2>二、分段原文</h2>
+<h2 id="section-4">二、分段原文</h2>
 <blockquote>
 <p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
-<h3>1. 三种收益率统计形式介绍</h3>
+<h3 id="section-5">1. 三种收益率统计形式介绍</h3>
 <p>现在来绘制关于股票收益率的图，我们考虑收益率的三种统计形式。第一种，也就是简单的以日为计算周期的收益率的统计图像。第二种绘制一段时期内的累计收益率。第三种绘制日收益率的直方图。我们先来看一下以日为计算周期的收益率，统计每个交易日收盘价格相较前一个交易日收盘价格的涨跌百分比，收益率的计算公式如图，其中P_i表示第i天的收盘价格，P_i-1表示第i减一天的收盘价格，而R_i就表示第i天的收益率。下图表格中已经包含了日收益率的数据，这是因为我们从TuShare获取到的数据已经经过了预处理。我们也可以根据股票价格自行计算。</p>
-<h3>2. 日收益率代码实现与绘图</h3>
+<h3 id="section-6">2. 日收益率代码实现与绘图</h3>
 <p>日收益率代码非常简单，直接调用pandas中的pct_change应用到收盘价这一列数据上，就得到一个新数据，命名为daily_changes，表示每日收益率。调用plot函数，对daily_changes绘制出来就得到了每日收益率的图像。打印收益率的前五行看一下，这里注意第一天的收益率是NaN，所以绘制收益率的图像是从历史数据的第二天开始绘制的。</p>
-<h3>3. 累计收益率两种计算方法</h3>
+<h3 id="section-7">3. 累计收益率两种计算方法</h3>
 <p>接下来绘制累计收益率。这里提供了两种计算方法，原书中采用的是第一种，即将一段时间内的每日收益率累加求和，这实际上模拟的是连续每日买入、次日卖出、连续操作一段时间后的总收益率。看代码直接调用pandas中的cumsum函数，然后将data.cumsum()绘制出来，就得到了第一种加法的累计收益率。第二种乘法计算的累计收益率我认为更符合实际一些，其计算的是一段时期内的期末收益相较期初收益的涨跌比，计算公式如图。我们来看一下代码实现，前两行计算得到的data_return就是累计收益率。实际上这两种累计收益率的计算方法结果都非常接近，如果你把第二种乘法的累计收益率公式展开，就会发现它的一次项就是加法累计收益率，后面的二次项、三次项等等都是非常小的项，在实际中可以忽略不计。我们把这两种计算方法的差值打印出来看一下，可以看出相差很小，所以在现实中使用第一种或第二种方法都可以。</p>
-<h3>4. 直方图与describe统计量</h3>
+<h3 id="section-8">4. 直方图与describe统计量</h3>
 <p>第三个要绘制的图是收益率的直方图。直方图是一种对数据分布情况的图形表示，横纵坐标分别表示的是统计样本和该样本对应的某个属性的度量，用长条图来表示。我们这里横坐标表示的是每日收益率，纵坐标表示的是每日收益率对应的频数。这里绘制的是工行的每日收益率的直方图，可以看出工行的每日收益率分布还是比较接近正态分布的。这类的金融资产就存在一定的套利空间。最后来看一下describe这个函数，它可以快速计算出每日收益率的多种统计量，例如均值、标准差、极值、分位数等。</p>
-<h2>三、知识关联</h2>
-<h3>来源与类型</h3>
+<h2 id="section-9">三、知识关联</h2>
+<h3 id="section-10">来源与类型</h3>
 <ul>
 <li><span class="wikilink">量化Quantgirl</span></li>
 <li><span class="wikilink">抖音</span></li>
 <li><span class="wikilink">视频笔记</span></li>
 <li><span class="wikilink">KenRadar</span></li>
 </ul>
-<h3>相关主题</h3>
+<h3 id="section-11">相关主题</h3>
 <ul>
 <li><span class="wikilink">量化分析</span></li>
 <li><span class="wikilink">股票收益率</span></li>
@@ -83,28 +58,30 @@
 <li><span class="wikilink">教程类</span></li>
 <li><span class="wikilink">股票市场</span></li>
 </ul>
-<h3>人物</h3>
+<h3 id="section-12">人物</h3>
 <ul>
 <li>暂无明确人物</li>
 </ul>
-<h3>相关机构/公司</h3>
+<h3 id="section-13">相关机构/公司</h3>
 <ul>
 <li>暂无明确机构或公司</li>
 </ul>
-<h3>历史事件</h3>
+<h3 id="section-14">历史事件</h3>
 <ul>
 <li>暂无明确历史事件</li>
 </ul>
-<h3>资产/产品/地点</h3>
+<h3 id="section-15">资产/产品/地点</h3>
 <ul>
 <li>暂无明确资产、产品或地点</li>
 </ul>
-<details class="transcript"><summary>四、视频原始转录</summary>
+<div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
 <p>[!quote]- 展开查看原始转录
 以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
 <p>现在来绘制关于股票收益率的图，我们考虑收益率的三种统计形式。第一种，也就是简单的以日为计算周期的收益率的统计图像。第二种绘制一段时期内的累计收益率。第三种绘制日收益率的直方图。我们先来看一下以日为计算周期的收益率，第统计每个交易日收盘价格相较前一个交易日收盘价格的涨跌百分比收益率的计算公式。如图，其中PI表示第i天的收盘价格PI减一表示第i减一天的收盘价格，而i就表示第i天的收益率。下图表格中已经包含了日收益率的数据。这是因为我们从图尔获取到的数据已经经过了预处理。我们也可以根据股票价格自行计算，日收益率代码非常简单，直接调用sipandas中的PCT change应用到收盘价，这一列数据上就得到一类新的数据。命名为delay changes,表示每日收益率调用plot函数，像delay changes绘制出来就得到了每日收益率的图像打印收益率的前五行看一下。这里注意第一天的收益率是浪，所以绘制收益率的图像是从历史数据的第二天开始绘制的。接下来绘制累计收益率或累计收益率。这里提供了两种计算方法。原书中采用的是第一种即将一段时间内的每日收益率累加求和。这实际上模拟的是连续每日买入，次日卖出，连续操作一段时间后的总收益率看代码直接调用pandas中的consume函数，然后将data consume绘制出来，就得到了第一种加法的累计收益率。第二种，乘法计算的累计收益率我认为更符合实际一些，其计算的是一段时期内的期末收益，相较期初收益的涨跌比计算公式如图，我们来看一下代码实现前两行计算得到的data pride. Some就是累计收益率。实际上这两种累计收益率的计算方法结果都非常接近。如果你把第二种乘法的累计收益率公式展开，就会发现它的一次项就是加法。累计收益率后面的二次项、三次项等等都是非常小的项。在实际中可以忽略不计。我们把这两种计算方法的差值打印出来看一下，可以看出相差很小。所以在现实中使用第一种或第二种方法都可以。第三个要绘制的图是收益率的直方图。这方图是一种对数据分布情况的图形，表示。横纵坐标分别表示的是统计样本和该样本对应的某个属性的度量。用长条图来表示。我们这里横坐标表示的是每日收益率，纵坐标表示的是每日收益率对应的频数。这里绘制的是工行的每日收益率的直方图，可以看出工行的每日收益率分布还是比较接近正态分布的这类的金融资产，就存在一定的套利空间。最后来看一下describe这个函数，它可以快速计算出每人收益率的多种统计量，例如均值标准差、极值、分位数等。</p>
 </blockquote>
-</details></main>
-</body>
-</html>
+</details></div></div></article><section id="related" data-topics="[&quot;量化分析&quot;, &quot;股票收益率&quot;, &quot;Python&quot;, &quot;累计收益率&quot;, &quot;直方图&quot;, &quot;pandas&quot;, &quot;教程类&quot;, &quot;股票市场&quot;]" data-current="notes/douyin/量化Quantgirl/2022-10-22_Python绘制股票收益率统计图_7157227821637717256.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 三种收益率统计形式介绍</a><a href="#section-6">2. 日收益率代码实现与绘图</a><a href="#section-7">3. 累计收益率两种计算方法</a><a href="#section-8">4. 直方图与describe统计量</a><a href="#section-9">三、知识关联</a><a href="#section-10">来源与类型</a><a href="#section-11">相关主题</a><a href="#section-12">人物</a><a href="#section-13">相关机构/公司</a><a href="#section-14">历史事件</a><a href="#section-15">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-25 21:49</span></footer>
+<nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
+<dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
+<script id="kr-metadata" type="application/json">{"title": "Python绘制股票收益率统计图", "relative_url": "notes/douyin/量化Quantgirl/2022-10-22_Python绘制股票收益率统计图_7157227821637717256.html", "platform": "douyin", "creator": "量化Quantgirl", "external_content_id": "7157227821637717256", "published_at": "2022-10-22 14:59:39", "topics": ["量化分析", "股票收益率", "Python", "累计收益率", "直方图", "pandas", "教程类", "股票市场"], "summary": "讲解股票收益率的三种可视化方法：日收益率、累计收益率（加法与乘法）及收益率直方图。", "source_url": "https://www.douyin.com/video/7157227821637717256"}</script></body></html>

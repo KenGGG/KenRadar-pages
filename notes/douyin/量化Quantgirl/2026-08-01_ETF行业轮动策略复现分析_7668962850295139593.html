@@ -1,47 +1,22 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ETF行业轮动策略复现分析｜KenRadar</title>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f5; color: #202124; }
-    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
-    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
-    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
-    h1, h2, h3 { line-height: 1.25; color: #111827; }
-    h1 { font-size: 30px; margin: 24px 0 16px; }
-    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
-    h3 { font-size: 17px; margin-top: 24px; }
-    p, li { font-size: 16px; line-height: 1.8; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
-    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
-    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
-    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-    .meta { color: #6b7280; font-size: 13px; }
-    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
-    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
-    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
-    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
-    details.transcript[open] summary { margin-bottom: 18px; }
-  </style>
-</head>
-<body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-08-01_ETF行业轮动策略复现分析_7668962850295139593.md · 发布于 2026-10-12 11:35:11</div><nav class="page-links"><a href="https://www.douyin.com/video/7668962850295139593" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>ETF行业轮动策略复现分析</h1>
-<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7668962850295139593">https://www.douyin.com/video/7668962850295139593</a>）</p>
-<h2>一、内容简述</h2>
-<h3>（一）一句话结论</h3>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><meta name="description" content="复现动量与风险优化ETF轮动策略，本地回测显示高收益但深回撤，需卫星仓配置。">
+<title>ETF行业轮动策略复现分析｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<script defer src="../../../assets/site.js"></script></head>
+<body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
+<nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
+<main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>ETF行业轮动策略复现分析</h1><p class="muted">量化Quantgirl · douyin · 视频发布于 2026-08-01 15:32:45</p><nav class="page-links"><a href="https://www.douyin.com/video/7668962850295139593" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 论文介绍与复现设置</a><a href="#section-6">2. 策略细节与差异对比</a><a href="#section-7">三、知识关联</a><a href="#section-8">来源与类型</a><a href="#section-9">相关主题</a><a href="#section-10">人物</a><a href="#section-11">相关机构/公司</a><a href="#section-12">历史事件</a><a href="#section-13">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a></details><div class="article-copy"><p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7668962850295139593">https://www.douyin.com/video/7668962850295139593</a>）</p>
+<h2 id="section-1">一、内容简述</h2>
+<h3 id="section-2">（一）一句话结论</h3>
 <blockquote>
-<p><strong>一句话结论</strong>
+<p><strong>一句话结论 · 内容来源的摘要</strong>
 复现动量与风险优化ETF轮动策略，本地回测显示高收益但深回撤，需卫星仓配置。</p>
 </blockquote>
-<h3>（二）核心内容</h3>
+<h3 id="section-3">（二）核心内容</h3>
 <ol>
 <li>
 <p><strong>策略方法与核心结果</strong>
@@ -52,23 +27,23 @@
 本地结果与原文表三存在差异，主要因成交代理（收盘 vs 开盘）、回归对象（对数价格 vs 对数收益率）和成本口径不同。策略回撤较深，更适合卫星仓而非满仓。复现结论仅对本代理口径负责，不能直接对标原文格点。建议谨慎参考，避免盲目扩仓或全仓操作。</p>
 </li>
 </ol>
-<h2>二、分段原文</h2>
+<h2 id="section-4">二、分段原文</h2>
 <blockquote>
 <p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
-<h3>1. 论文介绍与复现设置</h3>
+<h3 id="section-5">1. 论文介绍与复现设置</h3>
 <p>本期复现一篇用动量筛选加收缩协方差，做行业ETF月频轮动的研究。原论文在固定十三只ETF上算二十五日趋势得分再优化权重，本复现对齐同一池子，但改用本地日频前复权，并用对数价格回归与收盘成交代理验本地主结果。扣完万二后，二零二一年六月到二零二五年十二月，累计约加百分之三百二十八，夏普约一点二七，最大回撤约负百分之二十五。</p>
-<h3>2. 策略细节与差异对比</h3>
+<h3 id="section-6">2. 策略细节与差异对比</h3>
 <p>规则本身很短，每月第一个交易日用正至前一日的二十五日窗口算信号，对数价格回归，得到斜率和拟合角度再折成年化趋势，并乘上判定系数形成得分，用正分才进持仓，全负就空仓。持仓后用收缩相关矩阵做均值方差风险厌恶取权重，后恢复且加总为一，百分之上期仓位，单标的偏离到百分之一才真正调仓，主净值已按单边万二计入半边换手，大约每月零七。这数据口径要先和原文分开看的。原论文表一只列是十三只ETF，本工程用本目录本地日频前复权数据。这边原文写对数收益回归，本工程主结果改用对数价格，因为对数收益回归，本地几乎选不出标的。成交与成本也不同。原文月首开盘并叠加印花，本工程用收盘代理，且注标只扣万二本。同为二零二一年六月到二零二五年十二月，结论只对本代理口径负责，不对原文表三格点负责。净值处理策略，多数时段压过沪深三百ETF，但也不是一路平滑，之后最大回撤，大约四分之一本金，更适合卫星仓，而不是满仓。主策略净值已经含万二，如果再按原文印花近似，加压收益会下修一节，但并不会改变规则。能不能跑回撤深不深？这两点判断头剁到数字一，主策略累计约加百分之三百二十八，年化约百分之三十七，夏普约一点二七，回撤约负百分之二十五，同区监护沪深三百ETF，累计约付百分之六，相普接近零。跟表三保累计约加百分之七十五，夏普零口五十七，只能当对照，不能当成这次本地已经实现。我们差距主要来自成交代理、回归对象和成本口径，不是同一厨房的同一道菜阿姨，我们的是可以机制上可以拆成两步分，同时要方向和稳定性。趋势强，但路径乱会被判定系数压低洗脚。协方差矩阵向单位阵收缩一半再重建协方差，用来压短窗噪声特优化目标是预期收益减风险、惩罚风险。厌恶的固定为二，全负分就空仓参数。参数和假设做小范围稳健性，而不是天天改窗，边界也比较清楚可做的事。十三支池的月频卫星舱为正分，才持有泰勇用收缩协方差定权。是的，要验证的是吧？本地百分之三百二十八当成实盘预期，或者满仓长期抗身回撤，或者盲目扩成全市场行业ETF别做的事，包括对数收益回归，却不检查得分是否几乎全面用前世写方差、讲故事，以及宣称已经复现原文表三格点，再走三点就够规则可执行。本地超额明显，但回撤深更一卫星仓。代理差异会抬高收益尺度，所以不要直接对标原文。数字工程入口是本目录下的回测脚本，本地模式即可复跑主表。</p>
-<h2>三、知识关联</h2>
-<h3>来源与类型</h3>
+<h2 id="section-7">三、知识关联</h2>
+<h3 id="section-8">来源与类型</h3>
 <ul>
 <li><span class="wikilink">量化Quantgirl</span></li>
 <li><span class="wikilink">抖音</span></li>
 <li><span class="wikilink">视频笔记</span></li>
 <li><span class="wikilink">KenRadar</span></li>
 </ul>
-<h3>相关主题</h3>
+<h3 id="section-9">相关主题</h3>
 <ul>
 <li><span class="wikilink">股票市场</span></li>
 <li><span class="wikilink">ETF轮动</span></li>
@@ -80,28 +55,30 @@
 <li><span class="wikilink">投资策略</span></li>
 <li><span class="wikilink">资产配置</span></li>
 </ul>
-<h3>人物</h3>
+<h3 id="section-10">人物</h3>
 <ul>
 <li>暂无明确人物</li>
 </ul>
-<h3>相关机构/公司</h3>
+<h3 id="section-11">相关机构/公司</h3>
 <ul>
 <li>暂无明确机构或公司</li>
 </ul>
-<h3>历史事件</h3>
+<h3 id="section-12">历史事件</h3>
 <ul>
 <li>暂无明确历史事件</li>
 </ul>
-<h3>资产/产品/地点</h3>
+<h3 id="section-13">资产/产品/地点</h3>
 <ul>
 <li>暂无明确资产、产品或地点</li>
 </ul>
-<details class="transcript"><summary>四、视频原始转录</summary>
+<div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
 <p>[!quote]- 展开查看原始转录
 以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
 <p>本期复线一篇用动量筛选加收缩斜方差，做行业ETF月平轮动的研究。故原论文在固定十三只ETF上算二十五日趋势得分再优化权重本复现对齐同一池子，但改用本地潜复权，并用对数价格回归与收盘成交代理验本地主结果扣完万二后二零二一年六月到二零二五年十二月，累计约加百分之三百二十八。夏普约一起的最大回撤约付百分之二十五。规则本身很短，每月第一个交易日用正至前一日的二十五日窗口算信号，对数价格回归，得到斜率和拟合角度再折成年化趋势，并乘上判定系数形成得分，用正分才进持全负，就空仓可进持后，用收缩相关矩阵做均值方差风险厌误取。二、权重后恢复且加总为一，百分之上期仓位呃，单标的偏离到百分之一才真正调仓，主净值已按单边万二计入半边换手，大约每月零七。三、这数据口径要先和原文分开看的。游泳表一只列是三只日评本工程用本目录本地日评前复权狂废这边原文写对数收益回归，本工程主结果改用对数价格，因为字面收益回归，本地几乎选不出标底。B成交与成本也不同。原文月首开盘并叠加印花本工程用收盘代理，且注标只扣万二本。同为二零二一年六月到二零二五年十二月，结论只对本代理口径负责，不对原文表、三格点负责的净值处理策略。多数时段压过铜器，沪深三百ETF,但也不是一路平滑之后最大回撤，大约四分之一本金更适合卫星仓，而不是满仓。主策略净值已经含万二。如果再按原文印花近似，加压收益会下修一节，但并不会改变规则。能不能跑回撤深不深？这两点判断头剁到数字一，主策略累计约加百分之三百，二十八年化约百分之三十七。夏普约的二十七回撤约负百分之二十五，同区监护深三百ETF,累计约付百分之六。相普接近零跟表三保累计约加百分之七十五，夏普零口五十七只能当对照，不能当成这次本地已经实现people,我们差距主要来自成交代理。回归对象和成本口径，不是同一厨房的同一道菜阿姨，我们的是可以机制上可以拆成两步分，同时要方向和稳定性。知识强，但路径乱会被判定系数压低洗脚。相关举证向单位证收缩一半再重建斜方差用来压短窗噪声特优化目标是预期收益减风险、惩罚风险。厌恶的固定为二，全负分就空仓参数。何富仙所住在做小范围稳健性，而不是天天改窗，边界也比较清楚可做的事。十三支池的月平卫星舱为正分，才持有泰勇用收缩斜方差定权。对，要胜做的是吧？本地百分之三百二十八当成实盘预期，或者满仓长期抗身回撤，或者盲目扩成全市场行业ETF别做的事，包括字面收益回归，却不检查得分是否几乎全面用前世写方差、讲故事，以及宣称已经复现原文表、三格点，再走三点就够规则可执行。本地超额明显，但回撤深更一卫星仓代理差异会抬高收益尺度，所以不要直接对标原文。数字工程入口是本目录下的回测脚本，本地模式即可复跑主表。</p>
 </blockquote>
-</details></main>
-</body>
-</html>
+</details></div></div></article><section id="related" data-topics="[&quot;股票市场&quot;, &quot;ETF轮动&quot;, &quot;动量策略&quot;, &quot;协方差优化&quot;, &quot;回测复现&quot;, &quot;卫星仓&quot;, &quot;量化策略研究&quot;, &quot;投资策略&quot;, &quot;资产配置&quot;]" data-current="notes/douyin/量化Quantgirl/2026-08-01_ETF行业轮动策略复现分析_7668962850295139593.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 论文介绍与复现设置</a><a href="#section-6">2. 策略细节与差异对比</a><a href="#section-7">三、知识关联</a><a href="#section-8">来源与类型</a><a href="#section-9">相关主题</a><a href="#section-10">人物</a><a href="#section-11">相关机构/公司</a><a href="#section-12">历史事件</a><a href="#section-13">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-25 21:49</span></footer>
+<nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
+<dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
+<script id="kr-metadata" type="application/json">{"title": "ETF行业轮动策略复现分析", "relative_url": "notes/douyin/量化Quantgirl/2026-08-01_ETF行业轮动策略复现分析_7668962850295139593.html", "platform": "douyin", "creator": "量化Quantgirl", "external_content_id": "7668962850295139593", "published_at": "2026-08-01 15:32:45", "topics": ["股票市场", "ETF轮动", "动量策略", "协方差优化", "回测复现", "卫星仓", "量化策略研究", "投资策略", "资产配置"], "summary": "复现动量与风险优化ETF轮动策略，本地回测显示高收益但深回撤，需卫星仓配置。", "source_url": "https://www.douyin.com/video/7668962850295139593"}</script></body></html>

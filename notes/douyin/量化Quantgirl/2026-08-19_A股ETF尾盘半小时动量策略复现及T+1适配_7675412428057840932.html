@@ -1,47 +1,22 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>A股ETF尾盘半小时动量策略复现及T+1适配｜KenRadar</title>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f5; color: #202124; }
-    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
-    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
-    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
-    h1, h2, h3 { line-height: 1.25; color: #111827; }
-    h1 { font-size: 30px; margin: 24px 0 16px; }
-    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
-    h3 { font-size: 17px; margin-top: 24px; }
-    p, li { font-size: 16px; line-height: 1.8; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
-    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
-    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
-    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-    .meta { color: #6b7280; font-size: 13px; }
-    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
-    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
-    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
-    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
-    details.transcript[open] summary { margin-bottom: 18px; }
-  </style>
-</head>
-<body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-08-19_A股ETF尾盘半小时动量策略复现及T+1适配_7675412428057840932.md · 发布于 2026-10-12 11:35:12</div><nav class="page-links"><a href="https://www.douyin.com/video/7675412428057840932" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>A股ETF尾盘半小时动量策略复现及T+1适配</h1>
-<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7675412428057840932">https://www.douyin.com/video/7675412428057840932</a>）</p>
-<h2>一、内容简述</h2>
-<h3>（一）一句话结论</h3>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><meta name="description" content="复现论文《Last hour momentum in the Chinese stock market》，研究沪深300ETF尾盘半小时动量策略，设计T+1适配规则验证可落地性。">
+<title>A股ETF尾盘半小时动量策略复现及T+1适配｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<script defer src="../../../assets/site.js"></script></head>
+<body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
+<nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
+<main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>A股ETF尾盘半小时动量策略复现及T+1适配</h1><p class="muted">量化Quantgirl · douyin · 视频发布于 2026-08-19 00:40:27</p><nav class="page-links"><a href="https://www.douyin.com/video/7675412428057840932" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 论文复现背景与策略设计</a><a href="#section-6">2. 信号规则与交易条件</a><a href="#section-7">3. ETF的T+1限制与适配路径</a><a href="#section-8">4. 样本区间与数据说明</a><a href="#section-9">5. 同日策略与全日持有对比</a><a href="#section-10">6. 毛收益与成本影响分析</a><a href="#section-11">7. T+1适配路径回测结果</a><a href="#section-12">8. 成交频率与冲击成本评估</a><a href="#section-13">9. 同日进出规则适用性分析</a><a href="#section-14">10. 总结与实践要点</a><a href="#section-15">三、知识关联</a><a href="#section-16">来源与类型</a><a href="#section-17">相关主题</a><a href="#section-18">人物</a><a href="#section-19">相关机构/公司</a><a href="#section-20">历史事件</a><a href="#section-21">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a></details><div class="article-copy"><p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7675412428057840932">https://www.douyin.com/video/7675412428057840932</a>）</p>
+<h2 id="section-1">一、内容简述</h2>
+<h3 id="section-2">（一）一句话结论</h3>
 <blockquote>
-<p><strong>一句话结论</strong>
+<p><strong>一句话结论 · 内容来源的摘要</strong>
 复现论文《Last hour momentum in the Chinese stock market》，研究沪深300ETF尾盘半小时动量策略，设计T+1适配规则验证可落地性。</p>
 </blockquote>
-<h3>（二）核心内容</h3>
+<h3 id="section-3">（二）核心内容</h3>
 <ol>
 <li>
 <p><strong>策略核心逻辑与论文背景</strong>
@@ -56,39 +31,39 @@
 T+1适配路径在十四点信号买入、次日开盘卖出，累计收益11.03%，年化11.61%，夏普1.84，最大回撤-4.10%，相对匹配窗口买入持有的超额累计高达19.80%，是最干净的一条路径。若持有到次日收盘，绝对累积更高但相对同窗基准反而亏损2.32%。确认版策略等r7确认后再进场，收益更薄，累计3.67%，年化3.80%，夏普超5，超额9.41%。样本期仅241个交易日，预测R方约2.3%，盈利依赖有条件暴露机制，尾部风险不可忽视，建议小仓位验证并持续跟踪。</p>
 </li>
 </ol>
-<h2>二、分段原文</h2>
+<h2 id="section-4">二、分段原文</h2>
 <blockquote>
 <p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
-<h3>1. 论文复现背景与策略设计</h3>
+<h3 id="section-5">1. 论文复现背景与策略设计</h3>
 <p>本期复现一篇关于中国股市尾盘半小时动量的论文，原论文用2012至2017年的日内行情，发现下午两点前后半小时收益符号能预测后续半小时。本复现无法公开一分钟线聚合，并对A股ETF无法当日回转的制度约束，设计了14点买入、次日开盘卖出的适配规则。</p>
-<h3>2. 信号规则与交易条件</h3>
+<h3 id="section-6">2. 信号规则与交易条件</h3>
 <p>下午交易时段被切成：13:30到14:00是r6，14:00到14:30是r7，14:30到15:00是r8。信号只用r6和r7的收益率符号，不引入其他因子，为原版。同日策略则需要当日回转制度配合：r6大于零就做多，r7大于零就做多。r8混合条件下r6和r7同时为正则持有r7加r8，r6为正但r7非正就只拿r7，r6小于等于零直接空仓。</p>
-<h3>3. ETF的T+1限制与适配路径</h3>
+<h3 id="section-7">3. ETF的T+1限制与适配路径</h3>
 <p>针对ETF的T+1限制，我们设计了核心适配路径：r6大于零时，在14:00按收盘价买入，次日开盘卖出。确认版需要等r7也大于零后，在14:30进场，同样次日开盘了结。两条策略都扣除了往返1bp的佣金。近似基准分为日内持有和与持仓期对齐的匹配买入持有。</p>
-<h3>4. 样本区间与数据说明</h3>
+<h3 id="section-8">4. 样本区间与数据说明</h3>
 <p>原论文基于日内行情，样本覆盖2012年5月到2017年12月。我们用的是公开行情的一分钟线聚合出半小时价格，实际拿到的窗口是2025年8月18日到2026年8月14日，共241个交易日。原论文主要针对沪深300指数及跟踪ETF，回撤以510300为主，B指数面板做对照。同等口径上原论文部分表格报无成本或往返6bp上线，我们采取更贴近实盘的往返1bp，单边0.5bp。</p>
-<h3>5. 同日策略与全日持有对比</h3>
+<h3 id="section-9">5. 同日策略与全日持有对比</h3>
 <p>从净值曲线看，论文同日混合策略扣完1bp后，走势非常平缓，最大回撤控制在负2.9%以内，但绝对收益明显跑输全日持有。表里一目了然：混合净累计8.1%，年化8.57%，夏普1.83，而日内满仓持有累计高达27.54%，年化29.1%，夏普1.88。这一轮样本期ETF整体上行，择时换来的不是更高收益，而是更小的波动和更浅的回撤。</p>
-<h3>6. 毛收益与成本影响分析</h3>
+<h3 id="section-10">6. 毛收益与成本影响分析</h3>
 <p>毛收益方面，混合累计能到9.4%，年化9.90%，夏普2.11，扣掉1bp往返成本后下滑约1.3个百分点。单独吃尾盘半小时也能拿到年化6.0%，夏普1.77，回撤仅负1.62%。但r7段最弱，年化只有2.12%，夏普0.60。可切换到T+1适配后，三条路径的净值表现差异明显。</p>
-<h3>7. T+1适配路径回测结果</h3>
+<h3 id="section-11">7. T+1适配路径回测结果</h3>
 <p>在14:00信号买入、次日开盘卖出的默认路径，累计11.03%，年化11.61%，夏普1.84，最大回撤负4.10%，相对匹配窗口的超额累计高达19.80%，是超额最干净的一条。如果持有到次日收盘，绝对累积更高有14.59%，年化15.37%，但相对同窗基准反而亏损2.32%，说明多拿的收益来自隔夜趋势，不是策略本身。确认版等r7确认后再进场，收益更薄，累计3.67%，年化3.80%，夏普超5，超额9.41%，更稳也更保守。</p>
-<h3>8. 成交频率与冲击成本评估</h3>
+<h3 id="section-12">8. 成交频率与冲击成本评估</h3>
 <p>该策略在整个回撤期内成交约116个交易日，毛收益到净收益累计缩水约1.2%，年化减少约1.33%。而且尾盘时段实际冲击成本可能高于1bp，当前未做建模。可落地路径是：针对A股宽基ETF的可做路径很明确，用14点信号次日开盘了结的规则，14点进场，次日开盘出场，小仓位验证，并且始终以匹配持有窗口的买入持有为基准，不要拿日内满仓持有来比较，那是对不上的。</p>
-<h3>9. 同日进出规则适用性分析</h3>
+<h3 id="section-13">9. 同日进出规则适用性分析</h3>
 <p>同日进出规则可以尝试，但仅限于当日回转品种，比如跨境ETF。在510300上不能直接套。如果拿那只ETF跑图，人混合近年化约13.0%，夏普3.68，回撤仅负1.4%。不过隔夜和日间趋势仍然主导，总账户策略贡献有限。那需要警惕的是，样本仅241个交易日，一分钟数据深度不足，预测R方只有约2.3%，盈利依赖有条件才暴露的机制，而非强预测。尾部风险不可忽视，不要因短期数字好就放大仓位。</p>
-<h3>10. 总结与实践要点</h3>
+<h3 id="section-14">10. 总结与实践要点</h3>
 <p>总结来看，尾盘半小时动量策略经T+1适配后，在510300上实现了年化11.6%，相对匹配窗口累计超额19.8%的收益。本期为2025年8月到2026年8月。同日混合路径虽然夏普1.83、回撤仅负2.9%、表现稳健，但绝对收益远不及简单持有，更适合作为低波动增强工具，而非主收益来源。实践落地的三个关键点是：严格使用匹配窗口的买入持有作为基准，控制尾盘时段的冲击成本，并且只在小仓位验证，持续跟踪半小时级别动量信号的稳定性。</p>
-<h2>三、知识关联</h2>
-<h3>来源与类型</h3>
+<h2 id="section-15">三、知识关联</h2>
+<h3 id="section-16">来源与类型</h3>
 <ul>
 <li><span class="wikilink">量化Quantgirl</span></li>
 <li><span class="wikilink">抖音</span></li>
 <li><span class="wikilink">视频笔记</span></li>
 <li><span class="wikilink">KenRadar</span></li>
 </ul>
-<h3>相关主题</h3>
+<h3 id="section-17">相关主题</h3>
 <ul>
 <li><span class="wikilink">量化交易</span></li>
 <li><span class="wikilink">股票策略</span></li>
@@ -101,28 +76,30 @@ T+1适配路径在十四点信号买入、次日开盘卖出，累计收益11.03
 <li><span class="wikilink">股票市场</span></li>
 <li><span class="wikilink">投资策略</span></li>
 </ul>
-<h3>人物</h3>
+<h3 id="section-18">人物</h3>
 <ul>
 <li>暂无明确人物</li>
 </ul>
-<h3>相关机构/公司</h3>
+<h3 id="section-19">相关机构/公司</h3>
 <ul>
 <li>暂无明确机构或公司</li>
 </ul>
-<h3>历史事件</h3>
+<h3 id="section-20">历史事件</h3>
 <ul>
 <li>暂无明确历史事件</li>
 </ul>
-<h3>资产/产品/地点</h3>
+<h3 id="section-21">资产/产品/地点</h3>
 <ul>
 <li>暂无明确资产、产品或地点</li>
 </ul>
-<details class="transcript"><summary>四、视频原始转录</summary>
+<div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
 <p>[!quote]- 展开查看原始转录
 以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
 <p>本期复现一篇关于中国股市尾盘半小时动量的论文，原论文用二零一二至二零一七年的主笔行情，发现下午两点前后半小时收益符号能预测后续半小时，本复线无法公开一分钟线聚合，并对a股ETF无法当日回转的制度约束，设计了十四点买入、次日开盘卖出的适配规则。 P线在沪深三百ETF上，同日混合策略扣完往返EBP,后年化约百分之八点六。夏普一点八三，最大回撤约负百分之二点九，适配路径相对匹配，窗口累计超额约百分之十九点八。腾。呃，下午交易时段被切成腾呃，十三点三十分到十四点是r六十四点到十四点，三十分是r七十四点，三十分到十五点，是r八信号，只用r六和r七的收益率符号不引入其他因子累为原版，同日电则需要当日回转制度配合。二六大于零就做多，二七二七大于零就做多。二八混合条件下二六和二七同时为正则持有二七加二八二六为证，但二七非正就只拿二七二六小于等于零，直接空仓开股ETF的t加一限制，我们设计了核心适配路径。 R六大于零时，在十四点按草末价买入，次日开盘卖出确认板需要等r七也大于零后，在十四点三十分进场。同样，次日开盘了结透策略都扣除了往返EBEP的佣金。近似基准分为日内持有和鱼池仓期对齐的匹配。买入持有可原论文基于主笔行情，样本覆盖二零一二年五月到二零一七年十二月，我们用的是公开行情的一分钟线，聚合出半小时价格呃，实际拿到的窗口是二零二五年八月十八日到二零二六年，八月十四日共二百四十一个交易日。行论文主要针对沪深三百指数及跟踪ETF本回撤以五幺零三零零为主，b指数面板做对照，同奔口径上原论文部分表格报无成本或往返六BP上线。我们采取更贴近实盘的往返EBP单边零点五BP,最关键的制度差异在于原文假定ETF能当日回转进出，而a股宽基ETF实际是t加一。因此，同日协议仅作为对照落地，以适配规则为准。本回测只对这二百四十一个交易日和使用一分钟代理数据的结果负责。从静止曲线看，论文同日混合策略扣完EBP后，走势非常平缓，最大回撤控制在负百分之二点九以内，但绝对收益明显。跑输全日持有表里一目了然，混合净累计百分之八点一五年化百分之八点五七。夏普一点八三儿童日满仓持有累计高达百分之二十七点五四。年化百分之二十九点一，夏普一点八八快。这轮样本期ETF整体上行择时换来的不是更高收益，而是更小的波动和更浅的回撤。看毛收益混合累计能到百分之九点四，一年化百分之九点九零。夏普二点一一扣掉EBP往返成本后下滑约一点三个百分点。八、单独吃尾盘半小时也能拿到年化百分之六点零。夏普一点七七回撤仅负百分之一点六二，但二七段最弱，年化只有百分之二点一二。夏普零点六零可切换到t加一适配后，三条路径的净值表现差异明显。在十四点信号买入，次日开盘卖出的默认路径累计百分之十一点零三，一年化百分之十一点六一。夏普一点八四最大回撤负百分之四点一零，相对匹配窗口的超额累计高达百分之十九点八零，是超额最干净的一条果。如果持有到次日收盘，绝对累积更高，有百分之十四点五九年化百分之十五点三七，但相对同窗基准反而亏损百分之二点三二。说明多拿的收益来自隔夜趋势，不是策略本身确认版，等阿七确认后再进场，收益更薄，在累计百分之三点六七年化百分之三点八，误刀超五，超额百分之九点四一，更稳也更保守。可核策略在整个回撤期内成交约一百一十六个交易日，毛收益到净收益累计缩水约百分之一点二，六年化减少约百分之一点三三。而且尾盘时段实际冲击成本可能高于EBP,当前未做建模可落地路径。那上a股宽基ETF的可做路径很明确，用十四点星号，次日开盘了结的规则，十四点进场，次日开盘出场小仓位验证，并且始终以匹配持有窗口的买入持有为基准，不要拿日内满仓持有来比较。那是对不上的。同日进出规则可以尝试，但仅限于当日回转品种。比如跨境ETF在五幺零三零零上不能直接套。如果拿那只ETF跑。图人混合近年化约百分之十三点零，夏普三点六八，回撤仅负百分之一点四。不过，隔夜和日间趋势仍然主导，总账户策略贡献有限。那需要警惕的是，样本及二百四十一个交易日一分钟，数据深度不足，预测r方只有约百分之二点三，盈利依赖有条件才暴露的机制，而非强预测尾部风险不可忽视，不要因短期数字好就放大仓位。总结来看，尾盘半小时动量策略经t加一适配后，在五幺零三零零上实现了年化百分之十一点六，相对匹配窗口累计超额百分之十九点八的收益。哦，本期为二零二五年八月到二零二六年八月同日混合路径。虽然夏普一点八三回撤仅负百分之二点九，表现稳健，但绝对收益远不及简单持有，更适合作为低波动增强工具，而非主收益来源。很好。我食盆落地的三个关键点是严格使用匹配窗口的买入持有作为基准控制尾盘时段的冲击成本，并且只在小仓位验证，持续跟踪半小时级别动量信号的稳定性。</p>
 </blockquote>
-</details></main>
-</body>
-</html>
+</details></div></div></article><section id="related" data-topics="[&quot;量化交易&quot;, &quot;股票策略&quot;, &quot;ETF投资&quot;, &quot;尾盘动量&quot;, &quot;T+1适配&quot;, &quot;量化策略&quot;, &quot;论文复现&quot;, &quot;量化策略论文复现&quot;, &quot;股票市场&quot;, &quot;投资策略&quot;]" data-current="notes/douyin/量化Quantgirl/2026-08-19_A股ETF尾盘半小时动量策略复现及T+1适配_7675412428057840932.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 论文复现背景与策略设计</a><a href="#section-6">2. 信号规则与交易条件</a><a href="#section-7">3. ETF的T+1限制与适配路径</a><a href="#section-8">4. 样本区间与数据说明</a><a href="#section-9">5. 同日策略与全日持有对比</a><a href="#section-10">6. 毛收益与成本影响分析</a><a href="#section-11">7. T+1适配路径回测结果</a><a href="#section-12">8. 成交频率与冲击成本评估</a><a href="#section-13">9. 同日进出规则适用性分析</a><a href="#section-14">10. 总结与实践要点</a><a href="#section-15">三、知识关联</a><a href="#section-16">来源与类型</a><a href="#section-17">相关主题</a><a href="#section-18">人物</a><a href="#section-19">相关机构/公司</a><a href="#section-20">历史事件</a><a href="#section-21">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-25 21:49</span></footer>
+<nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
+<dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
+<script id="kr-metadata" type="application/json">{"title": "A股ETF尾盘半小时动量策略复现及T+1适配", "relative_url": "notes/douyin/量化Quantgirl/2026-08-19_A股ETF尾盘半小时动量策略复现及T+1适配_7675412428057840932.html", "platform": "douyin", "creator": "量化Quantgirl", "external_content_id": "7675412428057840932", "published_at": "2026-08-19 00:40:27", "topics": ["量化交易", "股票策略", "ETF投资", "尾盘动量", "T+1适配", "量化策略", "论文复现", "量化策略论文复现", "股票市场", "投资策略"], "summary": "复现论文《Last hour momentum in the Chinese stock market》，研究沪深300ETF尾盘半小时动量策略，设计T+1适配规则验证可落地性。", "source_url": "https://www.douyin.com/video/7675412428057840932"}</script></body></html>

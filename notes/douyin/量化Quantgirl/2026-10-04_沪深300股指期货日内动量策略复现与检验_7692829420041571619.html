@@ -1,47 +1,22 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>沪深300股指期货日内动量策略复现与检验｜KenRadar</title>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f5; color: #202124; }
-    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
-    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
-    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
-    h1, h2, h3 { line-height: 1.25; color: #111827; }
-    h1 { font-size: 30px; margin: 24px 0 16px; }
-    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
-    h3 { font-size: 17px; margin-top: 24px; }
-    p, li { font-size: 16px; line-height: 1.8; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
-    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
-    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
-    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-    .meta { color: #6b7280; font-size: 13px; }
-    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
-    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
-    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
-    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
-    details.transcript[open] summary { margin-bottom: 18px; }
-  </style>
-</head>
-<body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-10-04_沪深300股指期货日内动量策略复现与检验_7692829420041571619.md · 发布于 2026-10-12 11:35:12</div><nav class="page-links"><a href="https://www.douyin.com/video/7692829420041571619" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>沪深300股指期货日内动量策略复现与检验</h1>
-<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7692829420041571619">https://www.douyin.com/video/7692829420041571619</a>）</p>
-<h2>一、内容简述</h2>
-<h3>（一）一句话结论</h3>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><meta name="description" content="复现2020年论文，以开盘段信号决定尾盘方向，75分钟双信号+平昨底仓全样本年化6.22%夏普1.08，但2026年夏普仅0.66，样本内最优不可直接固化。">
+<title>沪深300股指期货日内动量策略复现与检验｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<script defer src="../../../assets/site.js"></script></head>
+<body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
+<nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
+<main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>沪深300股指期货日内动量策略复现与检验</h1><p class="muted">量化Quantgirl · douyin · 视频发布于 2026-10-04 23:07:21</p><nav class="page-links"><a href="https://www.douyin.com/video/7692829420041571619" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 策略概述与核心参数</a><a href="#section-6">2. 主回测结果与回撤指标</a><a href="#section-7">3. 信号构造与成本结构</a><a href="#section-8">4. 对照实验与费率敏感性</a><a href="#section-9">5. 净值路径与费用影响</a><a href="#section-10">6. 年度收益分布与对比基准</a><a href="#section-11">7. 实盘应用建议与最终结论</a><a href="#section-12">三、知识关联</a><a href="#section-13">来源与类型</a><a href="#section-14">相关主题</a><a href="#section-15">人物</a><a href="#section-16">相关机构/公司</a><a href="#section-17">历史事件</a><a href="#section-18">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a></details><div class="article-copy"><p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7692829420041571619">https://www.douyin.com/video/7692829420041571619</a>）</p>
+<h2 id="section-1">一、内容简述</h2>
+<h3 id="section-2">（一）一句话结论</h3>
 <blockquote>
-<p><strong>一句话结论</strong>
+<p><strong>一句话结论 · 内容来源的摘要</strong>
 复现2020年论文，以开盘段信号决定尾盘方向，75分钟双信号+平昨底仓全样本年化6.22%夏普1.08，但2026年夏普仅0.66，样本内最优不可直接固化。</p>
 </blockquote>
-<h3>（二）核心内容</h3>
+<h3 id="section-3">（二）核心内容</h3>
 <ol>
 <li>
 <p><strong>策略逻辑：双段同号筛选尾盘方向</strong>
@@ -56,33 +31,33 @@
 75分钟为全样本静态扫描最优参数，样本外表现明显弱化，2026年夏普仅0.66、年化2.90%，不可直接作为可固化上线的最优参数。成本口径对结果影响显著：信号日成本0.46个基点，换月日0.92个基点，新开并同日平掉成本2.53个基点。策略定位为已有隔夜多空底仓时的尾盘方向开关，建议用样本外滚动参数和真实成交成本重新检验后再决定是否实盘部署，同时需监控滑点流动性、保证金占用和费率变化。</p>
 </li>
 </ol>
-<h2>二、分段原文</h2>
+<h2 id="section-4">二、分段原文</h2>
 <blockquote>
 <p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
-<h3>1. 策略概述与核心参数</h3>
+<h3 id="section-5">1. 策略概述与核心参数</h3>
 <p>在本期复现一篇中国股指期货日内持续动量研究，我们回测沪深300股指期货75分钟双信号平昨底仓，在726个交易日里累计19.06%，年化6.22%，夏普1.08。本策略在13:45确认开盘段与午后前段同号后，只交易13:45至15:00的最后75分钟，隔夜多空各一手，做多时平掉昨天空头，做空时平掉昨天多头，昨天多头持仓延续。样本覆盖2023年9月26日至2026年9月24日，75分钟使样本内静态最优。但2026年夏普只有0.66，不能直接外推，暂记账是个好习惯。</p>
-<h3>2. 主回测结果与回撤指标</h3>
+<h3 id="section-6">2. 主回测结果与回撤指标</h3>
 <p>主规则用75分钟双信号加平昨底仓，在2023年9月26日至2026年9月24日的726个交易日里，累计19.06%，年化6.22%，夏普1.08，最大回撤5.81%。策略在13:45确认开盘段和午后前段同向后，只参与13:45至15:00的最后75分钟15:00平结，但75分钟来自全样本静态扫描，2026年夏普仅0.66，不能直接当成可固化上线的最优参数。每日持有下一自然月交割的沪深300股指期货合约，换月首个交易日切换到下月，换月日双平旧合约双开新合约并跳过信号，避免新仓被按平均平掉。</p>
-<h3>3. 信号构造与成本结构</h3>
+<h3 id="section-7">3. 信号构造与成本结构</h3>
 <p>开盘段由09:30到10:45计算涨跌，倒数第二段把11:00至11:30接13:00至13:45的两段涨跌相乘，且不计午休跳空。13:45两段同为正就做多，同为非正就做空，其余空仓。隔夜多空各一手只平反向昨仓，并在15:00补回。执行上用隔夜多空各一手的底仓，把日内方向变成平昨，本身进场口为零：做多日平掉昨天的空头并在15:00开回空头，做空日对多头做同样动作，空仓日两手不动。信号日成本只有平昨加开仓的0.46个基点，换月日双平双开0.92个基点，而当天新开并同日平掉平均要扣2.53个基点，全样本换月37天，信号日319天，保证金按单向大边占用，成本压力显著小于裸做日内开平一次。</p>
-<h3>4. 对照实验与费率敏感性</h3>
+<h3 id="section-8">4. 对照实验与费率敏感性</h3>
 <p>另有平今不带底仓对照，年化4.05%，夏普0.70，说明成本口径会明显影响结果。原文使用2010年4月16日至2019年3月29日的一分钟行情共2174日，并按60分钟构造信号。本工程用投研端一分钟沪深300股指期货合约数据，样本为2023年9月26日至2026年9月24日的726个交易日，只采用2016年后09:30至11:30、13:00至15:00时段。主规则改为75分钟，60分钟仅做同账本对照，不能把两个窗口结果直接等同，因为投研端一分钟和五分钟在2023年9月前为空，无法在原始窗口重跑原文的费率与净值，也只能在同账本内比较。</p>
-<h3>5. 净值路径与费用影响</h3>
+<h3 id="section-9">5. 净值路径与费用影响</h3>
 <p>从净值路径看，75分钟双信号费前累计21.67%，扣平昨底仓费用后累计19.06%，费用72.6个基点。主规则最大回撤5.81%，按平昨金口径最大回撤扩大到7.17%。同一费用账本下，60分钟平昨累计只有9.08%，明显弱于75分钟的19.06%。图中净值和回撤都按日收益复利累积，换月日双边费用已计入平昨路径值。75分钟平昨底仓全样本年化6.22%，夏普1.08，卡玛1.07，最大回撤5.81%。同一75分钟信号若当天新开并15:00平掉，平均年化降到4.05%，夏普0.70，累计1.84%，而费前年化6.98%，夏普1.21，说明主结果不是未扣成本的毛收益展示。</p>
-<h3>6. 年度收益分布与对比基准</h3>
+<h3 id="section-10">6. 年度收益分布与对比基准</h3>
 <p>本回测未设指数基准，尾盘每天做多并扣平昨金的年化为完全负8.89%，最大回撤25.32%。在5、15、23、34、45、60和75分钟这组互不重叠的窗口上扫描，75分钟的全样本夏普1.08和卡玛1.07同时最高。40分钟夏普1.06虽然接近，但卡玛只有0.93。加2026年75分钟年化2.90%，夏普0.66，卡玛0.70，仍然为正但明显弱于全样本。60分钟全样本年化3.13%，2026年累计0.06%，说明时长选择很敏感，而75分钟来自同一726日样本的静态筛选，本质是样本内最优，实盘部署前需要后续样本或滚动规则重新检验。</p>
-<h3>7. 实盘应用建议与最终结论</h3>
+<h3 id="section-11">7. 实盘应用建议与最终结论</h3>
 <p>726个交易日里有319个信号日，换月37天不交易，信号不同向日不承担最后75分钟方向风险，这是它和每天做多最本质的区别。按年看，2023至2026累计收益分别为3.64%、4.23%、8.06%、2.00%，其中2023年只有63个交易日，14.39%的年化被短样本放大。2025年夏普1.72，2026年T值只有0.54。而每天持有最后75分钟多头并扣平昨金的年化为完全负8.89%，因此收益来自同向筛选和允许做空，而非简单暴露于尾盘上涨。在实盘上可以把这套信号当做已有隔夜多空各一手时的尾盘方向开关，13:45根据75分钟双信号调整净方向，15:00恢复，双边底仓。两段不同向就保持空仓，不强制每天参与最后75分钟。若只能当天新开并在15:00平仓就要按平均成本评估，历史年化被压到4.05%，夏普0.70。同时需监控滑点流动性、保证金占用和费率变化，不要把75分钟样本内最优参数直接固化上线，不要用2023年短样本的高年化推断未来。策略的历史主结果是用75分钟双信号加平昨底仓，2023年9月26日至2026年9月24日累计19.06%，年化6.22%，夏普1.08，最大回撤5.81%。交易价值主要来自13:45后的方向筛选、不同向日的空仓减少暴露以及允许做空，而不是长期持有尾盘多头。成本决定可用性，平昨底仓与平均账本的年化差为2.17个百分点。2026年仍有2.00%累计收益但夏普0.66、T值0.54，因此更适合定位为可监控的尾盘择时模块，用样本外滚动参数和真实成交成本决定是否部署。</p>
-<h2>三、知识关联</h2>
-<h3>来源与类型</h3>
+<h2 id="section-12">三、知识关联</h2>
+<h3 id="section-13">来源与类型</h3>
 <ul>
 <li><span class="wikilink">量化Quantgirl</span></li>
 <li><span class="wikilink">抖音</span></li>
 <li><span class="wikilink">视频笔记</span></li>
 <li><span class="wikilink">KenRadar</span></li>
 </ul>
-<h3>相关主题</h3>
+<h3 id="section-14">相关主题</h3>
 <ul>
 <li><span class="wikilink">股票市场</span></li>
 <li><span class="wikilink">量化交易</span></li>
@@ -94,28 +69,30 @@
 <li><span class="wikilink">货币政策</span></li>
 <li><span class="wikilink">投资策略</span></li>
 </ul>
-<h3>人物</h3>
+<h3 id="section-15">人物</h3>
 <ul>
 <li>暂无明确人物</li>
 </ul>
-<h3>相关机构/公司</h3>
+<h3 id="section-16">相关机构/公司</h3>
 <ul>
 <li>暂无明确机构或公司</li>
 </ul>
-<h3>历史事件</h3>
+<h3 id="section-17">历史事件</h3>
 <ul>
 <li>暂无明确历史事件</li>
 </ul>
-<h3>资产/产品/地点</h3>
+<h3 id="section-18">资产/产品/地点</h3>
 <ul>
 <li>暂无明确资产、产品或地点</li>
 </ul>
-<details class="transcript"><summary>四、视频原始转录</summary>
+<div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
 <p>[!quote]- 展开查看原始转录
 以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
 <p>在本期复现一篇中国股指期货日内持续动量研究，我们回测沪深三百股指期货七十五分钟，双信号平左底仓，在七百二十六个交易日里，累计百分之一千九点零，六年化百分之六点二二。夏普一点零八本策略在十三点四十五分确认开盘段与午后前段同号后，只交易十三点四十五分至十五点的最后七十五分钟，隔夜多空各一手做多时平调，昨天空头做空时平调，昨天多头持旧样本，覆盖二零二三年九月二十六日至二零二六年九月二十四日七十五分钟，使样本内静态最优。二零二六年。夏普只有零点六六，不能直接外推，暂记账，是个好习惯。自沪深三百股指期货主规则用七十五分钟双信号加平左底仓。在二零二三年九月二十六日至二零二三年九月二十四日的七百二十六个交易日里，累计百分之十九点零，六年化百分之六点二二。夏普一点零八，最大回撤百分之五点八一。台机场在十三点四十五分确认开盘段和午后前段同像后，只参与十三点四十五分至十五点的最后七十五分钟十五点了结，但七十五分钟来自全样本静态扫描二零二六年夏普仅零点六六，不能直接当成可固化上限的最优参数。在每日持有下一自然月交割的沪深三百股指期货合约约割月首个交易日，切到下月换月日双平旧合约双开新合约并跳过信号，避免新仓被按平均平掉。开盘段由九点三十分到十点四十五分计算，涨跌倒数第二段，把十一点至十一点三十分接十三点至十三点四十五分的两段涨跌相乘，且不计午休。跳空十三点四十五分，两段同为正就做多，同为非正就做空，其余空仓隔夜多空各一手只平反向座仓，并在十五点补回执行上用隔夜多空各一手的底仓，把日内方向变成平凿，本身进场口为零，做多日平掉昨天的空投，并在十五点开回空头做空日，对多头做同样动作，空仓日两手不动，星号日成本。因此，只有平昨加开仓的零点四六个g点换月日双屏双开零点九二个g点，而当天新开变频均要扣二点五三个g点，全样本化月三十七天，信号日三百一十九天保证金按单向大边占用，成本压力显着小于裸坐日内开屏一次还当天新开并平刀成本压力显着小于。但今他万霞底才七天信号，日三十一九天保证金按单向大边占用，成本压力显着小于裸坐日内开屏，且多次研究使用。二零一零年四月十六日至二零一九年三月二十九日的一分钟行情共两千一百七十四日，并按六十分钟构造信号。本工程用投研端一分钟，沪深三百股指期货合约数据样本为二零二三年九月二十六日至二零二六年九月二十四日的七百二十六个交易日，只采用二零一六年后九点三十分至十一点三十分十三点至十五点时段。但是研究覆盖二零一五年前后两套适中本回测主规则改为七十五分钟，六十分钟仅做同胀本对照，不能把两个窗口结果直接等同。因为投研端一分钟和五分钟在二零二三年九月前为空，无法在原始窗口重跑后，文的费率与净值也只能在同账本内比较。从静止路径看，七十五分钟双信号费钱累计百分之二十一点六七，扣屏左底仓费用后累计百分之十九点零六，费用七十二点六一个百分点。主规则最大回撤扩百分之五点八，一瓶金口径最大回撤扩大到万分之七点一七，同一费用账本下六十分钟。平卓累计只有百分之九点零八，明显弱于七十五分钟的百分之十九点零六图中净值和回撤都按日收益复利累积换月日，双边费用已计入平卓路径值换月日，双边费用已计入平卓路径计期换月日，双边费用已计入平卓路径补结果里七十五分钟。平卓底仓全样本年化百分之六点二二，夏普一点零八卡玛一点零七，最大回撤百分之五点八一，同一七十五分钟信号。若当天新开并十五点平掉，平均年化降到百分之四点零五。夏普零点七零。累计百分之一点八四，而费前年化百分之六点九八。夏普一点二一说明主结果不是未扣成本的毛收益展示。读左底仓信号日成本零点四六个基点，换月日零点九二个基点，平均对照有仓日二点五三个基点。本回测未设指数基准，尾盘每天做多并扣平，今的年化为完负百分之八点八九，最大回撤百分之二十五点三二。在五十十五二十三十四十四五六十和七十五分钟，这组互不重叠的三段结构上，扫描时长七十五分钟的全样本夏普一点零八和卡玛一点零七，同时最高四十分钟。夏普一点零六虽然接近，但卡马只有零点九三，加二六年七十五分钟，年化百分之二点九零。夏普零点六六卡玛零点七零，仍然为正，但明显弱于全样本六十分钟，全样本年化百分之三点一三，二零二六年累计百分之零点零六。说明时场选择很敏感，而七十五分钟来自同一七百二十六日样本的静态筛选本质是样本内最优，且不可交易部署前需要后续样本或滚动规则重新检验。不规则三百一十九个信号日换月三十七天。不交易信号不同，向日不承担最后七十五分钟方向风险，这是它和每天做多最本质的区别。按年看，四年，累计均为证二零二三年百分之三点六四，二零二四年百分之四点二三，二零二五年百分之八点零六，二零二六年百分之二点零零。其中二零二三年只有六十三个交易日，百分之十四点三九的年化被短样本放大。二零二五年，夏普一点七二二零二六年t值只有零点五四，而每天持有最后七十五分钟多头并扣平金的年化为买负百分之八点八九，因此收益来自同向筛选和允许做空，而非简单暴露于尾盘上涨。多头并扣平子，而非简单暴露于尾盘上涨。在实盘上，可以把这套信号当做已有隔夜多空各一手时的尾盘方向开关十三点四十五分，根据七十五分钟双信号调整，静方向十五点恢复，双边底仓两段不同，向就保持空仓，不强制每天参与最后七十五分钟，只能当天新开，并在十五点平仓。就要按平均成本评估，历史，年化被压到百分之四点零五夏普零点七零。同时需监控划点流动性、保证金占用和费率变化，并且不要把七十五分钟样本内最优参数直接固化上线。不要用二零二三年短样本的高年化推断，未来换月日，应完成双边换约并跳过信号交易策略的历史主结果是用七十五分钟双信号加平左底仓。二零二三年九月二十六日至二零二六年九月二十四日，累计百分之十九点零，六年化百分之六点二。二面普一点零八，最大回撤百分之五点八一，交易价值主要来自十三点四十五分后的方向筛选不同，向日的空仓减少暴露以及允许做空，而不是长期持有。尾盘多头成本决定可用性。平卓底仓与平均账本的年化差为二点一七个百分点。二零二六年仍有百分之两点零零累计收益，但夏普零点六六t值零点五四，因此更适合定位为可监控的尾盘择时模块，用样本外滚动参数和真实成交成本决定是否部署。</p>
 </blockquote>
-</details></main>
-</body>
-</html>
+</details></div></div></article><section id="related" data-topics="[&quot;股票市场&quot;, &quot;量化交易&quot;, &quot;日内动量&quot;, &quot;量化策略&quot;, &quot;回测复现&quot;, &quot;尾盘择时&quot;, &quot;量化策略复现&quot;, &quot;货币政策&quot;, &quot;投资策略&quot;]" data-current="notes/douyin/量化Quantgirl/2026-10-04_沪深300股指期货日内动量策略复现与检验_7692829420041571619.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 策略概述与核心参数</a><a href="#section-6">2. 主回测结果与回撤指标</a><a href="#section-7">3. 信号构造与成本结构</a><a href="#section-8">4. 对照实验与费率敏感性</a><a href="#section-9">5. 净值路径与费用影响</a><a href="#section-10">6. 年度收益分布与对比基准</a><a href="#section-11">7. 实盘应用建议与最终结论</a><a href="#section-12">三、知识关联</a><a href="#section-13">来源与类型</a><a href="#section-14">相关主题</a><a href="#section-15">人物</a><a href="#section-16">相关机构/公司</a><a href="#section-17">历史事件</a><a href="#section-18">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-25 21:49</span></footer>
+<nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
+<dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
+<script id="kr-metadata" type="application/json">{"title": "沪深300股指期货日内动量策略复现与检验", "relative_url": "notes/douyin/量化Quantgirl/2026-10-04_沪深300股指期货日内动量策略复现与检验_7692829420041571619.html", "platform": "douyin", "creator": "量化Quantgirl", "external_content_id": "7692829420041571619", "published_at": "2026-10-04 23:07:21", "topics": ["股票市场", "量化交易", "日内动量", "量化策略", "回测复现", "尾盘择时", "量化策略复现", "货币政策", "投资策略"], "summary": "复现2020年论文，以开盘段信号决定尾盘方向，75分钟双信号+平昨底仓全样本年化6.22%夏普1.08，但2026年夏普仅0.66，样本内最优不可直接固化。", "source_url": "https://www.douyin.com/video/7692829420041571619"}</script></body></html>

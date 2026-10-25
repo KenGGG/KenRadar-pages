@@ -1,47 +1,22 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>论文解读：多频率连续仓位量化交易算法MCTG｜KenRadar</title>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f5; color: #202124; }
-    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
-    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
-    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
-    h1, h2, h3 { line-height: 1.25; color: #111827; }
-    h1 { font-size: 30px; margin: 24px 0 16px; }
-    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
-    h3 { font-size: 17px; margin-top: 24px; }
-    p, li { font-size: 16px; line-height: 1.8; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
-    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
-    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
-    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-    .meta { color: #6b7280; font-size: 13px; }
-    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
-    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
-    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
-    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
-    details.transcript[open] summary { margin-bottom: 18px; }
-  </style>
-</head>
-<body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-10-12_论文解读：多频率连续仓位量化交易算法MCTG_7649059435083566336.md · 发布于 2026-10-12 11:35:12</div><nav class="page-links"><a href="https://www.douyin.com/video/7649059435083566336" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>论文解读：多频率连续仓位量化交易算法MCTG</h1>
-<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7649059435083566336">https://www.douyin.com/video/7649059435083566336</a>）</p>
-<h2>一、内容简述</h2>
-<h3>（一）一句话结论</h3>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><meta name="description" content="论文提出MCTG框架，融合多频率数据与GARCH波动预测，通过PPO训练输出连续仓位指令，回测显著优于传统模型。">
+<title>论文解读：多频率连续仓位量化交易算法MCTG｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<script defer src="../../../assets/site.js"></script></head>
+<body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
+<nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
+<main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>论文解读：多频率连续仓位量化交易算法MCTG</h1><p class="muted">量化Quantgirl · douyin · 视频发布于 2026-06-09 00:17:23</p><nav class="page-links"><a href="https://www.douyin.com/video/7649059435083566336" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 传统模型局限与MCTG框架设计</a><a href="#section-6">2. 网络架构与训练机制</a><a href="#section-7">3. 回测结果与论文贡献</a><a href="#section-8">三、知识关联</a><a href="#section-9">来源与类型</a><a href="#section-10">相关主题</a><a href="#section-11">人物</a><a href="#section-12">相关机构/公司</a><a href="#section-13">历史事件</a><a href="#section-14">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a></details><div class="article-copy"><p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7649059435083566336">https://www.douyin.com/video/7649059435083566336</a>）</p>
+<h2 id="section-1">一、内容简述</h2>
+<h3 id="section-2">（一）一句话结论</h3>
 <blockquote>
-<p><strong>一句话结论</strong>
+<p><strong>一句话结论 · 内容来源的摘要</strong>
 论文提出MCTG框架，融合多频率数据与GARCH波动预测，通过PPO训练输出连续仓位指令，回测显著优于传统模型。</p>
 </blockquote>
-<h3>（二）核心内容</h3>
+<h3 id="section-3">（二）核心内容</h3>
 <ol>
 <li>
 <p><strong>传统强化学习交易模型的两大信息缺失</strong>
@@ -52,25 +27,25 @@
 MCTG框架设计并行深度网络，将5分钟、日线、周线三条数据通路分别经过全连接层和GARCH处理后汇合，形成统一状态。GARCH(1,1)预测波动率直接送入状态空间，使智能体具备风险感知。动作空间改为连续值[-1,1]，代表买入或卖出仓位比例，由PPO优化超额收益与回撤控制。回测显示平均收益率292.56%，夏普比率2.147，最大回撤仅13.34%，全面优于买入持有和传统离散模型。</p>
 </li>
 </ol>
-<h2>二、分段原文</h2>
+<h2 id="section-4">二、分段原文</h2>
 <blockquote>
 <p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
-<h3>1. 传统模型局限与MCTG框架设计</h3>
+<h3 id="section-5">1. 传统模型局限与MCTG框架设计</h3>
 <p>交易AI连波动都算进去了。这篇由电子科技大学、港大、清华作者联合发表的论文提出多频率、连续股份交易算法MCTG。以往的深度强化学习交易模型往往只依赖单一频率数据，动作空间缩成买、卖、持有三个信号，几乎不考虑市场波动信息和实际交易成本，风险调整后收益很难让人满意。核心缺口有两个：一是忽略多时间尺度信息，没法同时捕捉短线震荡和长线趋势；二是离散动作根本不知道该买多少，资金配置低效，在市场剧烈波动时尤其明显。作者因此设计了MCTG框架，它同时接入五分钟、日线、周线数据，并引入GARCH模型预测波动，训练出的智能体能输出连续的仓位指令，精细控制买卖比例。</p>
-<h3>2. 网络架构与训练机制</h3>
+<h3 id="section-6">2. 网络架构与训练机制</h3>
 <p>具体做法是设计并行深度网络，每一条频率的数据流各走一路神经网络，再加权融合成统一状态。GARCH(1,1)给出的波动预测直接送进状态，让智能体在学习时就带着风险预感。策略优化使用PPO算法，保证训练稳定。GARCH(1,1)模型根据上一期的残差平方和、过去方差更新当期方差，相当于把市场的不安程度提前告诉智能体，智能体据此在PPO框架下不断调整连续动作，把超额收益与回撤控制一起优化。</p>
-<h3>3. 回测结果与论文贡献</h3>
+<h3 id="section-7">3. 回测结果与论文贡献</h3>
 <p>回测数据集覆盖五百只股票，按五分钟、日、周切分。结果显示，MCTG平均盈亏比达到292.56%，夏普比率2.147，最大回撤仅13.34%，各项指标都显著优于基础DNN、DNN-GARCH和买入持有策略。动图展示得很清楚，高频、中频、低频三条数据通路分别经过全连接和GARCH汇合后进入PPO智能体，智能体输出一个[-1,1]的标量，直接决定下一日买入或卖出的资金比例，实现端到端的连续交易。这一篇论文的贡献有三点：搭建了能融合多频率与波动预测的并行网络；把风险预算写进状态空间；再用连续动作做精细化调仓。最终验证MCTG不仅收益更高，回撤也更可控，为量化交易提供了强风险意识的落地路径。</p>
-<h2>三、知识关联</h2>
-<h3>来源与类型</h3>
+<h2 id="section-8">三、知识关联</h2>
+<h3 id="section-9">来源与类型</h3>
 <ul>
 <li><span class="wikilink">量化Quantgirl</span></li>
 <li><span class="wikilink">抖音</span></li>
 <li><span class="wikilink">视频笔记</span></li>
 <li><span class="wikilink">KenRadar</span></li>
 </ul>
-<h3>相关主题</h3>
+<h3 id="section-10">相关主题</h3>
 <ul>
 <li><span class="wikilink">量化交易</span></li>
 <li><span class="wikilink">深度强化学习</span></li>
@@ -83,29 +58,31 @@ MCTG框架设计并行深度网络，将5分钟、日线、周线三条数据通
 <li><span class="wikilink">投资策略</span></li>
 <li><span class="wikilink">资产配置</span></li>
 </ul>
-<h3>人物</h3>
+<h3 id="section-11">人物</h3>
 <ul>
 <li>暂无明确人物</li>
 </ul>
-<h3>相关机构/公司</h3>
+<h3 id="section-12">相关机构/公司</h3>
 <ul>
 <li><span class="wikilink">这篇由电子科技</span></li>
 <li><span class="wikilink">连续股份</span></li>
 </ul>
-<h3>历史事件</h3>
+<h3 id="section-13">历史事件</h3>
 <ul>
 <li>暂无明确历史事件</li>
 </ul>
-<h3>资产/产品/地点</h3>
+<h3 id="section-14">资产/产品/地点</h3>
 <ul>
 <li>暂无明确资产、产品或地点</li>
 </ul>
-<details class="transcript"><summary>四、视频原始转录</summary>
+<div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
 <p>[!quote]- 展开查看原始转录
 以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
 <p>交易AI连波动都算进去了。这篇由电子科技大学、港大、清华作者联合发表的论文提出，多频率、连续股份交易算法MCTG以往的深度强化，学习交易模型和指依赖单一频率数据动作也缩成买卖池，三个信号，几乎是市场波动信息也顾不上实际交易成本，风险调整后收益很难让人满意。核心缺口有两个，一是忽略多时间尺度，信息，没法同时度东短线震荡和长线趋势。二是离散动作根本不知道该买多少资金配置，低效在市场剧烈波动时尤其波动。作者因此设计了MCTG框架，它同时接入五分钟日线和周线数据，并引入GARCH模型预测波动训练出的代理，能输出连续的仓位指令，精细控制买卖比例。具体做法法是设计并行深度网络，每一条频率的数据流，各走一路神经网络，再加权融合成统一状态。 Gar ch一一给出的波动预测直接送进状态，让委托在学习时就带着风险预感策略，优化使用PPO算法，保证训练稳定。波动预测采用GARCH一一模型，根据上一期的残差平方和，过去方差更新当期方差，相当于把市场的不安程度提前告诉代理代理。据此，在PPO框架下不断调整连续动作，把超额收益与回撤控制一起，优化微撤数据集，覆盖五百只股票，按五分钟日周切分。结果显示，MCTG平均盈亏比达到百分之二百九十二点五六，夏普比率二点一四七，最大回撤仅百分之十三点三四，各项指标都显著优于基础。Dnn DNNG ARCH和买入持有策略。盾构图展示的很清楚，高频、中频、低频三条数据通路分别经过全连接和chop pop汇合后进入PPO代理代理输出一个洛伊九腰的标量，直接决定下一日买入或卖出的资金比例，实现端到端的连续交易。这一篇论文的贡献有三点，搭建了能融合多频率与波动预测的并行网络，把风险预算写进状态空间，再用连续动作做精细化调仓，最终验证MCTG不仅收益更高，回撤也更可控，为量化交易提供了强风险意识的落地路径。</p>
 </blockquote>
-</details></main>
-</body>
-</html>
+</details></div></div></article><section id="related" data-topics="[&quot;量化交易&quot;, &quot;深度强化学习&quot;, &quot;GARCH&quot;, &quot;PPO&quot;, &quot;多频率数据融合&quot;, &quot;论文解读&quot;, &quot;AI产业&quot;, &quot;股票市场&quot;, &quot;投资策略&quot;, &quot;资产配置&quot;]" data-current="notes/douyin/量化Quantgirl/2026-10-12_论文解读：多频率连续仓位量化交易算法MCTG_7649059435083566336.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 传统模型局限与MCTG框架设计</a><a href="#section-6">2. 网络架构与训练机制</a><a href="#section-7">3. 回测结果与论文贡献</a><a href="#section-8">三、知识关联</a><a href="#section-9">来源与类型</a><a href="#section-10">相关主题</a><a href="#section-11">人物</a><a href="#section-12">相关机构/公司</a><a href="#section-13">历史事件</a><a href="#section-14">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-25 21:49</span></footer>
+<nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
+<dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
+<script id="kr-metadata" type="application/json">{"title": "论文解读：多频率连续仓位量化交易算法MCTG", "relative_url": "notes/douyin/量化Quantgirl/2026-10-12_论文解读：多频率连续仓位量化交易算法MCTG_7649059435083566336.html", "platform": "douyin", "creator": "量化Quantgirl", "external_content_id": "7649059435083566336", "published_at": "2026-06-09 00:17:23", "topics": ["量化交易", "深度强化学习", "GARCH", "PPO", "多频率数据融合", "论文解读", "AI产业", "股票市场", "投资策略", "资产配置"], "summary": "论文提出MCTG框架，融合多频率数据与GARCH波动预测，通过PPO训练输出连续仓位指令，回测显著优于传统模型。", "source_url": "https://www.douyin.com/video/7649059435083566336"}</script></body></html>

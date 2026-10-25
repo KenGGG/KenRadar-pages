@@ -1,47 +1,22 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>量化交易编程入门：Python+大模型速成指南｜KenRadar</title>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f5; color: #202124; }
-    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
-    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
-    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
-    h1, h2, h3 { line-height: 1.25; color: #111827; }
-    h1 { font-size: 30px; margin: 24px 0 16px; }
-    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
-    h3 { font-size: 17px; margin-top: 24px; }
-    p, li { font-size: 16px; line-height: 1.8; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
-    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
-    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
-    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-    .meta { color: #6b7280; font-size: 13px; }
-    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
-    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
-    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
-    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
-    details.transcript[open] summary { margin-bottom: 18px; }
-  </style>
-</head>
-<body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-10-12_量化交易编程入门：Python+大模型速成指南_7556467219169889536.md · 发布于 2026-10-12 11:35:12</div><nav class="page-links"><a href="https://www.douyin.com/video/7556467219169889536" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>量化交易编程入门：Python+大模型速成指南</h1>
-<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7556467219169889536">https://www.douyin.com/video/7556467219169889536</a>）</p>
-<h2>一、内容简述</h2>
-<h3>（一）一句话结论</h3>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><meta name="description" content="讲解Python编程在量化交易中的定位，介绍大模型辅助编程新方式及函数概念，演示如何用提示词模板让AI生成数据获取代码">
+<title>量化交易编程入门：Python+大模型速成指南｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<script defer src="../../../assets/site.js"></script></head>
+<body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
+<nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
+<main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>量化交易编程入门：Python+大模型速成指南</h1><p class="muted">量化Quantgirl · douyin · 视频发布于 2025-10-02 11:52:21</p><nav class="page-links"><a href="https://www.douyin.com/video/7556467219169889536" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 编程在量化交易中的定位与建议</a><a href="#section-6">2. 编程与大模型辅助编程概念</a><a href="#section-7">3. 函数概念与量化四步骤</a><a href="#section-8">4. 提示词模板五要素详解</a><a href="#section-9">5. 示例：用AI生成收盘价获取代码</a><a href="#section-10">6. 运行环境与依赖安装</a><a href="#section-11">三、知识关联</a><a href="#section-12">来源与类型</a><a href="#section-13">相关主题</a><a href="#section-14">人物</a><a href="#section-15">相关机构/公司</a><a href="#section-16">历史事件</a><a href="#section-17">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a></details><div class="article-copy"><p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7556467219169889536">https://www.douyin.com/video/7556467219169889536</a>）</p>
+<h2 id="section-1">一、内容简述</h2>
+<h3 id="section-2">（一）一句话结论</h3>
 <blockquote>
-<p><strong>一句话结论</strong>
+<p><strong>一句话结论 · 内容来源的摘要</strong>
 讲解Python编程在量化交易中的定位，介绍大模型辅助编程新方式及函数概念，演示如何用提示词模板让AI生成数据获取代码</p>
 </blockquote>
-<h3>（二）核心内容</h3>
+<h3 id="section-3">（二）核心内容</h3>
 <ol>
 <li>
 <p><strong>编程是量化入门最简单也最重要的环节</strong>
@@ -56,31 +31,31 @@
 博主分享了一个通用提示词模板，包含五个核心要素：角色定义、任务目标、输入变量、输出格式及技术约束。以获取股票收盘价为实例，指定AI以量化工程师身份，输入股票代码与起止日期，输出DataFrame格式数据，数据源限定为akshare开源接口。运行环境推荐使用VS Code加Miniconda或在线平台如Google Colab、百度飞桨。初次运行因未安装akshare包会报错，需用pip安装第三方依赖后再执行，即可获得目标历史数据。</p>
 </li>
 </ol>
-<h2>二、分段原文</h2>
+<h2 id="section-4">二、分段原文</h2>
 <blockquote>
 <p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
-<h3>1. 编程在量化交易中的定位与建议</h3>
+<h3 id="section-5">1. 编程在量化交易中的定位与建议</h3>
 <p>Hello，大家好，今天是教会文科生闺蜜，量化交易第一课，高同学进来听课。今天我要教会你的是Python编程快速上手，这是量化交易入门最重要也是最不重要的一个环节。最重要是因为我们所有的研究都要基于它去实现。最不重要是因为它是整个量化交易中最简单的部分。初期的时候，你的量化策略还没有涉及太复杂的模型，也没有大量的运算。所以我的建议是，新手不要一开始就掉进编程的坑里，我们只需要掌握一些基础知识，然后就可以快速通关去到下一个环节，不用担心编程基础没有打牢了后面怎么办，这个技能的提升是要贯穿你整个学习生涯的。</p>
-<h3>2. 编程与大模型辅助编程概念</h3>
+<h3 id="section-6">2. 编程与大模型辅助编程概念</h3>
 <p>那么言归正传，Python到底如何快速入门呢？你要先知道到底什么是编程，编程就是将你想要做的事情写成一段代码，交由计算机翻译，转成底层的指令，最终让计算机能够理解并执行你的想法，这是我们的传统编程方式。随着计算术的发展，我们现在又多了一个辅助工具，就是大模型。大模型允许我们不再直接进行代码的撰写或是调试，只需要我们将自己的需求用自然语言描述出来，大模型就可以代替我们来编写程序。那么现在我们入门量化交易的编程门槛就只剩下一件事了，那就是函数。</p>
-<h3>3. 函数概念与量化四步骤</h3>
+<h3 id="section-7">3. 函数概念与量化四步骤</h3>
 <p>什么是函数呢？函数就是把一段可以重复使用的步骤给它起一个名字，然后规定好哪些是输入，按照固定的处理逻辑进行计算，得到最后的输出。那按照这个思路，我们就只需要把量化交易的过程拆解成一个一个的函数，然后就能够像搭建积木一样快速拼装出一个完整的策略，但这里我们指的是简单策略。那么一个标准的量化过程分为哪几个环节呢？我们大致可以分为以下四个步骤：第一步是获取数据，第二步是构建信号，第三步是策略执行，第四步是性能评估。</p>
-<h3>4. 提示词模板五要素详解</h3>
+<h3 id="section-8">4. 提示词模板五要素详解</h3>
 <p>我们先来试一下写一个最简单的数据获取函数，我们利用大模型现在来书写提示词。这里有一个通用的提示词模板，它包含五个要素。首先你要对AI进行角色定义，就是你希望AI以什么样的身份来产出。第二个是目标，就是你这段函数要解决一个什么样的问题，比如我们现在要获取指定标的的收盘价。第三个就是输入，我们需要规定这个函数的输入有哪些变量。第四个是输出，就是我们最终想要得到的数据是什么以及它的格式是什么。第五个就是我们还可以对它进行时价约束，比如我们指定它使用什么工具、什么库、异常处理以及代码注解等等。</p>
-<h3>5. 示例：用AI生成收盘价获取代码</h3>
+<h3 id="section-9">5. 示例：用AI生成收盘价获取代码</h3>
 <p>现在我们把这一段提示词发给大模型，比如用DeepSeek，我们让它以自身量化工程师的身份来实现一个Python函数，目标是获取某标的在一段时间内的收盘价。我们的输入指定三个变量，分别是股票代码、开始日期和结束日期。输出我们要历史数据格式限定为DataFrame。最后一个约束我们限定数据源使用akshare，akshare是一个开源的金融数据接口，可以用Python直接来拉取股票、期货、外汇、基金等一些金融数据，类似的还有tushare、BaoStock、STOCK等等。</p>
-<h3>6. 运行环境与依赖安装</h3>
+<h3 id="section-10">6. 运行环境与依赖安装</h3>
 <p>我们现在等待代码完成。代码的运行环境我个人习惯使用VS Code编辑器加Miniconda一个Python环境管理器，这些安装如果你觉得麻烦的话，也可以直接使用在线的编程工具。我这里给大家演示的是Google的Colab，也可以使用百度的PaddlePaddle Studio，这些平台都提供一些免费的计算资源，而且它用的是Notebook，你就不需要再去安装Python工具，可以直接在上面运行代码。等你熟悉一段时间Python之后，就可以尝试自己在本地安装软件和搭建环境，类似的教程非常多，大家可以在网上找一下。我们运行之后这段AI写的代码就会出现一个报错，这个报错的意思是我们没有安装akshare。对Python来说这些第三方包都是需要手动安装的，我们用pip这个包管理工具来进行安装。好，我们再次运行代码，这就是DataFrame格式的历史数据，指定股票以及它所对应的收盘价。Ok我们这节课就先讲这么多，下节课继续。</p>
-<h2>三、知识关联</h2>
-<h3>来源与类型</h3>
+<h2 id="section-11">三、知识关联</h2>
+<h3 id="section-12">来源与类型</h3>
 <ul>
 <li><span class="wikilink">量化Quantgirl</span></li>
 <li><span class="wikilink">抖音</span></li>
 <li><span class="wikilink">视频笔记</span></li>
 <li><span class="wikilink">KenRadar</span></li>
 </ul>
-<h3>相关主题</h3>
+<h3 id="section-13">相关主题</h3>
 <ul>
 <li><span class="wikilink">AI产业</span></li>
 <li><span class="wikilink">量化交易</span></li>
@@ -93,28 +68,30 @@
 <li><span class="wikilink">量化交易教育</span></li>
 <li><span class="wikilink">股票市场</span></li>
 </ul>
-<h3>人物</h3>
+<h3 id="section-14">人物</h3>
 <ul>
 <li>暂无明确人物</li>
 </ul>
-<h3>相关机构/公司</h3>
+<h3 id="section-15">相关机构/公司</h3>
 <ul>
 <li>暂无明确机构或公司</li>
 </ul>
-<h3>历史事件</h3>
+<h3 id="section-16">历史事件</h3>
 <ul>
 <li>暂无明确历史事件</li>
 </ul>
-<h3>资产/产品/地点</h3>
+<h3 id="section-17">资产/产品/地点</h3>
 <ul>
 <li>暂无明确资产、产品或地点</li>
 </ul>
-<details class="transcript"><summary>四、视频原始转录</summary>
+<div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
 <p>[!quote]- 展开查看原始转录
 以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
 <p>Hello,大家好，今天是教会文科生闺蜜，量化交易第一课高同学进来听课。今天我要教会你的是python编程，快速上手，这是量化交易入门最重要也是最不重要的一个环节。最重要是因为我们所有的研究都要基于它去实现。最不重要是因为它是整个量化交易中最简单的部分。初期的时候，你的量化策略还没有涉及太复杂的模型，也没有含量的运算。所以我的建议是，新手不要一开始就掉进编程的坑里。我们只需要掌握一些基础知识，然后就可以快速通关，去到下一个环节，不用担心编程基础没有打牢了，后面怎么办？这个技能的提升是要贯穿你整个学习生涯的OK.那么我们言归正传，python到底如何快速入门呢？你要先知道到底什么是编程，编程就是将你想要做的事情写成一段代码，交由计算机研译，转成底层的指令，最终让计算机能够理解并执行你的想法，这是我们的传统编程方式。随着让计算术的发展，我们现在又多了一个辅助工具，就是大模型。大模型允许我们不再直接进行代码的撰写或是调试。只需要我们将自己的需求用自然语言描述出来，大模型就可以代替我们来编写程序。那么现在我们入门量化交易的编程门槛就只剩下一件事了，那就是函数。什么是函数呢？函数就是把一段可以重复使用的步骤给他起一个名字，然后规定好哪些是输入，按照固定的处理逻辑进行计算，得到最后一个输出。那按照这个思路，我们就只需要把量化交易的过程拆解成一个一个的函数。然后就能够像搭建积木一样，快速拼装出一个完整的策略。但这里我们指的是简单策略。那么一个标准的量化过程分为哪几个环节呢？我们大致可以分为以下四个步骤，第一步是获取数据，第二步是构建信号，第三步是策略执行。第四步是性能评估。我们先来试一下，写一个最简单的数据获取函数，我们利用大模型，现在我们来书写提示词。这里有一个通用的提示词模板，它包含五个要素。首先你要对AI进行角色定义，就是你希望AI以什么样的身份来产出。第二个是目标，就是你这段函数要解决一个什么样的问题。比如我们现在要获取指定标的的收盘价。第三个就是输入，我们需要规定这个函数的输入有哪些变量。第四个是输出，就是我们最终想要得到的数据是什么，以及它的格式是什么。第五个就是我们还可以对它进行时价约束，比如我们指定它使用什么工具，什么库异常处理以及代码注解等等。现在我们把这一段提示词发给大模型，比如用deep seek,我们让它以自身量化工程师的身份来实现一个python函数。现在是获取某标的在一段时间内的收盘价。我们的输入指定三个变量，分别是股票代码开始、日期和结束日期输出。我们要历史数据格式限定为data fme最后一个约束。我们限定数据源使用acine. Exshare是一个开源的金融数据接口，可以用python直接来拉取股票、期货、外汇基金等一些金融数据。类似的还有to share boss、 stock等等。我们现在等待代码完成代码的运行环境。我个人习惯使用VS code编辑器，加米尼康达一个python环境管理器。这些安装如果你觉得麻烦的话，也可以直接使用在线的编程工具。我这里给大家演示的是谷歌的colab,也可以使用百度的AS studio.这些平台都提供一些免费的计算资源，而且它用的是notebook,你就不需要再去安装python工具，可以直接在上面运行代码。等你熟悉一段时间，python之后，就可以尝试自己在本地安装软件和搭建环境。类似的教程非常多，大家可以在网上找一下，我们运行之后，这段AI写的代码就会出现一个报错。这个报错的意思是我们没有安装acshare.对python来说，这些第三方包都是需要手动安装的，我们用PIP这个包管理工具来进行安装。好，我们再次运行代码，这就是data frame格式的历史数据，指定股票，以及它所对应的收盘价。 Ok我们这节课就先讲这么多下节课继续。</p>
 </blockquote>
-</details></main>
-</body>
-</html>
+</details></div></div></article><section id="related" data-topics="[&quot;AI产业&quot;, &quot;量化交易&quot;, &quot;Python编程&quot;, &quot;大模型辅助编程&quot;, &quot;函数&quot;, &quot;提示词模板&quot;, &quot;akshare&quot;, &quot;数据获取&quot;, &quot;量化交易教育&quot;, &quot;股票市场&quot;]" data-current="notes/douyin/量化Quantgirl/2026-10-12_量化交易编程入门：Python+大模型速成指南_7556467219169889536.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 编程在量化交易中的定位与建议</a><a href="#section-6">2. 编程与大模型辅助编程概念</a><a href="#section-7">3. 函数概念与量化四步骤</a><a href="#section-8">4. 提示词模板五要素详解</a><a href="#section-9">5. 示例：用AI生成收盘价获取代码</a><a href="#section-10">6. 运行环境与依赖安装</a><a href="#section-11">三、知识关联</a><a href="#section-12">来源与类型</a><a href="#section-13">相关主题</a><a href="#section-14">人物</a><a href="#section-15">相关机构/公司</a><a href="#section-16">历史事件</a><a href="#section-17">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-25 21:49</span></footer>
+<nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
+<dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
+<script id="kr-metadata" type="application/json">{"title": "量化交易编程入门：Python+大模型速成指南", "relative_url": "notes/douyin/量化Quantgirl/2026-10-12_量化交易编程入门：Python+大模型速成指南_7556467219169889536.html", "platform": "douyin", "creator": "量化Quantgirl", "external_content_id": "7556467219169889536", "published_at": "2025-10-02 11:52:21", "topics": ["AI产业", "量化交易", "Python编程", "大模型辅助编程", "函数", "提示词模板", "akshare", "数据获取", "量化交易教育", "股票市场"], "summary": "讲解Python编程在量化交易中的定位，介绍大模型辅助编程新方式及函数概念，演示如何用提示词模板让AI生成数据获取代码", "source_url": "https://www.douyin.com/video/7556467219169889536"}</script></body></html>

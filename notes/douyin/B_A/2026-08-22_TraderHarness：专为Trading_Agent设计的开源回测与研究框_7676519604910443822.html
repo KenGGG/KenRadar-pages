@@ -1,48 +1,24 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Agent炒股没有回测框架？看看Traderharness TraderHarness 是专为 Trading Agent 设计的开源回测与研究框架。Agent 可以读取盘前晨报、在 Sandbox 中分析数据、形成判断并自主下单；所有研究、决策和成交行为都能按交易日回放与审计。它的重点不是展示一条高收益曲线，而是研究 Agent 是否遵守交易规则，以及自主交易是否真正可行。
-@抖音科技 #抖音创作者大会 #抖音前沿科技首发计划 #vibecoding大赏#ai新星计划#股票交易｜KenRadar</title>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f5; color: #202124; }
-    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
-    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
-    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
-    h1, h2, h3 { line-height: 1.25; color: #111827; }
-    h1 { font-size: 30px; margin: 24px 0 16px; }
-    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
-    h3 { font-size: 17px; margin-top: 24px; }
-    p, li { font-size: 16px; line-height: 1.8; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
-    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
-    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
-    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-    .meta { color: #6b7280; font-size: 13px; }
-    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
-    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
-    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
-    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
-    details.transcript[open] summary { margin-bottom: 18px; }
-  </style>
-</head>
-<body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-08-22_TraderHarness：专为Trading_Agent设计的开源回测与研究框_7676519604910443822.md · 发布于 2026-09-21 09:20:58</div><nav class="page-links"><a href="https://www.douyin.com/video/7676519604910443822" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>TraderHarness：专为Trading Agent设计的开源回测与研究框</h1>
-<p>抖音 | B:A | 原文链接（<a href="https://www.douyin.com/video/7676519604910443822">https://www.douyin.com/video/7676519604910443822</a>）</p>
-<h2>一、内容简述</h2>
-<h3>（一）一句话结论</h3>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><meta name="description" content="KenRadar · 可查找、可复核的研究阅读空间">
+<title>Agent炒股没有回测框架？看看Traderharness TraderHarness 是专为 Trading Agent 设计的开源回测与研究框架。Agent 可以读取盘前晨报、在 Sandbox 中分析数据、形成判断并自主下单；所有研究、决策和成交行为都能按交易日回放与审计。它的重点不是展示一条高收益曲线，而是研究 Agent 是否遵守交易规则，以及自主交易是否真正可行。
+@抖音科技 #抖音创作者大会 #抖音前沿科技首发计划 #vibecoding大赏#ai新星计划#股票交易｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<script defer src="../../../assets/site.js"></script></head>
+<body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
+<nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
+<main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>Agent炒股没有回测框架？看看Traderharness TraderHarness 是专为 Trading Agent 设计的开源回测与研究框架。Agent 可以读取盘前晨报、在 Sandbox 中分析数据、形成判断并自主下单；所有研究、决策和成交行为都能按交易日回放与审计。它的重点不是展示一条高收益曲线，而是研究 Agent 是否遵守交易规则，以及自主交易是否真正可行。
+@抖音科技 #抖音创作者大会 #抖音前沿科技首发计划 #vibecoding大赏#ai新星计划#股票交易</h1><p class="muted">B_A · douyin · 视频发布于 未知时间</p><nav class="page-links"><a href="https://www.douyin.com/video/7676519604910443822" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 框架定位与背景</a><a href="#section-6">2. Agent每日交易流程</a><a href="#section-7">3. 成交记录与复盘回放</a><a href="#section-8">4. 框架价值与开源信息</a><a href="#section-9">三、知识关联</a><a href="#section-10">来源与类型</a><a href="#section-11">相关主题</a><a href="#section-12">人物</a><a href="#section-13">相关机构/公司</a><a href="#section-14">历史事件</a><a href="#section-15">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a></details><div class="article-copy"><p>抖音 | B:A | 原文链接（<a href="https://www.douyin.com/video/7676519604910443822">https://www.douyin.com/video/7676519604910443822</a>）</p>
+<h2 id="section-1">一、内容简述</h2>
+<h3 id="section-2">（一）一句话结论</h3>
 <blockquote>
-<p><strong>一句话结论</strong>
+<p><strong>一句话结论 · 内容来源的摘要</strong>
 TraderHarness是专为Trading Agent设计的开源回测与研究框架，支持按交易日回放Agent的研究、决策和成交行为。通过真实案例展示Agent在受限Sandbox中读取信息、自主分析并下单交易的过程，核心价值在于验证Agent是否遵守交易规则及自主交易是否真正可行，而非单纯追求高收益曲线。</p>
 </blockquote>
-<h3>（二）核心内容</h3>
+<h3 id="section-3">（二）核心内容</h3>
 <ol>
 <li>
 <p><strong>框架定位与核心价值</strong>
@@ -65,27 +41,27 @@ TraderHarness是专为Trading Agent设计的开源回测与研究框架。重点
 TraderHarness已在GitHub开源。其价值在于让Agent真正像交易员一样研究、计算和下单，同时清晰呈现Agent做对了什么、哪里做错了。</p>
 </li>
 </ol>
-<h2>二、分段原文</h2>
+<h2 id="section-4">二、分段原文</h2>
 <blockquote>
 <p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
-<h3>1. 框架定位与背景</h3>
+<h3 id="section-5">1. 框架定位与背景</h3>
 <p>Trading Agent层出不穷，但最基本的问题到现在仍然没人说清楚：它看到的到底是当时的信息还是偷看了未来？它为什么下单，赚了还是亏了？Trader Harness就是给Trading Agent准备的回测与研究环境。先看一份真实的回测记录样本，从2024年8月1日到10月31日，一共59个交易日，绿色线是Agent的账户权益。九月底开始，曲线快速抬升，到10月31日，最终资产来到131万1千3百57元，整段回测收益是11.14%。从账户高点往下，最大的回落幅度是1.24%。总共53笔成交，同期基准指数的收益是13.8%。所以这59个交易日的意义不是证明某个策略有多强。真正要研究的是，Agent交易行为是否符合事先设定的要求和规则，以及让Agent在市场之中自主研究、判断和交易到底是否可行。曲线上的每一笔买卖都能回到当天核对，这是历史回测，不代表未来表现。</p>
-<h3>2. Agent每日交易流程</h3>
+<h3 id="section-6">2. Agent每日交易流程</h3>
 <p>每天开始，Agent先收到盘前晨报：账户、市场宽度、板块强弱、政策快讯和自选股跟踪，都只能来自当时可见的信息。接着它可以在受限Sandbox里直接写Python——这里不是写死的几个指标按钮，它会依次读取全市场120日数据，自己计算区间位置、ATR波动收缩、量价流和OBV，筛选出候选股票。但原始数据和未来数据仍然不可访问。研究完成后，模型会留下可回放的判断，比如这只股票涨停，但成交量放大到20日均量的30到40倍，同时板块走弱，股价进入加速末端，Agent最终决定保护利润，清仓退出。</p>
-<h3>3. 成交记录与复盘回放</h3>
+<h3 id="section-7">3. 成交记录与复盘回放</h3>
 <p>下单只能经过Place Order画面里的参数、理由和环境回执。在同一条证据链上卖出9100股，成交价12.12元，实现盈亏9872.14元。然后环境负责撮合费用，T+1持仓与现金，回测按交易日继续推进。左侧的日期轨迹可以回到任何一天，重放晨报、判断工具和成交。最后结果页会把这条曲线继续拆开：这次一共交易22只证券，按证券汇总的累计已实现盈亏是110149元，全部交易费用是3028元。其中603226买入一次、卖出一次，最终净赚29544元，收益率37.15%。每只证券每次买卖的费用和原因都能核对。</p>
-<h3>4. 框架价值与开源信息</h3>
+<h3 id="section-8">4. 框架价值与开源信息</h3>
 <p>Trader Harness的价值不是让Agent看起来会交易，而是让它真的像交易员一样研究、计算和下单，同时让你知道它到底做对了什么、哪里做错了。Trader Harness已经在GitHub开源。Trading Agent再多，也应该先把回测做规范。</p>
-<h2>三、知识关联</h2>
-<h3>来源与类型</h3>
+<h2 id="section-9">三、知识关联</h2>
+<h3 id="section-10">来源与类型</h3>
 <ul>
 <li><span class="wikilink">B:A</span></li>
 <li><span class="wikilink">抖音</span></li>
 <li><span class="wikilink">视频笔记</span></li>
 <li><span class="wikilink">KenRadar</span></li>
 </ul>
-<h3>相关主题</h3>
+<h3 id="section-11">相关主题</h3>
 <ul>
 <li><span class="wikilink">开源工具</span></li>
 <li><span class="wikilink">量化回测</span></li>
@@ -98,11 +74,11 @@ TraderHarness已在GitHub开源。其价值在于让Agent真正像交易员一�
 <li><span class="wikilink">量化交易</span></li>
 <li><span class="wikilink">开源框架</span></li>
 </ul>
-<h3>人物</h3>
+<h3 id="section-12">人物</h3>
 <ul>
 <li>暂无明确人物</li>
 </ul>
-<h3>相关机构/公司</h3>
+<h3 id="section-13">相关机构/公司</h3>
 <ul>
 <li><span class="wikilink">抖音科技</span></li>
 <li><span class="wikilink">抖音前沿科技</span></li>
@@ -111,20 +87,22 @@ TraderHarness已在GitHub开源。其价值在于让Agent真正像交易员一�
 <li><span class="wikilink">这次一共交易22只证券</span></li>
 <li><span class="wikilink">每只证券</span></li>
 </ul>
-<h3>历史事件</h3>
+<h3 id="section-14">历史事件</h3>
 <ul>
 <li>暂无明确历史事件</li>
 </ul>
-<h3>资产/产品/地点</h3>
+<h3 id="section-15">资产/产品/地点</h3>
 <ul>
 <li>暂无明确资产、产品或地点</li>
 </ul>
-<details class="transcript"><summary>四、视频原始转录</summary>
+<div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
 <p>[!quote]- 展开查看原始转录
 以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
 <p>Trading agent层出不穷，但最基本的问题到现在仍然没人说清楚，他看到的到底是当时的信息还是偷看了未来？他为什么下单，赚了还是亏了？能不能逐步复盘trader harness,就是给trading agent准备的回撤与研究环境。先看一份真实的回撤记录样本，从二零二四年八月一日到十月三十一日，一共五十九个交易日是色线，是agent的账户权益。九月底开始，曲线快速抬升，到十月三十一日，最终资产来到一百三十一万一千，三百五十七元，整段回撤收益是百分之十一点一四。从账户高点往下看，最大的回落幅度是百分之一点二四，总共五十三笔成交总期基准指数的收益是百分之十三点八。所以这五十九个交易日的意义不是证明某个策略有多强。真正要研究的是，agent交易行为是否符合事先设定的要求和规则，以及让agent在市场中自主研究、判判断和交易到底是否可行。曲线上的每一笔买卖都能回到当天核对，这是历史回测，不代表未来表现。每天开始，agent先收到盘前晨报账户市场宽度、板块强弱政策快讯和自选股跟踪，都指来自当时可见的信息。接着他可以在受限sandbox里直接写python,这里不是写死的几个指标按钮，它依次读取全市场，一百二十日数据，自己计算区间位置，ATR波动收缩、量、价流和OBV在筛出候选，但原始数据和未来数据仍然不可访问。研究完成后，模型会留下可回放的判断，比如这只股票涨停，但成交量放大到二十日均量的三十到四十倍。同时，板块走弱，股价进入加速末端，a枕最终决定保护利润，清仓退出下单，只能经过place order画面里的参数、理由和环境回执。在同一条证据链上卖出九千一百股，成交价十二点一二，实现盈亏九千八百七十二点一四元。然后环境负责撮合费用，t加一持仓与现金回测，按交易日继续推进左侧的日期轨迹，可以回到任何一天，重放晨报判断工具和成交。最后结果业会把这条曲线继续拆开。这次一共交易二十二只证券按证券汇总的累计已实现盈亏是十一万零一百四十九元，全部交易费用是三千零二十八元。其中六零三二二六买入一次，卖出一次，最终净赚两万九千五百四十四元，收益率是百分之三十七点一五。每只证券每次买卖费用和原因都能核对trader harness的价值，不是让agent看起来会交易，而是让他真的像交易员一样研究计算和下单，同时让你知道他到底做对了什么，哪里做错了。 Trader harness已经在github开源，trading agent再多，也应该先把回撤做规范。</p>
 </blockquote>
-</details></main>
-</body>
-</html>
+</details></div></div></article><section id="related" data-topics="[]" data-current="notes/douyin/B_A/2026-08-22_TraderHarness：专为Trading_Agent设计的开源回测与研究框_7676519604910443822.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 框架定位与背景</a><a href="#section-6">2. Agent每日交易流程</a><a href="#section-7">3. 成交记录与复盘回放</a><a href="#section-8">4. 框架价值与开源信息</a><a href="#section-9">三、知识关联</a><a href="#section-10">来源与类型</a><a href="#section-11">相关主题</a><a href="#section-12">人物</a><a href="#section-13">相关机构/公司</a><a href="#section-14">历史事件</a><a href="#section-15">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-25 21:47</span></footer>
+<nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
+<dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
+<script id="kr-metadata" type="application/json">{"title": "Agent炒股没有回测框架？看看Traderharness TraderHarness 是专为 Trading Agent 设计的开源回测与研究框架。Agent 可以读取盘前晨报、在 Sandbox 中分析数据、形成判断并自主下单；所有研究、决策和成交行为都能按交易日回放与审计。它的重点不是展示一条高收益曲线，而是研究 Agent 是否遵守交易规则，以及自主交易是否真正可行。\n@抖音科技 #抖音创作者大会 #抖音前沿科技首发计划 #vibecoding大赏#ai新星计划#股票交易", "relative_url": "notes/douyin/B_A/2026-08-22_TraderHarness：专为Trading_Agent设计的开源回测与研究框_7676519604910443822.html", "platform": "douyin", "creator": "B_A", "external_content_id": "", "published_at": "", "topics": [], "summary": "", "source_url": "https://www.douyin.com/video/7676519604910443822"}</script></body></html>

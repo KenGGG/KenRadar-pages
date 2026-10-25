@@ -1,47 +1,22 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>期权波动率偏离套利：分位规则与短样本风险｜KenRadar</title>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f5; color: #202124; }
-    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
-    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
-    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
-    h1, h2, h3 { line-height: 1.25; color: #111827; }
-    h1 { font-size: 30px; margin: 24px 0 16px; }
-    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
-    h3 { font-size: 17px; margin-top: 24px; }
-    p, li { font-size: 16px; line-height: 1.8; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
-    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
-    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
-    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-    .meta { color: #6b7280; font-size: 13px; }
-    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
-    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
-    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
-    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
-    details.transcript[open] summary { margin-bottom: 18px; }
-  </style>
-</head>
-<body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-10-17_期权波动率偏离套利：分位规则与短样本风险_7697603981773737250.md · 发布于 2026-10-25 11:26:49</div><nav class="page-links"><a href="https://www.douyin.com/video/7697603981773737250" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>期权波动率偏离套利：分位规则与短样本风险</h1>
-<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7697603981773737250">https://www.douyin.com/video/7697603981773737250</a>）</p>
-<h2>一、内容简述</h2>
-<h3>（一）一句话结论</h3>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><meta name="description" content="作者介绍沪深300股指期权波动率偏离研究：用报价隐含波动率与历史收益预测波动率的差值形成分位信号，比较日历价差和跨式组合。约一年、十一次交易的回测不能当成稳定实盘预期；ASR末段收益数字互相冲突，本文不裁定具体年化收益。">
+<title>期权波动率偏离套利：分位规则与短样本风险｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<script defer src="../../../assets/site.js"></script></head>
+<body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
+<nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
+<main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>期权波动率偏离套利：分位规则与短样本风险</h1><p class="muted">量化Quantgirl · douyin · 视频发布于 2026-10-17 11:55:04</p><nav class="page-links"><a href="https://www.douyin.com/video/7697603981773737250" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 研究介绍（ASR原样，含未决错字）</a><a href="#section-6">2. 数据与波动特征（ASR原样）</a><a href="#section-7">3. 两类模型与历史拟合（ASR原样）</a><a href="#section-8">4. 分位交易规则（ASR原样）</a><a href="#section-9">5. 回测及样本限制（ASR原样，收益数字有冲突）</a><a href="#section-10">三、知识关联</a><a href="#section-11">来源与类型</a><a href="#section-12">相关主题</a><a href="#section-13">人物</a><a href="#section-14">相关机构/公司</a><a href="#section-15">历史事件</a><a href="#section-16">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a></details><div class="article-copy"><p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7697603981773737250">https://www.douyin.com/video/7697603981773737250</a>）</p>
+<h2 id="section-1">一、内容简述</h2>
+<h3 id="section-2">（一）一句话结论</h3>
 <blockquote>
-<p><strong>一句话结论</strong>
+<p><strong>一句话结论 · 内容来源的摘要</strong>
 作者介绍沪深300股指期权波动率偏离研究：用报价隐含波动率与历史收益预测波动率的差值形成分位信号，比较日历价差和跨式组合。约一年、十一次交易的回测不能当成稳定实盘预期；ASR末段收益数字互相冲突，本文不裁定具体年化收益。</p>
 </blockquote>
-<h3>（二）核心内容</h3>
+<h3 id="section-3">（二）核心内容</h3>
 <ol>
 <li>
 <p><strong>来源与编辑说明</strong>
@@ -64,29 +39,29 @@
 ASR开头及后段出现三十四点六六、二十二点四零等数字，末段还分别出现跨式二十四点六六与日历价差二十四点六六，无法仅凭转录判定哪一个是原音或图表值。因此标题和摘要不采用具体收益率。ASR还有今不要回答的是、现金平仓线、蛋粉等疑似识别问题，全部原样保留，需对照音画后另行审校。没有真人听校或金融事实核验，不构成投资建议。</p>
 </li>
 </ol>
-<h2>二、分段原文</h2>
+<h2 id="section-4">二、分段原文</h2>
 <blockquote>
 <p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
-<h3>1. 研究介绍（ASR原样，含未决错字）</h3>
+<h3 id="section-5">1. 研究介绍（ASR原样，含未决错字）</h3>
 <p>本期解读一篇沪深三百股指期权的波动率偏离套利研究，跨式组合回测，年化收益率百分之三十四点六六，夏普比率五点八八。规则是隐含波动率相对预测波动率的差值，碰到历史百分之九十五或百分之五分位，就开仓回到百分之八十五或百分之十五分位就平仓回测。只有二零二四年二月二十六日到二零二五年，二月二十一日，大约十一次交易年化会放大，短期结果也没有扣完全部短期成本。在波动率就是价格晃动的幅度，也是期权贵不贵的标尺。沪深三百股指期权二零一九年上市之后，报价里已经含着市场对未来风险的共同预期，反推出来就是隐含波动率。要是这个报价和模型预测的未来波动只是短暂岔开，而且岔开，会往回靠差值，本身就可以当成交易信号。今不要回答的是，哪一种波动模型更能记下沪深三百下跌时波动放大的特点，以及报价反推的隐含波动率和模型预测差多少时才值得下单。</p>
-<h3>2. 数据与波动特征（ASR原样）</h3>
+<h3 id="section-6">2. 数据与波动特征（ASR原样）</h3>
 <p>数据用的是真实日行情开仓线，取历史差值的现金平仓线，取百分之八十五和百分之十五分位。同时比较日历价差和跨市两种做法，就算分成两本账，一边用期权报价反推隐含波动率，一边用指数历史收益预测下一期波动两边的差变成开平仓信号，再分别放到日历价差和跨时上回测。后面的收益数字都从这条链上出来，不是先选一个模型，名字再倒退故事。沪深三百覆盖的是两市里市值大、成交活跃的公司期权合约标准化，可以用看涨和看跌拼出不同风险。参与者里机构更多，所以更适合看波动率交易。后面选合约时，盯的是标的行权价和到期日，平值附近就是按这三项留下的。蛋粉里成交和持仓整体是抬起来的，波动变大时成交会再放大一截，说明不确定上升时。有人用期权对冲二零二五年头两个月成交同比回落，绝对规模仍然构作日评回测。近月深度虚值的买卖价差仍然可能吃掉信号。在浮生三百日，收益是左偏尖峰后尾极端日比正态分布假设的更多波动还一团一团的出现，同样幅度的下跌，往往比上涨更推高下一期波动。所以后面比的是能分开好坏消息的模型，而不是一条从头到尾不变的波动率。</p>
-<h3>3. 两类模型与历史拟合（ASR原样）</h3>
+<h3 id="section-7">3. 两类模型与历史拟合（ASR原样）</h3>
 <p>市场。账本用报价反推，现在把波动定在多贵常数，波动率算得快，但分不开。不同行权价和远近月，允许波动率自己变化的模型，才能记下微笑和偏斜。预测账本用历史收益看下一期波动，只记聚集的版本分不开，利空亲门线的版本，把下跌和上涨的冲击分开策略交易的就是这两本账之间的极端差。累计波动率报价用四个量描述，曲面当前波动水平决定平值附近有多高价格，弹性决定不同。行权价怎么变？价格和波动是同向还是反向？决定左右偏波动，本身有多晃，决定微笑弯多少，它比常数波动率更能分开行权价和到期日。所以后面用它读市场报价比几类预测模型里能分开利空冲击的门线模型，样本内误差最小不对称项估计是零点零七二四大于零，表示同样幅度的下跌比上涨更推高下。一期波动波动还会延续，而且序列平稳，所以可以每个交易日用新数据重估，拿来当下一期的预测值标准化、残差围着零上下走，残差和平方残差都没有留下成串的自相关说明波动聚集大体被吸走了，后尾用t分布去配条件，波动率也把样本里几段高波动标了出来。这只说明历史价结构被吃进去了不说明后面的交易一定赚钱。</p>
-<h3>4. 分位交易规则（ASR原样）</h3>
+<h3 id="section-8">4. 分位交易规则（ASR原样）</h3>
 <p>卖仓不看一个固定数字，而看差值在历史上的位置高过百分之九十五，分位就当成波动，被卖贵了却卖出。波动低过百分之五分位就当成波动被买便宜了去买入。波动卖出的仓回到百分之八十五分位以下平，买入的仓回到百分之十五分位以上平。另外，还有止盈止损，到期前剩余不足时，按收盘价强制品利价差，用同一型权价不同，到期月波动。卖贵时卖近月买远月，买便宜时，反过来赚的是近远月时间，价值衰减不一样。跨市是同一型权价，同一到期日同时拿看涨和看跌波动。卖贵就卖出这一对，买便宜就买入这一对跨市更直接赌波动幅度，所以更吃报价。有没有读对质减？</p>
-<h3>5. 回测及样本限制（ASR原样，收益数字有冲突）</h3>
+<h3 id="section-9">5. 回测及样本限制（ASR原样，收益数字有冲突）</h3>
 <p>从二零二四年二月二十六日到二零二五年二月二十一日，只留平值附近的看涨和看跌去掉到期不足五个交易日或者数据缺的合约预测波动，每个交易日用新数据重估开仓，用开盘价成本里写了每手十五元手续费，年出期权，还记保证金占用、买卖价差和划点，没有按盘口逐笔扣利价差。在常数波动率报价下，十一次里七次赚钱收益为正，但黄的更大。换成随机波动率报价后，十一次里八次赚钱，年化收益率百分之二十二点四零。夏普比率两点三五波动降到百分之八点六一差，主要来自报价，能不能分开？不同行权价和远近月不是仓位，公式变了，户波动率下的卖出，跨市保证金占的多，收益波动到百分之三点三五。夏普比率只有零点二一，换成随机波动率。报价后，跨市年化收益率百分之三十四点六，六年化波动百分之五点六六，夏普比率五点八八十，一次里七次赚钱卖个夏普，来自大约一年十几次交易年化把短样本拉长了，不能当成稳定的实盘预期。在两种报价下都是正收益，更像吃期限结构，对报价模型没那么脆。跨市在随机波动率报价下收益弹性更大，也更依赖曲面。有没有读对，对照下来，日历价差年化百分之二十二点四零，跨式年化百分之二十四点六六都处在同一段大约十一次交易里，在模型更适合记下跌时波动，放开随机波动率，报价比常数波动率，更能放开微笑和远近月滚动分位比一条死阈值更能标出极端差。日历价差年化百分之二十四点六六，跨式年化百分之三十四点六六都处在同一小窗口里，平稳时更偏日历价差波动放大时才提高，跨市还要单独留活亏光的位置。</p>
-<h2>三、知识关联</h2>
-<h3>来源与类型</h3>
+<h2 id="section-10">三、知识关联</h2>
+<h3 id="section-11">来源与类型</h3>
 <ul>
 <li><span class="wikilink">量化Quantgirl</span></li>
 <li><span class="wikilink">抖音</span></li>
 <li><span class="wikilink">视频笔记</span></li>
 <li><span class="wikilink">KenRadar</span></li>
 </ul>
-<h3>相关主题</h3>
+<h3 id="section-12">相关主题</h3>
 <ul>
 <li><span class="wikilink">量化研究</span></li>
 <li><span class="wikilink">期权</span></li>
@@ -97,28 +72,30 @@ ASR开头及后段出现三十四点六六、二十二点四零等数字，末�
 <li><span class="wikilink">货币政策</span></li>
 <li><span class="wikilink">投资策略</span></li>
 </ul>
-<h3>人物</h3>
+<h3 id="section-13">人物</h3>
 <ul>
 <li>暂无明确人物</li>
 </ul>
-<h3>相关机构/公司</h3>
+<h3 id="section-14">相关机构/公司</h3>
 <ul>
 <li>暂无明确机构或公司</li>
 </ul>
-<h3>历史事件</h3>
+<h3 id="section-15">历史事件</h3>
 <ul>
 <li>暂无明确历史事件</li>
 </ul>
-<h3>资产/产品/地点</h3>
+<h3 id="section-16">资产/产品/地点</h3>
 <ul>
 <li>暂无明确资产、产品或地点</li>
 </ul>
-<details class="transcript"><summary>四、视频原始转录</summary>
+<div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
 <p>[!quote]- 展开查看原始转录
 以下内容由 funasr:paraformer-zh 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
 <p>本期解读一篇沪深三百股指期权的波动率偏离套利研究，跨式组合回测，年化收益率百分之三十四点六六，夏普比率五点八八。规则是隐含波动率相对预测波动率的差值，碰到历史百分之九十五或百分之五分位，就开仓回到百分之八十五或百分之十五分位就平仓回测。只有二零二四年二月二十六日到二零二五年，二月二十一日，大约十一次交易年化会放大，短期结果也没有扣完全部短期成本。在波动率就是价格晃动的幅度，也是期权贵不贵的标尺。沪深三百股指期权二零一九年上市之后，报价里已经含着市场对未来风险的共同预期，反推出来就是隐含波动率。要是这个报价和模型预测的未来波动只是短暂岔开，而且岔开，会往回靠差值，本身就可以当成交易信号。今不要回答的是，哪一种波动模型更能记下沪深三百下跌时波动放大的特点，以及报价反推的隐含波动率和模型预测差多少时才值得下单。数据用的是真实日行情开仓线，取历史差值的现金平仓线，取百分之八十五和百分之十五分位。同时比较日历价差和跨市两种做法，就算分成两本账，一边用期权报价反推隐含波动率，一边用指数历史收益预测下一期波动两边的差变成开平仓信号，再分别放到日历价差和跨时上回测。后面的收益数字都从这条链上出来，不是先选一个模型，名字再倒退故事。沪深三百覆盖的是两市里市值大、成交活跃的公司期权合约标准化，可以用看涨和看跌拼出不同风险。参与者里机构更多，所以更适合看波动率交易。后面选合约时，盯的是标的行权价和到期日，平值附近就是按这三项留下的。蛋粉里成交和持仓整体是抬起来的，波动变大时成交会再放大一截，说明不确定上升时。有人用期权对冲二零二五年头两个月成交同比回落，绝对规模仍然构作日评回测。近月深度虚值的买卖价差仍然可能吃掉信号。在浮生三百日，收益是左偏尖峰后尾极端日比正态分布假设的更多波动还一团一团的出现，同样幅度的下跌，往往比上涨更推高下一期波动。所以后面比的是能分开好坏消息的模型，而不是一条从头到尾不变的波动率。市场。账本用报价反推，现在把波动定在多贵常数，波动率算得快，但分不开。不同行权价和远近月，允许波动率自己变化的模型，才能记下微笑和偏斜。预测账本用历史收益看下一期波动，只记聚集的版本分不开，利空亲门线的版本，把下跌和上涨的冲击分开策略交易的就是这两本账之间的极端差。累计波动率报价用四个量描述，曲面当前波动水平决定平值附近有多高价格，弹性决定不同。行权价怎么变？价格和波动是同向还是反向？决定左右偏波动，本身有多晃，决定微笑弯多少，它比常数波动率更能分开行权价和到期日。所以后面用它读市场报价比几类预测模型里能分开利空冲击的门线模型，样本内误差最小不对称项估计是零点零七二四大于零，表示同样幅度的下跌比上涨更推高下。一期波动波动还会延续，而且序列平稳，所以可以每个交易日用新数据重估，拿来当下一期的预测值标准化、残差围着零上下走，残差和平方残差都没有留下成串的自相关说明波动聚集大体被吸走了，后尾用t分布去配条件，波动率也把样本里几段高波动标了出来。这只说明历史价结构被吃进去了不说明后面的交易一定赚钱。卖仓不看一个固定数字，而看差值在历史上的位置高过百分之九十五，分位就当成波动，被卖贵了却卖出。波动低过百分之五分位就当成波动被买便宜了去买入。波动卖出的仓回到百分之八十五分位以下平，买入的仓回到百分之十五分位以上平。另外，还有止盈止损，到期前剩余不足时，按收盘价强制品利价差，用同一型权价不同，到期月波动。卖贵时卖近月买远月，买便宜时，反过来赚的是近远月时间，价值衰减不一样。跨市是同一型权价，同一到期日同时拿看涨和看跌波动。卖贵就卖出这一对，买便宜就买入这一对跨市更直接赌波动幅度，所以更吃报价。有没有读对质减？从二零二四年二月二十六日到二零二五年二月二十一日，只留平值附近的看涨和看跌去掉到期不足五个交易日或者数据缺的合约预测波动，每个交易日用新数据重估开仓，用开盘价成本里写了每手十五元手续费，年出期权，还记保证金占用、买卖价差和划点，没有按盘口逐笔扣利价差。在常数波动率报价下，十一次里七次赚钱收益为正，但黄的更大。换成随机波动率报价后，十一次里八次赚钱，年化收益率百分之二十二点四零。夏普比率两点三五波动降到百分之八点六一差，主要来自报价，能不能分开？不同行权价和远近月不是仓位，公式变了，户波动率下的卖出，跨市保证金占的多，收益波动到百分之三点三五。夏普比率只有零点二一，换成随机波动率。报价后，跨市年化收益率百分之三十四点六，六年化波动百分之五点六六，夏普比率五点八八十，一次里七次赚钱卖个夏普，来自大约一年十几次交易年化把短样本拉长了，不能当成稳定的实盘预期。在两种报价下都是正收益，更像吃期限结构，对报价模型没那么脆。跨市在随机波动率报价下收益弹性更大，也更依赖曲面。有没有读对，对照下来，日历价差年化百分之二十二点四零，跨式年化百分之二十四点六六都处在同一段大约十一次交易里，在模型更适合记下跌时波动，放开随机波动率，报价比常数波动率，更能放开微笑和远近月滚动分位比一条死阈值更能标出极端差。日历价差年化百分之二十四点六六，跨式年化百分之三十四点六六都处在同一小窗口里，平稳时更偏日历价差波动放大时才提高，跨市还要单独留活亏光的位置。</p>
 </blockquote>
-</details></main>
-</body>
-</html>
+</details></div></div></article><section id="related" data-topics="[&quot;量化研究&quot;, &quot;期权&quot;, &quot;来源不确定性&quot;, &quot;波动率&quot;, &quot;分位规则&quot;, &quot;回测风险&quot;, &quot;货币政策&quot;, &quot;投资策略&quot;]" data-current="notes/douyin/量化Quantgirl/2026-10-17_期权波动率偏离套利：分位规则与短样本风险_7697603981773737250.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 研究介绍（ASR原样，含未决错字）</a><a href="#section-6">2. 数据与波动特征（ASR原样）</a><a href="#section-7">3. 两类模型与历史拟合（ASR原样）</a><a href="#section-8">4. 分位交易规则（ASR原样）</a><a href="#section-9">5. 回测及样本限制（ASR原样，收益数字有冲突）</a><a href="#section-10">三、知识关联</a><a href="#section-11">来源与类型</a><a href="#section-12">相关主题</a><a href="#section-13">人物</a><a href="#section-14">相关机构/公司</a><a href="#section-15">历史事件</a><a href="#section-16">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-25 21:49</span></footer>
+<nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
+<dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
+<script id="kr-metadata" type="application/json">{"title": "期权波动率偏离套利：分位规则与短样本风险", "relative_url": "notes/douyin/量化Quantgirl/2026-10-17_期权波动率偏离套利：分位规则与短样本风险_7697603981773737250.html", "platform": "douyin", "creator": "量化Quantgirl", "external_content_id": "7697603981773737250", "published_at": "2026-10-17 11:55:04", "topics": ["量化研究", "期权", "来源不确定性", "波动率", "分位规则", "回测风险", "货币政策", "投资策略"], "summary": "作者介绍沪深300股指期权波动率偏离研究：用报价隐含波动率与历史收益预测波动率的差值形成分位信号，比较日历价差和跨式组合。约一年、十一次交易的回测不能当成稳定实盘预期；ASR末段收益数字互相冲突，本文不裁定具体年化收益。", "source_url": "https://www.douyin.com/video/7697603981773737250"}</script></body></html>

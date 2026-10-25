@@ -1,47 +1,22 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AI辅助搭建个人量化交易框架的八个模块｜KenRadar</title>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f5; color: #202124; }
-    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
-    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
-    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
-    h1, h2, h3 { line-height: 1.25; color: #111827; }
-    h1 { font-size: 30px; margin: 24px 0 16px; }
-    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
-    h3 { font-size: 17px; margin-top: 24px; }
-    p, li { font-size: 16px; line-height: 1.8; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
-    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
-    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
-    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-    .meta { color: #6b7280; font-size: 13px; }
-    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
-    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
-    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
-    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
-    details.transcript[open] summary { margin-bottom: 18px; }
-  </style>
-</head>
-<body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-10-16_AI辅助搭建个人量化交易框架的八个模块_7697069284039724314.md · 发布于 2026-10-16 14:50:49</div><nav class="page-links"><a href="https://www.douyin.com/video/7697069284039724314" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>AI辅助搭建个人量化交易框架的八个模块</h1>
-<p>抖音 | 小圆量化 | 原文链接（<a href="https://www.douyin.com/video/7697069284039724314">https://www.douyin.com/video/7697069284039724314</a>）</p>
-<h2>一、内容简述</h2>
-<h3>（一）一句话结论</h3>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><meta name="description" content="博主分享用AI辅助搭建可复用个人量化框架的八年经验，涵盖数据获取、特征分析、策略开发、回测评估、可视化、工程工具和实盘对接全流程。">
+<title>AI辅助搭建个人量化交易框架的八个模块｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<script defer src="../../../assets/site.js"></script></head>
+<body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
+<nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
+<main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>AI辅助搭建个人量化交易框架的八个模块</h1><p class="muted">小圆量化 · douyin · 视频发布于 2026-10-16 09:20:01</p><nav class="page-links"><a href="https://www.douyin.com/video/7697069284039724314" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 量化框架八个模块概览</a><a href="#section-6">2. 策略、回测与评估</a><a href="#section-7">3. 可视化、工程工具与实盘对接</a><a href="#section-8">三、知识关联</a><a href="#section-9">来源与类型</a><a href="#section-10">相关主题</a><a href="#section-11">人物</a><a href="#section-12">相关机构/公司</a><a href="#section-13">历史事件</a><a href="#section-14">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a></details><div class="article-copy"><p>抖音 | 小圆量化 | 原文链接（<a href="https://www.douyin.com/video/7697069284039724314">https://www.douyin.com/video/7697069284039724314</a>）</p>
+<h2 id="section-1">一、内容简述</h2>
+<h3 id="section-2">（一）一句话结论</h3>
 <blockquote>
-<p><strong>一句话结论</strong>
+<p><strong>一句话结论 · 内容来源的摘要</strong>
 博主分享用AI辅助搭建可复用个人量化框架的八年经验，涵盖数据获取、特征分析、策略开发、回测评估、可视化、工程工具和实盘对接全流程。</p>
 </blockquote>
-<h3>（二）核心内容</h3>
+<h3 id="section-3">（二）核心内容</h3>
 <ol>
 <li>
 <p><strong>八大模块构建量化框架全链条</strong>
@@ -52,25 +27,25 @@
 策略模块需明确买卖时点和仓位，先用双均线等简单规则跑通，想做机器学习可考虑LightGBM给股票打分选股。回测使用backtrader模拟订单成交和资金变化，注意收盘后出信号不能默认按当天收盘价成交，回测成交方式须与实际对得上。评估框架生成收益分析报告，重点看超额收益和最大回撤。可视化用Plotly绘制净值回撤和买卖点，Streamlit做成交互页面。工程工具用schedule定时任务和logging记录数据版本、策略参数和交易信号。实盘需根据市场选择接入方式，如VN.py或券商QMT，先用模拟。</p>
 </li>
 </ol>
-<h2>二、分段原文</h2>
+<h2 id="section-4">二、分段原文</h2>
 <blockquote>
 <p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
-<h3>1. 量化框架八个模块概览</h3>
+<h3 id="section-5">1. 量化框架八个模块概览</h3>
 <p>一个人怎么搭一套完整的个人量化交易框架？在AI的帮助下，我用半年时间实践出了一套可复用的框架。整体来说有八个模块：第一，数据获取，历史行情可以用AKShare（个人项目），先用CSV文件保存，在本地方便重复调用。拿到数据之后，先检查缺失值、交易日和复权问题，第一个是策略数据口径变了，结果也可能变。第二，分析和特征，用pandas整理和分析数据，用TALIB计算均线、RSI这些技术指标，省去逐个实现的工作。先想清楚这个指标为什么可能有用，再决定加进去。第一版先选少量能解释的特征，方便后面检查它们有没有贡献。</p>
-<h3>2. 策略、回测与评估</h3>
+<h3 id="section-6">2. 策略、回测与评估</h3>
 <p>第三，策略写清楚什么时候买、什么时候卖、买多少，先用双均线这样的简单规则跑通，想做机器学习再考虑LightGBM给股票打分，形成选股信号。第四，回测，backtrader可以模拟订单成交和资金变化，也能设置手续费和滑点。这里有个容易忽略的问题，用收盘后的数据出信号，就不能默认自己已经按当天收盘价买到了，回测里的成交方式要和实际交易对得上。第五，评估，框架tests可以把收益序列生成分析报告，省去自己拼指标和图表的时间。除了收益还要问两个问题：比基准多赚了多少？最差的一次从高点跌了多少？最后一个问题就是最大回撤。结合这些结果，你才知道收益背后承担了什么风险。</p>
-<h3>3. 可视化、工程工具与实盘对接</h3>
+<h3 id="section-7">3. 可视化、工程工具与实盘对接</h3>
 <p>第六，可视化，用Plotly画净值回撤和买卖点，再用Streamlit做成一个交互页面，方便查看不同策略的结果。把买卖点放回行情里，你就更容易看出策略是在抓住趋势还是在震荡里反复交易。第七，工程工具，简单的定时任务可以用schedule，日志用Python自带的logging，把数据版本、策略参数和交易信号记录下来，以后结果变了或者程序报错才查得清原因。仓位限制和异常提醒也要贯穿整个流程。第八，实盘，根据交易市场和账户权限选择合适的接入方式，比如用VN.py对接交易接口，或者接入券商支持的QMT。这里要处理行情、订单回报和持仓同步，先用模拟运行验证。断线怎么办？会不会重复下单？仓位有没有超限？最后给准备动手的朋友一个建议，八个模块是框架的全貌，但第一版可以很小，一个数据源、一个简单策略，接上回测和评估，先跑通整个闭环，先做一套能反复验证想法的工具，拿到结果再一点点把它补完整。在实践的过程中学习完善，这就是我建议个人开发者的起步路线。</p>
-<h2>三、知识关联</h2>
-<h3>来源与类型</h3>
+<h2 id="section-8">三、知识关联</h2>
+<h3 id="section-9">来源与类型</h3>
 <ul>
 <li><span class="wikilink">小圆量化</span></li>
 <li><span class="wikilink">抖音</span></li>
 <li><span class="wikilink">视频笔记</span></li>
 <li><span class="wikilink">KenRadar</span></li>
 </ul>
-<h3>相关主题</h3>
+<h3 id="section-10">相关主题</h3>
 <ul>
 <li><span class="wikilink">量化交易</span></li>
 <li><span class="wikilink">个人框架</span></li>
@@ -83,28 +58,30 @@
 <li><span class="wikilink">AI产业</span></li>
 <li><span class="wikilink">股票市场</span></li>
 </ul>
-<h3>人物</h3>
+<h3 id="section-11">人物</h3>
 <ul>
 <li>暂无明确人物</li>
 </ul>
-<h3>相关机构/公司</h3>
+<h3 id="section-12">相关机构/公司</h3>
 <ul>
 <li>暂无明确机构或公司</li>
 </ul>
-<h3>历史事件</h3>
+<h3 id="section-13">历史事件</h3>
 <ul>
 <li>暂无明确历史事件</li>
 </ul>
-<h3>资产/产品/地点</h3>
+<h3 id="section-14">资产/产品/地点</h3>
 <ul>
 <li>暂无明确资产、产品或地点</li>
 </ul>
-<details class="transcript"><summary>四、视频原始转录</summary>
+<div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
 <p>[!quote]- 展开查看原始转录
 以下内容由 funasr:paraformer-zh 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
 <p>一个人怎么搭一套完整的个人量化交易框架。在AI的帮助下，我用半年时间实践出了一套可复用的框架。整体来说有八个模块，第一，数据获取历史行情可以用AK十二个人项目，先用SCL light保存，在本地方便重复调用。拿到数据之后，先检查缺失值交易日和复权口用。第一个策略数据口径变了，结果也可能变。第二，分析和特征，用pandas整理和分析数据，用TALIB计算均线RSI这些技术指标省去逐个实现的工作。先想清楚这个指标为什么可能有用，再决定加进去。第一版先选少量，能解释的特征，方便后面检查他们有没有贡献。第三，策略写清楚什么时候买，什么时候卖买多少，先用双均线这样的简单规则跑通，想做机器学习，再考虑light之b m,给股票打分，形成选股信号、训练和验证，按时间切开检验。他在没参与训练的后续行情里是否仍然有效？第四，回撤back trader可以模拟订单成交和资金变化，也能设置手续费和划点。这里有个容易忽略的问题，用收盘后的数据出信号，就不能默认自己已经按当天收盘价买到了。回测里的成交方式要和实际交易对得上。第五，评估框子tests可以把收益序列生成分析报告，省去自己拼指标和图表的时间。除了收益还要问两个问题，比基准多赚了多少？最差的一次从高点跌了多少。最后一个问题就是最大回撤。结合这些结果，你才知道收益背后承担了什么风险。第六，可视化用pllot ly化净值回撤和买卖点，再用stream late做成一个交互页面，方便查看不同策略的结果。把买卖点放回行情里，你就更容易看出策略是在抓住趋势还是在震荡里反复交易。第七，工程工具，简单的定时任务，可以用schedule日志，用python自带的logging,把数据版本、策略参数和交易信号记录下来以后，结果变了，或者程序报错才查得清原因。仓位限制和异常提醒也要贯穿整个流程。第八，石盘根据交易市场和账户权限选择合适的接入方式，比如用VN点PY对接交易接口或者接入券商支持的QMT.这里要处理行情，订单回报和持仓同步，先用模拟运行验证。断线怎么办？会不会重复下单？仓位有没有超限？最后给准备动手的朋友一个建议，八个模块是框架的全貌，但第一版可以很小一个数据源，一个简单策略，接上回测和评估，先跑通整个闭环，先做一套，能反复验证想法的工具，拿到结果再一点点把它补完整。在实践的过程中学习完善，这就是我建议个人开发者的起步路线。</p>
 </blockquote>
-</details></main>
-</body>
-</html>
+</details></div></div></article><section id="related" data-topics="[&quot;量化交易&quot;, &quot;个人框架&quot;, &quot;回测&quot;, &quot;AKShare&quot;, &quot;LightGBM&quot;, &quot;backtrader&quot;, &quot;实盘对接&quot;, &quot;投资研究/量化交易&quot;, &quot;AI产业&quot;, &quot;股票市场&quot;]" data-current="notes/douyin/小圆量化/2026-10-16_AI辅助搭建个人量化交易框架的八个模块_7697069284039724314.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 量化框架八个模块概览</a><a href="#section-6">2. 策略、回测与评估</a><a href="#section-7">3. 可视化、工程工具与实盘对接</a><a href="#section-8">三、知识关联</a><a href="#section-9">来源与类型</a><a href="#section-10">相关主题</a><a href="#section-11">人物</a><a href="#section-12">相关机构/公司</a><a href="#section-13">历史事件</a><a href="#section-14">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-25 21:48</span></footer>
+<nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
+<dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
+<script id="kr-metadata" type="application/json">{"title": "AI辅助搭建个人量化交易框架的八个模块", "relative_url": "notes/douyin/小圆量化/2026-10-16_AI辅助搭建个人量化交易框架的八个模块_7697069284039724314.html", "platform": "douyin", "creator": "小圆量化", "external_content_id": "7697069284039724314", "published_at": "2026-10-16 09:20:01", "topics": ["量化交易", "个人框架", "回测", "AKShare", "LightGBM", "backtrader", "实盘对接", "投资研究/量化交易", "AI产业", "股票市场"], "summary": "博主分享用AI辅助搭建可复用个人量化框架的八年经验，涵盖数据获取、特征分析、策略开发、回测评估、可视化、工程工具和实盘对接全流程。", "source_url": "https://www.douyin.com/video/7697069284039724314"}</script></body></html>

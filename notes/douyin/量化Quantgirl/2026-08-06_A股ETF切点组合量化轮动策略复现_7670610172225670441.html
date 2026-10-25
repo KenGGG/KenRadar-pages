@@ -1,47 +1,22 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>A股ETF切点组合量化轮动策略复现｜KenRadar</title>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f5; color: #202124; }
-    header { border-bottom: 1px solid #e3e1dc; background: #fff; }
-    .bar, main { max-width: 920px; margin: 0 auto; padding: 20px; }
-    .brand { font-size: 13px; color: #5f6368; letter-spacing: .02em; }
-    h1, h2, h3 { line-height: 1.25; color: #111827; }
-    h1 { font-size: 30px; margin: 24px 0 16px; }
-    h2 { font-size: 22px; margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 22px; }
-    h3 { font-size: 17px; margin-top: 24px; }
-    p, li { font-size: 16px; line-height: 1.8; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    blockquote { margin: 18px 0; padding: 12px 16px; border-left: 4px solid #2563eb; background: #eff6ff; color: #1f2937; }
-    code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; }
-    pre { overflow: auto; background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; margin: 18px 0; background: #fff; }
-    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; text-align: left; vertical-align: top; }
-    .meta { color: #6b7280; font-size: 13px; }
-    .page-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .page-links a { display: inline-flex; align-items: center; border: 1px solid #dbe3ef; background: #f8fafc; border-radius: 999px; padding: 5px 10px; font-size: 13px; }
-    .wikilink { display: inline-block; background: #eef2ff; color: #3730a3; padding: 0 6px; border-radius: 4px; }
-    details.transcript { margin-top: 34px; border-top: 1px solid #e5e7eb; padding-top: 18px; }
-    details.transcript summary { cursor: pointer; font-size: 18px; font-weight: 650; color: #374151; }
-    details.transcript[open] summary { margin-bottom: 18px; }
-  </style>
-</head>
-<body>
-  <header><div class="bar"><div class="brand">KenRadar</div><div class="meta">2026-08-06_A股ETF切点组合量化轮动策略复现_7670610172225670441.md · 发布于 2026-10-12 11:35:11</div><nav class="page-links"><a href="https://www.douyin.com/video/7670610172225670441" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav></div></header>
-  <main><h1>A股ETF切点组合量化轮动策略复现</h1>
-<p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7670610172225670441">https://www.douyin.com/video/7670610172225670441</a>）</p>
-<h2>一、内容简述</h2>
-<h3>（一）一句话结论</h3>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><meta name="description" content="复现深度强化学习切点组合策略，用12只A股行业ETF测试，混合方案年化约16.5%、夏普1.30，优于等权及沪深300基准。">
+<title>A股ETF切点组合量化轮动策略复现｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<script defer src="../../../assets/site.js"></script></head>
+<body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
+<nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
+<main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>A股ETF切点组合量化轮动策略复现</h1><p class="muted">量化Quantgirl · douyin · 视频发布于 2026-08-06 02:05:09</p><nav class="page-links"><a href="https://www.douyin.com/video/7670610172225670441" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 研究背景与核心结果</a><a href="#section-6">2. 框架与方法说明</a><a href="#section-7">3. 结果对比与图表分析</a><a href="#section-8">4. 结论与建议</a><a href="#section-9">三、知识关联</a><a href="#section-10">来源与类型</a><a href="#section-11">相关主题</a><a href="#section-12">人物</a><a href="#section-13">相关机构/公司</a><a href="#section-14">历史事件</a><a href="#section-15">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a></details><div class="article-copy"><p>抖音 | 量化Quantgirl | 原文链接（<a href="https://www.douyin.com/video/7670610172225670441">https://www.douyin.com/video/7670610172225670441</a>）</p>
+<h2 id="section-1">一、内容简述</h2>
+<h3 id="section-2">（一）一句话结论</h3>
 <blockquote>
-<p><strong>一句话结论</strong>
+<p><strong>一句话结论 · 内容来源的摘要</strong>
 复现深度强化学习切点组合策略，用12只A股行业ETF测试，混合方案年化约16.5%、夏普1.30，优于等权及沪深300基准。</p>
 </blockquote>
-<h3>（二）核心内容</h3>
+<h3 id="section-3">（二）核心内容</h3>
 <ol>
 <li>
 <p><strong>策略框架与核心结果</strong>
@@ -52,27 +27,27 @@
 混合方案显著优于等权方案（夏普0.32）和沪深300基准（夏普0.04），改进动态也压制了旧启发式的高波动与深回撤。假设年换手1.2、扣20bp成本后，混合方案夏普仍约1.28，说明对轻度成本不敏感。主图并排展示夏普与回撤，混合方案优势不在追最高累计收益，而在回撤受控后的风险调整收益上。博主提醒，当基准自身偏强时超额会变薄，应更看重回撤与夏普而非阶段性年化。</p>
 </li>
 </ol>
-<h2>二、分段原文</h2>
+<h2 id="section-4">二、分段原文</h2>
 <blockquote>
 <p>以下内容保持博主原意和论述顺序，仅修正明显错别字、ASR 识别错误、标点与断句。</p>
 </blockquote>
-<h3>1. 研究背景与核心结果</h3>
+<h3 id="section-5">1. 研究背景与核心结果</h3>
 <p>本期复现一篇论文，用深度强化学习调整切点组合风险厌恶与再平衡节奏。原论文在行业ETF上训练策略，网络选择风险目标与持有天数。本复现改用中国十二只主题与行业ETF的本地日线，并用半方差优化加波动袖套替代完整训练。默认混合方案年化约16.5%，夏普约1.30，最大回撤约-15%。两年换手假设扣20个基点后夏普仍约1.28。</p>
-<h3>2. 框架与方法说明</h3>
+<h3 id="section-6">2. 框架与方法说明</h3>
 <p>组合始终全额做多，十二只基金权重非负且求和为一，不使用杠杆与卖空。估计窗口净二百五十二个交易日。静态路径大约每三十日，在风险目标网格上选样本内夏普更高的权重。动态路径则同时给出风险目标与五到六十日的持有期。默认混合方案把改进后的动态半方差路径与波动受控的静态路径按日收益等权合成，用来压制旧启发式容易单票满仓的问题。数据口径与原文并不相同，本研究主要用行业ETF日线，复现本工程改用本地A股前复权日线主净值，从2021年6月到2026年7月。控制律也不是完整策略网络训练。因此后文数字只对本代理实验与窗口负责，不拿来核对原文表格。</p>
-<h3>3. 结果对比与图表分析</h3>
+<h3 id="section-7">3. 结果对比与图表分析</h3>
 <p>格点靠净值。图上混合方案曲线相对平稳，最大回撤大约负15%。旧启发式累计更高，但回撤大约负31%，波动也被放大。主图混文的静态切点已经明显强于等权与沪深300市场基准。真正要慎用过度集中的旧动态规则。把年化与成本摊薄放在一起看，混合方案年化约16.5，夏普约1.30，回撤约负15%。改进动态与波动受控静态都在同一量级，旧启发式年化更高，但夏普掉到约0.79。在年换手大约1.2的假设下扣20个基点后混合方案夏普仍约1.28，说明这条边对轻度成本并不敏感。</p>
-<h3>4. 结论与建议</h3>
+<h3 id="section-8">4. 结论与建议</h3>
 <p>主图把夏普、年化与最大回撤并排放在一起，混合方案的优势主要不在追最高累计，而在回撤受控后的风险调整后收益上。当基准自身偏强时要超额会变薄，因此更要看回撤与夏普，而不是只看阶段性年化。一个综合来看，可执行默认是建议的混合方案并用波动袖套限制风险预算，不要默认就启发式满仓，也不要在未完成完整训练之前，不把本代理结果直接等同于原文深度强化学习结论。这是中国ETF代理在非完整训练控制律下的结果，结论边界需要审慎对待。</p>
-<h2>三、知识关联</h2>
-<h3>来源与类型</h3>
+<h2 id="section-9">三、知识关联</h2>
+<h3 id="section-10">来源与类型</h3>
 <ul>
 <li><span class="wikilink">量化Quantgirl</span></li>
 <li><span class="wikilink">抖音</span></li>
 <li><span class="wikilink">视频笔记</span></li>
 <li><span class="wikilink">KenRadar</span></li>
 </ul>
-<h3>相关主题</h3>
+<h3 id="section-11">相关主题</h3>
 <ul>
 <li><span class="wikilink">量化投资</span></li>
 <li><span class="wikilink">AI产业</span></li>
@@ -85,28 +60,30 @@
 <li><span class="wikilink">量化投资研究</span></li>
 <li><span class="wikilink">股票市场</span></li>
 </ul>
-<h3>人物</h3>
+<h3 id="section-12">人物</h3>
 <ul>
 <li>暂无明确人物</li>
 </ul>
-<h3>相关机构/公司</h3>
+<h3 id="section-13">相关机构/公司</h3>
 <ul>
 <li><span class="wikilink">十二只基金</span></li>
 </ul>
-<h3>历史事件</h3>
+<h3 id="section-14">历史事件</h3>
 <ul>
 <li>暂无明确历史事件</li>
 </ul>
-<h3>资产/产品/地点</h3>
+<h3 id="section-15">资产/产品/地点</h3>
 <ul>
 <li>暂无明确资产、产品或地点</li>
 </ul>
-<details class="transcript"><summary>四、视频原始转录</summary>
+<div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>四、视频原始转录</summary>
 <blockquote>
 <p>[!quote]- 展开查看原始转录
 以下内容由 Whisper 自动转录生成，可能存在错字、断句错误或语义遗漏，请以原视频为准。</p>
 <p>本期复现一篇，用深度强化学习、调整、切点组合风险、厌恶与再平衡节奏的研究。原论文在每股行业基金上训练策略，网络选择风险目标与持有天数本复现，改用十二至中国主题与行业基金的本地日线，并用半方差优化加波动，秀套替代完整万轮训练，默认混合方案盲年化约十六点百分之五。夏普约一点三零，最大回撤约付百分之十五，两年换手假设扣二十个基点后，夏普仍约一点二八组合，始终全额多投十二只基金权重非负且求和为一，不使用杠杆与卖空，估计创曲净二百五十二个交易日，静态路径大约每三十日。在风险目标网格上选样本内，夏普更高的权重动态路径，你则同时给出风险目标于五到六十日的持有期默认混合方案。把改进后的动态半方差路径与波动受控的静态路径，按日收益等权合成，用来压住旧启发，是容易单票满仓的问题。后数据口径与原文并不相同。书倩呢别不主要用每股日线与行业基金、宇宙本工程改用本地前赋权日线主净值从二零二一年六月到二零二六年，七月控制率也不是完整策略网络训练比。因此，后文数字只对本代理宇宙与窗口负责，不拿来核对原文表格，格点靠静值。图上混合方案抬升相对平稳，最大回撤大约负百分之十五。我旧启发式累计更高，但回撤大约负百分之三十一，波动也被放大。 Ab我们漫文风格的静态切点已经明显强于等全于市场基准。真正要慎用的是过渡集中的旧动态规则，把毛表与成本近似放在一起看混合方案年化约十六点五，夏普约一点三零回撤约负百分之十五。他改进动态与波动受控静态都在同一量级，就启发式年化更高。但夏普掉到约零点七九，在年换手大约一点二的假设下扣二十个基点后混合方案。夏普仍约一点二八，说明这条边对轻度成本并不敏感。主图把夏普年化与最大回撤并排放在一起，混合方案的优势主要不在追最高累计，而在回撤受控后的风险调整收益窗里，基准自身偏强时要超额会变薄，因此更要看回撤与夏普，而不是只看阶段性年化。一个综合来看，可执行默认是混合方案的并用波动袖套限制风险预算，不要默认就启发式满仓，也不要在未完成完整训练之前，不把本代理结果直接等同于原文。深度强化学习表格。一个。这是中国基金代理于非完整训练控制率下的结果，边界需要留在用法里。</p>
 </blockquote>
-</details></main>
-</body>
-</html>
+</details></div></div></article><section id="related" data-topics="[&quot;量化投资&quot;, &quot;AI产业&quot;, &quot;切点组合&quot;, &quot;ETF轮动&quot;, &quot;量化策略&quot;, &quot;深度强化学习&quot;, &quot;夏普比率&quot;, &quot;回撤控制&quot;, &quot;量化投资研究&quot;, &quot;股票市场&quot;]" data-current="notes/douyin/量化Quantgirl/2026-08-06_A股ETF切点组合量化轮动策略复现_7670610172225670441.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容简述</a><a href="#section-2">（一）一句话结论</a><a href="#section-3">（二）核心内容</a><a href="#section-4">二、分段原文</a><a href="#section-5">1. 研究背景与核心结果</a><a href="#section-6">2. 框架与方法说明</a><a href="#section-7">3. 结果对比与图表分析</a><a href="#section-8">4. 结论与建议</a><a href="#section-9">三、知识关联</a><a href="#section-10">来源与类型</a><a href="#section-11">相关主题</a><a href="#section-12">人物</a><a href="#section-13">相关机构/公司</a><a href="#section-14">历史事件</a><a href="#section-15">资产/产品/地点</a><a href="#raw-transcript">四、视频原始转录</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-25 21:49</span></footer>
+<nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
+<dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
+<script id="kr-metadata" type="application/json">{"title": "A股ETF切点组合量化轮动策略复现", "relative_url": "notes/douyin/量化Quantgirl/2026-08-06_A股ETF切点组合量化轮动策略复现_7670610172225670441.html", "platform": "douyin", "creator": "量化Quantgirl", "external_content_id": "7670610172225670441", "published_at": "2026-08-06 02:05:09", "topics": ["量化投资", "AI产业", "切点组合", "ETF轮动", "量化策略", "深度强化学习", "夏普比率", "回撤控制", "量化投资研究", "股票市场"], "summary": "复现深度强化学习切点组合策略，用12只A股行业ETF测试，混合方案年化约16.5%、夏普1.30，优于等权及沪深300基准。", "source_url": "https://www.douyin.com/video/7670610172225670441"}</script></body></html>
