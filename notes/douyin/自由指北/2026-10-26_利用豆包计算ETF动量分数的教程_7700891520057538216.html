@@ -1,27 +1,44 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="light dark"><meta name="description" content="本文主要介绍如何利用“豆包”工具计算ETF动量分数。作者首先展示了动量公式，并说明用户可将截图发送给豆包，让其计算指定指数（如纳指）在特定日期（如25天周期内）的动量分数。文中举例指出，豆包计算出的纳指动量分数（1.174817）比作者本地系统显示的数值（1.175）更为精确。此外，作者提到豆包还能生成定时任务或Excel表格，实现每日收盘后自动更新和推送动量数据，强调该工具具有普惠性，方便用户自行测试各类策略。">
-<title>利用豆包计算ETF动量分数的教程｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
+<meta name="color-scheme" content="light dark"><meta name="description" content="自由指北演示将视频中的动量公式截图交给豆包，询问指定标的的25天动量，并与本地页面显示值对照；另提出收盘后查询、定时任务和Excel自动更新的用法。公式表达式未进入ASR，显示值精度与自动化能力均未独立核验。
+
+&gt; !warning 校订边界与未知项
+&gt; 本篇由 Hermes Agent（OpenAI gpt-6.1-sol）根据保留的700字FunASR转录保守校订。原始AI整理为freellmapi / auto（数据库provider为openai-compatible），服务端实际选用的底层模型未知。未真人听校、未核对视频公式画面；ASR含豆包/">
+<title>2026-10-26_利用豆包计算ETF动量分数的教程_7700891520057538216｜KenRadar</title><link rel="stylesheet" href="../../../assets/site.css">
 <script defer src="../../../assets/site.js"></script></head>
 <body data-kind="article" data-root="../../../"><a class="skip" href="#main">跳到正文</a>
 <header class="topbar"><a class="brand" href="../../../index.html"><span class="radar">◎</span><span>KenRadar<small>信息有据 · 研究有序</small></span></a>
 <nav aria-label="主导航"><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a></nav><div class="actions"><button data-search>⌕ 搜索 <kbd>Ctrl K</kbd></button><button data-theme aria-label="切换深浅色主题">◐</button></div></header>
 <div class="layout"><aside class="sidebar"><p class="eyebrow">研究工作台</p><a href="../../../index.html">总览</a><a href="../../../sources.html">来源</a><a href="../../../index.html#topics">研究主题</a><hr><p class="eyebrow">探索公开知识</p><p class="muted">从来源出发，让每一条信息<br>都有可回溯的依据。</p><a href="../../../sources.html">全部来源 →</a><div id="sidebar-topics"></div></aside>
 <main id="main" tabindex="-1"><div class="crumbs"><a href="../../../index.html">总览</a> / 研究笔记</div>
-<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>利用豆包计算ETF动量分数的教程</h1><p class="muted">自由指北 · douyin · 视频发布于 2026-10-26 16:32:10</p><nav class="page-links"><a href="https://www.douyin.com/video/7700891520057538216" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
-<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容综述</a><a href="#section-2">二、分段原文</a><a href="#section-3">1. 动量公式计算与豆包工具使用演示</a><a href="#raw-transcript">三、转录原文</a></details><div class="article-copy"><p>抖音 | 自由指北 | 原文链接（<a href="https://www.douyin.com/video/7700891520057538216">https://www.douyin.com/video/7700891520057538216</a>）</p>
+<article data-pagefind-body><header class="article-head"><p class="eyebrow">RESEARCH NOTES · 来源笔记</p><h1>2026-10-26_利用豆包计算ETF动量分数的教程_7700891520057538216</h1><p class="muted">自由指北 · douyin · 视频发布于 2026-10-26 16:32:10</p><nav class="page-links"><a href="https://www.douyin.com/video/7700891520057538216" target="_blank" rel="noopener noreferrer">抖音源视频</a><a href="index.html">返回博主主页</a><a href="../../../index.html">返回发布首页</a></nav><button class="focus-toggle" data-focus>专注阅读</button></header>
+<details class="mobile-toc"><summary>本文目录</summary><a href="#section-1">一、内容综述</a><a href="#section-2">1. 先保存视频中展示的公式</a><a href="#section-3">2. 用指定标的与周期提问</a><a href="#section-4">3. 将两处显示结果作对照，而非验证正确性</a><a href="#section-5">4. 收盘后查询和定时任务是作者提出的用法</a><a href="#section-6">5. Excel自动更新与自行测试</a><a href="#section-7">二、分段原文</a><a href="#section-8">1. 动量计算与工具用法（ASR原样分段）</a><a href="#raw-transcript">三、转录原文</a></details><div class="article-copy"><p>抖音 | 自由指北 | <a href="https://www.douyin.com/video/7700891520057538216">原视频</a></p>
 <h2 id="section-1">一、内容综述</h2>
-<p>本文主要介绍如何利用“豆包”工具计算ETF动量分数。作者首先展示了动量公式，并说明用户可将截图发送给豆包，让其计算指定指数（如纳指）在特定日期（如25天周期内）的动量分数。文中举例指出，豆包计算出的纳指动量分数（1.174817）比作者本地系统显示的数值（1.175）更为精确。此外，作者提到豆包还能生成定时任务或Excel表格，实现每日收盘后自动更新和推送动量数据，强调该工具具有普惠性，方便用户自行测试各类策略。</p>
-<h2 id="section-2">二、分段原文</h2>
-<h3 id="section-3">1. 动量公式计算与豆包工具使用演示</h3>
+<p>自由指北演示将视频中的动量公式截图交给豆包，询问指定标的的25天动量，并与本地页面显示值对照；另提出收盘后查询、定时任务和Excel自动更新的用法。公式表达式未进入ASR，显示值精度与自动化能力均未独立核验。</p>
+<blockquote>
+<p>[!warning] 校订边界与未知项
+本篇由 Hermes Agent（OpenAI gpt-6.1-sol）根据保留的700字FunASR转录保守校订。原始AI整理为freellmapi / auto（数据库provider为openai-compatible），服务端实际选用的底层模型未知。未真人听校、未核对视频公式画面；ASR含豆包/豆瓣、纳指相关同音词及十月/十一月日期冲突，转录原文原样保留。不能由本文复现完整公式，也不把作者的精度、自动化或策略判断当作独立验证。</p>
+</blockquote>
+<h3 id="section-2">1. 先保存视频中展示的公式</h3>
+<p>作者说公式在画面中，可截图保存并发给豆包。本次保留的ASR没有读出公式表达式，且未核对视频画面，因此不补写计算公式、对数回归、年化或R²等定义。</p>
+<h3 id="section-3">2. 用指定标的与周期提问</h3>
+<p>作者以二十五天动量和纳指为演示，建议将公式交给豆包后询问动量分数；这里的25天是该演示口述，不能据此认定所有策略统一使用这个周期。</p>
+<h3 id="section-4">3. 将两处显示结果作对照，而非验证正确性</h3>
+<p>作者口述豆包结果为1.174817，自己“大盘牛”的ETF趋势页面显示1.175，并称前者更精确。这里仅保留作者的显示值和判断，不把更多小数位当作计算正确性或收益有效性的实证。ASR同时出现“十一月十六号”和“十月十六号”，演示日期未确定。</p>
+<h3 id="section-5">4. 收盘后查询和定时任务是作者提出的用法</h3>
+<p>作者建议收盘后再询问当天分数，并说可让豆包生成定时任务以便每天在电脑上查看。本次没有实际调用豆包、建立定时任务或核验数据更新能力。</p>
+<h3 id="section-6">5. Excel自动更新与自行测试</h3>
+<p>作者还提出让豆包生成Excel、每天自动更新动量，鼓励观众自己用一用、测一测、跑策略。这是使用建议，不是已经验证的自动化系统或策略回测结果；本次不进行额外回测或交易。</p>
+<h2 id="section-7">二、分段原文</h2>
+<h3 id="section-8">1. 动量计算与工具用法（ASR原样分段）</h3>
 <p>大家好，今天跟大家介绍一下动量公式怎么计算。之前我们的动量策略大家都比较感兴趣，一直问的好多朋友都在问说动量公式怎么算？动量公式是什么？那今天就花了一些时间帮大家整理一下动量公式，让大家都可以在自己本地就可以计算动量分数了。首先我们动量公式可以，我们直接让豆包就可以计算了。这里是咱们的一个动量的一个公式，就在这里，大家可以截屏发给豆包就可以。对你只要把这段公式发给豆包，让豆包给我们计算一下我们二十五天的动量，计算一下纳质动量分数就可以了，它就会给你计算。而且豆包还能帮你生成一个定时任务，让你每天都可以在自己电脑上看，我们就让它截止。这是十一月十六号发的，收盘的时候，让他发到今天的动量是多少？这个是豆包给我们计算的，它思考了五十一秒计算的一个分数，一点一七四八幺七。我可以在我们大盘牛，这里也有一个动量，分数是在ETF趋势，这里我可以选，这是纳纸，我们可以看一下十月十六号。好，大家可以看一下，我们的是一点一七五豆包算出来的比我们的还要精确，它是一点一七四八幺七。所以有了这个公式以后，大家都可以截图，这个公式大家可以自己保存下来。有了这个公式以后，你只要把它发给豆包，等到收盘的时候，你就问他，你说豆瓣今天钠指的动量分数是多少？它就会告诉你帮你算出来，也可以让豆包跟你说，任何标题豆瓣都可以帮你算。甚至有了这个公式之后，你都可以让豆瓣帮你生成一个excel,每天自动更新动量大家都可以用一下，多包还是比较普惠的。每个人基本上都可以用今天动量公式就完整的分享给大家了。大家就可以自己去用一用测一测，看一下包括我们的策略，各种策略，大家都可以去跑一下。好了，我是自由之辈，感谢大家关注，下期再见。</p>
 <div data-pagefind-ignore id="raw-transcript"><details class="transcript"><summary>三、转录原文</summary>
 <blockquote>
 <p>[!quote]- 展开查看转录原文</p>
 <p>大家好，今天跟大家介绍一下动量公式怎么计算。之前我们的动量策略大家都比较感兴趣，一直问的好多朋友都在问说动量公式怎么算？动量公式是什么？那今天就花了一些时间帮大家整理一下动量公式，让大家都可以在自己本地就可以计算动量分数了。首先我们动量公式可以，我们直接让豆包就可以计算了。这里是咱们的一个动量的一个公式，就在这里，大家可以截屏发给豆包就可以。对你只要把这段公式发给豆包，让豆包给我们计算一下我们二十五天的动量，计算一下纳质动量分数就可以了，它就会给你计算。而且豆包还能帮你生成一个定时任务，让你每天都可以在自己电脑上看，我们就让它截止。这是十一月十六号发的，收盘的时候，让他发到今天的动量是多少？这个是豆包给我们计算的，它思考了五十一秒计算的一个分数，一点一七四八幺七。我可以在我们大盘牛，这里也有一个动量，分数是在ETF趋势，这里我可以选，这是纳纸，我们可以看一下十月十六号。好，大家可以看一下，我们的是一点一七五豆包算出来的比我们的还要精确，它是一点一七四八幺七。所以有了这个公式以后，大家都可以截图，这个公式大家可以自己保存下来。有了这个公式以后，你只要把它发给豆包，等到收盘的时候，你就问他，你说豆瓣今天钠指的动量分数是多少？它就会告诉你帮你算出来，也可以让豆包跟你说，任何标题豆瓣都可以帮你算。甚至有了这个公式之后，你都可以让豆瓣帮你生成一个excel,每天自动更新动量大家都可以用一下，多包还是比较普惠的。每个人基本上都可以用今天动量公式就完整的分享给大家了。大家就可以自己去用一用测一测，看一下包括我们的策略，各种策略，大家都可以去跑一下。好了，我是自由之辈，感谢大家关注，下期再见。</p>
 </blockquote>
-</details></div></div></article><section id="related" data-topics="[&quot;ETF动量&quot;, &quot;豆包&quot;, &quot;投资策略&quot;, &quot;自动化计算&quot;, &quot;AI产业&quot;]" data-current="notes/douyin/自由指北/2026-10-26_利用豆包计算ETF动量分数的教程_7700891520057538216.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容综述</a><a href="#section-2">二、分段原文</a><a href="#section-3">1. 动量公式计算与豆包工具使用演示</a><a href="#raw-transcript">三、转录原文</a><a href="#main">↑ 回到顶部</a></div></aside></div>
-<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-28 19:53</span></footer>
+</details></div></div></article><section id="related" data-topics="[&quot;ETF动量&quot;, &quot;豆包&quot;, &quot;投资策略&quot;, &quot;自动化计算&quot;, &quot;AI产业&quot;]" data-current="notes/douyin/自由指北/2026-10-26_利用豆包计算ETF动量分数的教程_7700891520057538216.html"></section></main><aside class="right"><div class="toc"><p class="eyebrow">本文目录</p><a href="#section-1">一、内容综述</a><a href="#section-2">1. 先保存视频中展示的公式</a><a href="#section-3">2. 用指定标的与周期提问</a><a href="#section-4">3. 将两处显示结果作对照，而非验证正确性</a><a href="#section-5">4. 收盘后查询和定时任务是作者提出的用法</a><a href="#section-6">5. Excel自动更新与自行测试</a><a href="#section-7">二、分段原文</a><a href="#section-8">1. 动量计算与工具用法（ASR原样分段）</a><a href="#raw-transcript">三、转录原文</a><a href="#main">↑ 回到顶部</a></div></aside></div>
+<footer>KenRadar · 公开研究笔记 <span>页面生成于 2026-10-28 20:02</span></footer>
 <nav class="bottom" aria-label="移动导航"><a href="../../../index.html">◎ 总览</a><a href="../../../sources.html">▦ 来源</a><button data-search>⌕ 搜索</button></nav>
 <dialog id="search-dialog" aria-label="全站搜索"><div class="search-head"><label for="global-query">搜索公开笔记</label><button data-close aria-label="关闭搜索">关闭</button></div><input id="global-query" type="search" placeholder="标题、创作者、研究主题…" autocomplete="off"><p class="muted">检索标题、来源、主题和摘要；原始转录不参与搜索。</p><div id="search-results" aria-live="polite"></div></dialog>
-<script id="kr-metadata" type="application/json">{"title": "利用豆包计算ETF动量分数的教程", "relative_url": "notes/douyin/自由指北/2026-10-26_利用豆包计算ETF动量分数的教程_7700891520057538216.html", "platform": "douyin", "creator": "自由指北", "external_content_id": "7700891520057538216", "published_at": "2026-10-26 16:32:10", "topics": ["ETF动量", "豆包", "投资策略", "自动化计算", "AI产业"], "summary": "本文主要介绍如何利用“豆包”工具计算ETF动量分数。作者首先展示了动量公式，并说明用户可将截图发送给豆包，让其计算指定指数（如纳指）在特定日期（如25天周期内）的动量分数。文中举例指出，豆包计算出的纳指动量分数（1.174817）比作者本地系统显示的数值（1.175）更为精确。此外，作者提到豆包还能生成定时任务或Excel表格，实现每日收盘后自动更新和推送动量数据，强调该工具具有普惠性，方便用户自行测试各类策略。", "source_url": "https://www.douyin.com/video/7700891520057538216"}</script></body></html>
+<script id="kr-metadata" type="application/json">{"title": "2026-10-26_利用豆包计算ETF动量分数的教程_7700891520057538216", "relative_url": "notes/douyin/自由指北/2026-10-26_利用豆包计算ETF动量分数的教程_7700891520057538216.html", "platform": "douyin", "creator": "自由指北", "external_content_id": "7700891520057538216", "published_at": "2026-10-26 16:32:10", "topics": ["ETF动量", "豆包", "投资策略", "自动化计算", "AI产业"], "summary": "自由指北演示将视频中的动量公式截图交给豆包，询问指定标的的25天动量，并与本地页面显示值对照；另提出收盘后查询、定时任务和Excel自动更新的用法。公式表达式未进入ASR，显示值精度与自动化能力均未独立核验。\n\n> !warning 校订边界与未知项\n> 本篇由 Hermes Agent（OpenAI gpt-6.1-sol）根据保留的700字FunASR转录保守校订。原始AI整理为freellmapi / auto（数据库provider为openai-compatible），服务端实际选用的底层模型未知。未真人听校、未核对视频公式画面；ASR含豆包/", "source_url": "https://www.douyin.com/video/7700891520057538216"}</script></body></html>
