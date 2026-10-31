@@ -9,3 +9,16 @@
 button{min-width:44px}.topbar nav a{display:inline-flex;align-items:center;min-height:44px}.toc{max-height:calc(100vh - 125px);overflow:auto}.toc a{min-height:44px;display:flex;align-items:center}
 @media(max-width:768px){.filters input{font-size:16px}}
 .topic-row button{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px}.topic-row button small{margin-left:0}
+
+/* Keep long notes readable across local and public readers. */
+.article-copy { overflow-wrap:anywhere; }
+.article-copy :is(h1,h2,h3) { scroll-margin-top:6rem; text-wrap:balance; }
+.article-copy :is(pre,table) { max-width:100%; overflow-x:auto; }
+.article-copy a { text-decoration:underline; text-underline-offset:.2em; }
+@media print {
+  .topbar,.sidebar,.rightbar,.bottom,.actions,footer { display:none!important; }
+  .layout { display:block; }
+  .article-copy { max-width:none; color:#000; }
+  .article-copy :is(h1,h2,h3) { break-after:avoid; }
+  .article-copy :is(blockquote,li) { break-inside:avoid; }
+}
